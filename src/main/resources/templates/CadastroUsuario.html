@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"/>
+<title>Cadastro de Usuários</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-static-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">
+				<img src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png"/>
+			</a>
+		</div>
+	</div>
+</nav>
+
+<form class="form-horizontal" method="POST" action="/usuarios">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h1 class="panel-title">Novo Usuário</h1>
+		</div>
+	
+	
+	<div class="panel-body">
+		<div class="form-group">
+			<label for="nome" class="col-sm-2 control-label">Nome:</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="nome" name="nome"/>
+			</div>
+		</div>
+			<div class="form-group">
+			<label for="nome" class="col-sm-2 control-label">Matrícula:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="matricula" name="matricula" />
+			</div>
+		</div>
+			<div class="form-group">
+			<label for="nome" class="col-sm-2 control-label">Cargo:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="cargo" name="cargo"/>
+			</div>
+		</div>
+		
+	<div class="form-group">
+			<label for="nome" class="col-sm-2 control-label">Nível de acesso:</label>
+			<div class="col-sm-2">
+				<select class="form-control">
+					<option>Administrador</option>
+					<option>Usuário TECI</option>
+					<option>Usuário padrão</option>
+				</select>
+			</div>
+		</div>
+		
+			<div class="form-group">
+     		<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Cadastrar</button>
+			</div>
+		</div>
+		
+		
+	</div>
+	</div>
+</form>
+
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
