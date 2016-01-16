@@ -1,9 +1,14 @@
 package com.teci.gereteci.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.teci.gereteci.model.*;
 import com.teci.gereteci.repository.*;
@@ -15,15 +20,23 @@ public class UsuarioController {
 	@Autowired
 	private Usuarios usuarios;
 	@RequestMapping("/novo")
-	public String novo()
+	public ModelAndView novo()
 	{
-		return "CadastroUsuario";
+		ModelAndView mv = new ModelAndView("CadastroUsuario");
+		mv.addObject("todosNiveisUsuario", Nivel.values());
+		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(Usuario usuario)
+	public ModelAndView salvar(Usuario usuario)
 	{
 		usuarios.save(usuario);
-		return "CadastroUsuario";
+	
+		ModelAndView mv = new ModelAndView("CadastroUsuario");
+		
+		return mv;
 	}
-
+	@ModelAttribute("todosNiveisUsuario")
+	public List<Nivel> todosNiveisUsuario() {
+		return Arrays.asList(Nivel.values());
+	}
 }
