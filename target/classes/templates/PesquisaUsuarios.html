@@ -31,7 +31,7 @@
 					<td class="text-center" th:text="${usuario.matricula}"></td>
 					<td class="text-center" th:text="${usuario.cargo}"></td>
 					<td class="text-center" th:text="${usuario.setor_id_setor}"></td>
-					<td class="text-center" th:text="${usuario.nivel_acesso.nivel}"></td>  
+					<td class="text-center"><span class="label" th:text="${usuario.nivel_acesso.nivel}" th:classappend="${#strings.toString(usuario.nivel_acesso) == 'ADMINISTRADOR' ? 'label-success' : 'label-danger'}"></span></td>  
 				</tr>
 			<tr>
 				<td colspan="6" th:if="${#lists.isEmpty(usuarios)}">Nenhum usuário encontrado</td>
