@@ -1,29 +1,21 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="LayoutPadrao" >
 <head>
-<meta charset="UTF-8"/>
-<title>Cadastro de Usuários</title>
-<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" href="/css/style.css"/>
-</head>
-<body>
-<nav class="navbar navbar-inverse navbar-static-top">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">
-				<img src="http://www.ctb.ba.gov.br/themes/admindireta/images/logo-ctb.png"/>
-			</a>
-		</div>
-	</div>
-</nav>
 
+<title>Cadastro de Usuários</title>
+</head>
+
+<section layout:fragment="conteudo">
 <form class="form-horizontal" method="POST" action="/usuarios">
 	<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
 		<span th:text="${mensagem}">Usuário cadastrado com sucesso</span>
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
+			<div class="clearfix">
 			<h1 class="panel-title">Novo Usuário</h1>
+		<a class="btn btn-link aw-link-panel" href="/usuarios">Voltar para pesquisa</a>
+		</div>
 		</div>
 	
 	
@@ -66,7 +58,5 @@
 	</div>
 	</div>
 </form>
-
-<script src="/js/bootstrap.min.js"></script>
-</body>
+</section>
 </html>

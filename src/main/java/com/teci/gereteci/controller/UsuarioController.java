@@ -35,6 +35,15 @@ public class UsuarioController {
 		
 		return mv;
 	}
+	@RequestMapping
+	public ModelAndView pesquisar()
+	{
+		List<Usuario> todosUsuarios = usuarios.findAll();
+		ModelAndView mv = new ModelAndView("PesquisaUsuarios");
+	    mv.addObject("usuarios", todosUsuarios);
+		return mv;
+	}
+	
 	@ModelAttribute("todosNiveisUsuario")
 	public List<Nivel> todosNiveisUsuario() {
 		return Arrays.asList(Nivel.values());

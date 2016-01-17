@@ -77,12 +77,21 @@ public class Usuario {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Integer Setor_id_setor() {
+	public Integer getSetor_id_setor() {
 		return this.setor_id_setor;
 	}
 	public void setSetor_id_setor(Integer setor_id_setor) {
 		this.setor_id_setor= setor_id_setor;
 	}
+	
+	public Nivel getNivel_acesso() {
+		return this.nivel_acesso;
+	}
+	
+	public void setNivel_acesso(Nivel nivel) {
+		this.nivel_acesso = nivel;
+	}
+	
 	
 /*	public String getSetor() {
 		return this.setor;
