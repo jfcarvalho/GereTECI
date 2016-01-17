@@ -31,8 +31,11 @@
 					<td class="text-center" th:text="${usuario.matricula}"></td>
 					<td class="text-center" th:text="${usuario.cargo}"></td>
 					<td class="text-center" th:text="${usuario.setor_id_setor}"></td>
-					<!--   <td class="text-center" th:text="${usuario.nivel_acesso.nivel}"></td> -->
+					<!--   <td class="text-center" th:text="${usuario.nivel_acesso.nivel}"></td>  -->
 				</tr>
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(usuarios)}">Nenhum usuário encontrado</td>
+			</tr>
 			</tbody>
 		
 		</table>

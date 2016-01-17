@@ -25,9 +25,9 @@ public class Usuario {
 	
 	private String cargo; 
 	
-	private Integer setor_id_setor; 
-	@Enumerated(EnumType.STRING)
+	private Integer setor_id_setor;
 	
+	@Enumerated(EnumType.STRING)
 	private Nivel nivel_acesso; 
 	
 	
@@ -86,10 +86,6 @@ public class Usuario {
 	
 	public Nivel getNivel_acesso() {
 		return this.nivel_acesso;
-	}
-	
-	public void setNivel_acesso(Nivel nivel) {
-		this.nivel_acesso = nivel;
 	}
 	
 	

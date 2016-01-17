@@ -42,8 +42,8 @@
 	<div class="form-group">
 			<label for="nome" class="col-sm-2 control-label">Nível de acesso:</label>
 			<div class="col-sm-2">
-				<select class="form-control">
-					<option th:each="niveis : ${nivelList}" th:value="${niveis}" th:text="${niveis.nivel}"></option>
+				<select class="form-control" name="nivel_acesso">
+					<option th:each="nivel : ${todosNiveisUsuario}" th:value="${nivel}" th:text="${nivel.nivel}"></option>
 				</select>
 			</div>
 		</div>

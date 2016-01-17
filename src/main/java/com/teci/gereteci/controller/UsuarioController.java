@@ -23,7 +23,7 @@ public class UsuarioController {
 	public ModelAndView novo()
 	{
 		ModelAndView mv = new ModelAndView("CadastroUsuario");
-		mv.addObject("todosNiveisUsuario", Nivel.values());
+		//mv.addObject("todosNiveisUsuario", Nivel.values());
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
@@ -32,7 +32,7 @@ public class UsuarioController {
 		usuarios.save(usuario);
 	
 		ModelAndView mv = new ModelAndView("CadastroUsuario");
-		
+		mv.addObject("mensagem", "Usuário salvo com sucesso!");
 		return mv;
 	}
 	@RequestMapping
