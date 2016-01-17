@@ -88,6 +88,11 @@ public class Usuario {
 		return this.nivel_acesso;
 	}
 	
+	public void setNivel_acesso(Nivel nivel)
+	{
+		this.nivel_acesso = nivel;
+	}
+	
 	
 /*	public String getSetor() {
 		return this.setor;
