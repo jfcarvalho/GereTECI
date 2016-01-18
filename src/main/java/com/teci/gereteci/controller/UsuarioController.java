@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,15 +25,21 @@ public class UsuarioController {
 	public ModelAndView novo()
 	{
 		ModelAndView mv = new ModelAndView("CadastroUsuario");
+		mv.addObject(new Usuario());
 		//mv.addObject("todosNiveisUsuario", Nivel.values());
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView salvar(Usuario usuario)
+	public ModelAndView salvar(@Validated Usuario usuario, Errors errors)
 	{
+		ModelAndView mv = new ModelAndView("CadastroUsuario");
+		if(errors.hasErrors())
+		{
+			return mv;
+		}
 		usuarios.save(usuario);
 	
-		ModelAndView mv = new ModelAndView("CadastroUsuario");
+		
 		mv.addObject("mensagem", "Usuário salvo com sucesso!");
 		return mv;
 	}
