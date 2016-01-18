@@ -7,14 +7,8 @@
 
 <section layout:fragment="conteudo">
 <form class="form-horizontal" method="POST" action="/usuarios" th:object="${usuario}">
-	<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
-		<span th:text="${mensagem}">Usuário cadastrado com sucesso</span>
-	</div>
-	<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
-		<div th:each="detailedError :${#fields.detailedErrors()}">
-		<span th:text="${detailedError.message}"></span></div>
-	</div>
-	<div class="panel panel-default">
+		<div layout:include="MensagemUsuario"></div>
+		<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="clearfix">
 			<h1 class="panel-title">Novo Usuário</h1>
