@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.*;
 import com.teci.gereteci.repository.*;
@@ -30,18 +31,17 @@ public class UsuarioController {
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView salvar(@Validated Usuario usuario, Errors errors)
+	public String salvar(@Validated Usuario usuario, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView("CadastroUsuario");
 		if(errors.hasErrors())
 		{
-			return mv;
+			return "cadastroUsuario";
 		}
 		usuarios.save(usuario);
-	
 		
-		mv.addObject("mensagem", "Usuário salvo com sucesso!");
-		return mv;
+		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");	
+		return "redirect:/usuarios/novo";
 	}
 	@RequestMapping
 	public ModelAndView pesquisar()
