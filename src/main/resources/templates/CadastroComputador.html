@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="LayoutPadraoUsuario" >
+<head>
+
+<title>Cadastro de Usuários</title>
+</head>
+
+<section layout:fragment="conteudo">
+<form class="form-horizontal" method="POST" action="/computadores" th:object="${computador}">
+		<div layout:include="MensagemUsuario"></div>
+		<div layout:include="MensagemErro"></div>
+		<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+			<h1 class="panel-title">Novo Comutador</h1>
+		<a class="btn btn-link aw-link-panel" href="/computadores">Voltar para pesquisa</a>
+		</div>
+		</div>
+	
+	
+	<div class="panel-body">
+	<input type="hidden" th:field="*{id_computador}" />
+		<div class="form-group" th:classappend="${#fields.hasErrors('patrimonio')} ? has-error">
+			<label for="patrimonio" class="col-sm-2 control-label" >Patrimonio:</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="patrimonio" name="patrimonio" th:field="*{patrimonio}"/>
+			</div>
+		</div>
+			<div class="form-group" th:classappend="${#fields.hasErrors('sistema')} ? has-error">
+			<label for="sistema" class="col-sm-2 control-label">Sistema:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="sistema" name="sistema" th:field="*{sistema}" />
+			</div>
+		</div>
+			<div class="form-group" th:classappend="${#fields.hasErrors('versao')} ? has-error">
+			<label for="versao" class="col-sm-2 control-label">Versão:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="versao" name="versao" th:field="*{versao}"/>
+			</div>
+		</div>
+		
+		
+			<div class="form-group" th:classappend="${#fields.hasErrors('versao')} ? has-error">
+			<label for="arquitetura" class="col-sm-2 control-label">Arquitetura:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="arquitetura" name="arquitetura" th:field="*{arquitetura}"/>
+			</div>
+		</div>
+			
+			<div class="form-group" th:classappend="${#fields.hasErrors('versao')} ? has-error">
+			<label for="versao" class="col-sm-2 control-label">Versão:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="versao" name="versao" th:field="*{versao}"/>
+			</div>
+		</div>
+		
+			<div class="form-group" th:classappend="${#fields.hasErrors('versao')} ? has-error">
+			<label for="versao" class="col-sm-2 control-label">Versão:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="versao" name="versao" th:field="*{versao}"/>
+			</div>
+		</div>
+	
+		
+			<div class="form-group" th:classappend="${#fields.hasErrors('ip')} ? has-error">
+			<label for="ip" class="col-sm-2 control-label">IP:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="ip" name="ip" th:field="*{ip}"/>
+			</div>
+		</div>
+		
+			<div class="form-group" th:classappend="${#fields.hasErrors('mascara')} ? has-error">
+			<label for="mascara" class="col-sm-2 control-label">Mascara:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="mascara" name="mascara" th:field="*{mascara}"/>
+			</div>
+		</div>
+		
+			<div class="form-group" th:classappend="${#fields.hasErrors('gateway')} ? has-error">
+			<label for="ip" class="col-sm-2 control-label">Gateway:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="gateway" name="gateway" th:field="*{gateway}"/>
+			</div>
+		</div>
+		
+			<div class="form-group" th:classappend="${#fields.hasErrors('dns_alternativo')} ? has-error">
+			<label for="ip" class="col-sm-2 control-label">Dns Alternativo:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="dns_alternativo" name="dns_alternativo" th:field="*{dns_alternativo}"/>
+			</div>
+		</div>
+		
+		<div class="form-group" th:classappend="${#fields.hasErrors('dns_preferencial')} ? has-error">
+			<label for="ip" class="col-sm-2 control-label">Dns Preferencial:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="dns_preferencial" name="dns_preferencial" th:field="*{dns_preferencial}"/>
+			</div>
+		</div>
+		
+		<div class="form-group" th:classappend="${#fields.hasErrors('data_compra')} ? has-error">
+			<label for="data_compra" class="col-sm-2 control-label">Data de compra:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="data_compra" name="data_compra" th:field="*{data_compra}"/>
+			</div>
+		</div>
+		
+		<div class="form-group" th:classappend="${#fields.hasErrors('data_formatacao')} ? has-error">
+			<label for="data_formatacao" class="col-sm-2 control-label">Dns Preferencial:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="data_formatacao" name="data_formatacao" th:field="*{data_formatacao}"/>
+			</div>
+		</div>
+		
+			<div class="form-group">
+     		<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Cadastrar</button>
+			</div>
+		</div>
+	</div>	
+	</div>
+</form>
+</section>
+</html>
