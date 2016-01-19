@@ -63,6 +63,13 @@ public class UsuarioController {
 		mv.addObject(usuario);
 		return mv;
 	}
+	
+	@RequestMapping(value="{id_usuario}", method=RequestMethod.DELETE)
+	public String excluir(@PathVariable Integer id_usuario)
+	{
+		usuarios.delete(id_usuario);
+		return "redirect:/usuarios";
+	}
 	@ModelAttribute("todosNiveisUsuario")
 	public List<Nivel> todosNiveisUsuario() {
 		return Arrays.asList(Nivel.values());
