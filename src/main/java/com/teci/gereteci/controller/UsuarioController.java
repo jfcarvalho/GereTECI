@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,13 +20,13 @@ import com.teci.gereteci.repository.*;
 @Controller
 @RequestMapping("/usuarios")
 public class UsuarioController {
-	
+	private static final String CADASTRO_VIEW = "CadastroUsuario"; 
 	@Autowired
 	private Usuarios usuarios;
 	@RequestMapping("/novo")
 	public ModelAndView novo()
 	{
-		ModelAndView mv = new ModelAndView("CadastroUsuario");
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(new Usuario());
 		//mv.addObject("todosNiveisUsuario", Nivel.values());
 		return mv;
@@ -33,7 +34,7 @@ public class UsuarioController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Validated Usuario usuario, Errors errors, RedirectAttributes attributes)
 	{
-		ModelAndView mv = new ModelAndView("CadastroUsuario");
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
 		{
 			return "cadastroUsuario";
@@ -52,6 +53,16 @@ public class UsuarioController {
 		return mv;
 	}
 	
+	@RequestMapping("{id_usuario}")
+	public ModelAndView edicao(@PathVariable("id_usuario") Usuario usuario)
+	{
+		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
+		//Usuario usuario = usuarios.findOne(id_usuario);
+		
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		mv.addObject(usuario);
+		return mv;
+	}
 	@ModelAttribute("todosNiveisUsuario")
 	public List<Nivel> todosNiveisUsuario() {
 		return Arrays.asList(Nivel.values());

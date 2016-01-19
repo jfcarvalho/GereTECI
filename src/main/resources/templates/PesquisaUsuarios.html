@@ -14,6 +14,7 @@
 		</div>
 		</div>
 		<div class="panel-body">
+		
 		<table class="table table-bordered table-striped">
 		
 			<thead>
@@ -22,7 +23,10 @@
 				<th class="text-center col-md-2">Matricula</th>
 				<th class="text-center col-md-2">Cargo</th>
 				<th class="text-center col-md-2">Setor</th>
-				<th class="text-center col-md-1">Nível de Acesso</th></tr>
+				<th class="text-center col-md-2">Nível de Acesso</th>
+				<th class="text-center col-md-1">Ação</th>
+				</tr>
+				
 			</thead>
 			<tbody>
 				<tr th:each="usuario : ${usuarios}">
@@ -32,7 +36,9 @@
 					<td class="text-center" th:text="${usuario.cargo}"></td>
 					<td class="text-center" th:text="${usuario.setor_id_setor}"></td>
 					<td class="text-center"><span class="label" th:text="${usuario.nivel_acesso.nivel}" th:classappend="${#strings.toString(usuario.nivel_acesso) == 'ADMINISTRADOR' ? 'label-success' : 'label-danger'}"></span></td>  
+					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/usuarios/{id_usuario}(id_usuario=${usuario.id_usuario})}"><span class="glyphicon glyphicon-pencil" ></span></a></td>
 				</tr>
+				
 			<tr>
 				<td colspan="6" th:if="${#lists.isEmpty(usuarios)}">Nenhum usuário encontrado</td>
 			</tr>

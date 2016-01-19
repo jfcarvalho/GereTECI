@@ -18,6 +18,7 @@
 	
 	
 	<div class="panel-body">
+	<input type="hidden" th:field="*{id_usuario}" />
 		<div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
 			<label for="nome" class="col-sm-2 control-label" >Nome:</label>
 			<div class="col-sm-4">
