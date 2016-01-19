@@ -65,9 +65,10 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value="{id_usuario}", method=RequestMethod.DELETE)
-	public String excluir(@PathVariable Integer id_usuario)
+	public String excluir(@PathVariable Integer id_usuario, RedirectAttributes attributes)
 	{
 		usuarios.delete(id_usuario);
+		attributes.addFlashAttribute("mensagem", "Usuário excluido com sucesso com sucesso!");	
 		return "redirect:/usuarios";
 	}
 	@ModelAttribute("todosNiveisUsuario")

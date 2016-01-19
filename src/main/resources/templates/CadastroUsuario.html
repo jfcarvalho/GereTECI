@@ -8,6 +8,7 @@
 <section layout:fragment="conteudo">
 <form class="form-horizontal" method="POST" action="/usuarios" th:object="${usuario}">
 		<div layout:include="MensagemUsuario"></div>
+		<div layout:include="MensagemErro"></div>
 		<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="clearfix">
