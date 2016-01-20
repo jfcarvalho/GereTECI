@@ -35,6 +35,7 @@ public class Usuario {
 	
 	
 	
+	
 	//@Column
 	//private String setor;
 	
@@ -95,6 +96,7 @@ public class Usuario {
 	{
 		this.nivel_acesso = nivel;
 	}
+	
 	
 	
 /*	public String getSetor() {

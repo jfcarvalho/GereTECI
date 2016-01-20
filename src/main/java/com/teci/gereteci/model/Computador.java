@@ -52,7 +52,7 @@ public class Computador {
 	private Date data_backup;
 	@Temporal(TemporalType.DATE)
 	private Date data_formatacao;
-	
+	private String id_impressao;
 	
 	
 	public Integer getId_computador()
@@ -148,6 +148,14 @@ public class Computador {
 		this.data_formatacao = data_formatacao;
 	}
 	
+	public String getId_impressao() {
+		return this.id_impressao;
+	}
+	
+	public void setId_impressao(String id_impressao)
+	{
+		this.id_impressao = id_impressao;
+	}
 	
 	
 	
