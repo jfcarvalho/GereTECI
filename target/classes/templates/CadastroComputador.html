@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="LayoutPadraoUsuario" >
 <head>
 
-<title>Cadastro de Usuários</title>
+<title>Cadastro de Computadores</title>
 </head>
 
 <section layout:fragment="conteudo">
@@ -12,103 +12,113 @@
 		<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="clearfix">
-			<h1 class="panel-title">Novo Comutador</h1>
+			<h1 class="panel-title">Novo Computador</h1>
 		<a class="btn btn-link aw-link-panel" href="/computadores">Voltar para pesquisa</a>
 		</div>
 		</div>
 	
 	
 	<div class="panel-body">
+	<div class="boxes">
 	<input type="hidden" th:field="*{id_computador}" />
 		<div class="form-group" th:classappend="${#fields.hasErrors('patrimonio')} ? has-error">
 			<label for="patrimonio" class="col-sm-2 control-label" >Patrimonio:</label>
-			<div class="col-sm-4">
+			<div class="col-sm-6">
 				<input type="text" class="form-control" id="patrimonio" name="patrimonio" th:field="*{patrimonio}"/>
 			</div>
 		</div>
-			<div class="form-group" th:classappend="${#fields.hasErrors('sistema')} ? has-error">
+			<div class="form-group">
 			<label for="sistema" class="col-sm-2 control-label">Sistema:</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" id="sistema" name="sistema" th:field="*{sistema}" />
-			</div>
-		</div>
-			<div class="form-group" th:classappend="${#fields.hasErrors('versao')} ? has-error">
-			<label for="versao" class="col-sm-2 control-label">Versão:</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" id="versao" name="versao" th:field="*{versao}"/>
+			<div class="col-sm-6">
+				<select class="form-control" name="sistema">
+					<option th:each="sistema : ${todosSistemasComputador}" th:value="${sistema}" th:text="${sistema.sistema}"></option>
+				</select>
 			</div>
 		</div>
 		
-		
-			<div class="form-group" th:classappend="${#fields.hasErrors('versao')} ? has-error">
+	<div class="form-group">
 			<label for="arquitetura" class="col-sm-2 control-label">Arquitetura:</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" id="arquitetura" name="arquitetura" th:field="*{arquitetura}"/>
+			<div class="col-sm-6">
+				<select class="form-control" name="arquitetura">
+					<option th:each="arquitetura : ${todasArquiteturasComputador}" th:value="${arquitetura}" th:text="${arquitetura.arquitetura}"></option>
+				</select>
 			</div>
 		</div>
 			
-			<div class="form-group" th:classappend="${#fields.hasErrors('versao')} ? has-error">
-			<label for="versao" class="col-sm-2 control-label">Versão:</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" id="versao" name="versao" th:field="*{versao}"/>
-			</div>
-		</div>
-		
-			<div class="form-group" th:classappend="${#fields.hasErrors('versao')} ? has-error">
-			<label for="versao" class="col-sm-2 control-label">Versão:</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" id="versao" name="versao" th:field="*{versao}"/>
-			</div>
-		</div>
 	
 		
 			<div class="form-group" th:classappend="${#fields.hasErrors('ip')} ? has-error">
 			<label for="ip" class="col-sm-2 control-label">IP:</label>
-			<div class="col-sm-2">
+			<div class="col-sm-6">
 				<input type="text" class="form-control" id="ip" name="ip" th:field="*{ip}"/>
 			</div>
 		</div>
 		
-			<div class="form-group" th:classappend="${#fields.hasErrors('mascara')} ? has-error">
+			<div class="form-group">
 			<label for="mascara" class="col-sm-2 control-label">Mascara:</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" id="mascara" name="mascara" th:field="*{mascara}"/>
+			<div class="col-sm-6">
+				<select class="form-control" name="mascara">
+					<option th:each="mascara : ${todasMascarasComputador}" th:value="${mascara}" th:text="${mascara.mascara}"></option>
+				</select>
 			</div>
 		</div>
 		
-			<div class="form-group" th:classappend="${#fields.hasErrors('gateway')} ? has-error">
-			<label for="ip" class="col-sm-2 control-label">Gateway:</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" id="gateway" name="gateway" th:field="*{gateway}"/>
+			<div class="form-group">
+			<label for="gateway" class="col-sm-2 control-label">Gateway:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="gateway">
+					<option th:each="gateway : ${todosGatewaysComputador}" th:value="${gateway}" th:text="${gateway.gateway}"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="dns_preferencial" class="col-sm-2 control-label">Dns Preferencial:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="dns_preferencial">
+					<option th:each="dns_preferencial : ${todosDNSPComputador}" th:value="${dns_preferencial}" th:text="${dns_preferencial.dns_preferencial}"></option>
+				</select>
 			</div>
 		</div>
 		
-			<div class="form-group" th:classappend="${#fields.hasErrors('dns_alternativo')} ? has-error">
-			<label for="ip" class="col-sm-2 control-label">Dns Alternativo:</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" id="dns_alternativo" name="dns_alternativo" th:field="*{dns_alternativo}"/>
+			<div class="form-group">
+			<label for="dns_alternativo" class="col-sm-2 control-label">Dns Alternativo:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="dns_alternativo">
+					<option th:each="dns_alternativo : ${todosDNSAComputador}" th:value="${dns_alternativo}" th:text="${dns_alternativo.dns_alternativo}"></option>
+				</select>
 			</div>
 		</div>
 		
-		<div class="form-group" th:classappend="${#fields.hasErrors('dns_preferencial')} ? has-error">
-			<label for="ip" class="col-sm-2 control-label">Dns Preferencial:</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" id="dns_preferencial" name="dns_preferencial" th:field="*{dns_preferencial}"/>
+		
+		
+		<div class="form-group" th:classappend="${#fields.hasErrors('versao_java')} ? has-error">
+			<label for="versao_java" class="col-sm-2 control-label">Versão do Java:</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="versao_java" name="versao_java" th:field="*{versao_java}"/>
 			</div>
 		</div>
-		
+		</div>
+		<div class="boxes">
 		<div class="form-group" th:classappend="${#fields.hasErrors('data_compra')} ? has-error">
 			<label for="data_compra" class="col-sm-2 control-label">Data de compra:</label>
-			<div class="col-sm-2">
+			<div class="col-sm-6">
 				<input type="text" class="form-control" id="data_compra" name="data_compra" th:field="*{data_compra}"/>
 			</div>
 		</div>
 		
 		<div class="form-group" th:classappend="${#fields.hasErrors('data_formatacao')} ? has-error">
-			<label for="data_formatacao" class="col-sm-2 control-label">Dns Preferencial:</label>
-			<div class="col-sm-2">
+			<label for="data_formatacao" class="col-sm-2 control-label">Data da última formatação:</label>
+			<div class="col-sm-6">
 				<input type="text" class="form-control" id="data_formatacao" name="data_formatacao" th:field="*{data_formatacao}"/>
 			</div>
+		</div>
+		
+		<div class="form-group" th:classappend="${#fields.hasErrors('data_backup')} ? has-error">
+			<label for="data_backup" class="col-sm-2 control-label">Data do último backup:</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="data_backup" name="data_backup" th:field="*{data_backup}"/>
+			</div>
+		</div>
 		</div>
 		
 			<div class="form-group">

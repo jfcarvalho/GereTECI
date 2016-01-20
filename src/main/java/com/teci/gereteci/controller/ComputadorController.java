@@ -71,9 +71,31 @@ public class ComputadorController {
 		attributes.addFlashAttribute("mensagem", "Computador excluido com sucesso com sucesso!");	
 		return "redirect:/computadores";
 	}
-	/*@ModelAttribute("todosNiveisUsuario")
-	public List<Nivel> todosNiveisUsuario() {
-		return Arrays.asList(Nivel.values());
+	@ModelAttribute("todosSistemasComputador")
+	public List<Sistema> todosSistemasComputador() {
+		return Arrays.asList(Sistema.values());
 	}
-	*/
+	@ModelAttribute("todasArquiteturasComputador")
+	public List<Arquitetura> todasArquiteturasComputador() {
+		return Arrays.asList(Arquitetura.values());
+	}
+	@ModelAttribute("todasMascarasComputador")
+	public List<Mascara> todasMascarasComputador() {
+		return Arrays.asList(Mascara.values());
+	}
+	@ModelAttribute("todosGatewaysComputador")
+	public List<Gateway> todosGatewaysComputador() {
+		return Arrays.asList(Gateway.values());
+	}
+	@ModelAttribute("todosDNSPComputador")
+	public List<Dns_preferencial> todosDNSPComputador() {
+		return Arrays.asList(Dns_preferencial.values());
+	}
+	
+	@ModelAttribute("todosDNSAComputador")
+	public List<Dns_alternativo> todosDNSAComputador() {
+		return Arrays.asList(Dns_alternativo.values());
+	}
+	
+	
 }

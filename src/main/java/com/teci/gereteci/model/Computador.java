@@ -16,6 +16,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
 @Entity
 
 
@@ -27,22 +28,22 @@ public class Computador {
 	
 	@Size(min=1, max=20, message="O tamanho do campo nome tem que ser entre 1 e 20")
 	private String patrimonio;
+	@Enumerated(EnumType.STRING)
 	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
-	private String sistema;
+	private Sistema sistema;
 	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
-	private String arquitetura;
-	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
-	private String versao;
+	@Enumerated(EnumType.STRING)
+	private Arquitetura arquitetura;
 	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
 	private String ip;
 	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
-	private String mascara;
+	private Mascara mascara;
 	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
-	private String gateway;
+	private Gateway gateway;
 	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
-	private String dns_alternativo;
+	private Dns_alternativo dns_alternativo;
 	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
-	private String dns_preferencial;
+	private Dns_preferencial dns_preferencial;
 	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
 	private String versao_java;
 	@Temporal(TemporalType.DATE)
@@ -74,56 +75,51 @@ public class Computador {
 		this.patrimonio = patrimonio;
 	}
 	
-	public String getArquitetura()
+	public Arquitetura getArquitetura()
 	{
 		return this.arquitetura;
 	}
 	
-	public void setArquitetura(String arquitetura)
+	public void setArquitetura(Arquitetura arquitetura)
 	{
 		this.arquitetura = arquitetura;
 	}
 	
-	public String getSistema() {
+	public Sistema getSistema() {
 		return this.sistema;
 	}
-	public void setSistema(String sistema) {
+	public void setSistema(Sistema sistema) {
 		this.sistema = sistema;
 	}
-	public String getVersao() {
-		return versao;
-	}
-	public void setVersao(String versao) {
-		this.versao = versao;
-	}
+	
 	public String getIp() {
 		return this.ip;
 	}
 	public void setIp(String ip) {
 		this.ip= ip;
 	}
-	public String getGateway() {
+	public Gateway getGateway() {
 		return this.gateway;
 	}
-	public void setGateway(String gateway) {
+	public void setGateway(Gateway gateway) {
 		this.gateway= gateway;
 	}
-	public String getMascara() {
+	public Mascara getMascara() {
 		return this.mascara;
 	}
-	public void setMascara(String mascara) {
+	public void setMascara(Mascara mascara) {
 		this.mascara = mascara;
 	}
-	public String getDns_alternativo() {
+	public Dns_alternativo getDns_alternativo() {
 		return this.dns_alternativo;
 	}
-	public void setDns_alternativo(String dns_alternativo) {
+	public void setDns_alternativo(Dns_alternativo dns_alternativo) {
 		this.dns_alternativo = dns_alternativo;
 	}
-	public String getDns_preferencial() {
+	public Dns_preferencial getDns_preferencial() {
 		return this.dns_preferencial;
 	}
-	public void setDns_preferencial(String dns_preferencial) {
+	public void setDns_preferencial(Dns_preferencial dns_preferencial) {
 		this.dns_preferencial = dns_preferencial;
 	}
 	public String getVersao_java() {
