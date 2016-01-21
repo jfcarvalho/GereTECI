@@ -97,5 +97,10 @@ public class ComputadorController {
 		return Arrays.asList(Dns_alternativo.values());
 	}
 	
+	@ModelAttribute("todosStatusComputador")
+	public List<StatusComputador> todosStatusComputador() {
+		return Arrays.asList(StatusComputador.values());
+	}
+	
 	
 }

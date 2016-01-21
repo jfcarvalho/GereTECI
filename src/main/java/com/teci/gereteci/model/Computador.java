@@ -10,10 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
@@ -36,15 +34,14 @@ public class Computador {
 	private Arquitetura arquitetura;
 	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
 	private String ip;
-	
+	@Enumerated(EnumType.STRING)
 	private Mascara mascara;
-	
+	@Enumerated(EnumType.STRING)
 	private Gateway gateway;
-	
+	@Enumerated(EnumType.STRING)
 	private Dns_alternativo dns_alternativo;
-	
+	@Enumerated(EnumType.STRING)
 	private Dns_preferencial dns_preferencial;
-	
 	private String versao_java;
 	@Temporal(TemporalType.DATE)
 	private Date data_compra;
@@ -53,7 +50,7 @@ public class Computador {
 	@Temporal(TemporalType.DATE)
 	private Date data_formatacao;
 	private String id_impressao;
-	
+	private StatusComputador status;
 	
 	public Integer getId_computador()
 	{
@@ -155,6 +152,15 @@ public class Computador {
 	public void setId_impressao(String id_impressao)
 	{
 		this.id_impressao = id_impressao;
+	}
+	
+	public StatusComputador getStatus() {
+		return this.status;
+	}
+	
+	public void setStatus(StatusComputador status)
+	{
+		this.status = status;
 	}
 	
 	
