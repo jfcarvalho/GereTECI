@@ -29,22 +29,22 @@ public class Computador {
 	@Size(min=1, max=20, message="O tamanho do campo nome tem que ser entre 1 e 20")
 	private String patrimonio;
 	@Enumerated(EnumType.STRING)
-	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
+	
 	private Sistema sistema;
-	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
+	
 	@Enumerated(EnumType.STRING)
 	private Arquitetura arquitetura;
 	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
 	private String ip;
-	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
+	
 	private Mascara mascara;
-	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
+	
 	private Gateway gateway;
-	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
+	
 	private Dns_alternativo dns_alternativo;
-	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
+	
 	private Dns_preferencial dns_preferencial;
-	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
+	
 	private String versao_java;
 	@Temporal(TemporalType.DATE)
 	private Date data_compra;
