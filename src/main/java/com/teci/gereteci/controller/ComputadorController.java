@@ -23,6 +23,8 @@ public class ComputadorController {
 	private static final String CADASTRO_VIEW = "CadastroComputador"; 
 	@Autowired
 	private Computadores computadores;
+	@Autowired
+	private Usuarios usuarios;
 	@RequestMapping("/novo")
 	public ModelAndView novo()
 	{
@@ -100,6 +102,15 @@ public class ComputadorController {
 	@ModelAttribute("todosStatusComputador")
 	public List<StatusComputador> todosStatusComputador() {
 		return Arrays.asList(StatusComputador.values());
+	}
+	
+	@ModelAttribute("todosUsuariosComputador")
+	public List<Usuario> todosUsuariosComputador()
+	{
+		List<Usuario> todosUsuarios = usuarios.findAll();
+	//	ModelAndView mv = new ModelAndView("PesquisaComputadores");
+	   // mv.addObject("usuarios", todosUsuarios);
+		return todosUsuarios;
 	}
 	
 	

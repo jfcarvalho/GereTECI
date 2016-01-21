@@ -51,6 +51,7 @@ public class Computador {
 	private Date data_formatacao;
 	private String id_impressao;
 	private StatusComputador status;
+	private Integer usuario_id_usuario;
 	
 	public Integer getId_computador()
 	{
@@ -163,6 +164,13 @@ public class Computador {
 		this.status = status;
 	}
 	
+	public Integer getUsuario_id_usuario()
+	{
+		return this.usuario_id_usuario;
+	}
 	
-	
+	public void setUsuario_id_usuario(Integer usuario_id_usuario)
+	{
+		this.usuario_id_usuario = usuario_id_usuario;
+	}
 }
