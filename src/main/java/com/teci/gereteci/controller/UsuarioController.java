@@ -23,6 +23,9 @@ public class UsuarioController {
 	private static final String CADASTRO_VIEW = "CadastroUsuario"; 
 	@Autowired
 	private Usuarios usuarios;
+	@Autowired
+	private Setores setores;
+	
 	@RequestMapping("/novo")
 	public ModelAndView novo()
 	{
@@ -75,4 +78,13 @@ public class UsuarioController {
 	public List<Nivel> todosNiveisUsuario() {
 		return Arrays.asList(Nivel.values());
 	}
+
+	@ModelAttribute("todosSetoresUsuario")
+	public List<Setor> todosSetoresUsuario()
+	{
+		List<Setor> todosSetores= setores.findAll();
+		return todosSetores;
+	}
+	
+	
 }
