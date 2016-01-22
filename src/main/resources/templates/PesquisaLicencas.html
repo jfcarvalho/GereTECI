@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="LayoutPadraoUsuario" >
+<head>
+<title>Pesquisa de Usuários</title>
+</head>
+
+<section layout:fragment="conteudo">
+<div layout:include="MensagemUsuario"></div>
+
+<div class="panel panel-default">
+		
+		<div class="panel-heading">
+		<div class="clearfix">	
+			<h1 class="panel-title">Pesquisa de Licenças</h1>
+			<a class="btn btn-link aw-link-panel" href="/licencas/novo">Nova licença</a>
+		</div>
+		</div>
+		<div class="panel-body">
+		
+		<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr><th class="text-center col-md-1">#</th>
+				<th class="text-center col-md-2">Nome</th>
+				<th class="text-center col-md-2">Chave</th>
+				<th class="text-center col-md-2">Data de compra</th>
+				<th class="text-center col-md-2">Expira em</th>
+				<th class="text-center col-md-1">Ação</th>
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="licenca: ${licencas}">
+					<td class="text-center" th:text="${licenca.id_licenca}"></td>
+					<td class="text-center" th:text="${licenca.nome}"></td>
+					<td class="text-center" th:text="${licenca.chave}"></td>
+					<td class="text-center" th:text="${licenca.data_compra}"></td>
+					<td class="text-center" th:text="${licenca.data_expira}"></td>
+					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/licencas/{id_licenca}(id_licenca=${licenca.id_licenca})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalLicenca" th:attr="data-id_licenca=${licenca.id_licenca}, data-nome=${licenca.nome}"><span class="glyphicon glyphicon-remove"></span></a></td>
+					
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(licencas)}">Nenhuma licença encontrada</td>
+			</tr>
+			</tbody>
+		
+		</table>
+		</div>
+		
+		<div layout:include="DialogoConfirmacaoExclusaoLicenca"></div>
+	</div>	
+</section>
+
+</html>
