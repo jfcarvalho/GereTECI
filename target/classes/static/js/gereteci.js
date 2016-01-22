@@ -56,3 +56,22 @@ $('#confirmacaoExclusaoModalSetor').on('show.bs.modal', function(event)
 			
 			
 		});
+$('#confirmacaoExclusaoModalRecurso').on('show.bs.modal', function(event)
+		{
+			var button = $(event.relatedTarget);
+			var codigoRecurso = button.data('id_recurso');
+			var nomeRecurso= button.data('descricao');
+			
+			var modal = $(this);
+			var form = modal.find('form');
+			var action = form.data('url-base');
+			if(!action.endsWith('/'))
+				{
+					action += '/';
+				}
+			
+				form.attr('action', action + codigoRecurso);
+				modal.find('.modal-body span').html('Tem certeza que deseja excluir o recurso <strong>' + nomeRecurso+ '</strong>?');
+			
+			
+		});
