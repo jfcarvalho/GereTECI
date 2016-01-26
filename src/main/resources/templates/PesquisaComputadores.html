@@ -21,6 +21,7 @@
 		
 			<thead>
 				<tr><th class="text-center col-md-1">Patrimônio</th>
+				<th class="text-center col-md-2">Usuário</th>
 				<th class="text-center col-md-2">S.O</th>
 				<th class="text-center col-md-2">Arquitetura</th>
 				<th class="text-center col-md-2">IP</th>
@@ -29,19 +30,21 @@
 				<th class="text-center col-md-2">Situação</th>
 				<th class="text-center col-md-2">Ação</th>
 				
+				
 				</tr>
 				
 			</thead>
 			<tbody>
 				<tr th:each="computador : ${computadores}">
 					<td class="text-center" th:text="${computador.patrimonio}"></td>
+					<td class="text-center" th:each="usuario: ${usuarios}" th:text="{$usuario}"></td>
 					<td class="text-center" th:text="${computador.sistema.sistema}"></td>
 					<td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td>
 					<td class="text-center" th:text="${computador.ip}"></td>
 					<td class="text-center" th:text="${computador.versao_java}"></td>
 					<td class="text-center" th:text="${computador.id_impressao}"></td>
 					<td class="text-center"><span class="label" th:text="${computador.status.status}" th:classappend="${#strings.toString(computador.status) == 'funcionando' ? 'label-success' : 'label-danger'}"></span></td>  
-					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/computadores/{id_computador}(id_computador=${computador.id_computador})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalComputador" th:attr="data-id_computador=${computador.id_computador}, data-ip=${computador.ip}"><span class="glyphicon glyphicon-remove"></span></a><span class="glyphicon glyphicon-eye-open"></span><span class="glyphicon glyphicon-wrench"></span></td>
+					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/computadores/{id_computador}(id_computador=${computador.id_computador})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalComputador" th:attr="data-id_computador=${computador.id_computador}, data-ip=${computador.ip}"><span class="glyphicon glyphicon-remove"></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#detalhesComputador" th:attr="data-id_computador=${computador.id_computador}, data-ip=${computador.ip}, data-data_compra=${computador.data_compra}, data-data_formatacao=${computador.data_formatacao}, data-patrimonio=${computador.patrimonio}, data-sistema=${computador.sistema.sistema}, data-arquitetura=${computador.arquitetura.arquitetura}, data-versao_java=${computador.versao_java}, data-data_backup=${computador.data_backup}, data-dns_preferencial=${computador.dns_preferencial.dns_preferencial}, data-mascara=${computador.mascara.mascara}, data-gateway=${computador.gateway.gateway}, data-dns_alternativo=${computador.dns_alternativo.dns_alternativo}, data-ip=${computador.ip}, data-id_impressao=${computador.id_impressao}, data-status=${computador.status.status}"><span class="glyphicon glyphicon-eye-open"></span></a><span class="glyphicon glyphicon-wrench"></span></td>
 				</tr>
 				
 			<tr>
@@ -53,6 +56,7 @@
 		</div>
 		
 		<div layout:include="DialogoConfirmacaoExclusaoComputador"></div>
+		<div layout:include="DialogoDetalhesComputador"></div>
 	</div>	
 </section>
 
