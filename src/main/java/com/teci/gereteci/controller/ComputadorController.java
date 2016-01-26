@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -41,10 +42,16 @@ public class ComputadorController {
 		{
 			return "cadastroComputador";
 		}
+		try{
 		computadores.save(computador);
-		
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
 		return "redirect:/computadores/novo";
+	}
+		catch(DataIntegrityViolationException e) 
+		{
+			errors.rejectValue("data_compra", null, "Formato de data inválido"); errors.rejectValue("data_formatacao", null, "Formato de data inválido");errors.rejectValue("data_backup", null, "Formato de data inválido"); 
+			return CADASTRO_VIEW;
+		}
 	}
 	@RequestMapping
 	public ModelAndView pesquisar()
@@ -56,7 +63,7 @@ public class ComputadorController {
 		mv.addObject("usuarios", todosUsuarios);
 	    return mv;
 	}
-	
+
 	@RequestMapping("{id_computador}")
 	public ModelAndView edicao(@PathVariable("id_computador") Computador computador)
 	{
