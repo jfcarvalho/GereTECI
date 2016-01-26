@@ -1,8 +1,9 @@
 package com.teci.gereteci.model;
 
 public enum Mascara {
-	mascaraPadrao("255.255.255.0"),
-	automatico("Automático");
+	
+	automatico("Automático"),
+	mascaraPadrao("255.255.255.0");
 	private String mascara;
 
 

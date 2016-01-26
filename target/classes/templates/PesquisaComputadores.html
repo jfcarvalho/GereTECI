@@ -21,7 +21,7 @@
 		
 			<thead>
 				<tr><th class="text-center col-md-1">Patrimônio</th>
-				<th class="text-center col-md-2">Usuário</th>
+				<!--   <th class="text-center col-md-2">Usuário</th> -->
 				<th class="text-center col-md-2">S.O</th>
 				<th class="text-center col-md-2">Arquitetura</th>
 				<th class="text-center col-md-2">IP</th>
@@ -37,7 +37,7 @@
 			<tbody>
 				<tr th:each="computador : ${computadores}">
 					<td class="text-center" th:text="${computador.patrimonio}"></td>
-					<td class="text-center" th:each="usuario: ${usuarios}" th:text="{$usuario}"></td>
+				<!--  	<td class="text-center" th:each="usuario: ${usuarios}" th:text="{$usuario}"></td> -->
 					<td class="text-center" th:text="${computador.sistema.sistema}"></td>
 					<td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td>
 					<td class="text-center" th:text="${computador.ip}"></td>

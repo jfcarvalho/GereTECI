@@ -57,6 +57,8 @@ public class Computador {
 	private String id_impressao;
 	private StatusComputador status;
 	private Integer usuario_id_usuario;
+	private String processador;
+	private Memoria memoria;
 	
 	public Integer getId_computador()
 	{
@@ -177,5 +179,22 @@ public class Computador {
 	public void setUsuario_id_usuario(Integer usuario_id_usuario)
 	{
 		this.usuario_id_usuario = usuario_id_usuario;
+	}
+	
+	public Memoria getMemoria() {
+		return this.memoria;
+	}
+	
+	public void setMemoria(Memoria memoria)
+	{
+		this.memoria = memoria;
+	}
+	public String getProcessador() {
+		return this.processador;
+	}
+	
+	public void setProcessador(String processador)
+	{
+		this.processador = processador;
 	}
 }

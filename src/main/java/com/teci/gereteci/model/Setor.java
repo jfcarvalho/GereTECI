@@ -20,11 +20,12 @@ public class Setor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_setor;
-	@Size(min=1, max=20, message="O tamanho do campo Nome do setor tem que ser entre 1 e 20")
+	@Size(min=1, max=70, message="O tamanho do campo Nome do setor tem que ser entre 1 e 20")
 	private String sigla;
-	@Size(min=1, max=40, message="O tamanho do campo nome tem que ser entre 1 e 20")
+	@Size(min=1, max=70, message="O tamanho do campo nome tem que ser entre 1 e 20")
 	private String nome;
 	private Integer responsavel; 
+
 	
 	
 	
@@ -65,6 +66,9 @@ public class Setor {
 	{
 		this.responsavel = responsavel;
 	}
+	
+	
+	
 	
 	
 }

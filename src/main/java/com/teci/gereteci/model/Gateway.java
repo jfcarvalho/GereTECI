@@ -1,8 +1,9 @@
 package com.teci.gereteci.model;
 
 public enum Gateway {
-	gatewayPadrao("10.95.1.256"),
-	automatico("Automático");
+
+	automatico("Automático"),
+	gatewayPadrao("10.95.1.256");
 	private String gateway;
 
 

@@ -4,14 +4,14 @@ $('#detalhesComputador').on('show.bs.modal', function(event)
 			var codigoComputador = button.data('id_computador');
 			var ipComputador = button.data('ip');
 			var dataCompra = button.data('data_compra');
-			var dataFormatacao = button.data('data_formatacao');;
+			var dataFormatacao = button.data('data_formatacao');
 			var patrimonio = button.data('patrimonio');
 			var sistema = button.data('sistema');
 			var arquitetura = button.data('arquitetura');
 			var versao_java = button.data('versao_java');
 			var dataBackup = button.data('data_backup');
-			var dns_preferencial = button.data('dns_preferencial');;
-			var dns_alternativo = button.data('dns_alternativo');;
+			var dns_preferencial = button.data('dns_preferencial');
+			var dns_alternativo = button.data('dns_alternativo');
 			var mascara = button.data('mascara');
 			var gateway = button.data('gateway');
 			var id_impressao = button.data('id_impressao');

@@ -113,6 +113,11 @@ public class ComputadorController {
 		return Arrays.asList(StatusComputador.values());
 	}
 	
+	@ModelAttribute("todasMemoriasComputador")
+	public List<Memoria> todosMemoriasComputador() {
+		return Arrays.asList(Memoria.values());
+	}
+	
 	@ModelAttribute("todosUsuariosComputador")
 	public List<Usuario> todosUsuariosComputador()
 	{
