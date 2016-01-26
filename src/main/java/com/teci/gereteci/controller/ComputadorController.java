@@ -50,9 +50,11 @@ public class ComputadorController {
 	public ModelAndView pesquisar()
 	{
 		List<Computador> todosComputadores = computadores.findAll();
+		List<Usuario> todosUsuarios = usuarios.findAll();
 		ModelAndView mv = new ModelAndView("PesquisaComputadores");
 	    mv.addObject("computadores", todosComputadores);
-		return mv;
+		mv.addObject("usuarios", todosUsuarios);
+	    return mv;
 	}
 	
 	@RequestMapping("{id_computador}")
