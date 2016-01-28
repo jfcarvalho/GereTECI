@@ -2,14 +2,15 @@ package com.teci.gereteci.model;
 
 
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -35,9 +36,9 @@ public class Impressora {
 	@Enumerated(EnumType.STRING)
 	private Mascara mascara;
 	
-	private Integer setor_id_setor ;
-	
 	private StatusComputador status;
+	@ManyToMany(mappedBy="impressoras")
+	private List<Computador> computadores;
 	
 	public Integer getId_impressora()
 	{
@@ -102,10 +103,12 @@ public class Impressora {
 	public void setDns_preferencial(Dns_preferencial dns_preferencial) {
 		this.dns_preferencial = dns_preferencial;
 	}
-	public Integer getSetor_id_setor(){
-		return this.setor_id_setor;
+	public List<Computador> getComputadores()
+	{
+		return this.computadores;
 	}
-	public void setSetor_id_setor(Integer setor_id_setor) {
-		this.setor_id_setor = setor_id_setor;
+	public void setComputadores(List<Computador> computadores)
+	{
+		this.computadores = computadores;
 	}
 }

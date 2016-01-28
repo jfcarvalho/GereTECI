@@ -97,6 +97,14 @@
 				<input type="text" class="form-control" id="versao_java" name="versao_java" th:field="*{versao_java}"/>
 			</div>
 		</div>
+		<div class="form-group">
+		<label for="" class="col-sm-2 control-label">Impressora:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="impressoras">
+					<option th:each="impressora : ${todasImpressorasComputador}" th:value="${impressora.id_impressora}" th:text="${impressora.marca}"></option>
+				</select>
+			</div>
+		</div>
 		</div>
 		<div class="boxes">
 		<div class="form-group" th:classappend="${#fields.hasErrors('data_compra')} ? has-error">
@@ -140,22 +148,12 @@
 				<input type="text" class="form-control" id="processador" name="processador" th:field="*{processador}"/>
 			</div>
 		</div>
-		
-		<!--  <div class="form-group">
-			<label for="dns_alternativo" class="col-sm-2 control-label">Impressora:</label>
-			<div class="col-sm-6">
-				<select class="form-control" name="dns_alternativo">
-					<option th:each="dns_alternativo : ${todosDNSAComputador}" th:value="${dns_alternativo}" th:text="${dns_alternativo.dns_alternativo}"></option>
-				</select>
-			</div>
-		</div>
-		-->
-		
+				
 		<div class="form-group">
 			<label for="status" class="col-sm-2 control-label">Situação:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="status">
-					<option th:each="statusMaquina : ${todosStatusComputador}" th:value="${statusMaquina}" th:text="${statusMaquina.status}" th:selected="${computador.status}"></option>
+					<option th:each="statusMaquina : ${todosStatusComputador}" th:value="${statusMaquina}" th:text="${statusMaquina.status}" th:selected="${statusMaquina.status == computador.status}"></option>
 				</select>
 			</div>
 		</div>
@@ -168,6 +166,8 @@
 				</select>
 			</div>
 		</div>
+		
+		
 		
 		</div>
 		

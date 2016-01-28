@@ -26,6 +26,9 @@ public class ComputadorController {
 	private Computadores computadores;
 	@Autowired
 	private Usuarios usuarios;
+	@Autowired
+	private Impressoras impressoras;
+	
 	@RequestMapping("/novo")
 	public ModelAndView novo()
 	{
@@ -122,10 +125,17 @@ public class ComputadorController {
 	public List<Usuario> todosUsuariosComputador()
 	{
 		List<Usuario> todosUsuarios = usuarios.findAll();
-	//	ModelAndView mv = new ModelAndView("PesquisaComputadores");
-	   // mv.addObject("usuarios", todosUsuarios);
 		return todosUsuarios;
 	}
 	
+	@ModelAttribute("todosImpressorasComputador")
+	public List<Impressora> todasImpressorasComputador()
+	{
+		List<Impressora> todasImpressoras = impressoras.findAll();
+		return todasImpressoras;
+	}
+	
+ 
+
 	
 }

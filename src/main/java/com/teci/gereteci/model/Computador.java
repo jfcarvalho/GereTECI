@@ -3,13 +3,18 @@ package com.teci.gereteci.model;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
@@ -59,6 +64,10 @@ public class Computador {
 	private Integer usuario_id_usuario;
 	private String processador;
 	private Memoria memoria;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "computador_has_impressora", joinColumns = { @JoinColumn(name="computador_id_computador")}, inverseJoinColumns={ @JoinColumn (name = "impressora_id_impressora") })
+	private List<Impressora> impressoras;
 	
 	public Integer getId_computador()
 	{
@@ -197,4 +206,14 @@ public class Computador {
 	{
 		this.processador = processador;
 	}
+	public List<Impressora> getImpressoras()
+	{
+		return this.impressoras;
+	}
+	public void setImpressoras(List<Impressora> impressoras)
+	{
+		this.impressoras = impressoras;
+	}
+	
+	
 }
