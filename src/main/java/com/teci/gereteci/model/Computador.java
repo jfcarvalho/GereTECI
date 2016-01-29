@@ -69,6 +69,9 @@ public class Computador {
 	@JoinTable(name = "computador_has_impressora", joinColumns = { @JoinColumn(name="computador_id_computador")}, inverseJoinColumns={ @JoinColumn (name = "impressora_id_impressora") })
 	private List<Impressora> impressoras;
 	
+	@ManyToMany(mappedBy="computadores")
+	private List<LicencaOffice> licencasOffice;
+	
 	public Integer getId_computador()
 	{
 		return this.id_computador;
@@ -213,6 +216,15 @@ public class Computador {
 	public void setImpressoras(List<Impressora> impressoras)
 	{
 		this.impressoras = impressoras;
+	}
+	public List<LicencaOffice> getLicencasOffice()
+	{
+		return this.licencasOffice;
+	}
+	
+	public void setLicencasOffice(List<LicencaOffice> licencasOffice)
+	{
+		this.licencasOffice = licencasOffice;
 	}
 	
 	

@@ -28,7 +28,7 @@ public class ComputadorController {
 	private Usuarios usuarios;
 	@Autowired
 	private Impressoras impressoras;
-	
+
 	@RequestMapping("/novo")
 	public ModelAndView novo()
 	{
@@ -45,7 +45,10 @@ public class ComputadorController {
 		{
 			return "cadastroComputador";
 		}
-		try{
+		computadores.save(computador);
+		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		return "redirect:/computadores/novo";
+		/*try{
 		computadores.save(computador);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
 		return "redirect:/computadores/novo";
@@ -55,6 +58,7 @@ public class ComputadorController {
 			errors.rejectValue("data_compra", null, "Formato de data inválido"); errors.rejectValue("data_formatacao", null, "Formato de data inválido");errors.rejectValue("data_backup", null, "Formato de data inválido"); 
 			return CADASTRO_VIEW;
 		}
+	*/	
 	}
 	@RequestMapping
 	public ModelAndView pesquisar()
@@ -128,10 +132,10 @@ public class ComputadorController {
 		return todosUsuarios;
 	}
 	
-	@ModelAttribute("todosImpressorasComputador")
+	@ModelAttribute("todasImpressorasComputador")
 	public List<Impressora> todasImpressorasComputador()
 	{
-		List<Impressora> todasImpressoras = impressoras.findAll();
+		List<Impressora> todasImpressoras= impressoras.findAll();
 		return todasImpressoras;
 	}
 	

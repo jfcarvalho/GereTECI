@@ -23,6 +23,8 @@ public class LicencaOfficeController {
 	private static final String CADASTRO_VIEW = "CadastroLicencaOffice"; 
 	@Autowired
 	private LicencasOffice licencasOffice;
+	@Autowired
+	private Computadores computadores;
 	
 	
 	@RequestMapping("/novo")
@@ -76,6 +78,12 @@ public class LicencaOfficeController {
 	@ModelAttribute("todosPlanosLicencaOffice")
 	public List<PlanoOffice> todosPlanosLicencaOffice() {
 		return Arrays.asList(PlanoOffice.values());
+	}
+	@ModelAttribute("todosComputadoresLicencasOffice")
+	public List<Computador> todosComputadoresLicencasOffice()
+	{
+		List<Computador> todosComputadores= computadores.findAll();
+		return todosComputadores;
 	}
 	
 	
