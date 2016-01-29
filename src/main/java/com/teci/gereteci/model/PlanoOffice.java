@@ -5,6 +5,7 @@ public enum PlanoOffice {
 	Intermediario("Intermediário"),
 	Avancado("Avançado"),
 	AvancadoProdeb("Avançado Prodeb");
+	
 	private String plano;
 	
 	PlanoOffice(String plano)
