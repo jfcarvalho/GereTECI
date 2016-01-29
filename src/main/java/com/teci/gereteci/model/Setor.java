@@ -2,6 +2,8 @@ package com.teci.gereteci.model;
 
 
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -25,7 +27,9 @@ public class Setor {
 	@Size(min=1, max=70, message="O tamanho do campo nome tem que ser entre 1 e 20")
 	private String nome;
 	private Integer responsavel; 
-
+	@OneToMany(mappedBy="setorUsuario")
+	private List<Usuario> usuarios;
+	
 	
 	
 	
