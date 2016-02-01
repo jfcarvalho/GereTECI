@@ -39,7 +39,6 @@ CREATE TABLE `computador_has_licenca_office` (
 
 LOCK TABLES `computador_has_licenca_office` WRITE;
 /*!40000 ALTER TABLE `computador_has_licenca_office` DISABLE KEYS */;
-INSERT INTO `computador_has_licenca_office` VALUES (21,2);
 /*!40000 ALTER TABLE `computador_has_licenca_office` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -2,6 +2,7 @@ package com.teci.gereteci.model;
 
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -36,27 +37,11 @@ public class Usuario {
 	private Nivel nivel_acesso; 
 	private String telefone;
 	private String email;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
 	@JoinColumn(name="setor_id_setor")
-	private Setor setorUsuario;
+	private Setor setor;
 	
-	
-	
-	
-	//@Column
-	//private String setor;
-	
-	/*
-	public Usuario(){}
-	public Usuario(String matricula, String nome, String setor, String cargo, Integer setor_id_setor) {
-		super();
-		this.matricula = matricula;
-		this.nome = nome;
-		this.cargo = cargo;
-		//this.setor_id_setor = setor_id_setor;
-		//this.setor = setor;
-	}
-	*/
+
 	public Integer getId_usuario()
 	{
 		return this.id_usuario;
@@ -88,13 +73,8 @@ public class Usuario {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	/*public Integer getSetor_id_setor() {
-		return this.setor_id_setor;
-	}
-	public void setSetor_id_setor(Integer setor_id_setor) {
-		this.setor_id_setor= setor_id_setor;
-	}
-	*/
+	
+
 	public Nivel getNivel_acesso() {
 		return this.nivel_acesso;
 	}
@@ -124,13 +104,13 @@ public class Usuario {
 		this.email= email;
 	}
 	
-	
-/*	public String getSetor() {
+	public Setor getSetor()
+	{
 		return this.setor;
 	}
-	public void setSetor(String setor) {
-		this.setor= setor;
+	public void setSetor(Setor setor)
+	{
+		this.setor = setor;
 	}
 	
-	*/
 }

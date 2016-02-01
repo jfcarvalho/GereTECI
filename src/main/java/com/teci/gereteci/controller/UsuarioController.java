@@ -31,17 +31,20 @@ public class UsuarioController {
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(new Usuario());
+		
 		//mv.addObject("todosNiveisUsuario", Nivel.values());
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Usuario usuario, Errors errors, RedirectAttributes attributes)
+	public String salvar(@Validated Usuario usuario, Setor setor, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
 		{
 			return "cadastroUsuario";
 		}
+		//System.out.println(">>>>>>>>>>>>>>>>>> "+setor.getNome() +" <<<<<<<<<<<<<<<<<<<<<<<<<<");
+		usuario.setSetor(setor);
 		usuarios.save(usuario);
 		
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");	
@@ -57,12 +60,13 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("{id_usuario}")
-	public ModelAndView edicao(@PathVariable("id_usuario") Usuario usuario)
+	public ModelAndView edicao(@PathVariable("id_usuario") Usuario usuario, Setor setor)
 	{
 		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		usuario.setSetor(setor);
 		mv.addObject(usuario);
 		return mv;
 	}

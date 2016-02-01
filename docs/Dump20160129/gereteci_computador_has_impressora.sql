@@ -39,7 +39,6 @@ CREATE TABLE `computador_has_impressora` (
 
 LOCK TABLES `computador_has_impressora` WRITE;
 /*!40000 ALTER TABLE `computador_has_impressora` DISABLE KEYS */;
-INSERT INTO `computador_has_impressora` VALUES (26,3);
 /*!40000 ALTER TABLE `computador_has_impressora` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -43,7 +43,6 @@ CREATE TABLE `impressora` (
 
 LOCK TABLES `impressora` WRITE;
 /*!40000 ALTER TABLE `impressora` DISABLE KEYS */;
-INSERT INTO `impressora` VALUES (2,'10.95.1.38','gatewayPadrao','dnspPadrao','dnsaPadrao','mascaraPadrao',NULL,'Kyocera','1234',2),(3,'10.95.1.58','automatico','retiro','automatico','automatico',NULL,'HP Deskjet','7777',3);
 /*!40000 ALTER TABLE `impressora` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

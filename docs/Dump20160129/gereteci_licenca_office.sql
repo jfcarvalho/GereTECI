@@ -38,7 +38,6 @@ CREATE TABLE `licenca_office` (
 
 LOCK TABLES `licenca_office` WRITE;
 /*!40000 ALTER TABLE `licenca_office` DISABLE KEYS */;
-INSERT INTO `licenca_office` VALUES (2,'COADM','1991-05-10','1991-05-10','Basico');
 /*!40000 ALTER TABLE `licenca_office` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

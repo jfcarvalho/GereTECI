@@ -56,7 +56,6 @@ CREATE TABLE `computador` (
 
 LOCK TABLES `computador` WRITE;
 /*!40000 ALTER TABLE `computador` DISABLE KEYS */;
-INSERT INTO `computador` VALUES (21,'2016-01-05','2016-01-06','CTB-1210','v7','x32Bits',NULL,NULL,'8.45','2016-01-08','dnspPadrao','mascaraPadrao','gatewayPadrao','dnsaPadrao','10.95.1.89','12','2',28,6,'Intel Dual Core'),(26,'2016-01-29','2016-01-29','102024','v7','x64Bits',NULL,NULL,'8','2016-01-29','dnspPadrao','mascaraPadrao','gatewayPadrao','dnsaPadrao','10.95.1.3','1500','3',36,6,'Intel Dual Core');
 /*!40000 ALTER TABLE `computador` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
