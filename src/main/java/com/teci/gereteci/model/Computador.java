@@ -32,7 +32,7 @@ public class Computador {
 	
 	private Integer id_computador;
 	
-	@Size(min=1, max=20, message="O tamanho do campo nome tem que ser entre 1 e 20")
+	@Size(min=1, max=100, message="O tamanho do campo nome tem que ser entre 1 e 20")
 	private String patrimonio;
 	@Enumerated(EnumType.STRING)
 	
@@ -40,7 +40,7 @@ public class Computador {
 	
 	@Enumerated(EnumType.STRING)
 	private Arquitetura arquitetura;
-	@Size(min=3, max=20, message="O tamanho do campo nome tem que ser entre 3 e 20")
+	@Size(min=3, max=100, message="O tamanho do campo nome tem que ser entre 3 e 20")
 	private String ip;
 	@Enumerated(EnumType.STRING)
 	private Mascara mascara;

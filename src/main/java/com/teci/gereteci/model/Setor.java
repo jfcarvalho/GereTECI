@@ -13,7 +13,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import javax.validation.constraints.Size;
@@ -25,16 +27,15 @@ public class Setor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_setor;
-	@Size(min=1, max=70, message="O tamanho do campo Nome do setor tem que ser entre 1 e 20")
+	@Size(min=1, max=100, message="O tamanho do campo Nome do setor tem que ser entre 1 e 20")
 	private String sigla;
-	@Size(min=1, max=70, message="O tamanho do campo nome tem que ser entre 1 e 20")
+	@Size(min=1, max=100, message="O tamanho do campo nome tem que ser entre 1 e 20")
 	private String nome;
-	private Integer responsavel; 
 	@OneToMany(mappedBy="setor")
 	private List<Usuario> usuarios;
-	
-	
-	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="responsavel")
+	private Usuario responsavel;
 	
 	public Integer getId_setor()
 	{
@@ -64,12 +65,12 @@ public class Setor {
 		this.nome = nome;
 	}
 	
-	public Integer getResponsavel()
+	public Usuario getResponsavel()
 	{
 		return this.responsavel;
 	}
 	
-	public void setResponsavel(Integer responsavel)
+	public void setResponsavel(Usuario responsavel)
 	{
 		this.responsavel = responsavel;
 	}

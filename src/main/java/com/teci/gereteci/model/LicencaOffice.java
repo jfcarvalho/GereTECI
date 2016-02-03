@@ -28,7 +28,7 @@ public class LicencaOffice {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_licencaoffice;
 	
-	@Size(min=1, max=20, message="O tamanho do campo nome tem que ser entre 1 e 20")
+	@Size(min=1, max=100, message="O tamanho do campo nome tem que ser entre 1 e 20")
 	private String nome;
 	@Temporal(TemporalType.DATE)
 	private Date data_compra;

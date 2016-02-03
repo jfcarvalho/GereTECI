@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -34,13 +35,16 @@ public class SetorController {
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Setor setor, Errors errors, RedirectAttributes attributes)
+	public String salvar(@Validated Setor setor, @RequestParam(value="responsavel", required=true) Integer responsavel, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
 		{
 			return "cadastroSetor";
 		}
+		System.out.println(">>>>>>>>> ID DO RESPONSAVEL: "+ responsavel);
+		Usuario user = usuarios.findOne(responsavel);
+		setor.setResponsavel(user);
 		setores.save(setor);
 		
 		attributes.addFlashAttribute("mensagem", "Setor salvo com sucesso!");	
