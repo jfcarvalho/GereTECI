@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -36,15 +37,21 @@ public class UsuarioController {
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Usuario usuario, Setor setor, Errors errors, RedirectAttributes attributes)
+	public String salvar(@Validated Usuario usuario, @RequestParam Integer setor_id_setor, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		System.out.println(">>>>> ID DO SETOR: "+ setor_id_setor +"");
 		if(errors.hasErrors())
 		{
 			return "cadastroUsuario";
 		}
-		//System.out.println(">>>>>>>>>>>>>>>>>> "+setor.getNome() +" <<<<<<<<<<<<<<<<<<<<<<<<<<");
-		usuario.setSetor(setor);
+		//WTF?
+		Setor sector = setores.findOne(setor_id_setor);
+		usuario.setSetor(sector);
+		List<Usuario> users = sector.getUsuarios();
+		users.add(usuario);
+		sector.setUsuarios(users);
+		
 		usuarios.save(usuario);
 		
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");	
@@ -60,13 +67,13 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("{id_usuario}")
-	public ModelAndView edicao(@PathVariable("id_usuario") Usuario usuario, Setor setor)
+	public ModelAndView edicao(@PathVariable("id_usuario") Usuario usuario)
 	{
 		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		usuario.setSetor(setor);
+		
 		mv.addObject(usuario);
 		return mv;
 	}
