@@ -2,12 +2,16 @@ package com.teci.gereteci.model;
 
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,8 +30,11 @@ public class Recurso {
 	private String descricao;
 	@Size(min=3, max=20, message="O tamanho do campo cargo tem que ser entre 3 e 20")
 	private String marca;
-	private Integer computador_id_computador ;
 	private StatusComputador status;
+	
+	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
+	@JoinColumn(name="computador_id_computador")
+	private Computador computador;
 	
 	public Integer getId_recurso()
 	{
@@ -60,17 +67,19 @@ public class Recurso {
 	public void setMarca(String marca) {
 		this.marca= marca;
 	}
-	public Integer getComputador_id_computador() {
-		return this.computador_id_computador;
-	}
-	public void setComptuador_id_computador(Integer computador_id_computador) {
-		this.computador_id_computador= computador_id_computador;
-	}
 	
 	public StatusComputador getStatus() {
 		return this.status;
 	}
 	public void setStatus(StatusComputador status) {
 		this.status= status;
+	}
+	public Computador getComputador()
+	{
+		return this.computador;
+	}
+	public void setComputador(Computador computador)
+	{
+		this.computador = computador;
 	}
 }

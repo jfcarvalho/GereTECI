@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,13 +36,19 @@ public class RecursoController {
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Recurso recurso, Errors errors, RedirectAttributes attributes)
+	public String salvar(@Validated Recurso recurso, @RequestParam Integer computador_id_computador, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
 		{
 			return "cadastroRecurso";
 		}
+		Computador computer= computadores.findOne(computador_id_computador);
+		recurso.setComputador(computer);
+		List<Recurso> resources = computer.getRecursos();
+		resources.add(recurso);
+		computer.setRecursos(resources);
+		
 		recursos.save(recurso);
 		
 		attributes.addFlashAttribute("mensagem", "Recurso salvo com sucesso!");	

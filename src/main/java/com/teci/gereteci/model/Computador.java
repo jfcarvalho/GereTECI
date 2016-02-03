@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
@@ -68,9 +69,10 @@ public class Computador {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "computador_has_impressora", joinColumns = { @JoinColumn(name="computador_id_computador")}, inverseJoinColumns={ @JoinColumn (name = "impressora_id_impressora") })
 	private List<Impressora> impressoras;
-	
 	@ManyToMany(mappedBy="computadores")
 	private List<LicencaOffice> licencasOffice;
+	@OneToMany(mappedBy="computador")
+	private List<Recurso> recursos;
 	
 	public Integer getId_computador()
 	{
@@ -226,6 +228,16 @@ public class Computador {
 	{
 		this.licencasOffice = licencasOffice;
 	}
+	public List<Recurso> getRecursos()
+	{
+		return this.recursos;
+	}
+	
+	public void setRecursos(List<Recurso> recursos)
+	{
+		this.recursos = recursos;
+	}
+	
 	
 	
 }
