@@ -73,17 +73,7 @@
 				</select>
 			</div>
 		</div>
-		
-		
-		<div class="form-group">
-			<label for="setor_id_setor" class="col-sm-2 control-label">Setor de alocação:</label>
-			<div class="col-sm-2">
-				<select class="form-control" name="setor_id_setor">
-					<option th:each="setor : ${todosSetoresImpressora}" th:value="${setor.id_setor}" th:text="${setor.nome}"></option>
-				</select>
-			</div>
-		</div>
-		
+			
 		<div class="form-group">
 			<label for="status" class="col-sm-2 control-label">Situação:</label>
 			<div class="col-sm-6">

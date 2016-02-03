@@ -2,12 +2,16 @@ package com.teci.gereteci.model;
 
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,30 +31,17 @@ public class Usuario {
 	@Size(min=3, max=20, message="O tamanho do campo cargo tem que ser entre 3 e 20")
 	private String cargo; 
 	
-	private Integer setor_id_setor;
+	//private Integer setor_id_setor;
 	
 	@Enumerated(EnumType.STRING)
 	private Nivel nivel_acesso; 
 	private String telefone;
 	private String email;
+	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
+	@JoinColumn(name="setor_id_setor")
+	private Setor setor;
 	
-	
-	
-	
-	//@Column
-	//private String setor;
-	
-	/*
-	public Usuario(){}
-	public Usuario(String matricula, String nome, String setor, String cargo, Integer setor_id_setor) {
-		super();
-		this.matricula = matricula;
-		this.nome = nome;
-		this.cargo = cargo;
-		//this.setor_id_setor = setor_id_setor;
-		//this.setor = setor;
-	}
-	*/
+
 	public Integer getId_usuario()
 	{
 		return this.id_usuario;
@@ -82,13 +73,8 @@ public class Usuario {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Integer getSetor_id_setor() {
-		return this.setor_id_setor;
-	}
-	public void setSetor_id_setor(Integer setor_id_setor) {
-		this.setor_id_setor= setor_id_setor;
-	}
 	
+
 	public Nivel getNivel_acesso() {
 		return this.nivel_acesso;
 	}
@@ -118,13 +104,13 @@ public class Usuario {
 		this.email= email;
 	}
 	
-	
-/*	public String getSetor() {
+	public Setor getSetor()
+	{
 		return this.setor;
 	}
-	public void setSetor(String setor) {
-		this.setor= setor;
+	public void setSetor(Setor setor)
+	{
+		this.setor = setor;
 	}
 	
-	*/
 }
