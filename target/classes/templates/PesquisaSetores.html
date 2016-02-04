@@ -23,7 +23,8 @@
 				<tr><th class="text-center col-md-1">#</th>
 				<th class="text-center col-md-2">Nome</th>
 				<th class="text-center col-md-2">Sigla</th>
-				<th class="text-center col-md-2">Respnsavek</th>
+				<th class="text-center col-md-2">Responsável</th>
+				<th class="text-center col-md-2">Ação</th>
 				
 				</tr>
 				
@@ -33,6 +34,7 @@
 					<td class="text-center" th:text="${setor.id_setor}"></td>
 					<td class="text-center" th:text="${setor.nome}"></td>
 					<td class="text-center" th:text="${setor.sigla}"></td>
+					<td class="text-center" th:text="${setor.responsavel.nome}"></td>
 					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/setores/{id_setor}(id_setor=${setor.id_setor})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalSetor" th:attr="data-id_setor=${setor.id_setor}, data-nome=${setor.nome}"><span class="glyphicon glyphicon-remove"></span></a></td>
 					
 				</tr>

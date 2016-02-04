@@ -2,8 +2,8 @@ package com.teci.gereteci.model;
 
 public enum Nivel {
 	ADMINISTRADOR("Administrador"),
-	USUARIOTECI("UsuarioTECI"),
-	USUARIOPADRAO("UsuarioPadrao");
+	USUARIOTECI("Usuário TECI"),
+	USUARIOPADRAO("Usuário Padrão");
 	
 	private String nivel;
 

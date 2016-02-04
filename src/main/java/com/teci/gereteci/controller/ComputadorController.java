@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -38,27 +39,19 @@ public class ComputadorController {
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Computador computador, Errors errors, RedirectAttributes attributes)
+	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
 		{
 			return "cadastroComputador";
 		}
+		Usuario user = usuarios.findOne(usuario_id_usuario);
+		computador.setUsuario(user);
 		computadores.save(computador);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
 		return "redirect:/computadores/novo";
-		/*try{
-		computadores.save(computador);
-		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
-		return "redirect:/computadores/novo";
-	}
-		catch(DataIntegrityViolationException e) 
-		{
-			errors.rejectValue("data_compra", null, "Formato de data inválido"); errors.rejectValue("data_formatacao", null, "Formato de data inválido");errors.rejectValue("data_backup", null, "Formato de data inválido"); 
-			return CADASTRO_VIEW;
-		}
-	*/	
+	
 	}
 	@RequestMapping
 	public ModelAndView pesquisar()

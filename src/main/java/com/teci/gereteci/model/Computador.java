@@ -5,6 +5,7 @@ package com.teci.gereteci.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,6 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
@@ -62,7 +64,7 @@ public class Computador {
 	private Date data_formatacao;
 	private String id_impressao;
 	private StatusComputador status;
-	private Integer usuario_id_usuario;
+	//private Integer usuario_id_usuario;
 	private String processador;
 	private Memoria memoria;
 
@@ -73,6 +75,9 @@ public class Computador {
 	private List<LicencaOffice> licencasOffice;
 	@OneToMany(mappedBy="computador")
 	private List<Recurso> recursos;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="usuario_id_usuario")
+	private Usuario usuario;
 	
 	public Integer getId_computador()
 	{
@@ -185,7 +190,7 @@ public class Computador {
 		this.status = status;
 	}
 	
-	public Integer getUsuario_id_usuario()
+	/*public Integer getUsuario_id_usuario()
 	{
 		return this.usuario_id_usuario;
 	}
@@ -194,7 +199,7 @@ public class Computador {
 	{
 		this.usuario_id_usuario = usuario_id_usuario;
 	}
-	
+	*/
 	public Memoria getMemoria() {
 		return this.memoria;
 	}
@@ -236,6 +241,14 @@ public class Computador {
 	public void setRecursos(List<Recurso> recursos)
 	{
 		this.recursos = recursos;
+	}
+	public Usuario getUsuario()
+	{
+		return this.usuario;
+	}
+	public void setUsuario(Usuario usuario)
+	{
+		this.usuario = usuario;
 	}
 	
 	

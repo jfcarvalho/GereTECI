@@ -25,6 +25,8 @@
 				<th class="text-center col-md-2">Chave</th>
 				<th class="text-center col-md-2">Data de compra</th>
 				<th class="text-center col-md-2">Expira em</th>
+				<th class="text-center col-md-2">Computador</th>
+				<th class="text-center col-md-2">Usuário</th>
 				<th class="text-center col-md-1">Ação</th>
 				</tr>
 				
@@ -36,6 +38,8 @@
 					<td class="text-center" th:text="${licenca.chave}"></td>
 					<td class="text-center" th:text="${licenca.data_compra}"></td>
 					<td class="text-center" th:text="${licenca.data_expira}"></td>
+					<td class="text-center" th:text="${licenca.computador.ip}"></td>
+					<td class="text-center" th:text="${licenca.computador.usuario.nome}"></td>
 					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/licencas/{id_licenca}(id_licenca=${licenca.id_licenca})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalLicenca" th:attr="data-id_licenca=${licenca.id_licenca}, data-nome=${licenca.nome}"><span class="glyphicon glyphicon-remove"></span></a></td>
 					
 				</tr>

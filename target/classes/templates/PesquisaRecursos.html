@@ -25,6 +25,9 @@
 				<th class="text-center col-md-2">Descrição</th>
 				<th class="text-center col-md-2">Marca</th>
 				<th class="text-center col-md-2">Estado</th>
+				<th class="text-center col-md-2">Computador</th>
+				<th class="text-center col-md-2">Usuário</th>
+				<th class="text-center col-md-2">Setor</th>
 				<th class="text-center col-md-2">Ação</th>
 				
 				</tr>
@@ -36,8 +39,10 @@
 					<td class="text-center" th:text="${recurso.patrimonio}"></td>
 					<td class="text-center" th:text="${recurso.descricao}"></td>
 					<td class="text-center" th:text="${recurso.marca}"></td>
-					
 					<td class="text-center"><span class="label" th:text="${recurso.status.status}" th:classappend="${#strings.toString(recurso.status) == 'funcionando' ? 'label-success' : 'label-danger'}"></span></td>  
+					<td class="text-center" th:text="${recurso.computador.ip}"></td>
+					<td class="text-center" th:text="${recurso.computador.usuario.nome}"></td>
+					<td class="text-center" th:text="${recurso.computador.usuario.setor.sigla}"></td>
 					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/recursos/{id_recurso}(id_recurso=${recurso.id_recurso})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalRecurso" th:attr="data-id_recurso=${recurso.id_recurso}, data-descricao=${recurso.descricao}"><span class="glyphicon glyphicon-remove"></span></a></td>
 					
 				</tr>

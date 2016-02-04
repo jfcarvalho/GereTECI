@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,13 +36,16 @@ public class LicencaController {
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Licenca licenca, Errors errors, RedirectAttributes attributes)
+	public String salvar(@Validated Licenca licenca, @RequestParam Integer computador_id_computador, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
 		{
 			return "cadastroLicenca";
 		}
+		Computador computer = computadores.findOne(computador_id_computador);
+		licenca.setComputador(computer);
+		
 		licencas.save(licenca);
 		
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");	

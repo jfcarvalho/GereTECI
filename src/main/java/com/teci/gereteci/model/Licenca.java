@@ -4,12 +4,15 @@ package com.teci.gereteci.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,8 +35,10 @@ public class Licenca {
 	private Date data_compra;
 	@Temporal(TemporalType.DATE)
 	private Date data_expira;
-	
-	private Integer computador_id_computador;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="computador_id_computador")
+	private Computador computador;
+	//private Integer computador_id_computador;
 	
 	public Integer getId_licenca()
 	{
@@ -72,11 +77,12 @@ public class Licenca {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Integer getComputador_id_computador() {
-		return this.computador_id_computador;
+	public Computador getComputador() {
+		return this.computador;
 	}
-	public void setComputador_id_computador(Integer computador_id_computador) {
-		this.computador_id_computador= computador_id_computador;
+	public void setComputador(Computador computador) {
+		
+		this.computador = computador;
 	}
 	
 }
