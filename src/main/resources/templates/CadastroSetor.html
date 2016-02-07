@@ -37,7 +37,7 @@
 			<label for="responsavel" class="col-sm-2 control-label">Responsável:</label>
 			<div class="col-sm-2">
 				<select class="form-control" name="responsavel">
-					<option th:each="responsavel : ${todosResponsaveisSetor}" th:value="${responsavel.id_usuario}" th:text="${responsavel.nome}"></option>
+					<option th:each="responsavel : ${todosResponsaveisSetor}" th:value="${responsavel.id_usuario}" th:text="${responsavel.nome}" th:selected="${set} ? ${set.responsavel.id_usuario} == ${responsavel.id_usuario}" ></option>
 				</select>
 			</div>
 		</div>

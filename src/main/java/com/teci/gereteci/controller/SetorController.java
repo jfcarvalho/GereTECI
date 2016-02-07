@@ -63,6 +63,7 @@ public class SetorController {
 	public ModelAndView edicao(@PathVariable("id_setor") Setor setor)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		mv.addObject("set", setor);
 		mv.addObject(setor);
 		return mv;
 	}

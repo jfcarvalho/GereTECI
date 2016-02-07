@@ -74,7 +74,7 @@ public class UsuarioController {
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject("su", usuario);
-	//	mv.addObject(usuario);
+		mv.addObject(usuario);
 		return mv;
 	}
 	

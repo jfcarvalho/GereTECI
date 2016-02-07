@@ -162,7 +162,7 @@
 		<label for="" class="col-sm-2 control-label">Usuário:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="usuario_id_usuario">
-					<option th:each="usuario : ${todosUsuariosComputador}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}"></option>
+					<option th:each="usuario : ${todosUsuariosComputador}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}" th:selected="${pc} ? ${pc.usuario.id_usuario} == ${usuario.id_usuario}"></option>
 				</select>
 			</div>
 		</div>
