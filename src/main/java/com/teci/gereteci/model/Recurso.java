@@ -26,10 +26,11 @@ public class Recurso {
 	
 	@Size(min=1, max=100, message="O tamanho do campo nome tem que ser entre 1 e 20")
 	private String patrimonio;
-	@Size(min=3, max=100, message="O tamanho do campo nome tem que ser entre 3 e 20")
+	@Size(min=1, max=100, message="O tamanho do campo nome tem que ser entre 3 e 20")
 	private String descricao;
-	@Size(min=3, max=100, message="O tamanho do campo cargo tem que ser entre 3 e 20")
+	@Size(min=1, max=100, message="O tamanho do campo cargo tem que ser entre 3 e 20")
 	private String marca;
+	@Enumerated(EnumType.STRING)
 	private StatusComputador status;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})

@@ -101,7 +101,7 @@
 		<label for="" class="col-sm-2 control-label">Impressora:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="impressoras" multiple="multiple">
-					<option th:each="impressora : ${todasImpressorasComputador}" th:value="${impressora.id_impressora}" th:text="${impressora.marca}"></option>
+					<option th:each="impressora : ${todasImpressorasComputador}" th:value="${{impressora.id_impressora}}" th:text="${impressora.marca}"></option>
 				</select>
 			</div>
 		</div>
@@ -166,7 +166,14 @@
 				</select>
 			</div>
 		</div>
-		
+		<div class="form-group">
+		<label for="" class="col-sm-2 control-label">Recursos:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="recursos" multiple="multiple">
+					<option th:each="recurso : ${todasRecursosComputador}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao}"></option>
+				</select>
+			</div>
+		</div>
 		
 		
 		</div>

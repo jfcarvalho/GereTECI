@@ -29,7 +29,10 @@ public class ComputadorController {
 	private Usuarios usuarios;
 	@Autowired
 	private Impressoras impressoras;
-
+	@Autowired
+	private Recursos recursos;
+	
+	
 	@RequestMapping("/novo")
 	public ModelAndView novo()
 	{
@@ -133,8 +136,10 @@ public class ComputadorController {
 		List<Impressora> todasImpressoras= impressoras.findAll();
 		return todasImpressoras;
 	}
-	
- 
-
-	
+	@ModelAttribute("todosRecursosComputador")
+	public List<Recurso> todasRecursosComputador()
+	{
+		List<Recurso> todosRecursos= recursos.findAll();
+		return todosRecursos;
+	}	
 }

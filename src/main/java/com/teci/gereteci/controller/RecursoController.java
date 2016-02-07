@@ -70,6 +70,8 @@ public class RecursoController {
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		
+		mv.addObject("rec", recurso);
 		mv.addObject(recurso);
 		return mv;
 	}

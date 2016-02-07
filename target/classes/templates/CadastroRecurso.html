@@ -44,7 +44,7 @@
 			<label for="computador_id_computador" class="col-sm-2 control-label">Computador:</label>
 			<div class="col-sm-2">
 				<select class="form-control" name="computador_id_computador">
-					<option th:each="computador : ${todosComputadoresRecurso}" th:value="${computador.id_computador}" th:text="${computador.patrimonio}"></option>
+					<option th:each="computador : ${todosComputadoresRecurso}" th:value="${computador.id_computador}" th:text="${computador.patrimonio}" th:selected="${rec} ? ${rec.computador.patrimonio} == ${computador.patrimonio}"></option>
 				</select>
 			</div>
 		</div>
@@ -53,7 +53,7 @@
 			<label for="status" class="col-sm-2 control-label">Situação:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="status">
-					<option th:each="status : ${todosStatusRecurso}" th:value="${status}" th:text="${status.status}"></option>
+					<option th:each="status : ${todosStatusRecurso}" th:value="${status}" th:text="${status.status}" th:selected="${rec} ? ${rec.status.status} == ${status.status}"></option>
 				</select>
 			</div>
 		</div>
