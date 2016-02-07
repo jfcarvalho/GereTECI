@@ -21,6 +21,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
+		<property name="hibernate.event.merge.entity_copy_observer" value="allow"/>
+		
 	</properties>
 
 	<dependencies>

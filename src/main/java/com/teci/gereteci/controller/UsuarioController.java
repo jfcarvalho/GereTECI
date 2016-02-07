@@ -73,8 +73,8 @@ public class UsuarioController {
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		
-		mv.addObject(usuario);
+		mv.addObject("su", usuario);
+	//	mv.addObject(usuario);
 		return mv;
 	}
 	

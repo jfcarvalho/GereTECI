@@ -71,7 +71,9 @@ public class ComputadorController {
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		mv.addObject("pc", computador);
 		mv.addObject(computador);
+		
 		return mv;
 	}
 	

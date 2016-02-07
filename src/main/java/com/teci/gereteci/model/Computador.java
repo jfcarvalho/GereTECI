@@ -37,9 +37,7 @@ public class Computador {
 	@Size(min=1, max=100, message="O tamanho do campo nome tem que ser entre 1 e 20")
 	private String patrimonio;
 	@Enumerated(EnumType.STRING)
-	
 	private Sistema sistema;
-	
 	@Enumerated(EnumType.STRING)
 	private Arquitetura arquitetura;
 	@Size(min=3, max=100, message="O tamanho do campo nome tem que ser entre 3 e 20")
@@ -52,6 +50,7 @@ public class Computador {
 	private Dns_alternativo dns_alternativo;
 	@Enumerated(EnumType.STRING)
 	private Dns_preferencial dns_preferencial;
+	@Size(min=1, max=100, message="O tamanho do campo nome tem que ser entre 3 e 20")
 	private String versao_java;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
@@ -62,10 +61,14 @@ public class Computador {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date data_formatacao;
+	@Size(min=3, max=100, message="O tamanho do campo nome tem que ser entre 3 e 20")
 	private String id_impressao;
+	@Enumerated(EnumType.STRING)
 	private StatusComputador status;
 	//private Integer usuario_id_usuario;
+	@Size(min=1, max=100, message="O tamanho do campo nome tem que ser entre 3 e 20")
 	private String processador;
+	@Enumerated(EnumType.STRING)
 	private Memoria memoria;
 
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -75,7 +78,7 @@ public class Computador {
 	private List<LicencaOffice> licencasOffice;
 	@OneToMany(mappedBy="computador")
 	private List<Recurso> recursos;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="usuario_id_usuario")
 	private Usuario usuario;
 	

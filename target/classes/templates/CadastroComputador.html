@@ -31,7 +31,7 @@
 			<label for="sistema" class="col-sm-2 control-label">Sistema:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="sistema">
-					<option th:each="sistema : ${todosSistemasComputador}" th:value="${sistema}" th:text="${sistema.sistema}" th:selected="${sistema.sistema}"></option>
+					<option th:each="sistema : ${todosSistemasComputador}" th:value="${sistema}" th:text="${sistema.sistema}" th:selected="${pc} ? ${pc.sistema.sistema} == ${sistema.sistema}"></option>
 				</select>
 			</div>
 		</div>
@@ -40,7 +40,7 @@
 			<label for="arquitetura" class="col-sm-2 control-label">Arquitetura:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="arquitetura">
-					<option th:each="arquitetura : ${todasArquiteturasComputador}" th:value="${arquitetura}" th:text="${arquitetura.arquitetura}" th:selected="${arquitetura.arquitetura}"></option>
+					<option th:each="arquitetura : ${todasArquiteturasComputador}" th:value="${arquitetura}" th:text="${arquitetura.arquitetura}" th:selected="${pc} ? ${pc.arquitetura.arquitetura} == ${arquitetura.arquitetura}"></option>
 				</select>
 			</div>
 		</div>
@@ -58,7 +58,7 @@
 			<label for="mascara" class="col-sm-2 control-label">Mascara:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="mascara">
-					<option th:each="mascara : ${todasMascarasComputador}" th:value="${mascara}" th:text="${mascara.mascara}" th:selected="${mascara.mascara}"></option>
+					<option th:each="mascara : ${todasMascarasComputador}" th:value="${mascara}" th:text="${mascara.mascara}" th:selected="${pc} ? ${pc.mascara.mascara} == ${mascara.mascara}"></option>
 				</select>
 			</div>
 		</div>
@@ -67,7 +67,7 @@
 			<label for="gateway" class="col-sm-2 control-label">Gateway:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="gateway">
-					<option th:each="gateway : ${todosGatewaysComputador}" th:value="${gateway}" th:text="${gateway.gateway}" th:selected="${gateway.gateway}"></option>
+					<option th:each="gateway : ${todosGatewaysComputador}" th:value="${gateway}" th:text="${gateway.gateway}" th:selected="${pc} ? ${pc.gateway.gateway} == ${gateway.gateway}"></option>
 				</select>
 			</div>
 		</div>
@@ -75,7 +75,7 @@
 			<label for="dns_preferencial" class="col-sm-2 control-label">Dns Preferencial:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="dns_preferencial">
-					<option th:each="dns_preferencial : ${todosDNSPComputador}" th:value="${dns_preferencial}" th:text="${dns_preferencial.dns_preferencial}" th:selected="${dns_preferencial.dns_preferencial}"></option>
+					<option th:each="dns_preferencial : ${todosDNSPComputador}" th:value="${dns_preferencial}" th:text="${dns_preferencial.dns_preferencial}" th:selected="${pc} ? ${pc.dns_preferencial.dns_preferencial} == ${dns_preferencial.dns_preferencial}"></option>
 				</select>
 			</div>
 		</div>
@@ -84,7 +84,7 @@
 			<label for="dns_alternativo" class="col-sm-2 control-label">Dns Alternativo:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="dns_alternativo">
-					<option th:each="dns_alternativo : ${todosDNSAComputador}" th:value="${dns_alternativo}" th:text="${dns_alternativo.dns_alternativo}"  th:selected="${dns_alternativo.dns_alternativo}"></option>
+					<option th:each="dns_alternativo : ${todosDNSAComputador}" th:value="${dns_alternativo}" th:text="${dns_alternativo.dns_alternativo}"  th:selected="${pc} ? ${pc.dns_alternativo.dns_alternativo} == ${dns_alternativo.dns_alternativo}"></option>
 				</select>
 			</div>
 		</div>
@@ -100,7 +100,7 @@
 		<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Impressora:</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="impressoras">
+				<select class="form-control" name="impressoras" multiple="multiple">
 					<option th:each="impressora : ${todasImpressorasComputador}" th:value="${impressora.id_impressora}" th:text="${impressora.marca}"></option>
 				</select>
 			</div>
@@ -138,11 +138,11 @@
 			<label for="processador" class="col-sm-2 control-label">Memória</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="memoria">
-					<option th:each="memoria : ${todasMemoriasComputador}" th:value="${memoria}" th:text="${memoria.memoria}" th:selected="${memoria.memoria}"></option>
+					<option th:each="memoria : ${todasMemoriasComputador}" th:value="${memoria}" th:text="${memoria.memoria}" th:selected="${pc} ? ${pc.memoria.memoria} == ${memoria.memoria}"></option>
 				</select>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group" th:classappend="${#fields.hasErrors('processador')} ? has-error">
 			<label for="processador" class="col-sm-2 control-label">Processador:</label>
 			<div class="col-sm-6">
 				<input type="text" class="form-control" id="processador" name="processador" th:field="*{processador}"/>
@@ -153,7 +153,7 @@
 			<label for="status" class="col-sm-2 control-label">Situação:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="status">
-					<option th:each="statusMaquina : ${todosStatusComputador}" th:value="${statusMaquina}" th:text="${statusMaquina.status}" th:selected="${statusMaquina.status == computador.status}"></option>
+					<option th:each="statusMaquina : ${todosStatusComputador}" th:value="${statusMaquina}" th:text="${statusMaquina.status}" th:selected="${pc} ? ${pc.status.status} == ${statusMaquina.status}"></option>
 				</select>
 			</div>
 		</div>

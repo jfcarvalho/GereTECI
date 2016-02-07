@@ -37,7 +37,7 @@ public class Usuario {
 	private Nivel nivel_acesso; 
 	private String telefone;
 	private String email;
-	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="setor_id_setor")
 	private Setor setor;
 	
