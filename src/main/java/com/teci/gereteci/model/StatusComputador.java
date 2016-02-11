@@ -2,9 +2,8 @@ package com.teci.gereteci.model;
 
 public enum StatusComputador {
 	
-	com_defeito_func("Defeito, porém funcionando"),
+	manutencao("Em manutenção"),
 	com_defeito_para("Defeito e parado"),
-	dando_baxa("Deu baixa"),
 	funcionando("Funcionando normalmente");
 	private String status;
 	

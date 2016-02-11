@@ -64,6 +64,7 @@ public class LicencaOfficeController {
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		mv.addObject("lo", licencaOffice);
 		mv.addObject(licencaOffice);
 		return mv;
 	}

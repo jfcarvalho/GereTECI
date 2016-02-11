@@ -51,7 +51,7 @@
 			<label for="computador_id_comptuador" class="col-sm-2 control-label">Computador:</label>
 			<div class="col-sm-2">
 				<select class="form-control" name="computador_id_computador">
-					<option th:each="computador: ${todosComputadoresLicenca}" th:value="${computador.id_computador}" th:text="${computador.patrimonio}"></option>
+					<option th:each="computador: ${todosComputadoresLicenca}" th:value="${computador.id_computador}" th:text="${computador.patrimonio}" th:selected="${lpc} ? ${lpc.computador.id_computador} == ${computador.id_computador}"></option>
 				</select>
 			</div>
 		</div>

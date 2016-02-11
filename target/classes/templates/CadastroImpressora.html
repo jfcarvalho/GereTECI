@@ -43,7 +43,7 @@
 			<label for="mascara" class="col-sm-2 control-label">Mascara:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="mascara">
-					<option th:each="mascara : ${todasMascarasImpressora}" th:value="${mascara}" th:text="${mascara.mascara}"></option>
+					<option th:each="mascara : ${todasMascarasImpressora}" th:value="${mascara}" th:text="${mascara.mascara}" th:selected="${print} ? ${print.mascara.mascara} == ${mascara.mascara}"></option>
 				</select>
 			</div>
 		</div>
@@ -52,7 +52,7 @@
 			<label for="gateway" class="col-sm-2 control-label">Gateway:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="gateway">
-					<option th:each="gateway : ${todosGatewaysImpressora}" th:value="${gateway}" th:text="${gateway.gateway}"></option>
+					<option th:each="gateway : ${todosGatewaysImpressora}" th:value="${gateway}" th:text="${gateway.gateway}" th:selected="${print} ? ${print.gateway.gateway} == ${gateway.gateway}"></option>
 				</select>
 			</div>
 		</div>
@@ -60,7 +60,7 @@
 			<label for="dns_preferencial" class="col-sm-2 control-label">Dns Preferencial:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="dns_preferencial">
-					<option th:each="dns_preferencial : ${todosDNSPImpressora}" th:value="${dns_preferencial}" th:text="${dns_preferencial.dns_preferencial}"></option>
+					<option th:each="dns_preferencial : ${todosDNSPImpressora}" th:value="${dns_preferencial}" th:text="${dns_preferencial.dns_preferencial}" th:selected="${print} ? ${print.dns_preferencial.dns_preferencial} == ${dns_preferencial.dns_preferencial}"></option>
 				</select>
 			</div>
 		</div>
@@ -69,7 +69,7 @@
 			<label for="dns_alternativo" class="col-sm-2 control-label">Dns Alternativo:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="dns_alternativo">
-					<option th:each="dns_alternativo : ${todosDNSAImpressora}" th:value="${dns_alternativo}" th:text="${dns_alternativo.dns_alternativo}"></option>
+					<option th:each="dns_alternativo : ${todosDNSAImpressora}" th:value="${dns_alternativo}" th:text="${dns_alternativo.dns_alternativo}" th:selected="${print} ? ${print.dns_alternativo.dns_alternativo} == ${dns_alternativo.dns_alternativo}"></option>
 				</select>
 			</div>
 		</div>
@@ -78,7 +78,7 @@
 			<label for="status" class="col-sm-2 control-label">Situação:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="status">
-					<option th:each="status : ${todosStatusImpressora}" th:value="${status}" th:text="${status.status}"></option>
+					<option th:each="status : ${todosStatusImpressora}" th:value="${status}" th:text="${status.status}" th:selected="${print} ? ${print.status.status} == ${status.status}"></option>
 				</select>
 			</div>
 		</div>

@@ -62,6 +62,7 @@ public class ImpressoraController {
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		mv.addObject("print", impressora);
 		mv.addObject(impressora);
 		return mv;
 	}

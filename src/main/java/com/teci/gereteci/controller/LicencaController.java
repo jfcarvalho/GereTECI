@@ -67,6 +67,7 @@ public class LicencaController {
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		mv.addObject("lpc", licenca);
 		mv.addObject(licenca);
 		return mv;
 	}

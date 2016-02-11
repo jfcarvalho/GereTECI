@@ -33,7 +33,9 @@
 				<tr th:each="licenca: ${licencasOffice}">
 					<td class="text-center" th:text="${licenca.id_licencaoffice}"></td>
 					<td class="text-center" th:text="${licenca.nome}"></td>
-					<td class="text-center" th:text="${licenca.plano.plano}"></td>
+					<td class="text-center"><div th:switch="${licenca.plano.plano}"><span class="label label-success" th:text="${licenca.plano.plano}" th:case="'Básico'"></span>
+																				<span class="label label-warning" th:text="${licenca.plano.plano}" th:case="'Intermediário'"></span>
+																													  <span class="label label-danger" th:text="${licenca.plano.plano}" th:case="'Avançado'"></span><span class="label label-danger" th:text="${licenca.plano.plano}" th:case="'Avançado Prodeb'"></span></div></td>
 					<td class="text-center" th:text="${licenca.data_compra}"></td>
 					<td class="text-center" th:text="${licenca.data_expira}"></td>
 					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/licencasoffice/{id_licencaoffice}(id_licencaoffice=${licenca.id_licencaoffice})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalLicencaOffice" th:attr="data-id_licencaoffice=${licenca.id_licencaoffice}, data-nome=${licenca.nome}"><span class="glyphicon glyphicon-remove"></span></a></td>

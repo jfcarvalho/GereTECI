@@ -37,7 +37,9 @@
 					<td class="text-center" th:text="${usuario.matricula}"></td>
 					<td class="text-center" th:text="${usuario.cargo}"></td>
 					<td class="text-center" th:text="${usuario.setor.nome}"></td>
-					<td class="text-center"><span class="label" th:text="${usuario.nivel_acesso.nivel}" th:classappend="${#strings.toString(usuario.nivel_acesso) == 'ADMINISTRADOR' ? 'label-success' : 'label-danger'}"></span></td>  
+					<td class="text-center"><div th:switch="${usuario.nivel_acesso.nivel}"><span class="label label-success" th:text="${usuario.nivel_acesso.nivel}" th:case="'Administrador'"></span>
+																				<span class="label label-warning" th:text="${usuario.nivel_acesso.nivel}" th:case="'Usuário TECI'"></span>
+																													  <span class="label label-danger" th:text="${usuario.nivel_acesso.nivel}" th:case="'Usuário Padrão'"></span></div></td>  
 					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/usuarios/{id_usuario}(id_usuario=${usuario.id_usuario})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal" th:attr="data-id_usuario=${usuario.id_usuario}, data-nome=${usuario.nome}"><span class="glyphicon glyphicon-remove"></span></a></td>
 					
 				</tr>

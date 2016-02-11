@@ -170,7 +170,7 @@
 		<label for="" class="col-sm-2 control-label">Recursos:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="recursos" multiple="multiple">
-					<option th:each="recurso : ${todasRecursosComputador}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao}"></option>
+					<option th:each="recurso : ${todosRecursosComputador}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao}"></option>
 				</select>
 			</div>
 		</div>

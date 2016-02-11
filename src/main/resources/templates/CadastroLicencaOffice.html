@@ -54,7 +54,7 @@
 		<label for="" class="col-sm-2 control-label">Computador:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="computadores">
-					<option th:each="computador : ${todosComputadoresLicencasOffice}" th:value="${computador.id_computador}" th:text="${computador.ip}"></option>
+					<option th:each="computador : ${todosComputadoresLicencasOffice}" th:value="${computador.id_computador}" th:text="${computador.ip}" ></option>
 				</select>
 			</div>
 		</div>
