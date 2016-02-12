@@ -1,4 +1,4 @@
-package com.teci.gereteci.model;
+package com.teci.gereteci.model.Computador;
 
 
 
@@ -23,6 +23,14 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.teci.gereteci.model.Impressora.Impressora;
+import com.teci.gereteci.model.Internet.Dns_alternativo;
+import com.teci.gereteci.model.Internet.Dns_preferencial;
+import com.teci.gereteci.model.Internet.Gateway;
+import com.teci.gereteci.model.Internet.Mascara;
+import com.teci.gereteci.model.Licenca.LicencaOffice;
+import com.teci.gereteci.model.Usuario.Usuario;
 
 
 @Entity

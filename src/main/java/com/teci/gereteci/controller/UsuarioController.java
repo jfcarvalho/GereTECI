@@ -16,6 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.*;
+import com.teci.gereteci.model.Setor.Setor;
+import com.teci.gereteci.model.Usuario.Nivel;
+import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
 
 @Controller

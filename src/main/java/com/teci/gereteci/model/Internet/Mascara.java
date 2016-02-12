@@ -1,4 +1,4 @@
-package com.teci.gereteci.model;
+package com.teci.gereteci.model.Internet;
 
 public enum Mascara {
 	

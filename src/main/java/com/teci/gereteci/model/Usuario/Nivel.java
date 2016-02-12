@@ -1,4 +1,4 @@
-package com.teci.gereteci.model;
+package com.teci.gereteci.model.Usuario;
 
 public enum Nivel {
 	ADMINISTRADOR("Administrador"),

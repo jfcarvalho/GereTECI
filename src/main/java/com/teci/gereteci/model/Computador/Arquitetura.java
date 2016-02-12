@@ -1,4 +1,4 @@
-package com.teci.gereteci.model;
+package com.teci.gereteci.model.Computador;
 
 public enum Arquitetura {
 	x64Bits("64 bits"),

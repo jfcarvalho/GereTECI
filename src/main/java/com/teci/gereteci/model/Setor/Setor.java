@@ -1,4 +1,4 @@
-package com.teci.gereteci.model;
+package com.teci.gereteci.model.Setor;
 
 
 
@@ -19,6 +19,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import javax.validation.constraints.Size;
+
+import com.teci.gereteci.model.Usuario.Usuario;
 
 @Entity
 

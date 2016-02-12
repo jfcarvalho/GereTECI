@@ -1,4 +1,4 @@
-package com.teci.gereteci.model;
+package com.teci.gereteci.model.Impressora;
 
 
 
@@ -12,6 +12,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.Size;
+
+import com.teci.gereteci.model.Computador.Computador;
+import com.teci.gereteci.model.Computador.StatusComputador;
+import com.teci.gereteci.model.Internet.Dns_alternativo;
+import com.teci.gereteci.model.Internet.Dns_preferencial;
+import com.teci.gereteci.model.Internet.Gateway;
+import com.teci.gereteci.model.Internet.Mascara;
 
 @Entity
 
