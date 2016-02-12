@@ -23,7 +23,7 @@ import com.teci.gereteci.repository.*;
 @Controller
 @RequestMapping("/licencas")
 public class LicencaController {
-	private static final String CADASTRO_VIEW = "CadastroLicenca"; 
+	private static final String CADASTRO_VIEW = "/cadastro/CadastroLicenca"; 
 	@Autowired
 	private Licencas licencas;
 	@Autowired
@@ -57,7 +57,7 @@ public class LicencaController {
 	public ModelAndView pesquisar()
 	{
 		List<Licenca> todosLicencas = licencas.findAll();
-		ModelAndView mv = new ModelAndView("PesquisaLicencas");
+		ModelAndView mv = new ModelAndView("/pesquisa/PesquisaLicencas");
 	    mv.addObject("licencas", todosLicencas);
 		return mv;
 	}

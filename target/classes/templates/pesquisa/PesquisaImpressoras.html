@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
+<head>
+<title>Pesquisa de Impressoras</title>
+</head>
+
+<section layout:fragment="conteudo">
+<div layout:include="/mensagem/MensagemUsuario"></div>
+
+<div class="panel panel-default">
+		
+		<div class="panel-heading">
+		<div class="clearfix">	
+			<h1 class="panel-title">Pesquisa de Impressoras</h1>
+			<a class="btn btn-link aw-link-panel" href="/impressoras/novo">Nova impressora</a>
+		</div>
+		</div>
+		<div class="panel-body">
+		
+		<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr><th class="text-center col-md-1">Patrimônio</th>
+				<th class="text-center col-md-2">Marca</th>
+				<th class="text-center col-md-2">IP</th>
+				<th class="text-center col-md-2">Estado</th>
+				<th class="text-center col-md-2">Ação</th>
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="impressora : ${impressoras}">
+					<td class="text-center" th:text="${impressora.patrimonio}"></td>
+					<td class="text-center" th:text="${impressora.marca}"></td>
+					<td class="text-center" th:text="${impressora.ip}"></td>
+					<td class="text-center"><div th:switch="${impressora.status.status}"><span class="label label-success" th:text="${impressora.status.status}" th:case="'Funcionando normalmente'"></span>
+																				<span class="label label-warning" th:text="${impressora.status.status}" th:case="'Em manutenção'"></span>
+																													  <span class="label label-danger" th:text="${impressora.status.status}" th:case="'Defeito e parado'"></span></div></td>  
+					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/impressoras/{id_impressora}(id_impressora=${impressora.id_impressora})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalImpressora" th:attr="data-id_impressora=${impressora.id_impressora}, data-marca=${impressora.marca}"><span class="glyphicon glyphicon-remove"></span></a><span class="glyphicon glyphicon-eye-open"></span><span class="glyphicon glyphicon-wrench"></span></td>
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(impressoras)}">Nenhum computador encontrado</td>
+			</tr>
+			</tbody>
+		
+		</table>
+		</div>
+		
+		<div layout:include="/dialogos/DialogoConfirmacaoExclusaoImpressora"></div>
+	</div>	
+</section>
+
+</html>

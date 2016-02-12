@@ -24,7 +24,7 @@ import com.teci.gereteci.repository.*;
 @Controller
 @RequestMapping("/recursos")
 public class RecursoController {
-	private static final String CADASTRO_VIEW = "CadastroRecurso"; 
+	private static final String CADASTRO_VIEW = "/cadastro/CadastroRecurso"; 
 	@Autowired
 	private Recursos recursos;
 	@Autowired
@@ -61,7 +61,7 @@ public class RecursoController {
 	public ModelAndView pesquisar()
 	{
 		List<Recurso> todosRecursos = recursos.findAll();
-		ModelAndView mv = new ModelAndView("PesquisaRecursos");
+		ModelAndView mv = new ModelAndView("/pesquisa/PesquisaRecursos");
 	    mv.addObject("recursos", todosRecursos);
 		return mv;
 	}

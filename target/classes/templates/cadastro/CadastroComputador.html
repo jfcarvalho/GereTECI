@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
+<head>
+
+<title>Cadastro de Computadores</title>
+</head>
+
+<section layout:fragment="conteudo">
+<form class="form-horizontal" method="POST" action="/computadores" th:object="${computador}">
+		<div layout:include="/mensagem/MensagemUsuario"></div>
+		<div layout:include="/mensagem/MensagemErro"></div>
+		<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+			<h1 class="panel-title">Novo Computador</h1>
+		<a class="btn btn-link aw-link-panel" href="/computadores">Voltar para pesquisa</a>
+		</div>
+		</div>
+	
+	
+	<div class="panel-body">
+	<div class="boxes">
+	<input type="hidden" th:field="*{id_computador}" />
+		<div class="form-group" th:classappend="${#fields.hasErrors('patrimonio')} ? has-error">
+			<label for="patrimonio" class="col-sm-2 control-label" >Patrimonio:</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="patrimonio" name="patrimonio" th:field="*{patrimonio}"/>
+			</div>
+		</div>
+			<div class="form-group">
+			<label for="sistema" class="col-sm-2 control-label">Sistema:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="sistema">
+					<option th:each="sistema : ${todosSistemasComputador}" th:value="${sistema}" th:text="${sistema.sistema}" th:selected="${pc} ? ${pc.sistema.sistema} == ${sistema.sistema}"></option>
+				</select>
+			</div>
+		</div>
+		
+	<div class="form-group">
+			<label for="arquitetura" class="col-sm-2 control-label">Arquitetura:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="arquitetura">
+					<option th:each="arquitetura : ${todasArquiteturasComputador}" th:value="${arquitetura}" th:text="${arquitetura.arquitetura}" th:selected="${pc} ? ${pc.arquitetura.arquitetura} == ${arquitetura.arquitetura}"></option>
+				</select>
+			</div>
+		</div>
+			
+	
+		
+			<div class="form-group" th:classappend="${#fields.hasErrors('ip')} ? has-error">
+			<label for="ip" class="col-sm-2 control-label">IP:</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="ip" name="ip" th:field="*{ip}"/>
+			</div>
+		</div>
+		
+			<div class="form-group">
+			<label for="mascara" class="col-sm-2 control-label">Mascara:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="mascara">
+					<option th:each="mascara : ${todasMascarasComputador}" th:value="${mascara}" th:text="${mascara.mascara}" th:selected="${pc} ? ${pc.mascara.mascara} == ${mascara.mascara}"></option>
+				</select>
+			</div>
+		</div>
+		
+			<div class="form-group">
+			<label for="gateway" class="col-sm-2 control-label">Gateway:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="gateway">
+					<option th:each="gateway : ${todosGatewaysComputador}" th:value="${gateway}" th:text="${gateway.gateway}" th:selected="${pc} ? ${pc.gateway.gateway} == ${gateway.gateway}"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="dns_preferencial" class="col-sm-2 control-label">Dns Preferencial:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="dns_preferencial">
+					<option th:each="dns_preferencial : ${todosDNSPComputador}" th:value="${dns_preferencial}" th:text="${dns_preferencial.dns_preferencial}" th:selected="${pc} ? ${pc.dns_preferencial.dns_preferencial} == ${dns_preferencial.dns_preferencial}"></option>
+				</select>
+			</div>
+		</div>
+		
+			<div class="form-group">
+			<label for="dns_alternativo" class="col-sm-2 control-label">Dns Alternativo:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="dns_alternativo">
+					<option th:each="dns_alternativo : ${todosDNSAComputador}" th:value="${dns_alternativo}" th:text="${dns_alternativo.dns_alternativo}"  th:selected="${pc} ? ${pc.dns_alternativo.dns_alternativo} == ${dns_alternativo.dns_alternativo}"></option>
+				</select>
+			</div>
+		</div>
+		
+		
+		
+		<div class="form-group" th:classappend="${#fields.hasErrors('versao_java')} ? has-error">
+			<label for="versao_java" class="col-sm-2 control-label">Versão do Java:</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="versao_java" name="versao_java" th:field="*{versao_java}"/>
+			</div>
+		</div>
+		<div class="form-group">
+		<label for="" class="col-sm-2 control-label">Impressora:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="impressoras" multiple="multiple">
+					<option th:each="impressora : ${todasImpressorasComputador}" th:value="${{impressora.id_impressora}}" th:text="${impressora.marca}"></option>
+				</select>
+			</div>
+		</div>
+		</div>
+		<div class="boxes">
+		<div class="form-group" th:classappend="${#fields.hasErrors('data_compra')} ? has-error">
+			<label for="data_compra" class="col-sm-2 control-label">Data de compra:</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="data_compra" name="data_compra" th:field="*{data_compra}" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR" data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom" value="teste"/>
+			</div>
+		</div>
+		
+		<div class="form-group" th:classappend="${#fields.hasErrors('data_formatacao')} ? has-error">
+			<label for="data_formatacao" class="col-sm-2 control-label">Data da última formatação:</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="data_formatacao" name="data_formatacao" th:field="*{data_formatacao}" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR" data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"/>
+			</div>
+		</div>
+		
+		<div class="form-group" th:classappend="${#fields.hasErrors('data_backup')} ? has-error">
+			<label for="data_backup" class="col-sm-2 control-label">Data do último backup:</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="data_backup" name="data_backup" th:field="*{data_backup}" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR" data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"/>
+			</div>
+		</div>
+		
+		<div class="form-group" th:classappend="${#fields.hasErrors('id_impressao')} ? has-error">
+			<label for="id_impressao" class="col-sm-2 control-label">ID de Impressão:</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="id_impressao" name="id_impressao" th:field="*{id_impressao}"/>
+			</div>
+		</div>
+			<div class="form-group">
+			<label for="processador" class="col-sm-2 control-label">Memória</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="memoria">
+					<option th:each="memoria : ${todasMemoriasComputador}" th:value="${memoria}" th:text="${memoria.memoria}" th:selected="${pc} ? ${pc.memoria.memoria} == ${memoria.memoria}"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group" th:classappend="${#fields.hasErrors('processador')} ? has-error">
+			<label for="processador" class="col-sm-2 control-label">Processador:</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="processador" name="processador" th:field="*{processador}"/>
+			</div>
+		</div>
+				
+		<div class="form-group">
+			<label for="status" class="col-sm-2 control-label">Situação:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="status">
+					<option th:each="statusMaquina : ${todosStatusComputador}" th:value="${statusMaquina}" th:text="${statusMaquina.status}" th:selected="${pc} ? ${pc.status.status} == ${statusMaquina.status}"></option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="form-group">
+		<label for="" class="col-sm-2 control-label">Usuário:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="usuario_id_usuario">
+					<option th:each="usuario : ${todosUsuariosComputador}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}" th:selected="${pc} ? ${pc.usuario.id_usuario} == ${usuario.id_usuario}"></option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+		<label for="" class="col-sm-2 control-label">Recursos:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="recursos" multiple="multiple">
+					<option th:each="recurso : ${todosRecursosComputador}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao}"></option>
+				</select>
+			</div>
+		</div>
+		
+		
+		</div>
+		
+			<div class="form-group">
+     		<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Cadastrar</button>
+			</div>
+		</div>
+	</div>	
+	</div>
+</form>
+</section>
+</html>

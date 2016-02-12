@@ -27,7 +27,7 @@ import com.teci.gereteci.repository.*;
 @Controller
 @RequestMapping("/impressoras")
 public class ImpressoraController {
-	private static final String CADASTRO_VIEW = "CadastroImpressora"; 
+	private static final String CADASTRO_VIEW = "/cadastro/CadastroImpressora"; 
 	@Autowired
 	private Impressoras impressoras;
 	@Autowired
@@ -57,7 +57,7 @@ public class ImpressoraController {
 	public ModelAndView pesquisar()
 	{
 		List<Impressora> todasImpressoras = impressoras.findAll();
-		ModelAndView mv = new ModelAndView("PesquisaImpressoras");
+		ModelAndView mv = new ModelAndView("/pesquisa/PesquisaImpressoras");
 	    mv.addObject("impressoras", todasImpressoras);
 		return mv;
 	}
