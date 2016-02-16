@@ -1,10 +1,10 @@
 package com.teci.gereteci.model.Servico;
 
 public enum Categoria {
-	Manutencao("64 bits"),
-	atendimentoInterno("32 bits"),
-	atendimentoExterno("32 bits"),
-	atendimentoOutros("32 bits");
+	Manutencao("Manutenção"),
+	atendimentoInterno("Atendimento Interno"),
+	atendimentoExterno("Atendimento Externo"),
+	atendimentoOutros("Outros");
 	
 	private String descricao;
 	

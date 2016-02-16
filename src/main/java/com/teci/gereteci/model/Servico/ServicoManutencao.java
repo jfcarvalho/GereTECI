@@ -2,20 +2,11 @@ package com.teci.gereteci.model.Servico;
 
 import java.util.List;
 
-import com.teci.gereteci.model.Computador.Computador;
+import com.teci.gereteci.model.Usuario.Usuario;
 
-public class ServicoMicro extends Servico {
+public class ServicoManutencao extends Servico {
 	private DescricaoProntaMicro descricaoPronta;
-	private List<Computador> computadores;
 	
-	public void setComputadores(List<Computador> computadores)
-	{
-		this.computadores = computadores;
-	}
-	public List<Computador> getComputadores()
-	{
-		return this.computadores;
-	}
 	
 	public void setDescricaoPronta(DescricaoProntaMicro descricaoPronta)
 	{

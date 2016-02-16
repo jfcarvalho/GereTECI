@@ -1,12 +1,13 @@
 package com.teci.gereteci.model.Servico;
 
 import java.util.Date;
+import java.util.List;
 
 import com.teci.gereteci.model.Usuario.Usuario;
 
 public abstract class Servico {
 	private Date dataOcorrencia;
-	private Usuario solicitante;
+	private List<Usuario> solicitados;
 	private Usuario atendente;
 	private String descricaoProblema;
 	private Categoria categoria;
@@ -21,13 +22,13 @@ public abstract class Servico {
 	{
 		return this.dataOcorrencia;
 	}
-	public void setSolicitante(Usuario solicitante)
+	public void setSolicitados(List<Usuario> solicitados)
 	{
-		this.solicitante= solicitante;
+		this.solicitados = solicitados;
 	}
-	public Usuario getSolicitante()
+	public List<Usuario> getSolicitados()
 	{
-		return this.solicitante;
+		return this.solicitados;
 	}
 	public void setAtendente(Usuario atendente)
 	{

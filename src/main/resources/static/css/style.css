@@ -26,5 +26,14 @@
 .boxes {
 	float: left;
 	width:600px;
+}
 
+.servicos-button
+{
+	margin-top:8px;
+}
+
+.form-descricao
+{
+	witdh:200px;
 }
