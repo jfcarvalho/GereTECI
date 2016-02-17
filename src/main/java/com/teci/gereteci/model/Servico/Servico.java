@@ -19,13 +19,14 @@ public abstract class Servico {
 	private Integer id_servico;
 	private Date dataOcorrencia;
 	private List<Usuario> solicitados;
-	private Usuario atendente;
+	
 	@Size(min=1, max=100, message="O tamanho do campo nome tem que ser entre 1 e 20")
 	private String descricaoProblema;
 	
 	private Categoria categoria;
 	private StatusServico status;
 	private String identificador;
+	private Usuario atendente;
 	
 	public void setDataOcorrencia(Date dataOcorrencia)
 	{

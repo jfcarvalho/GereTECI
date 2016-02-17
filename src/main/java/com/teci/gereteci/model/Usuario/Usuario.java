@@ -26,18 +26,22 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_usuario;
 	
-	@Size(min=1, max=100, message="O tamanho do campo nome tem que ser entre 1 e 20")
+	@Size(min=1, max=100, message="O tamanho do campo matricula tem que ser entre 1 e 20")
 	private String matricula;
 	@Size(min=3, max=100, message="O tamanho do campo nome tem que ser entre 3 e 20")
 	private String nome;
 	@Size(min=3, max=100, message="O tamanho do campo cargo tem que ser entre 3 e 20")
 	private String cargo; 
+
+
 	
 	//private Integer setor_id_setor;
 	
 	@Enumerated(EnumType.STRING)
 	private Nivel nivel_acesso; 
+	@Size(min=3, max=100, message="O tamanho do campo telefone tem que ser entre 3 e 20")
 	private String telefone;
+	@Size(min=3, max=100, message="O tamanho do campo email tem que ser entre 3 e 20")
 	private String email;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="setor_id_setor")

@@ -36,6 +36,7 @@ public class Recurso {
 	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
 	@JoinColumn(name="computador_id_computador")
 	private Computador computador;
+	private CategoriaRecurso categoria;
 	
 	public Integer getId_recurso()
 	{
@@ -82,5 +83,13 @@ public class Recurso {
 	public void setComputador(Computador computador)
 	{
 		this.computador = computador;
+	}
+	public CategoriaRecurso getCategoria()
+	{
+		return this.categoria;
+	}
+	public void setCategoria(CategoriaRecurso categoria)
+	{
+		this.categoria = categoria;
 	}
 }
