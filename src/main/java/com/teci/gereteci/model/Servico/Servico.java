@@ -3,13 +3,26 @@ package com.teci.gereteci.model.Servico;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Size;
+
 import com.teci.gereteci.model.Usuario.Usuario;
 
+@Entity
 public abstract class Servico {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	private Integer id_servico;
 	private Date dataOcorrencia;
 	private List<Usuario> solicitados;
 	private Usuario atendente;
+	@Size(min=1, max=100, message="O tamanho do campo nome tem que ser entre 1 e 20")
 	private String descricaoProblema;
+	
 	private Categoria categoria;
 	private StatusServico status;
 	private String identificador;

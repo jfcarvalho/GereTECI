@@ -1,7 +1,5 @@
 package com.teci.gereteci.model.Servico;
 
-import java.util.List;
-
 import com.teci.gereteci.model.Usuario.Usuario;
 
 public class ServicoManutencao extends Servico {
