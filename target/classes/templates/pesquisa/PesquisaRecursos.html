@@ -22,7 +22,7 @@
 			<thead>
 				<tr><th class="text-center col-md-1">#</th>
 				<th class="text-center col-md-2">Patrimônio</th>
-				<th class="text-center col-md-2">Descrição</th>
+				<th class="text-center col-md-2">Categoria</th>
 				<th class="text-center col-md-2">Marca</th>
 				<th class="text-center col-md-2">Estado</th>
 				<th class="text-center col-md-2">Computador</th>
@@ -37,7 +37,7 @@
 				<tr th:each="recurso: ${recursos}">
 					<td class="text-center" th:text="${recurso.id_recurso}"></td>
 					<td class="text-center" th:text="${recurso.patrimonio}"></td>
-					<td class="text-center" th:text="${recurso.descricao}"></td>
+					<td class="text-center" th:text="${recurso.categoria.categoria}"></td>
 					<td class="text-center" th:text="${recurso.marca}"></td>
 					<td class="text-center"><div th:switch="${recurso.status.status}"><span class="label label-success" th:text="${recurso.status.status}" th:case="'Funcionando normalmente'"></span>
 																				<span class="label label-warning" th:text="${recurso.status.status}" th:case="'Em manutenção'"></span>

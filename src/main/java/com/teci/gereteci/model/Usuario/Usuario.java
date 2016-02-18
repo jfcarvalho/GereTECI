@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.teci.gereteci.model.Servico.Servico;
 import com.teci.gereteci.model.Setor.Setor;
 
 @Entity
@@ -46,7 +47,9 @@ public class Usuario {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="setor_id_setor")
 	private Setor setor;
-	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="servico")
+	private Servico servico;
 
 	public Integer getId_usuario()
 	{

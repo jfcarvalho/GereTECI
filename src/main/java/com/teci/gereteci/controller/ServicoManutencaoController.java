@@ -63,8 +63,8 @@ public class ServicoManutencaoController {
 	    return mv;
 	}
 
-	@RequestMapping("{id_servicomanutencao}")
-	public ModelAndView edicao(@PathVariable("id_servicomanutencao") ServicoManutencao servicoManutencao)
+	@RequestMapping("{id_servico}")
+	public ModelAndView edicao(@PathVariable("id_servico") ServicoManutencao servicoManutencao)
 	{
 		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
 		//Usuario usuario = usuarios.findOne(id_usuario);
@@ -76,7 +76,7 @@ public class ServicoManutencaoController {
 		return mv;
 	}
 	
-	@RequestMapping(value="{id_servicomanutencao}", method=RequestMethod.DELETE)
+	@RequestMapping(value="{id_servico}", method=RequestMethod.DELETE)
 	public String excluir(@PathVariable Integer id_servicomanutencao, RedirectAttributes attributes)
 	{
 		servicos.delete(id_servicomanutencao);
