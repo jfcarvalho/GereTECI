@@ -1,6 +1,8 @@
 package com.teci.gereteci.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ import com.teci.gereteci.model.Internet.Gateway;
 import com.teci.gereteci.model.Internet.Mascara;
 import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
+
+
 
 @Controller
 @RequestMapping("/computadores")
@@ -153,5 +157,117 @@ public class ComputadorController {
 	{
 		List<Recurso> todosRecursos= recursos.findAll();
 		return todosRecursos;
-	}	
+	}
+	@ModelAttribute("todosRecursosMonitor")
+	public List<Recurso> todasRecursosMonitor()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todosMonitores = new ArrayList<Recurso>();
+		Iterator it = todosRecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getCategoria().getCategoria().equals("Monitor"))
+			{
+				todosMonitores.add(obj);
+			}
+		}
+		return todosMonitores;
+	}
+	
+	@ModelAttribute("todosRecursosMouse")
+	public List<Recurso> todasRecursosMouse()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todosMouses = new ArrayList<Recurso>();
+		Iterator it = todosRecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getCategoria().getCategoria().equals("Moouse"))
+			{
+				todosMouses.add(obj);
+			}
+		}
+		return todosMouses;
+	}
+	
+	@ModelAttribute("todosRecursosTeclado")
+	public List<Recurso> todasRecursosTeclado()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todosTeclados = new ArrayList<Recurso>();
+		Iterator it = todosRecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getCategoria().getCategoria().equals("Teclado"))
+			{
+				todosTeclados.add(obj);
+			}
+		}
+		return todosTeclados;
+	}
+	
+	@ModelAttribute("todosRecursosMR")
+	public List<Recurso> todasRecursosMR()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todosMR = new ArrayList<Recurso>();
+		Iterator it = todosRecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getCategoria().getCategoria().equals("Mídia Removível"))
+			{
+				todosMR.add(obj);
+			}
+		}
+		return todosMR;
+	}
+	@ModelAttribute("todosRecursosCS")
+	public List<Recurso> todasRecursosCS()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todosCS = new ArrayList<Recurso>();
+		Iterator it = todosRecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getCategoria().getCategoria().equals("Caixa de Som"))
+			{
+				todosCS.add(obj);
+			}
+		}
+		return todosCS;
+	}
+	
+	@ModelAttribute("todosRecursosFone")
+	public List<Recurso> todasRecursosFone()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todosFones= new ArrayList<Recurso>();
+		Iterator it = todosRecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getCategoria().getCategoria().equals("Monitor"))
+			{
+				todosFones.add(obj);
+			}
+		}
+		return todosFones;
+	}
 }

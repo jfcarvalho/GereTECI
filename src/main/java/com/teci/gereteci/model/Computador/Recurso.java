@@ -38,6 +38,9 @@ public class Recurso {
 	private Computador computador;
 	private CategoriaRecurso categoria;
 	
+	private boolean disponivel;
+	
+	
 	public Integer getId_recurso()
 	{
 		return this.id_recurso;
@@ -92,4 +95,14 @@ public class Recurso {
 	{
 		this.categoria = categoria;
 	}
+	public boolean getDisponivel()
+	{
+		return this.disponivel;
+	}
+	
+	public void setDisponivel(boolean disponivel)
+	{
+		this.disponivel = disponivel;
+	}
+	
 }

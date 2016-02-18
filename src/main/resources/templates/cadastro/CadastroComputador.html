@@ -105,6 +105,25 @@
 				</select>
 			</div>
 		</div>
+		
+			<div class="form-group">
+		<label for="" class="col-sm-2 control-label">Monitor:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="recursos" multiple="multiple">
+					<option th:each="recurso : ${todosRecursosMonitor}" th:value="${recurso.id_recurso}" th:text="${recurso.marca}"></option>
+				</select>
+			</div>
+		</div>
+		 
+		  <div class="form-group">
+		<label for="" class="col-sm-2 control-label">Teclado:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="recursos" multiple="multiple">
+					<option th:each="recurso : ${todosRecursosTeclado}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao}"></option>
+				</select>
+			</div>
+		</div>
+		
 		</div>
 		<div class="boxes">
 		<div class="form-group" th:classappend="${#fields.hasErrors('data_compra')} ? has-error">
@@ -166,15 +185,33 @@
 				</select>
 			</div>
 		</div>
-		<div class="form-group">
-		<label for="" class="col-sm-2 control-label">Recursos:</label>
+	
+	<div class="form-group">
+		<label for="" class="col-sm-2 control-label">Mouse:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="recursos" multiple="multiple">
-					<option th:each="recurso : ${todosRecursosComputador}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao}"></option>
+					<option th:each="recurso : ${todosRecursosMouse}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao}"></option>
 				</select>
 			</div>
 		</div>
 		
+		<div class="form-group">
+		<label for="" class="col-sm-2 control-label">Caixas de Som:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="recursos" multiple="multiple">
+					<option th:each="recurso : ${todosRecursosCS}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao}"></option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="form-group">
+		<label for="" class="col-sm-2 control-label">Fones de Ouvido:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="recursos" multiple="multiple">
+					<option th:each="recurso : ${todosRecursosFone}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao}"></option>
+				</select>
+			</div>
+		</div>
 		
 		</div>
 		
@@ -183,6 +220,8 @@
 				<button type="submit" class="btn btn-primary">Cadastrar</button>
 			</div>
 		</div>
+		
+		
 	</div>	
 	</div>
 </form>
