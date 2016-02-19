@@ -188,7 +188,7 @@ public class ComputadorController {
 		while(it.hasNext())
 		{
 			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Moouse"))
+			if(obj.getCategoria().getCategoria().equals("Mouse"))
 			{
 				todosMouses.add(obj);
 			}
@@ -226,7 +226,7 @@ public class ComputadorController {
 		while(it.hasNext())
 		{
 			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Mídia Removível"))
+			if(obj.getCategoria().getCategoria().equals("Mídia removível"))
 			{
 				todosMR.add(obj);
 			}
@@ -263,11 +263,29 @@ public class ComputadorController {
 		while(it.hasNext())
 		{
 			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Monitor"))
+			if(obj.getCategoria().getCategoria().equals("Fone"))
 			{
 				todosFones.add(obj);
 			}
 		}
 		return todosFones;
+	}
+	@ModelAttribute("todosRecursosOutros")
+	public List<Recurso> todasRecursosOutros()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todosOutros= new ArrayList<Recurso>();
+		Iterator it = todosRecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getCategoria().getCategoria().equals("Outros"))
+			{
+				todosOutros.add(obj);
+			}
+		}
+		return todosOutros;
 	}
 }

@@ -50,7 +50,8 @@ public class Usuario {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="servico")
 	private Servico servico;
-
+	@Size(min=3, max=100, message="O tamanho do campo telefone tem que ser entre 3 e 20")
+	private String usuario_rede;
 	public Integer getId_usuario()
 	{
 		return this.id_usuario;
@@ -120,6 +121,16 @@ public class Usuario {
 	public void setSetor(Setor setor)
 	{
 		this.setor = setor;
+	}
+	
+	public String getUsuario_rede()
+	{
+		return this.email;
+	}
+	
+	public void setUsuario_rede(String usuario_rede)
+	{
+		this.usuario_rede= usuario_rede;
 	}
 	
 }

@@ -132,3 +132,11 @@ $('#confirmacaoExclusaoModalLicencaOffice').on('show.bs.modal', function(event)
 			
 			
 		});
+
+$(function() {
+	$('.js-currency').maskMoney({decimal: ',', thousands: '.', allowZero: true});
+	
+	$('.js-atualizar-status').on('click', function(event) {
+		console.log('clicou!');
+})
+});
