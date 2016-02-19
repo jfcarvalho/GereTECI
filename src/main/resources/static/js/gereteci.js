@@ -134,9 +134,22 @@ $('#confirmacaoExclusaoModalLicencaOffice').on('show.bs.modal', function(event)
 		});
 
 $(function() {
-	$('.js-currency').maskMoney({decimal: ',', thousands: '.', allowZero: true});
-	
 	$('.js-atualizar-status').on('click', function(event) {
-		console.log('clicou!');
-})
+		event.preventDefault();
+		var botaoManutencao = $(event.currentTarget);
+		var urlManutencao = botaoManutencao.attr('href'); 
+		console.log('urlManutencao', urlManutencao);
+		
+		var response = $.ajax({
+			url: urlManutencao, 
+			type: 'PUT'
+				
+		});
+		response.done(function(e) {
+			
+		
+});
+		response.fail(function(e) {
+				});
+
 });

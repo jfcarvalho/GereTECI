@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -288,4 +289,14 @@ public class ComputadorController {
 		}
 		return todosOutros;
 	}
+	@RequestMapping(value="/{id_computador}/manutencao", method=RequestMethod.PUT)
+	public @ResponseBody String manutencao(@PathVariable Integer id_computador)
+	{
+		//Isso aqui vai para camada de serviço
+		Computador computador = computadores.findOne(id_computador);
+		computador.setStatus(StatusComputador.manutencao);
+		computadores.save(computador);
+		return "OK";
+	}
+	
 }
