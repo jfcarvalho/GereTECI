@@ -296,7 +296,7 @@ public class ComputadorController {
 		Computador computador = computadores.findOne(id_computador);
 		computador.setStatus(StatusComputador.manutencao);
 		computadores.save(computador);
-		return "OK";
+		return StatusComputador.manutencao.getStatus();
 	}
 	
 }

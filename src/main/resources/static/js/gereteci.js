@@ -145,11 +145,14 @@ $(function() {
 			type: 'PUT'
 				
 		});
+		
 		response.done(function(e) {
+			var codigoManutencao = botaoManutencao.data('id_computador');
+			console.log(codigoManutencao);
+			$('[data-role=' + codigoManutencao + ']').html('<span class="label label-warning">' + e + '</span>');
+		});
 			
 		
 });
-		response.fail(function(e) {
-				});
-
+	
 });
