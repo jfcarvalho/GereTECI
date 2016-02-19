@@ -16,12 +16,15 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.*;
+import com.teci.gereteci.model.Setor.Setor;
+import com.teci.gereteci.model.Usuario.Nivel;
+import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
 
 @Controller
 @RequestMapping("/usuarios")
 public class UsuarioController {
-	private static final String CADASTRO_VIEW = "CadastroUsuario"; 
+	private static final String CADASTRO_VIEW = "/cadastro/CadastroUsuario"; 
 	@Autowired
 	private Usuarios usuarios;
 	@Autowired
@@ -61,7 +64,7 @@ public class UsuarioController {
 	public ModelAndView pesquisar()
 	{
 		List<Usuario> todosUsuarios = usuarios.findAll();
-		ModelAndView mv = new ModelAndView("PesquisaUsuarios");
+		ModelAndView mv = new ModelAndView("/pesquisa/PesquisaUsuarios");
 	    mv.addObject("usuarios", todosUsuarios);
 		return mv;
 	}

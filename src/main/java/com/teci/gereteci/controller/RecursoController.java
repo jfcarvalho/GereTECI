@@ -16,12 +16,16 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.*;
+import com.teci.gereteci.model.Computador.CategoriaRecurso;
+import com.teci.gereteci.model.Computador.Computador;
+import com.teci.gereteci.model.Computador.Recurso;
+import com.teci.gereteci.model.Computador.StatusComputador;
 import com.teci.gereteci.repository.*;
 
 @Controller
 @RequestMapping("/recursos")
 public class RecursoController {
-	private static final String CADASTRO_VIEW = "CadastroRecurso"; 
+	private static final String CADASTRO_VIEW = "/cadastro/CadastroRecurso"; 
 	@Autowired
 	private Recursos recursos;
 	@Autowired
@@ -58,7 +62,7 @@ public class RecursoController {
 	public ModelAndView pesquisar()
 	{
 		List<Recurso> todosRecursos = recursos.findAll();
-		ModelAndView mv = new ModelAndView("PesquisaRecursos");
+		ModelAndView mv = new ModelAndView("/pesquisa/PesquisaRecursos");
 	    mv.addObject("recursos", todosRecursos);
 		return mv;
 	}
@@ -93,6 +97,10 @@ public class RecursoController {
 	@ModelAttribute("todosStatusRecurso")
 	public List<StatusComputador> todosStatusRecurso() {
 		return Arrays.asList(StatusComputador.values());
+	}
+	@ModelAttribute("todasCategoriasRecurso")
+	public List<CategoriaRecurso> todasCategoriasRecurso() {
+		return Arrays.asList(CategoriaRecurso.values());
 	}
 	
 	

@@ -15,12 +15,19 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.*;
+import com.teci.gereteci.model.Computador.StatusComputador;
+import com.teci.gereteci.model.Impressora.Impressora;
+import com.teci.gereteci.model.Internet.Dns_alternativo;
+import com.teci.gereteci.model.Internet.Dns_preferencial;
+import com.teci.gereteci.model.Internet.Gateway;
+import com.teci.gereteci.model.Internet.Mascara;
+import com.teci.gereteci.model.Setor.Setor;
 import com.teci.gereteci.repository.*;
 
 @Controller
 @RequestMapping("/impressoras")
 public class ImpressoraController {
-	private static final String CADASTRO_VIEW = "CadastroImpressora"; 
+	private static final String CADASTRO_VIEW = "/cadastro/CadastroImpressora"; 
 	@Autowired
 	private Impressoras impressoras;
 	@Autowired
@@ -50,7 +57,7 @@ public class ImpressoraController {
 	public ModelAndView pesquisar()
 	{
 		List<Impressora> todasImpressoras = impressoras.findAll();
-		ModelAndView mv = new ModelAndView("PesquisaImpressoras");
+		ModelAndView mv = new ModelAndView("/pesquisa/PesquisaImpressoras");
 	    mv.addObject("impressoras", todasImpressoras);
 		return mv;
 	}

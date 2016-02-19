@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
+<head>
+<title>Pesquisa de Usuários</title>
+</head>
+
+<section layout:fragment="conteudo">
+<div layout:include="/mensagem/MensagemUsuario"></div>
+
+<div class="panel panel-default">
+		
+		<div class="panel-heading">
+		<div class="clearfix">	
+			<h1 class="panel-title">Pesquisa de Recursos</h1>
+			<a class="btn btn-link aw-link-panel" href="/recursos/novo">Novo recurso</a>
+		</div>
+		</div>
+		<div class="panel-body">
+		
+		<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr><th class="text-center col-md-1">#</th>
+				<th class="text-center col-md-2">Patrimônio</th>
+				<th class="text-center col-md-2">Categoria</th>
+				<th class="text-center col-md-2">Marca</th>
+				<th class="text-center col-md-2">Estado</th>
+				<th class="text-center col-md-2">Computador</th>
+				<th class="text-center col-md-2">Usuário</th>
+				<th class="text-center col-md-2">Setor</th>
+				<th class="text-center col-md-2">Ação</th>
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="recurso: ${recursos}">
+					<td class="text-center" th:text="${recurso.id_recurso}"></td>
+					<td class="text-center" th:text="${recurso.patrimonio}"></td>
+					<td class="text-center" th:text="${recurso.categoria.categoria}"></td>
+					<td class="text-center" th:text="${recurso.marca}"></td>
+					<td class="text-center"><div th:switch="${recurso.status.status}"><span class="label label-success" th:text="${recurso.status.status}" th:case="'Funcionando normalmente'"></span>
+																				<span class="label label-warning" th:text="${recurso.status.status}" th:case="'Em manutenção'"></span>
+																													  <span class="label label-danger" th:text="${recurso.status.status}" th:case="'Defeito e parado'"></span></div></td>  
+					<td class="text-center" th:text="${recurso.computador.ip}"></td>
+					<td class="text-center" th:text="${recurso.computador.usuario.nome}"></td>
+					<td class="text-center" th:text="${recurso.computador.usuario.setor.sigla}"></td>
+					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/recursos/{id_recurso}(id_recurso=${recurso.id_recurso})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalRecurso" th:attr="data-id_recurso=${recurso.id_recurso}, data-descricao=${recurso.descricao}"><span class="glyphicon glyphicon-remove"></span></a></td>
+					
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(recursos)}">Nenhum recurso encontrado</td>
+			</tr>
+			</tbody>
+		
+		</table>
+		</div>
+		
+		<div layout:include="/dialogos/DialogoConfirmacaoExclusaoRecurso"></div>
+	</div>	
+</section>
+
+</html>
