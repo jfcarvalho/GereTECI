@@ -276,3 +276,75 @@ $(function() {
 });
 	
 });
+
+$(function() {
+	$('.js-atualizar-status-manutencao-recurso').on('click', function(event) {
+		event.preventDefault();
+		var botaoManutencao = $(event.currentTarget);
+		var urlManutencao = botaoManutencao.attr('href'); 
+		console.log('urlManutencao', urlManutencao);
+		
+		var response = $.ajax({
+			url: urlManutencao, 
+			type: 'PUT'
+				
+		});
+		
+		response.done(function(e) {
+			var codigoManutencao = botaoManutencao.data('id_recurso');
+			console.log(codigoManutencao);
+			$('[data-role=' + codigoManutencao + ']').html('<span class="label label-warning">' + e + '</span>');
+		});
+			
+		
+});
+	
+});
+
+$(function() {
+	$('.js-atualizar-status-baixa-recurso').on('click', function(event) {
+		event.preventDefault();
+		var botaoBaixa= $(event.currentTarget);
+		var urlBaixa = botaoBaixa.attr('href'); 
+		console.log('urlBaixa', urlBaixa);
+		
+		var response = $.ajax({
+			url: urlBaixa, 
+			type: 'PUT'
+				
+		});
+		
+		response.done(function(a) {
+			var codigoBaixa= botaoBaixa.data('id_recurso');
+			console.log(codigoBaixa);
+			$('[data-role=' + codigoBaixa+ ']').html('<span class="label label-danger">'+ a + '</span>');
+		});
+			
+		
+});
+	
+});
+
+$(function() {
+	$('.js-atualizar-status-conserto-recurso').on('click', function(event) {
+		event.preventDefault();
+		var botaoFuncionando= $(event.currentTarget);
+		var urlFuncionando= botaoFuncionando.attr('href'); 
+		console.log('urlFuncionando', urlFuncionando);
+		
+		var response = $.ajax({
+			url: urlFuncionando, 
+			type: 'PUT'
+				
+		});
+		
+		response.done(function(s) {
+			var codigoFuncionando= botaoFuncionando.data('id_recurso');
+			console.log(codigoFuncionando);
+			$('[data-role=' + codigoFuncionando+ ']').html('<span class="label label-success">'+ s + '</span>');
+		});
+			
+		
+});
+	
+});

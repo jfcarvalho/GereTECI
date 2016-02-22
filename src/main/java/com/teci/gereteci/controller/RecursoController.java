@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -103,5 +104,34 @@ public class RecursoController {
 		return Arrays.asList(CategoriaRecurso.values());
 	}
 	
+	@RequestMapping(value="/{id_recurso}/manutencao", method=RequestMethod.PUT)
+	public @ResponseBody String manutencao(@PathVariable Integer id_recurso)
+	{
+		//Isso aqui vai para camada de serviço
+		Recurso recurso = recursos.findOne(id_recurso);
+		recurso.setStatus(StatusComputador.manutencao);
+		recursos.save(recurso);
+		return StatusComputador.manutencao.getStatus();
+	}
+	
+	@RequestMapping(value="/{id_recurso}/baixa", method=RequestMethod.PUT)
+	public @ResponseBody String baixa(@PathVariable Integer id_recurso)
+	{
+		//Isso aqui vai para camada de serviço
+		Recurso recurso = recursos.findOne(id_recurso);
+		recurso.setStatus(StatusComputador.com_defeito_para);
+		recursos.save(recurso);
+		return StatusComputador.com_defeito_para.getStatus();
+	}
+	
+	@RequestMapping(value="/{id_recurso}/consertado", method=RequestMethod.PUT)
+	public @ResponseBody String consertado(@PathVariable Integer id_recurso)
+	{
+		//Isso aqui vai para camada de serviço
+		Recurso recurso= recursos.findOne(id_recurso);
+		recurso.setStatus(StatusComputador.funcionando);
+		recursos.save(recurso);
+		return StatusComputador.funcionando.getStatus();
+	}
 	
 }
