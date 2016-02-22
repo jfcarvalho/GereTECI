@@ -125,7 +125,7 @@ public class Usuario {
 	
 	public String getUsuario_rede()
 	{
-		return this.email;
+		return this.usuario_rede;
 	}
 	
 	public void setUsuario_rede(String usuario_rede)

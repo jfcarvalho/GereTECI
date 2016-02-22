@@ -1,12 +1,12 @@
 package com.teci.gereteci.model.Computador;
 
 public enum Sistema {
+	v7("Windows 7"),
 	vXp("Windows XP"),
-	vServer("Windows Server"),
 	vVista("Windows Vista"),
+	vServer("Windows Server"),
 	v8("Windows 8"),
-	v10("Windows 10"),
-	v7("Windows 7");
+	v10("Windows 10");
 
 	private String sistema;
 	

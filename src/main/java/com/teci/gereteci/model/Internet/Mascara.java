@@ -2,8 +2,9 @@ package com.teci.gereteci.model.Internet;
 
 public enum Mascara {
 	
-	automatico("Automático"),
-	mascaraPadrao("255.255.255.0");
+	mascaraPadrao("255.255.255.0"),
+	automatico("Automático");
+	
 	private String mascara;
 
 

@@ -2,9 +2,10 @@ package com.teci.gereteci.model.Internet;
 
 public enum Dns_alternativo {
 	
+	dnsaPadrao("10.2.8.187"),
 	automatico("Automático"),
-	nenhum("Nenhum"),
-	dnsaPadrao("10.2.8.187");
+	nenhum("Nenhum");
+	;
 	private String dns_alternativo;
 
 
