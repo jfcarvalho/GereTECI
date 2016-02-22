@@ -299,4 +299,23 @@ public class ComputadorController {
 		return StatusComputador.manutencao.getStatus();
 	}
 	
+	@RequestMapping(value="/{id_computador}/baixa", method=RequestMethod.PUT)
+	public @ResponseBody String baixa(@PathVariable Integer id_computador)
+	{
+		//Isso aqui vai para camada de serviço
+		Computador computador = computadores.findOne(id_computador);
+		computador.setStatus(StatusComputador.com_defeito_para);
+		computadores.save(computador);
+		return StatusComputador.com_defeito_para.getStatus();
+	}
+	
+	@RequestMapping(value="/{id_computador}/consertado", method=RequestMethod.PUT)
+	public @ResponseBody String consertado(@PathVariable Integer id_computador)
+	{
+		//Isso aqui vai para camada de serviço
+		Computador computador = computadores.findOne(id_computador);
+		computador.setStatus(StatusComputador.funcionando);
+		computadores.save(computador);
+		return StatusComputador.funcionando.getStatus();
+	}
 }
