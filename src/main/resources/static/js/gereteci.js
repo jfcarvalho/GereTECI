@@ -348,3 +348,33 @@ $(function() {
 });
 	
 });
+
+$('.disable-patrimonio-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-patrimonio-botao').length) {
+	        // Disable elements.
+		  $(".disable-patrimonio-input").attr("disabled", "disabled");
+			$(".disable-patrimonio-input").attr("value", NULL);
+	      }	
+	  if ($('.disable-patrimonio-botao').length) {
+	        // Enable elements.
+	        $(".disable-patrimonio-botao").removeAttr("disabled");
+	      }
+	});
+
+$('.disable-computador-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-computador-botao').length) {
+	        // Disable elements.
+		  $(".disable-computador-input").attr("disabled", "disabled");
+			$(".disable-computador-option").attr("value", NULL);
+	      }	
+	  if ($('.disable-patrimonio-botao').length) {
+	        // Enable elements.
+	        $(".disable-computador-input").removeAttr("disabled");
+	      }
+	});
+		
+
