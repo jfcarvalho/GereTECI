@@ -134,7 +134,7 @@ $('#confirmacaoExclusaoModalLicencaOffice').on('show.bs.modal', function(event)
 		});
 
 $(function() {
-	$('.js-atualizar-status-manutencao').on('click', function(event) {
+	$('.js-atualizar-status-manutencao-computador').on('click', function(event) {
 		event.preventDefault();
 		var botaoManutencao = $(event.currentTarget);
 		var urlManutencao = botaoManutencao.attr('href'); 
@@ -158,7 +158,7 @@ $(function() {
 });
 
 $(function() {
-	$('.js-atualizar-status-baixa').on('click', function(event) {
+	$('.js-atualizar-status-baixa-computador').on('click', function(event) {
 		event.preventDefault();
 		var botaoBaixa= $(event.currentTarget);
 		var urlBaixa = botaoBaixa.attr('href'); 
@@ -182,7 +182,7 @@ $(function() {
 });
 
 $(function() {
-	$('.js-atualizar-status-conserto').on('click', function(event) {
+	$('.js-atualizar-status-conserto-computador').on('click', function(event) {
 		event.preventDefault();
 		var botaoFuncionando= $(event.currentTarget);
 		var urlFuncionando= botaoFuncionando.attr('href'); 
@@ -196,6 +196,78 @@ $(function() {
 		
 		response.done(function(s) {
 			var codigoFuncionando= botaoFuncionando.data('id_computador');
+			console.log(codigoFuncionando);
+			$('[data-role=' + codigoFuncionando+ ']').html('<span class="label label-success">'+ s + '</span>');
+		});
+			
+		
+});
+	
+});
+
+$(function() {
+	$('.js-atualizar-status-manutencao-impressora').on('click', function(event) {
+		event.preventDefault();
+		var botaoManutencao = $(event.currentTarget);
+		var urlManutencao = botaoManutencao.attr('href'); 
+		console.log('urlManutencao', urlManutencao);
+		
+		var response = $.ajax({
+			url: urlManutencao, 
+			type: 'PUT'
+				
+		});
+		
+		response.done(function(e) {
+			var codigoManutencao = botaoManutencao.data('id_impressora');
+			console.log(codigoManutencao);
+			$('[data-role=' + codigoManutencao + ']').html('<span class="label label-warning">' + e + '</span>');
+		});
+			
+		
+});
+	
+});
+
+$(function() {
+	$('.js-atualizar-status-baixa-impressora').on('click', function(event) {
+		event.preventDefault();
+		var botaoBaixa= $(event.currentTarget);
+		var urlBaixa = botaoBaixa.attr('href'); 
+		console.log('urlBaixa', urlBaixa);
+		
+		var response = $.ajax({
+			url: urlBaixa, 
+			type: 'PUT'
+				
+		});
+		
+		response.done(function(a) {
+			var codigoBaixa= botaoBaixa.data('id_impressora');
+			console.log(codigoBaixa);
+			$('[data-role=' + codigoBaixa+ ']').html('<span class="label label-danger">'+ a + '</span>');
+		});
+			
+		
+});
+	
+});
+
+$(function() {
+	$('.js-atualizar-status-conserto-impressora').on('click', function(event) {
+		event.preventDefault();
+		var botaoFuncionando= $(event.currentTarget);
+		var urlFuncionando= botaoFuncionando.attr('href'); 
+		console.log('urlFuncionando', urlFuncionando);
+		
+		var response = $.ajax({
+			url: urlFuncionando, 
+			type: 'PUT'
+				
+		});
+		
+		response.done(function(s) {
+			var codigoFuncionando= botaoFuncionando.data('id_impressora');
 			console.log(codigoFuncionando);
 			$('[data-role=' + codigoFuncionando+ ']').html('<span class="label label-success">'+ s + '</span>');
 		});

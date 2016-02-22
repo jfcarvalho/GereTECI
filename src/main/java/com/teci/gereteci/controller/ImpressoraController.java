@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.*;
+import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Computador.StatusComputador;
 import com.teci.gereteci.model.Impressora.Impressora;
 import com.teci.gereteci.model.Internet.Dns_alternativo;
@@ -112,4 +114,35 @@ public class ImpressoraController {
 		return Arrays.asList(Dns_alternativo.values());
 	}
 	
+	@RequestMapping(value="/{id_impressora}/manutencao", method=RequestMethod.PUT)
+	public @ResponseBody String manutencao(@PathVariable Integer id_impressora)
+	{
+		//Isso aqui vai para camada de serviço
+		Impressora impressora= impressoras.findOne(id_impressora);
+		impressora.setStatus(StatusComputador.manutencao);
+		impressoras.save(impressora);
+		return StatusComputador.manutencao.getStatus();
+	}
+	
+	@RequestMapping(value="/{id_impressora}/baixa", method=RequestMethod.PUT)
+	public @ResponseBody String baixa(@PathVariable Integer id_impressora)
+	{
+		//Isso aqui vai para camada de serviço
+		Impressora impressora= impressoras.findOne(id_impressora);
+		impressora.setStatus(StatusComputador.com_defeito_para);
+		impressoras.save(impressora);
+		return StatusComputador.com_defeito_para.getStatus();
+	}
+	
+	@RequestMapping(value="/{id_impressora}/consertado", method=RequestMethod.PUT)
+	public @ResponseBody String consertado(@PathVariable Integer id_impressora)
+	{
+		//Isso aqui vai para camada de serviço
+		Impressora impressora = impressoras.findOne(id_impressora);
+		impressora.setStatus(StatusComputador.funcionando);
+		impressoras.save(impressora);
+		return StatusComputador.funcionando.getStatus();
+	}
 }
+	
+
