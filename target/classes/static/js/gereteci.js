@@ -369,7 +369,7 @@ $('.disable-computador-botao').on('click', function(event)
 	  if ($('.disable-computador-botao').is(":checked")) {
 	        // Disable elements.
 		  $(".disable-computador-input").attr("disabled", "disabled");
-			$(".disable-computador-option").attr("value", NULL);
+		  $(".disable-computador-input").prepend('<input type="hidden" name="computador_id_computador" value=""/>');
 	      }	
 	  if (!$('.disable-computador-botao').is(":checked")) {
 	        // Enable elements.

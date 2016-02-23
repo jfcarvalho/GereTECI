@@ -21,6 +21,7 @@ import com.teci.gereteci.model.Computador.CategoriaRecurso;
 import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Computador.Recurso;
 import com.teci.gereteci.model.Computador.StatusComputador;
+import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
 
 @Controller
@@ -48,11 +49,17 @@ public class RecursoController {
 		{
 			return "cadastroRecurso";
 		}
-		Computador computer= computadores.findOne(computador_id_computador);
-		recurso.setComputador(computer);
-		List<Recurso> resources = computer.getRecursos();
-		resources.add(recurso);
-		computer.setRecursos(resources);
+		if(computador_id_computador != null)
+		{
+			Computador computer= computadores.findOne(computador_id_computador);
+			recurso.setComputador(computer);
+			List<Recurso> resources = computer.getRecursos();
+			resources.add(recurso);
+			computer.setRecursos(resources);
+		}
+		
+		
+		
 		
 		recursos.save(recurso);
 		
