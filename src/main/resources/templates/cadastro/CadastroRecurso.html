@@ -56,7 +56,7 @@
 			<label for="computador_id_computador" class="col-sm-2 control-label">Computador:</label>
 			<div class="col-sm-2">
 				<select class="form-control disable-computador-input" name="computador_id_computador">
-					<option class="disable-computador-option" th:each="computador : ${todosComputadoresRecurso}" th:value="${computador.id_computador}" th:text="${computador.patrimonio}" th:selected="${rec} ? ${rec.computador.patrimonio} == ${computador.patrimonio}"></option>
+					<option class="disable-computador-option" th:each="computador : ${todosComputadoresRecurso}" th:value="${computador.id_computador}" th:text="${computador.patrimonio}" th:selected="${rec} and ${rec.computador} ? ${rec.computador.patrimonio} == ${computador.patrimonio}"></option>
 				</select>
 				
 				<div class="row">
