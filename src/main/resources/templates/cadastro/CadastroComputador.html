@@ -24,11 +24,11 @@
 		<div class="form-group" th:classappend="${#fields.hasErrors('patrimonio')} ? has-error">
 			<label for="patrimonio" class="col-sm-2 control-label" >Patrimonio:</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="patrimonio" name="patrimonio" th:field="*{patrimonio}"/>
+				<input type="text" class="form-control disable-patrimonio-pc-input" id="patrimonio" name="patrimonio" th:field="*{patrimonio}"/>
 			</div>
 			 <div class="col-sm-6" style="margin-left:105px">
 				    <div class="input-group">
-				        <input type="checkbox"> Sem patrimônio</input>   	
+				        <input type="checkbox" class ="disable-patrimonio-pc-botao"/> Sem patrimônio  	
 				    </div><!-- /input-group -->
 				  </div><!-- /.col-lg-6 -->
 		</div>
@@ -55,7 +55,12 @@
 			<div class="form-group" th:classappend="${#fields.hasErrors('ip')} ? has-error">
 			<label for="ip" class="col-sm-2 control-label">IP:</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="ip" name="ip" th:field="*{ip}"/>
+				<input type="text" class="form-control form-control disable-ip-pc-input" id="ip" name="ip" th:field="*{ip}"/>
+					<div class="col-sm-6">
+				  <div class="input-group" style="margin-left:-10px">
+				        <input class="disable-ip-pc-botao" type="checkbox"> Sem IP</input>
+				    </div><!-- /input-group -->
+				  </div><!-- /.col-lg-6 -->
 			</div>
 		</div>
 		
@@ -188,15 +193,23 @@
 				<select class="form-control" name="status">
 					<option th:each="statusMaquina : ${todosStatusComputador}" th:value="${statusMaquina}" th:text="${statusMaquina.status}" th:selected="${pc} ? ${pc.status.status} == ${statusMaquina.status}"></option>
 				</select>
+				
+				
 			</div>
 		</div>
 		
 		<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Usuário:</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="usuario_id_usuario">
-					<option th:each="usuario : ${todosUsuariosComputador}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}" th:selected="${pc} ? ${pc.usuario.id_usuario} == ${usuario.id_usuario}"></option>
+				<select class="form-control disable-usuario-pc-input" name="usuario_id_usuario" value="">
+					<option th:each="usuario : ${todosUsuariosComputador}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}" th:selected="${pc} and ${pc.usuario} ? ${pc.usuario.id_usuario} == ${usuario.id_usuario}"></option> 
 				</select>
+				
+				 <div class="col-sm-6" style="width:180px">
+				    <div class="input-group">
+				        <input type="checkbox" class ="disable-usuario-pc-botao"/> Sem usuário  	
+				    </div><!-- /input-group -->
+				  </div>
 			</div>
 		</div>
 	

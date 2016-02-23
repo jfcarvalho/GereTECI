@@ -352,29 +352,97 @@ $(function() {
 $('.disable-patrimonio-botao').on('click', function(event)
 		{
 	
-	  if ($('.disable-patrimonio-botao').length) {
+	  if ($('.disable-patrimonio-botao').is(":checked")) {
 	        // Disable elements.
 		  $(".disable-patrimonio-input").attr("disabled", "disabled");
 			$(".disable-patrimonio-input").attr("value", NULL);
 	      }	
-	  if ($('.disable-patrimonio-botao').length) {
+	  if (!$('.disable-patrimonio-botao').is(":checked")) {
 	        // Enable elements.
-	        $(".disable-patrimonio-botao").removeAttr("disabled");
+	        $(".disable-patrimonio-input").removeAttr("disabled");
 	      }
 	});
 
 $('.disable-computador-botao').on('click', function(event)
 		{
 	
-	  if ($('.disable-computador-botao').length) {
+	  if ($('.disable-computador-botao').is(":checked")) {
 	        // Disable elements.
 		  $(".disable-computador-input").attr("disabled", "disabled");
 			$(".disable-computador-option").attr("value", NULL);
 	      }	
-	  if ($('.disable-patrimonio-botao').length) {
+	  if (!$('.disable-computador-botao').is(":checked")) {
 	        // Enable elements.
 	        $(".disable-computador-input").removeAttr("disabled");
 	      }
 	});
-		
+	
+$('.disable-patrimonio-pc-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-patrimonio-pc-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-patrimonio-pc-input").attr("disabled", "disabled");
+			$(".disable-patrimonio-pc-input").attr("value", NULL);
+	      }	
+	  if (!$('.disable-patrimonio-pc-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-patrimonio-pc-input").removeAttr("disabled");
+	      }
+	});
 
+$('.disable-usuario-pc-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-usuario-pc-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-usuario-pc-input").attr("disabled", "disabled");
+			$(".disable-usuario-pc-input").prepend('<input type="hidden" name="usuario_id_usuario" value=""/>');
+	      }	
+	  if (!$('.disable-usuario-pc-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-usuario-pc-input").removeAttr("disabled");
+	      }
+	});
+
+$('.disable-patrimonio-impressora-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-patrimonio-impressora-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-patrimonio-impressora-input").attr("disabled", "disabled");
+			$(".disable-patrimonio-impressora-input").attr("value", NULL);
+	      }	
+	  if (!$('.disable-patrimonio-impressora-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-patrimonio-impressora-input").removeAttr("disabled");
+	      }
+	});
+
+$('.disable-ip-pc-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-ip-pc-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-ip-pc-input").attr("disabled", "disabled");
+			$(".disable-ip-pc-input").attr("value", NULL);
+	      }	
+	  if (!$('.disable-ip-pc-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-ip-pc-input").removeAttr("disabled");
+	      }
+	});
+
+$('.disable-ip-impressora-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-ip-impressora-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-ip-impressora-input").attr("disabled", "disabled");
+			$(".disable-ip-impressora-input").attr("value", NULL);
+	      }	
+	  if (!$('.disable-ip-impressora-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-ip-impressora-input").removeAttr("disabled");
+	      }
+	});

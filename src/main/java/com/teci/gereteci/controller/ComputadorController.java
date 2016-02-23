@@ -66,8 +66,13 @@ public class ComputadorController {
 		{
 			return "cadastroComputador";
 		}
-		Usuario user = usuarios.findOne(usuario_id_usuario);
-		computador.setUsuario(user);
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+	
+		if(usuario_id_usuario != null)
+		{
+			Usuario user = usuarios.findOne(usuario_id_usuario);
+			computador.setUsuario(user);
+		}		
 		computadores.save(computador);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
 		return "redirect:/computadores/novo";
