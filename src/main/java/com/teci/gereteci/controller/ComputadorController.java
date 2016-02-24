@@ -48,8 +48,8 @@ public class ComputadorController {
 	private Impressoras impressoras;
 	@Autowired
 	private Recursos recursos;
-	
-	
+	List<Usuario> todosUsuariosSemComputador = new ArrayList<Usuario>();
+	Integer usuarioTemporario;
 	@RequestMapping("/novo")
 	public ModelAndView novo()
 	{
@@ -70,8 +70,18 @@ public class ComputadorController {
 	
 		if(usuario_id_usuario != null)
 		{
+			if(usuarioTemporario != null)
+			{
+				if(usuarioTemporario != usuario_id_usuario)
+				{
+					Usuario user = usuarios.findOne(usuarioTemporario);
+					todosUsuariosSemComputador.add(user);
+				}
+			}
 			Usuario user = usuarios.findOne(usuario_id_usuario);
 			computador.setUsuario(user);
+			user.setComputador(computador);
+			
 		}		
 		computadores.save(computador);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
@@ -92,11 +102,13 @@ public class ComputadorController {
 	@RequestMapping("{id_computador}")
 	public ModelAndView edicao(@PathVariable("id_computador") Computador computador)
 	{
-		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
+		System.out.println(">>>>>>> codigo recebido: " + computador.getId_computador());
+		System.out.println(">>>>>>> Codigo de usuario recebido: " + computador.getUsuario().getId_usuario());
 		//Usuario usuario = usuarios.findOne(id_usuario);
-		
+		usuarioTemporario = computador.getUsuario().getId_usuario();
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject("pc", computador);
+		
 		mv.addObject(computador);
 		
 		return mv;
@@ -145,11 +157,23 @@ public class ComputadorController {
 		return Arrays.asList(Memoria.values());
 	}
 	
-	@ModelAttribute("todosUsuariosComputador")
+	@ModelAttribute("todosUsuariosComputador") //Lista todos os usuários que ainda nao tem computador
 	public List<Usuario> todosUsuariosComputador()
 	{
 		List<Usuario> todosUsuarios = usuarios.findAll();
-		return todosUsuarios;
+		
+		Iterator it = todosUsuarios.iterator();
+		while(it.hasNext())
+		{
+			Usuario user = (Usuario) it.next();
+			if(user.getComputador() == null && !(todosUsuariosSemComputador.contains(user)))
+			{
+					todosUsuariosSemComputador.add(user);
+					System.out.println(todosUsuariosSemComputador.size());
+			}
+		}
+		return todosUsuariosSemComputador; 
+		//return todosUsuarios;
 	}
 	
 	@ModelAttribute("todasImpressorasComputador")

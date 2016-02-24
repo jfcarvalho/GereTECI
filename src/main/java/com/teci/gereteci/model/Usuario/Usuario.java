@@ -12,10 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Servico.Servico;
 import com.teci.gereteci.model.Setor.Setor;
 
@@ -52,6 +54,10 @@ public class Usuario {
 	private Servico servico;
 	@Size(min=3, max=100, message="O tamanho do campo telefone tem que ser entre 3 e 20")
 	private String usuario_rede;
+	@OneToOne
+	@JoinColumn(name="computador_id_computador")
+	private Computador computador;
+	
 	public Integer getId_usuario()
 	{
 		return this.id_usuario;
@@ -133,4 +139,12 @@ public class Usuario {
 		this.usuario_rede= usuario_rede;
 	}
 	
+	public Computador getComputador()
+	{
+		return this.computador;
+	}
+	public void setComputador(Computador computador)
+	{
+		this.computador = computador;
+	}
 }
