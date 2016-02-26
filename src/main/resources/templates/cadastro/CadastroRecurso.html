@@ -62,7 +62,7 @@
 				<div class="row">
   <div class="col-sm-6">
     <div class="input-group" style="margin-left:5px; width:200px;">
-        <input type="checkbox" class="disable-computador-botao"> Recurso sem computador</input>
+        <input type="checkbox" class="disable-computador-botao" th:attr="data-id_computador=${recurso.computador} ? ${recurso.computador.id_computador}" th:href="@{/recursos/{id_recurso}/sem_computador(id_recurso=${recurso.id_recurso})}"> Recurso sem computador</input>
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
   </div>

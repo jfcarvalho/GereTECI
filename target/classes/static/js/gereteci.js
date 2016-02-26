@@ -375,6 +375,12 @@ $('.disable-computador-botao').on('click', function(event)
 	        // Enable elements.
 	        $(".disable-computador-input").removeAttr("disabled");
 	      }
+	  var idcomputador = $(event.currentTarget);
+	  console.log(idcomputador.data('id_computador'));
+	  $('enviar').on('submit', function(event) 
+		{
+		  	
+		})
 	});
 	
 $('.disable-patrimonio-pc-botao').on('click', function(event)
@@ -446,3 +452,12 @@ $('.disable-ip-impressora-botao').on('click', function(event)
 	        $(".disable-ip-impressora-input").removeAttr("disabled");
 	      }
 	});
+
+$('.testando-layer').on('click', function(event)
+		{
+			var informacao =  $(event.currentTarget);
+			var array = informacao.data('id_computador');
+			console.log(array);
+		
+	
+		})

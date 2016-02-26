@@ -21,6 +21,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -260,6 +263,12 @@ public class Computador {
 	public void setUsuario(Usuario usuario)
 	{
 		this.usuario = usuario;
+	}
+	public String getRecursosJSON()
+	{
+		String json = new Gson().toJson(this.recursos);
+	
+		return json;
 	}
 	
 	

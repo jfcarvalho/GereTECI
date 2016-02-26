@@ -140,5 +140,13 @@ public class RecursoController {
 		recursos.save(recurso);
 		return StatusComputador.funcionando.getStatus();
 	}
+	@RequestMapping(value="/{id_recurso}/sem_computador", method=RequestMethod.PUT)
+	public @ResponseBody void sem_computador(@PathVariable Integer id_recurso)
+	{
+		//Isso aqui vai para camada de serviço
+		Recurso recurso= recursos.findOne(id_recurso);
+		recurso.setComputador(null);
+		recursos.save(recurso);
+	}
 	
 }
