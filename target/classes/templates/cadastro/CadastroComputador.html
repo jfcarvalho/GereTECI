@@ -115,11 +115,7 @@
 				</select>
 			</div>
 		</div>
-		<div class="testando-layer" th:attr="data-id_computador = ${computador.getRecursosJSON()}">
-			<label for="" class="col-sm-2 control-label">Monitor selecionado:</label>
-			
-			<br/>
-		</div>
+	
 			<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Monitor:</label>
 			<div class="col-sm-6">
@@ -207,7 +203,7 @@
 			<div class="col-sm-6">
 				<select class="form-control disable-usuario-pc-input" name="usuario_id_usuario" value="">
 					<option th:each="usuario : ${todosUsuariosComputador}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}"></option>
-					<option th:value="${pc} and ${pc.usuario} ? ${pc.usuario.id_usuario}" th:text="${pc} and ${pc.usuario}? ${pc.usuario.nome}" th:selected="true"></option> 
+					<!--  <option th:value="${pc} and ${pc.usuario} ? ${pc.usuario.id_usuario}" th:text="${pc} and ${pc.usuario}? ${pc.usuario.nome}" th:selected="true"></option> -->
 				</select>
 				
 				 <div class="col-sm-6" style="width:180px">

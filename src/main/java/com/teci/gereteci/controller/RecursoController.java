@@ -53,9 +53,9 @@ public class RecursoController {
 		{
 			Computador computer= computadores.findOne(computador_id_computador);
 			recurso.setComputador(computer);
-			List<Recurso> resources = computer.getRecursos();
-			resources.add(recurso);
-			computer.setRecursos(resources);
+			//List<Recurso> resources = computer.getRecursos();
+			//resources.add(recurso);
+			//computer.setRecursos(resources);
 		}
 		
 		

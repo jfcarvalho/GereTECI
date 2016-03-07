@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.teci.gereteci.model.*;
 import com.teci.gereteci.model.Computador.Arquitetura;
 import com.teci.gereteci.model.Computador.Computador;
@@ -36,6 +39,7 @@ import com.teci.gereteci.repository.*;
 
 
 
+
 @Controller
 @RequestMapping("/computadores")
 public class ComputadorController {
@@ -49,7 +53,7 @@ public class ComputadorController {
 	@Autowired
 	private Recursos recursos;
 	List<Usuario> todosUsuariosSemComputador = new ArrayList<Usuario>();
-	Integer usuarioTemporario;
+	
 	@RequestMapping("/novo")
 	public ModelAndView novo()
 	{
@@ -70,24 +74,15 @@ public class ComputadorController {
 	
 		if(usuario_id_usuario != null)
 		{
-			if(usuarioTemporario != null)
-			{
-				if(usuarioTemporario != usuario_id_usuario)
-				{
-					Usuario user = usuarios.findOne(usuarioTemporario);
-					todosUsuariosSemComputador.add(user);
-				}
-			}
 			Usuario user = usuarios.findOne(usuario_id_usuario);
-			computador.setUsuario(user);
-			user.setComputador(computador);
-			
+			//computador.setUsuario(user);
 		}		
 		computadores.save(computador);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
 		return "redirect:/computadores/novo";
-	
+		
 	}
+	
 	@RequestMapping
 	public ModelAndView pesquisar()
 	{
@@ -102,11 +97,33 @@ public class ComputadorController {
 	@RequestMapping("{id_computador}")
 	public ModelAndView edicao(@PathVariable("id_computador") Computador computador)
 	{
+		//ObjectMapper mapper = new ObjectMapper();
+		
 		System.out.println(">>>>>>> codigo recebido: " + computador.getId_computador());
-		System.out.println(">>>>>>> Codigo de usuario recebido: " + computador.getUsuario().getId_usuario());
+		//System.out.println(">>>>>>> Codigo de usuario recebido: " + computador.getUsuario().getId_usuario());
 		//Usuario usuario = usuarios.findOne(id_usuario);
-		usuarioTemporario = computador.getUsuario().getId_usuario();
+		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		
+		List<Recurso> rrecursos = recursos.findAll();
+		List<Recurso> recursosComputador = new ArrayList<Recurso>();
+		Iterator it = rrecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso rec = (Recurso) it.next();
+			if(rec.getComputador().getId_computador() == computador.getId_computador())
+			{
+					recursosComputador.add(rec);
+			}
+		}
+		
+		GsonBuilder b = new GsonBuilder();
+		b.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
+		Gson gson = b.create();
+	    //String json; 
+	    String json = gson.toJson(rrecursos); //retornando nullo
+		System.out.println(">>>>>>>>>>>> "+ json);
+		//mv.addObject("lista_recursos", json);
 		mv.addObject("pc", computador);
 		
 		mv.addObject(computador);

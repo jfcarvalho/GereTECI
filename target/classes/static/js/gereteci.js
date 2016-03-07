@@ -455,8 +455,10 @@ $('.disable-ip-impressora-botao').on('click', function(event)
 
 $('.testando-layer').on('click', function(event)
 		{
+			
 			var informacao =  $(event.currentTarget);
-			var array = informacao.data('id_computador');
+			//console.log(informacao);
+			var array = informacao.data('teste');
 			console.log(array);
 		
 	
