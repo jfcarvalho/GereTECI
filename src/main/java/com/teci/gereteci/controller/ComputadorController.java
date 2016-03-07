@@ -111,19 +111,24 @@ public class ComputadorController {
 		while(it.hasNext())
 		{
 			Recurso rec = (Recurso) it.next();
-			if(rec.getComputador().getId_computador() == computador.getId_computador())
-			{
+			if(rec.getComputador() != null) {
+				if(rec.getComputador().getId_computador() == computador.getId_computador())
+				{
+					System.out.println(rec.getDescricao());
 					recursosComputador.add(rec);
+				}
+				else {System.out.print("NÃO PERTENCE!!!");}
 			}
+			else {System.out.print("NULLO!!");}
 		}
-		
 		GsonBuilder b = new GsonBuilder();
 		b.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
 		Gson gson = b.create();
 	    //String json; 
-	    String json = gson.toJson(rrecursos); //retornando nullo
+	    String json = gson.toJson(recursosComputador); //retornando nullo
 		System.out.println(">>>>>>>>>>>> "+ json);
 		//mv.addObject("lista_recursos", json);
+		
 		mv.addObject("pc", computador);
 		
 		mv.addObject(computador);
@@ -199,12 +204,53 @@ public class ComputadorController {
 		List<Impressora> todasImpressoras= impressoras.findAll();
 		return todasImpressoras;
 	}
+	
+	@ModelAttribute("todasImpressorasDisponiveisComputador")
+	public List<Impressora> todasImpressorasDisponiveisComputador()
+	{
+		List<Impressora> todasImpressoras= impressoras.findAll();
+		List<Impressora> todasImpressorasDisponiveis = new ArrayList<Impressora>();
+		Iterator it = todasImpressoras.iterator();
+		while(it.hasNext())
+		{
+			Impressora obj = (Impressora) it.next();
+			
+			if(obj.getComputadores().isEmpty())
+			{
+					todasImpressorasDisponiveis.add(obj);
+			}
+		}
+		return todasImpressorasDisponiveis;
+		
+		
+	}
+	
 	@ModelAttribute("todosRecursosComputador")
 	public List<Recurso> todasRecursosComputador()
 	{
 		List<Recurso> todosRecursos= recursos.findAll();
 		return todosRecursos;
 	}
+	@ModelAttribute("todosRecursosMonitorDisponiveis")
+	public List<Recurso> todasRecursosMonitorDisponiveis()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todosMonitoresDisponiveis = new ArrayList<Recurso>();
+		Iterator it = todosRecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getCategoria().getCategoria().equals("Monitor"))
+			{
+				if(obj.getComputador() == null)
+					todosMonitoresDisponiveis.add(obj);
+			}
+		}
+		return todosMonitoresDisponiveis;
+	}
+	
 	@ModelAttribute("todosRecursosMonitor")
 	public List<Recurso> todasRecursosMonitor()
 	{
@@ -224,6 +270,7 @@ public class ComputadorController {
 		return todosMonitores;
 	}
 	
+	
 	@ModelAttribute("todosRecursosMouse")
 	public List<Recurso> todasRecursosMouse()
 	{
@@ -241,6 +288,26 @@ public class ComputadorController {
 			}
 		}
 		return todosMouses;
+	}
+	
+	@ModelAttribute("todosRecursosMouseDisponiveis")
+	public List<Recurso> todasRecursosMouseDisponiveis()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todosMousesDisponiveis = new ArrayList<Recurso>();
+		Iterator it = todosRecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getCategoria().getCategoria().equals("Mouse"))
+			{
+				if(obj.getComputador() == null)
+					todosMousesDisponiveis.add(obj);
+			}
+		}
+		return todosMousesDisponiveis;
 	}
 	
 	@ModelAttribute("todosRecursosTeclado")
@@ -262,6 +329,26 @@ public class ComputadorController {
 		return todosTeclados;
 	}
 	
+	@ModelAttribute("todosRecursosTecladoDisponiveis")
+	public List<Recurso> todasRecursosTecladoDisponiveis()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todosTecladosDisponiveis = new ArrayList<Recurso>();
+		Iterator it = todosRecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getCategoria().getCategoria().equals("Teclado"))
+			{
+				if(obj.getComputador() == null)
+					todosTecladosDisponiveis.add(obj);
+			}
+		}
+		return todosTecladosDisponiveis;
+	}
+	
 	@ModelAttribute("todosRecursosMR")
 	public List<Recurso> todasRecursosMR()
 	{
@@ -280,6 +367,27 @@ public class ComputadorController {
 		}
 		return todosMR;
 	}
+	
+	@ModelAttribute("todosRecursosMRDisponiveis")
+	public List<Recurso> todasRecursosMRDisponiveis()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todosMRDisponiveis = new ArrayList<Recurso>();
+		Iterator it = todosRecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getCategoria().getCategoria().equals("Mídia removível"))
+			{
+				if(obj.getComputador() == null)
+					todosMRDisponiveis.add(obj);
+			}
+		}
+		return todosMRDisponiveis;
+	}
+	
 	@ModelAttribute("todosRecursosCS")
 	public List<Recurso> todasRecursosCS()
 	{
@@ -299,6 +407,24 @@ public class ComputadorController {
 		return todosCS;
 	}
 	
+	@ModelAttribute("todosRecursosCSDisponiveis")
+	public List<Recurso> todasRecursosCSDisponiveis()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todosCSDisponiveis = new ArrayList<Recurso>();
+		Iterator it = todosRecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getCategoria().getCategoria().equals("Caixa de Som"))
+			{
+				todosCSDisponiveis.add(obj);
+			}
+		}
+		return todosCSDisponiveis;
+	}
 	@ModelAttribute("todosRecursosFone")
 	public List<Recurso> todasRecursosFone()
 	{
@@ -317,6 +443,26 @@ public class ComputadorController {
 		}
 		return todosFones;
 	}
+	@ModelAttribute("todosRecursosOutrosDisponiveis")
+	public List<Recurso> todasRecursosOutrosDisponiveis()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todosOutrosDisponiveis= new ArrayList<Recurso>();
+		Iterator it = todosRecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getCategoria().getCategoria().equals("Outros"))
+			{
+				if(obj.getComputador() == null)
+					todosOutrosDisponiveis.add(obj);
+			}
+		}
+		return todosOutrosDisponiveis;
+	}
+	
 	@ModelAttribute("todosRecursosOutros")
 	public List<Recurso> todasRecursosOutros()
 	{
@@ -335,6 +481,7 @@ public class ComputadorController {
 		}
 		return todosOutros;
 	}
+	
 	@RequestMapping(value="/{id_computador}/manutencao", method=RequestMethod.PUT)
 	public @ResponseBody String manutencao(@PathVariable Integer id_computador)
 	{

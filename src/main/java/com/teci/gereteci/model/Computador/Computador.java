@@ -84,10 +84,11 @@ public class Computador {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "computador_has_impressora", joinColumns = { @JoinColumn(name="computador_id_computador")}, inverseJoinColumns={ @JoinColumn (name = "impressora_id_impressora") })
 	private List<Impressora> impressoras;
-	@ManyToMany(mappedBy="computadores")
-	/*
+	/*@ManyToMany(mappedBy="computadores")
+	
 	private List<LicencaOffice> licencasOffice;
-	@OneToMany(mappedBy="computador")
+	*/
+	/*@OneToMany(mappedBy="computador")
 	private List<Recurso> recursos;
 	*/
 	@OneToOne
@@ -252,7 +253,8 @@ public class Computador {
 		this.licencasOffice = licencasOffice;
 	}
 	
-	
+	*/
+	/*
 	public List<Recurso> getRecursos()
 	{
 		return this.recursos;
