@@ -1,8 +1,7 @@
 package com.teci.gereteci.model.Computador;
 
 public enum Memoria {
-	m128("128 MB"),
-	m256("256 MB"),
+	
 	m512("512 MB"),
 	m1g("1 GB"),
 	m2g("2 GB"),

@@ -22,6 +22,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
+
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.teci.gereteci.model.Impressora.Impressora;
@@ -83,12 +85,16 @@ public class Computador {
 	@JoinTable(name = "computador_has_impressora", joinColumns = { @JoinColumn(name="computador_id_computador")}, inverseJoinColumns={ @JoinColumn (name = "impressora_id_impressora") })
 	private List<Impressora> impressoras;
 	@ManyToMany(mappedBy="computadores")
+	/*
 	private List<LicencaOffice> licencasOffice;
 	@OneToMany(mappedBy="computador")
 	private List<Recurso> recursos;
+	*/
 	@OneToOne
 	@JoinColumn(name="usuario_id_usuario")
 	private Usuario usuario;
+	
+
 	
 	public Integer getId_computador()
 	{
@@ -200,8 +206,8 @@ public class Computador {
 	{
 		this.status = status;
 	}
-	
-	/*public Integer getUsuario_id_usuario()
+	/*
+	public Integer getUsuario_id_usuario()
 	{
 		return this.usuario_id_usuario;
 	}
@@ -235,6 +241,7 @@ public class Computador {
 	{
 		this.impressoras = impressoras;
 	}
+	/*
 	public List<LicencaOffice> getLicencasOffice()
 	{
 		return this.licencasOffice;
@@ -244,6 +251,8 @@ public class Computador {
 	{
 		this.licencasOffice = licencasOffice;
 	}
+	
+	
 	public List<Recurso> getRecursos()
 	{
 		return this.recursos;
@@ -253,6 +262,7 @@ public class Computador {
 	{
 		this.recursos = recursos;
 	}
+	*/
 	public Usuario getUsuario()
 	{
 		return this.usuario;

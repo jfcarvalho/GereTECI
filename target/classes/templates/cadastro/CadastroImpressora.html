@@ -23,7 +23,12 @@
 		<div class="form-group" th:classappend="${#fields.hasErrors('patrimonio')} ? has-error">
 			<label for="patrimonio" class="col-sm-2 control-label" >Patrimonio:</label>
 			<div class="col-sm-4">
-				<input type="text" class="form-control" id="patimonio" name="patrimonio" th:field="*{patrimonio}"/>
+				<input type="text" class="form-control disable-patrimonio-impressora-input" id="patimonio" name="patrimonio" th:field="*{patrimonio}"/>
+				 <div class="col-sm-6">
+				    <div class="input-group" style="margin-left:-10px">
+				        <input class="disable-patrimonio-impressora-botao" type="checkbox"> Sem patrimônio</input>
+				    </div><!-- /input-group -->
+				  </div><!-- /.col-lg-6 -->
 			</div>
 		</div>
 			<div class="form-group" th:classappend="${#fields.hasErrors('marca')} ? has-error">
@@ -35,9 +40,13 @@
 			<div class="form-group" th:classappend="${#fields.hasErrors('ip')} ? has-error">
 			<label for="ip" class="col-sm-2 control-label">IP:</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="ip" name="ip" th:field="*{ip}"/>
+				<input type="text" class="form-control disable-ip-impressora-input" id="ip" name="ip" th:field="*{ip}"/>
+				  <div class="input-group" style="margin-left:5px">
+				        <input class="disable-ip-impressora-botao" type="checkbox"/> Sem IP
+				    </div><!-- /input-group -->
+				  </div><!-- /.col-lg-6 -->
 			</div>
-		</div>
+		
 		
 			<div class="form-group">
 			<label for="mascara" class="col-sm-2 control-label">Mascara:</label>

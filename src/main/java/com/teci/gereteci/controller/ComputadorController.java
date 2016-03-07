@@ -15,9 +15,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.teci.gereteci.model.*;
 import com.teci.gereteci.model.Computador.Arquitetura;
 import com.teci.gereteci.model.Computador.Computador;
@@ -35,6 +39,7 @@ import com.teci.gereteci.repository.*;
 
 
 
+
 @Controller
 @RequestMapping("/computadores")
 public class ComputadorController {
@@ -47,7 +52,7 @@ public class ComputadorController {
 	private Impressoras impressoras;
 	@Autowired
 	private Recursos recursos;
-	
+	List<Usuario> todosUsuariosSemComputador = new ArrayList<Usuario>();
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo()
@@ -65,13 +70,19 @@ public class ComputadorController {
 		{
 			return "cadastroComputador";
 		}
-		Usuario user = usuarios.findOne(usuario_id_usuario);
-		computador.setUsuario(user);
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+	
+		if(usuario_id_usuario != null)
+		{
+			Usuario user = usuarios.findOne(usuario_id_usuario);
+			//computador.setUsuario(user);
+		}		
 		computadores.save(computador);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
 		return "redirect:/computadores/novo";
-	
+		
 	}
+	
 	@RequestMapping
 	public ModelAndView pesquisar()
 	{
@@ -86,11 +97,35 @@ public class ComputadorController {
 	@RequestMapping("{id_computador}")
 	public ModelAndView edicao(@PathVariable("id_computador") Computador computador)
 	{
-		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
+		//ObjectMapper mapper = new ObjectMapper();
+		
+		System.out.println(">>>>>>> codigo recebido: " + computador.getId_computador());
+		//System.out.println(">>>>>>> Codigo de usuario recebido: " + computador.getUsuario().getId_usuario());
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		
+		List<Recurso> rrecursos = recursos.findAll();
+		List<Recurso> recursosComputador = new ArrayList<Recurso>();
+		Iterator it = rrecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso rec = (Recurso) it.next();
+			if(rec.getComputador().getId_computador() == computador.getId_computador())
+			{
+					recursosComputador.add(rec);
+			}
+		}
+		
+		GsonBuilder b = new GsonBuilder();
+		b.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
+		Gson gson = b.create();
+	    //String json; 
+	    String json = gson.toJson(rrecursos); //retornando nullo
+		System.out.println(">>>>>>>>>>>> "+ json);
+		//mv.addObject("lista_recursos", json);
 		mv.addObject("pc", computador);
+		
 		mv.addObject(computador);
 		
 		return mv;
@@ -139,11 +174,23 @@ public class ComputadorController {
 		return Arrays.asList(Memoria.values());
 	}
 	
-	@ModelAttribute("todosUsuariosComputador")
+	@ModelAttribute("todosUsuariosComputador") //Lista todos os usuários que ainda nao tem computador
 	public List<Usuario> todosUsuariosComputador()
 	{
 		List<Usuario> todosUsuarios = usuarios.findAll();
-		return todosUsuarios;
+		
+		Iterator it = todosUsuarios.iterator();
+		while(it.hasNext())
+		{
+			Usuario user = (Usuario) it.next();
+			if(user.getComputador() == null && !(todosUsuariosSemComputador.contains(user)))
+			{
+					todosUsuariosSemComputador.add(user);
+					System.out.println(todosUsuariosSemComputador.size());
+			}
+		}
+		return todosUsuariosSemComputador; 
+		//return todosUsuarios;
 	}
 	
 	@ModelAttribute("todasImpressorasComputador")
@@ -287,5 +334,34 @@ public class ComputadorController {
 			}
 		}
 		return todosOutros;
+	}
+	@RequestMapping(value="/{id_computador}/manutencao", method=RequestMethod.PUT)
+	public @ResponseBody String manutencao(@PathVariable Integer id_computador)
+	{
+		//Isso aqui vai para camada de serviço
+		Computador computador = computadores.findOne(id_computador);
+		computador.setStatus(StatusComputador.manutencao);
+		computadores.save(computador);
+		return StatusComputador.manutencao.getStatus();
+	}
+	
+	@RequestMapping(value="/{id_computador}/baixa", method=RequestMethod.PUT)
+	public @ResponseBody String baixa(@PathVariable Integer id_computador)
+	{
+		//Isso aqui vai para camada de serviço
+		Computador computador = computadores.findOne(id_computador);
+		computador.setStatus(StatusComputador.com_defeito_para);
+		computadores.save(computador);
+		return StatusComputador.com_defeito_para.getStatus();
+	}
+	
+	@RequestMapping(value="/{id_computador}/consertado", method=RequestMethod.PUT)
+	public @ResponseBody String consertado(@PathVariable Integer id_computador)
+	{
+		//Isso aqui vai para camada de serviço
+		Computador computador = computadores.findOne(id_computador);
+		computador.setStatus(StatusComputador.funcionando);
+		computadores.save(computador);
+		return StatusComputador.funcionando.getStatus();
 	}
 }
