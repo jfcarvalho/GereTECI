@@ -26,7 +26,6 @@ import com.teci.gereteci.model.*;
 import com.teci.gereteci.model.Computador.Arquitetura;
 import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Computador.Memoria;
-import com.teci.gereteci.model.Computador.Recurso;
 import com.teci.gereteci.model.Computador.Sistema;
 import com.teci.gereteci.model.Computador.StatusComputador;
 import com.teci.gereteci.model.Impressora.Impressora;
@@ -34,6 +33,7 @@ import com.teci.gereteci.model.Internet.Dns_alternativo;
 import com.teci.gereteci.model.Internet.Dns_preferencial;
 import com.teci.gereteci.model.Internet.Gateway;
 import com.teci.gereteci.model.Internet.Mascara;
+import com.teci.gereteci.model.Recurso.Recurso;
 import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
 
@@ -63,7 +63,7 @@ public class ComputadorController {
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
+	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer recurso_monitor, @RequestParam Integer recurso_teclado, @RequestParam Integer recurso_mouse, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
@@ -95,17 +95,18 @@ public class ComputadorController {
 	}
 
 	@RequestMapping("{id_computador}")
-	public ModelAndView edicao(@PathVariable("id_computador") Computador computador)
+
+	public ModelAndView edicao(@PathVariable("id_computador") Computador computador, @RequestParam Integer id_recurso, @RequestParam Integer recurso_teclado, @RequestParam Integer recurso_mouse)
 	{
 		//ObjectMapper mapper = new ObjectMapper();
 		
 		System.out.println(">>>>>>> codigo recebido: " + computador.getId_computador());
-		//System.out.println(">>>>>>> Codigo de usuario recebido: " + computador.getUsuario().getId_usuario());
+		//System.out.println(">>>>>>> Codigo de usuario recebido: " + recursos.getDescricao());
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		
-		List<Recurso> rrecursos = recursos.findAll();
+		List<Recurso> rrecursos = this.recursos.findAll();
 		List<Recurso> recursosComputador = new ArrayList<Recurso>();
 		Iterator it = rrecursos.iterator();
 		while(it.hasNext())

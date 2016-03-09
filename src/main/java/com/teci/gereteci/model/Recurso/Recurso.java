@@ -1,4 +1,4 @@
-package com.teci.gereteci.model.Computador;
+package com.teci.gereteci.model.Recurso;
 
 
 
@@ -12,17 +12,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
+import com.teci.gereteci.model.Computador.CategoriaRecurso;
+import com.teci.gereteci.model.Computador.Computador;
+import com.teci.gereteci.model.Computador.StatusComputador;
+
 @Entity
 
-
-public class Recurso {
+@MappedSuperclass
+public abstract class Recurso {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private Integer id_recurso;
 	
 	@Size(min=1, max=100, message="O tamanho do campo nome tem que ser entre 1 e 20")

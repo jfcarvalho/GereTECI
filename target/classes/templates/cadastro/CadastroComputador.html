@@ -117,9 +117,9 @@
 		</div>
 	
 			<div class="form-group">
-		<label for="" class="col-sm-2 control-label">Monitore(s) Disponivei(s):</label>
+		<label for="" class="col-sm-2 control-label">Monitor(es) Disponivel(eis):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recursos" multiple="multiple">
+				<select class="form-control" name="recurso_monitor" id="recurso_monitor" multiple="multiple">
 					<option th:each="recurso : ${todosRecursosMonitorDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
 			</div>
@@ -128,7 +128,7 @@
 		  <div class="form-group">
 		<label for="" class="col-sm-2 control-label">Teclado(s) Disponívei(s):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recursos" multiple="multiple">
+				<select class="form-control" name="recurso_teclado" multiple="multiple">
 					<option th:each="recurso : ${todosRecursosTecladoDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' +${recurso.patrimonio}"></option>
 				</select>
 			</div>
@@ -137,7 +137,7 @@
 		<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Mídia(s) removível(is) disponível(is):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recursos" multiple="multiple">
+				<select class="form-control" name="recurso_midia" multiple="multiple">
 					<option th:each="recurso : ${todosRecursosMRDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
 			</div>
@@ -217,7 +217,7 @@
 	<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Mouse(s) Disponível(is):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recursos" multiple="multiple">
+				<select class="form-control" name="id_recurso" multiple="multiple">
 					<option th:each="recurso : ${todosRecursosMouseDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
 			</div>
@@ -226,7 +226,7 @@
 		<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Caixas de Som Disponível(is):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recursos" multiple="multiple">
+				<select class="form-control" name="recurso_cs" multiple="multiple">
 					<option th:each="recurso : ${todosRecursosCS}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
 			</div>
@@ -235,7 +235,7 @@
 			<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Outros:</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recursos" multiple="multiple">
+				<select class="form-control" name="recurso_outros" multiple="multiple">
 					<option th:each="recurso : ${todosRecursosOutrosDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
 			</div>

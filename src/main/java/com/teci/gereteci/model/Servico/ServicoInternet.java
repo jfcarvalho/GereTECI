@@ -3,7 +3,7 @@ package com.teci.gereteci.model.Servico;
 import java.util.List;
 
 import com.teci.gereteci.model.Computador.Computador;
-import com.teci.gereteci.model.Computador.Recurso;
+import com.teci.gereteci.model.Recurso.Recurso;
 
 public class ServicoInternet extends Servico {
 	private DescricaoProntaInternet descricaoPronta;

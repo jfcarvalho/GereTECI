@@ -19,8 +19,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.teci.gereteci.model.*;
 import com.teci.gereteci.model.Computador.CategoriaRecurso;
 import com.teci.gereteci.model.Computador.Computador;
-import com.teci.gereteci.model.Computador.Recurso;
 import com.teci.gereteci.model.Computador.StatusComputador;
+import com.teci.gereteci.model.Recurso.Monitor;
+import com.teci.gereteci.model.Recurso.Recurso;
 import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
 
@@ -28,16 +29,17 @@ import com.teci.gereteci.repository.*;
 @RequestMapping("/recursos")
 public class RecursoController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroRecurso"; 
+	
 	@Autowired
 	private Recursos recursos;
 	@Autowired
 	private Computadores computadores;
 	
-	@RequestMapping("/novo")
-	public ModelAndView novo()
+	@RequestMapping("/monitor/novo")
+	public ModelAndView novoMonitor()
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		mv.addObject(new Recurso());
+		mv.addObject(new Monitor());
 		//mv.addObject("todosNiveisUsuario", Nivel.values());
 		return mv;
 	}

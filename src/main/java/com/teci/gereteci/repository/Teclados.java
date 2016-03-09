@@ -4,8 +4,9 @@ import java.io.Serializable;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.teci.gereteci.model.Recurso.Recurso;
+import com.teci.gereteci.model.Recurso.Teclado;
 
-public interface Recursos extends JpaRepository<Recurso, Integer>{
+
+public interface Teclados extends JpaRepository<Teclado, Integer>{
 
 }

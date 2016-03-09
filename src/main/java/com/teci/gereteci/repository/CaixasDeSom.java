@@ -4,8 +4,9 @@ import java.io.Serializable;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.teci.gereteci.model.Recurso.CaixaDeSom;
 import com.teci.gereteci.model.Recurso.Recurso;
 
-public interface Recursos extends JpaRepository<Recurso, Integer>{
+public interface CaixasDeSom extends JpaRepository<CaixaDeSom, Integer>{
 
 }
