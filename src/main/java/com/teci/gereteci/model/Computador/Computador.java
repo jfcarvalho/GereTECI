@@ -89,8 +89,12 @@ public class Computador {
 	@JoinTable(name = "computador_has_impressora", joinColumns = { @JoinColumn(name="computador_id_computador")}, inverseJoinColumns={ @JoinColumn (name = "impressora_id_impressora") })
 	private List<Impressora> impressoras;
 	@OneToOne
-	@JoinColumn(name="id_recurso")
+	@JoinColumn(name="id_recurso_monitor")
 	private Monitor recurso_monitor1;
+	/*@OneToOne
+	@JoinColumn(name="id_recurso_teclado")
+	private Teclado recurso_teclado;
+	*/
 	/*@OneToOne
 	@JoinColumn(name="id_recurso")
 	private Monitor recurso_monitor2;
@@ -297,9 +301,18 @@ public class Computador {
 	{
 		return this.recurso_monitor1;
 	}
-	public void setRecurso_monitor1(Monitor recurso_monitor1)
+	public void setRecurso_monitor1(Monitor recurso_monitor)
 	{
-		this.recurso_monitor1 = recurso_monitor1;
+		this.recurso_monitor1= recurso_monitor;
+	}
+	/*
+	public Teclado getRecurso_teclado()
+	{
+		return this.recurso_teclado;
+	}
+	public void setRecurso_teclado(Teclado recurso_teclado)
+	{
+		this.recurso_teclado= recurso_teclado;
 	}
 	/*
 	public Monitor getRecurso_monitor2()

@@ -3,6 +3,8 @@ package com.teci.gereteci.model.Recurso;
 
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,9 +12,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
@@ -22,9 +27,12 @@ import com.teci.gereteci.model.Computador.CategoriaRecurso;
 import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Computador.StatusComputador;
 
-@MappedSuperclass
+@Entity
+@Inheritance
+@DiscriminatorColumn(name="TIPO_RECURSO")
+@Table(name="recurso")
+
 public abstract class Recurso {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
@@ -39,11 +47,12 @@ public abstract class Recurso {
 	@Enumerated(EnumType.STRING)
 	private StatusComputador status;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
+	@OneToOne(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
 	@JoinColumn(name="computador_id_computador")
 	private Computador computador;
 	private CategoriaRecurso categoria;
-	
+	@Column(name = "TIPO_RECURSO", insertable=false, updatable=false)
+	private String tipo_recurso;
 	
 	
 	public Integer getId_recurso()
@@ -51,9 +60,9 @@ public abstract class Recurso {
 		return this.id_recurso;
 	}
 	
-	public void setId_recurso(Integer id_recurso)
+	public void setId_recurso(Integer Id_recurso)
 	{
-		this.id_recurso = id_recurso;
+		this.id_recurso = Id_recurso;
 	}
 	
 	public String getPatrimonio()
@@ -100,10 +109,11 @@ public abstract class Recurso {
 	{
 		this.categoria = categoria;
 	}
-	
-	 public String toString() {
-	      return "Patrimonio = " +this.patrimonio+ ", id_recurso = " +this.id_recurso;
-	    }
-	 
+	public String getTipo_recurso() {
+		return this.tipo_recurso;
+	}
+	public void setTipo_recurso(String tipo_recurso) {
+		this.tipo_recurso= tipo_recurso;
+	}
 	
 }

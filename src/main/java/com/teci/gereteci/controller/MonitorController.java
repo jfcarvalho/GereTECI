@@ -1,6 +1,7 @@
 package com.teci.gereteci.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.Computador.Computador;
+import com.teci.gereteci.model.Computador.StatusComputador;
 import com.teci.gereteci.model.Recurso.CaixaDeSom;
 import com.teci.gereteci.model.Recurso.Monitor;
 import com.teci.gereteci.model.Recurso.Recurso;
@@ -54,6 +56,7 @@ public class MonitorController {
 		{
 			Computador computer= computadores.findOne(computador_id_computador);
 			monitor.setComputador(computer);
+			computer.setRecurso_monitor1(monitor);
 			//List<Recurso> resources = computer.getRecursos();
 			//resources.add(recurso);
 			//computer.setRecursos(resources);
@@ -101,11 +104,18 @@ public class MonitorController {
 		while(it.hasNext())
 		{
 			Computador obj = (Computador) it.next();
-			if(obj.getRecurso_monitor1() == null)
-				todosComputadores.add(obj);
+			if(obj.getRecurso_monitor1() == null) {
+				System.out.println(obj.getId_impressao());
+				todosComputadoresDisponiveis.add(obj);
+			}
 		}
 		
 		return todosComputadoresDisponiveis;
 	}
+	@ModelAttribute("todosStatusMonitor")
+	public List<StatusComputador> todosStatusMonitor() {
+		return Arrays.asList(StatusComputador.values());
+	}
+	
 	
 }

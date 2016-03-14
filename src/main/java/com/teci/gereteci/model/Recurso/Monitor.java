@@ -1,10 +1,16 @@
 package com.teci.gereteci.model.Recurso;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
+@DiscriminatorValue("Monitor")
 
 public class Monitor extends Recurso {
+	
 	
 	private String polegadas;
 	private boolean dvi;
@@ -14,6 +20,7 @@ public class Monitor extends Recurso {
 		return this.polegadas;
 	}
 	
+
 	public boolean getDvi()
 	{
 		return this.dvi;

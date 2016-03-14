@@ -1,9 +1,13 @@
 package com.teci.gereteci.model.Recurso;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Midia extends Recurso {
+	
 	
 	private String tipo_midia;
 	private String capacidade;

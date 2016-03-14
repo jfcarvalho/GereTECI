@@ -37,6 +37,7 @@ import com.teci.gereteci.model.Recurso.CaixaDeSom;
 import com.teci.gereteci.model.Recurso.Midia;
 import com.teci.gereteci.model.Recurso.Monitor;
 import com.teci.gereteci.model.Recurso.Mouse;
+import com.teci.gereteci.model.Recurso.Recurso;
 import com.teci.gereteci.model.Recurso.Teclado;
 import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
@@ -56,20 +57,6 @@ public class ComputadorController {
 	private Impressoras impressoras;
 	@Autowired
 	private Recursos recursos;
-	
-	@Autowired
-	private Monitores monitores;
-	@Autowired
-	private Mouses mouses;
-	@Autowired
-	private Teclados teclados;
-	@Autowired
-	private CaixasDeSom cs;
-	@Autowired
-	private Midias midias;
-	
-	
-	
 	
 	List<Usuario> todosUsuariosSemComputador = new ArrayList<Usuario>();
 	
@@ -221,31 +208,35 @@ public class ComputadorController {
 	
 	
 	@ModelAttribute("todosMonitoresDisponiveis")
-	public List<Monitor> todasRecursosMonitorDisponiveis()
+	public List<Recurso> todasRecursosMonitorDisponiveis()
 	{
 		
 		
-		List<Monitor> todosMonitores= monitores.findAll();
-		List<Monitor> todosMonitoresDisponiveis = new ArrayList<Monitor>();
+		List<Recurso> todosMonitores= recursos.findAll();
+		List<Recurso> todosMonitoresDisponiveis = new ArrayList<Recurso>();
 		Iterator it = todosMonitores.iterator();
 		while(it.hasNext())
 		{
-			Monitor obj = (Monitor) it.next();
-			if(obj.getComputador() == null)
+			Recurso obj = (Recurso) it.next();
+			System.out.println(obj.getTipo_recurso());
+			if(obj.getComputador() == null && obj.getTipo_recurso().equals("Monitor")) {
+				//System.out.println(obj.getId_recurso() + obj.getPolegadas());
 				todosMonitoresDisponiveis.add(obj);
-			
+			}
 		}
 		return todosMonitoresDisponiveis;
 	}
 	
+	
+	
 	@ModelAttribute("todosMonitores")
-	public List<Monitor> todosMonitores()
+	public List<Recurso> todosMonitores()
 	{
-		List<Monitor> todosMonitores= monitores.findAll();
+		List<Recurso> todosMonitores= recursos.findAll();
 		return todosMonitores;
 	}
 	
-	
+	/*
 	@ModelAttribute("todosMouses")
 	public List<Mouse> todosMouses()
 	{
@@ -303,7 +294,7 @@ public class ComputadorController {
 		List<Midia> todasMR= midias.findAll();
 		return todasMR;
 	}
-	
+	/*
 	@ModelAttribute("todasMRDisponiveis")
 	public List<Midia> todasMRDisponiveis()
 	{
@@ -320,7 +311,8 @@ public class ComputadorController {
 		}
 		return todosMRDisponiveis;
 	}
-	
+	*/
+	/*
 	@ModelAttribute("todasCS")
 	public List<CaixaDeSom> todasCS()
 	{
@@ -328,7 +320,8 @@ public class ComputadorController {
 		List<CaixaDeSom> todosCS= cs.findAll();
 		return todosCS;
 	}
-	
+	*/
+	/*
 	@ModelAttribute("todosCSDisponiveis")
 	public List<CaixaDeSom> todasCSDisponiveis()
 	{
@@ -346,7 +339,7 @@ public class ComputadorController {
 		}
 		return todosCSDisponiveis;
 	}
-	
+	*/
 	@RequestMapping(value="/{id_computador}/manutencao", method=RequestMethod.PUT)
 	public @ResponseBody String manutencao(@PathVariable Integer id_computador)
 	{

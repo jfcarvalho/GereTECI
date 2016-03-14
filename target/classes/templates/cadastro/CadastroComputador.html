@@ -119,8 +119,8 @@
 			<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Monitor(es) Disponivel(eis):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recurso_monitor" id="recurso_monitor" multiple="multiple">
-					<option th:each="recurso : ${todosRecursosMonitorDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
+				<select class="form-control" name="id_recurso" id="id_recursor">
+					<option th:each="recurso : ${todosMonitoresDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
 			</div>
 		</div>
@@ -128,9 +128,10 @@
 		  <div class="form-group">
 		<label for="" class="col-sm-2 control-label">Teclado(s) Disponívei(s):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recurso_teclado" multiple="multiple">
+			<!--  	<select class="form-control" name="recurso_teclado" multiple="multiple">
 					<option th:each="recurso : ${todosRecursosTecladoDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' +${recurso.patrimonio}"></option>
 				</select>
+				-->
 			</div>
 		</div>
 		
