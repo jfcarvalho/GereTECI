@@ -1,11 +1,15 @@
 package com.teci.gereteci.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.Computador.Computador;
+import com.teci.gereteci.model.Computador.StatusComputador;
 import com.teci.gereteci.model.Recurso.CaixaDeSom;
 import com.teci.gereteci.model.Recurso.Midia;
 import com.teci.gereteci.repository.CaixasDeSom;
@@ -30,7 +35,7 @@ public class CaixaDeSomController {
 	@Autowired
 	private Computadores computadores;
 	
-	@RequestMapping("/cs/novo")
+	@RequestMapping("/novo")
 	public ModelAndView novaCS()
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW_CS);
@@ -88,5 +93,29 @@ public class CaixaDeSomController {
 		attributes.addFlashAttribute("mensagem", "Caixa de Som excluída com sucesso com sucesso!");	
 		return "redirect:/caixas";
 	}
+	
+	@ModelAttribute("todosComputadoresDisponiveis")
+	public List<Computador> todosComputadoresDisponiveis()
+	{
+		List<Computador> todosComputadores = computadores.findAll();
+		List<Computador> todosComputadoresDisponiveis = new ArrayList<Computador>();
+		Iterator it = todosComputadores.iterator();
+		while(it.hasNext())
+		{
+			Computador obj = (Computador) it.next();
+			if(obj.getRecurso_cs() == null) {
+				System.out.println(obj.getId_impressao());
+				todosComputadoresDisponiveis.add(obj);
+			}
+		}
+		
+		return todosComputadoresDisponiveis;
+	}
+	
+	@ModelAttribute("todosStatusCS")
+	public List<StatusComputador> todosStatusCS() {
+		return Arrays.asList(StatusComputador.values());
+	}
+	
 
 }

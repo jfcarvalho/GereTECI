@@ -91,10 +91,15 @@ public class Computador {
 	@OneToOne
 	@JoinColumn(name="id_recurso_monitor")
 	private Monitor recurso_monitor1;
-	/*@OneToOne
+	@OneToOne
 	@JoinColumn(name="id_recurso_teclado")
 	private Teclado recurso_teclado;
-	*/
+	@OneToOne
+	@JoinColumn(name="id_recurso_mouse")
+	private Mouse recurso_mouse;
+	@OneToOne
+	@JoinColumn(name="id_recurso_caixa")
+	private CaixaDeSom recurso_caixa;
 	/*@OneToOne
 	@JoinColumn(name="id_recurso")
 	private Monitor recurso_monitor2;
@@ -305,7 +310,7 @@ public class Computador {
 	{
 		this.recurso_monitor1= recurso_monitor;
 	}
-	/*
+	
 	public Teclado getRecurso_teclado()
 	{
 		return this.recurso_teclado;
@@ -314,20 +319,21 @@ public class Computador {
 	{
 		this.recurso_teclado= recurso_teclado;
 	}
-	/*
-	public Monitor getRecurso_monitor2()
+	public Teclado getRecurso_mouse()
 	{
-		return this.recurso_monitor2;
+		return this.recurso_teclado;
 	}
-	public void setRecurso_monitor1(Monitor recurso_monitor1)
+	public void setRecurso_mouse(Mouse recurso_mouse)
 	{
-		this.recurso_monitor1 = recurso_monitor1;
+		this.recurso_mouse= recurso_mouse;
 	}
-	public void setRecurso_monitor2(Monitor recurso_monitor2)
+	public Teclado getRecurso_caixa()
 	{
-		this.recurso_monitor2 = recurso_monitor2;
+		return this.recurso_teclado;
 	}
-*/
-	
+	public void setRecurso_caixa(CaixaDeSom recurso_caixa)
+	{
+		this.recurso_caixa= recurso_caixa;
+	}
 	
 }

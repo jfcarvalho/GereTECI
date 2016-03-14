@@ -227,6 +227,58 @@ public class ComputadorController {
 		return todosMonitoresDisponiveis;
 	}
 	
+	@ModelAttribute("todosTecladosDisponiveis")
+	public List<Recurso> todasTecladosDisponiveis()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todosTecladosDisponiveis = new ArrayList<Recurso>();
+		Iterator it = todosRecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getComputador() == null && obj.getTipo_recurso().equals("Teclado"))
+				todosTecladosDisponiveis.add(obj);
+			
+		}
+		return todosTecladosDisponiveis;
+	}
+	
+	@ModelAttribute("todosMousesDisponiveis")
+	public List<Recurso> todasMousesDisponiveis()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todosMousesDisponiveis = new ArrayList<>();
+		Iterator it = todosRecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getComputador() == null && obj.getTipo_recurso().equals("Mouse"))
+				todosMousesDisponiveis.add(obj);
+			
+		}
+		return todosMousesDisponiveis;
+	}
+	@ModelAttribute("todasCSDisponiveis")
+	public List<Recurso> todasCsDisponiveis()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todasCSDisponiveis = new ArrayList<>();
+		Iterator it = todosRecursos.iterator();
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getComputador() == null && obj.getTipo_recurso().equals("Mouse"))
+				todasCSDisponiveis.add(obj);
+			
+		}
+		return todasCSDisponiveis;
+	}
 	
 	
 	@ModelAttribute("todosMonitores")

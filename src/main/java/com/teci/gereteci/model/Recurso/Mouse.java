@@ -1,11 +1,13 @@
 package com.teci.gereteci.model.Recurso;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@DiscriminatorValue("Mouse")
 public class Mouse extends Recurso {
 	
 	private String tipo_mouse; //Se é usb o ps2

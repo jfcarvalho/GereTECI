@@ -1,11 +1,15 @@
 package com.teci.gereteci.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.Computador.Computador;
+import com.teci.gereteci.model.Computador.StatusComputador;
 import com.teci.gereteci.model.Recurso.Midia;
 import com.teci.gereteci.model.Recurso.Monitor;
 import com.teci.gereteci.repository.Computadores;
@@ -30,7 +35,7 @@ public class MidiaController {
 	@Autowired
 	private Computadores computadores;
 	
-	@RequestMapping("/midia_removivel/novo")
+	@RequestMapping("/novo")
 	public ModelAndView novaMidia()
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW_MIDIA);
@@ -89,4 +94,10 @@ public class MidiaController {
 		return "redirect:/midias";
 	}
 
+
+	@ModelAttribute("todosStatusMidia")
+	public List<StatusComputador> todosStatusMidia() {
+		return Arrays.asList(StatusComputador.values());
+	}
+	
 }
