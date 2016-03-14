@@ -1,5 +1,8 @@
 package com.teci.gereteci.model.Recurso;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Teclado extends Recurso {
 	
 	private String tipo_teclado;

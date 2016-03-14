@@ -22,8 +22,6 @@ import com.teci.gereteci.model.Computador.CategoriaRecurso;
 import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Computador.StatusComputador;
 
-@Entity
-
 @MappedSuperclass
 public abstract class Recurso {
 	

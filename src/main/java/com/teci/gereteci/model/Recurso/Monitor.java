@@ -1,5 +1,9 @@
 package com.teci.gereteci.model.Recurso;
 
+import javax.persistence.Entity;
+
+@Entity
+
 public class Monitor extends Recurso {
 	
 	private String polegadas;

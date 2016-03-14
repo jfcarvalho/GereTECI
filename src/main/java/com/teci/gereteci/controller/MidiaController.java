@@ -3,6 +3,7 @@ package com.teci.gereteci.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,10 @@ import com.teci.gereteci.model.Recurso.Midia;
 import com.teci.gereteci.model.Recurso.Monitor;
 import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Midias;
+
+@Controller
+@RequestMapping("/midias")
+
 
 public class MidiaController {
 	private static final String CADASTRO_VIEW_MIDIA = "/cadastro/CadastroMidia"; 

@@ -1,5 +1,8 @@
 package com.teci.gereteci.model.Recurso;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Mouse extends Recurso {
 	
 	private String tipo_mouse; //Se é usb o ps2

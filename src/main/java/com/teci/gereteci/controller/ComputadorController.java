@@ -33,7 +33,11 @@ import com.teci.gereteci.model.Internet.Dns_alternativo;
 import com.teci.gereteci.model.Internet.Dns_preferencial;
 import com.teci.gereteci.model.Internet.Gateway;
 import com.teci.gereteci.model.Internet.Mascara;
-import com.teci.gereteci.model.Recurso.Recurso;
+import com.teci.gereteci.model.Recurso.CaixaDeSom;
+import com.teci.gereteci.model.Recurso.Midia;
+import com.teci.gereteci.model.Recurso.Monitor;
+import com.teci.gereteci.model.Recurso.Mouse;
+import com.teci.gereteci.model.Recurso.Teclado;
 import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
 
@@ -52,6 +56,21 @@ public class ComputadorController {
 	private Impressoras impressoras;
 	@Autowired
 	private Recursos recursos;
+	
+	@Autowired
+	private Monitores monitores;
+	@Autowired
+	private Mouses mouses;
+	@Autowired
+	private Teclados teclados;
+	@Autowired
+	private CaixasDeSom cs;
+	@Autowired
+	private Midias midias;
+	
+	
+	
+	
 	List<Usuario> todosUsuariosSemComputador = new ArrayList<Usuario>();
 	
 	@RequestMapping("/novo")
@@ -104,34 +123,8 @@ public class ComputadorController {
 		//System.out.println(">>>>>>> Codigo de usuario recebido: " + recursos.getDescricao());
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
-		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		
-		List<Recurso> rrecursos = this.recursos.findAll();
-		List<Recurso> recursosComputador = new ArrayList<Recurso>();
-		Iterator it = rrecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso rec = (Recurso) it.next();
-			if(rec.getComputador() != null) {
-				if(rec.getComputador().getId_computador() == computador.getId_computador())
-				{
-					System.out.println(rec.getDescricao());
-					recursosComputador.add(rec);
-				}
-				else {System.out.print("NÃO PERTENCE!!!");}
-			}
-			else {System.out.print("NULLO!!");}
-		}
-		GsonBuilder b = new GsonBuilder();
-		b.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
-		Gson gson = b.create();
-	    //String json; 
-	    String json = gson.toJson(recursosComputador); //retornando nullo
-		System.out.println(">>>>>>>>>>>> "+ json);
-		//mv.addObject("lista_recursos", json);
-		
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);	
 		mv.addObject("pc", computador);
-		
 		mv.addObject(computador);
 		
 		return mv;
@@ -226,261 +219,132 @@ public class ComputadorController {
 		
 	}
 	
-	@ModelAttribute("todosRecursosComputador")
-	public List<Recurso> todasRecursosComputador()
-	{
-		List<Recurso> todosRecursos= recursos.findAll();
-		return todosRecursos;
-	}
-	@ModelAttribute("todosRecursosMonitorDisponiveis")
-	public List<Recurso> todasRecursosMonitorDisponiveis()
+	
+	@ModelAttribute("todosMonitoresDisponiveis")
+	public List<Monitor> todasRecursosMonitorDisponiveis()
 	{
 		
 		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosMonitoresDisponiveis = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
+		List<Monitor> todosMonitores= monitores.findAll();
+		List<Monitor> todosMonitoresDisponiveis = new ArrayList<Monitor>();
+		Iterator it = todosMonitores.iterator();
 		while(it.hasNext())
 		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Monitor"))
-			{
-				if(obj.getComputador() == null)
-					todosMonitoresDisponiveis.add(obj);
-			}
+			Monitor obj = (Monitor) it.next();
+			if(obj.getComputador() == null)
+				todosMonitoresDisponiveis.add(obj);
+			
 		}
 		return todosMonitoresDisponiveis;
 	}
 	
-	@ModelAttribute("todosRecursosMonitor")
-	public List<Recurso> todasRecursosMonitor()
+	@ModelAttribute("todosMonitores")
+	public List<Monitor> todosMonitores()
 	{
-		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosMonitores = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Monitor"))
-			{
-				todosMonitores.add(obj);
-			}
-		}
+		List<Monitor> todosMonitores= monitores.findAll();
 		return todosMonitores;
 	}
 	
 	
-	@ModelAttribute("todosRecursosMouse")
-	public List<Recurso> todasRecursosMouse()
+	@ModelAttribute("todosMouses")
+	public List<Mouse> todosMouses()
 	{
-		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosMouses = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Mouse"))
-			{
-				todosMouses.add(obj);
-			}
-		}
+		List<Mouse> todosMouses= mouses.findAll();
 		return todosMouses;
 	}
 	
-	@ModelAttribute("todosRecursosMouseDisponiveis")
-	public List<Recurso> todasRecursosMouseDisponiveis()
+	@ModelAttribute("todosMousesDisponiveis")
+	public List<Mouse> todasMousesDisponiveis()
 	{
 		
 		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosMousesDisponiveis = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
+		List<Mouse> todosMouses= mouses.findAll();
+		List<Mouse> todosMousesDisponiveis = new ArrayList<Mouse>();
+		Iterator it = todosMouses.iterator();
 		while(it.hasNext())
 		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Mouse"))
-			{
-				if(obj.getComputador() == null)
-					todosMousesDisponiveis.add(obj);
-			}
+			Mouse obj = (Mouse) it.next();
+			if(obj.getComputador() == null)
+				todosMousesDisponiveis.add(obj);
+			
 		}
 		return todosMousesDisponiveis;
 	}
 	
-	@ModelAttribute("todosRecursosTeclado")
-	public List<Recurso> todasRecursosTeclado()
+	@ModelAttribute("todosTeclados")
+	public List<Teclado> todaoTeclados()
 	{
-		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosTeclados = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Teclado"))
-			{
-				todosTeclados.add(obj);
-			}
-		}
+
+		List<Teclado> todosTeclados= teclados.findAll();	
 		return todosTeclados;
 	}
 	
-	@ModelAttribute("todosRecursosTecladoDisponiveis")
-	public List<Recurso> todasRecursosTecladoDisponiveis()
+	@ModelAttribute("todosTecladosDisponiveis")
+	public List<Teclado> todasTecladosDisponiveis()
 	{
 		
 		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosTecladosDisponiveis = new ArrayList<Recurso>();
+		List<Teclado> todosRecursos= teclados.findAll();
+		List<Teclado> todosTecladosDisponiveis = new ArrayList<Teclado>();
 		Iterator it = todosRecursos.iterator();
 		while(it.hasNext())
 		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Teclado"))
-			{
-				if(obj.getComputador() == null)
-					todosTecladosDisponiveis.add(obj);
-			}
+			Teclado obj = (Teclado) it.next();
+			if(obj.getComputador() == null)
+				todosTecladosDisponiveis.add(obj);
+			
 		}
 		return todosTecladosDisponiveis;
 	}
 	
-	@ModelAttribute("todosRecursosMR")
-	public List<Recurso> todasRecursosMR()
+	@ModelAttribute("todasMR")
+	public List<Midia> todasRecursosMR()
 	{
-		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosMR = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Mídia removível"))
-			{
-				todosMR.add(obj);
-			}
-		}
-		return todosMR;
+		List<Midia> todasMR= midias.findAll();
+		return todasMR;
 	}
 	
-	@ModelAttribute("todosRecursosMRDisponiveis")
-	public List<Recurso> todasRecursosMRDisponiveis()
+	@ModelAttribute("todasMRDisponiveis")
+	public List<Midia> todasMRDisponiveis()
 	{
 		
 		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosMRDisponiveis = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
+		List<Midia> todasMR= midias.findAll();
+		List<Midia> todosMRDisponiveis = new ArrayList<Midia>();
+		Iterator it = todasMR.iterator();
 		while(it.hasNext())
 		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Mídia removível"))
-			{
-				if(obj.getComputador() == null)
-					todosMRDisponiveis.add(obj);
-			}
+			Midia obj = (Midia) it.next();
+			if(obj.getComputador() == null)
+				todosMRDisponiveis.add(obj);
 		}
 		return todosMRDisponiveis;
 	}
 	
-	@ModelAttribute("todosRecursosCS")
-	public List<Recurso> todasRecursosCS()
+	@ModelAttribute("todasCS")
+	public List<CaixaDeSom> todasCS()
 	{
 		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosCS = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Caixa de Som"))
-			{
-				todosCS.add(obj);
-			}
-		}
+		List<CaixaDeSom> todosCS= cs.findAll();
 		return todosCS;
 	}
 	
-	@ModelAttribute("todosRecursosCSDisponiveis")
-	public List<Recurso> todasRecursosCSDisponiveis()
+	@ModelAttribute("todosCSDisponiveis")
+	public List<CaixaDeSom> todasCSDisponiveis()
 	{
 		
 		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosCSDisponiveis = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
+		List<CaixaDeSom> todasCS= cs.findAll();
+		List<CaixaDeSom> todosCSDisponiveis = new ArrayList<CaixaDeSom>();
+		Iterator it = todasCS.iterator();
 		while(it.hasNext())
 		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Caixa de Som"))
-			{
+			CaixaDeSom obj = (CaixaDeSom) it.next();
+			if(obj.getComputador() == null)
 				todosCSDisponiveis.add(obj);
-			}
+			
 		}
 		return todosCSDisponiveis;
-	}
-	@ModelAttribute("todosRecursosFone")
-	public List<Recurso> todasRecursosFone()
-	{
-		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosFones= new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Fone"))
-			{
-				todosFones.add(obj);
-			}
-		}
-		return todosFones;
-	}
-	@ModelAttribute("todosRecursosOutrosDisponiveis")
-	public List<Recurso> todasRecursosOutrosDisponiveis()
-	{
-		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosOutrosDisponiveis= new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Outros"))
-			{
-				if(obj.getComputador() == null)
-					todosOutrosDisponiveis.add(obj);
-			}
-		}
-		return todosOutrosDisponiveis;
-	}
-	
-	@ModelAttribute("todosRecursosOutros")
-	public List<Recurso> todasRecursosOutros()
-	{
-		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosOutros= new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Outros"))
-			{
-				todosOutros.add(obj);
-			}
-		}
-		return todosOutros;
 	}
 	
 	@RequestMapping(value="/{id_computador}/manutencao", method=RequestMethod.PUT)

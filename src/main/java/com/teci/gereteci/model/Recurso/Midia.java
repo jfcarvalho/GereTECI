@@ -1,5 +1,8 @@
 package com.teci.gereteci.model.Recurso;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Midia extends Recurso {
 	
 	private String tipo_midia;

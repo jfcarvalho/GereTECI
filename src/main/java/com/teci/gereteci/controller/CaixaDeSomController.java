@@ -3,6 +3,7 @@ package com.teci.gereteci.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,14 +20,17 @@ import com.teci.gereteci.repository.CaixasDeSom;
 import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Midias;
 
-public class CSController {
+@Controller
+@RequestMapping("/cs")
+
+public class CaixaDeSomController {
 	private static final String CADASTRO_VIEW_CS = "/cadastro/CadastroCS"; 
 	@Autowired
 	private CaixasDeSom caixas;
 	@Autowired
 	private Computadores computadores;
 	
-	@RequestMapping("/caixa_de_som/novo")
+	@RequestMapping("/cs/novo")
 	public ModelAndView novaCS()
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW_CS);
@@ -53,7 +57,7 @@ public class CSController {
 		}
 		caixas.save(cs);
 		attributes.addFlashAttribute("mensagem", "Caixas de som salva com sucesso!");	
-		return "redirect:/caixa_de_som/novo";
+		return "redirect:/cs/novo";
 	}
 	
 	public ModelAndView pesquisar()

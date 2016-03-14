@@ -1,5 +1,9 @@
 package com.teci.gereteci.model.Recurso;
 
+import javax.persistence.Entity;
+
+@Entity
+
 public class CaixaDeSom extends Recurso {
 	
 	private String tipo_cs;
