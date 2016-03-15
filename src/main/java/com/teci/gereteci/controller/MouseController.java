@@ -65,6 +65,7 @@ public class MouseController {
 		return "redirect:/mouses/novo";
 	}
 	
+	@RequestMapping
 	public ModelAndView pesquisar()
 	{
 		List<Mouse> todosMouses = mouses.findAll();

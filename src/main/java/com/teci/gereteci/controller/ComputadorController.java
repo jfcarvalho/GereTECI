@@ -102,7 +102,7 @@ public class ComputadorController {
 
 	@RequestMapping("{id_computador}")
 
-	public ModelAndView edicao(@PathVariable("id_computador") Computador computador, @RequestParam Integer id_recurso, @RequestParam Integer recurso_teclado, @RequestParam Integer recurso_mouse)
+	public ModelAndView edicao(@PathVariable("id_computador") Computador computador)
 	{
 		//ObjectMapper mapper = new ObjectMapper();
 		

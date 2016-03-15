@@ -65,7 +65,7 @@ public class MonitorController {
 		attributes.addFlashAttribute("mensagem", "Monitor salvo com sucesso!");	
 		return "redirect:/monitores/novo";
 	}
-	
+	@RequestMapping
 	public ModelAndView pesquisar()
 	{
 		List<Monitor> todosRecursos = monitores.findAll();
