@@ -64,7 +64,7 @@ public class TecladoController {
 		attributes.addFlashAttribute("mensagem", "Teclado salvo com sucesso!");	
 		return "redirect:/teclados/novo";
 	}
-	
+	@RequestMapping
 	public ModelAndView pesquisar()
 	{
 		List<Teclado> todosTeclados= teclados.findAll();
@@ -103,11 +103,11 @@ public class TecladoController {
 		while(it.hasNext())
 		{
 			Computador obj = (Computador) it.next();
-		/*	if(obj.getRecurso_teclado() == null) {
+			if(obj.getRecurso_teclado() == null) {
 				//System.out.println(obj.getId_impressao());
 				todosComputadoresDisponiveis.add(obj);
 			}
-		*/	
+			
 		}
 		
 		return todosComputadoresDisponiveis;

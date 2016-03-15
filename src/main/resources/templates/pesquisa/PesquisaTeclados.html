@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
+<head>
+<title>Pesquisa de Teclados</title>
+</head>
+
+<section layout:fragment="conteudo">
+<div layout:include="/mensagem/MensagemUsuario"></div>
+
+<div class="panel panel-default">
+		
+		<div class="panel-heading">
+		<div class="clearfix">	
+			<h1 class="panel-title">Pesquisa de Teclados</h1>
+			<a class="btn btn-link aw-link-panel" href="/teclados/novo">Novo teclado</a>
+		</div>
+		</div>
+		<div class="panel-body">
+		
+		<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr><th class="text-center col-md-1">#</th>
+				<th class="text-center col-md-2">Patrimônio</th>
+				<th class="text-center col-md-2">Marca</th>
+				<th class="text-center col-md-2">Situação</th>
+				<th class="text-center col-md-2">Descrição</th>
+				<th class="text-center col-md-2">Tipo de E/S</th>
+				<th class="text-center col-md-2">Multimídia</th>
+				<th class="text-center col-md-2">Cor</th>
+				<th class="text-center col-md-2">Usuário</th>
+				<th class="text-center col-md-2">Computador(IP)</th>
+				<th class="text-center col-md-2">Ação</th>
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="recurso: ${teclados}">
+					<td class="text-center" th:text="${recurso.id_recurso}"></td>
+					<td class="text-center" th:text="${recurso.patrimonio}"></td>
+					<td class="text-center" th:text="${recurso.marca}"></td>
+					<td class="text-center"><div th:switch="${recurso.status.status}" th:attr="data-role=${recurso.id_recurso}"><span class="label label-success" th:text="${recurso.status.status}" th:case="'Funcionando normalmente'"></span>
+																				<span class="label label-warning" th:text="${recurso.status.status}" th:case="'Em manutenção'"></span>
+																													  <span class="label label-danger" th:text="${recurso.status.status}" th:case="'Defeito e parado'"></span></div></td>  
+					<td class="text-center" th:text="${recurso.descricao} ? ${recurso.descricao}"></td>
+					<td class="text-center" th:text="${recurso.tipo_teclado}"></td>
+					<td class="text-center" th:text="${recurso.funcoes}"></td>
+					<td class="text-center" th:text="${recurso.cor}"></td>
+					<td class="text-center" th:text="${recurso.computador} and ${recurso.computador.usuario} ? ${recurso.computador.usuario.nome}"></td>
+					<td class="text-center" th:text="${recurso.computador}  ? ${recurso.computador.ip}"></td>
+					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/teclados/{id_recurso}(id_recurso=${recurso.id_recurso})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalRecurso" th:attr="data-id_recurso=${recurso.id_recurso}, data-descricao=${recurso.descricao}"><span class="glyphicon glyphicon-remove"></span></a><a class="js-atualizar-status-manutencao-recurso" th:href="@{/teclados/{id_recurso}/manutencao(id_recurso=${recurso.id_recurso})}" th:attr="data-id_recurso=${recurso.id_recurso}"><span class="glyphicon glyphicon-wrench"></span></a><a class="js-atualizar-status-baixa-recurso" th:href="@{/teclados/{id_recurso}/baixa(id_recurso=${recurso.id_recurso})}" th:attr="data-id_recurso=${recurso.id_recurso}"><span class="glyphicon glyphicon-fire"></span></a><a class="js-atualizar-status-conserto-recurso" th:href="@{/teclados/{id_recurso}/consertado(id_recurso=${recurso.id_recurso})}" th:attr="data-id_recurso=${recurso.id_recurso}"><span class="glyphicon glyphicon-ok-sign"></span></a></td>
+					
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(recursos)}">Nenhum recurso encontrado</td>
+			</tr>
+			</tbody>
+		
+		</table>
+		</div>
+		
+		<div layout:include="/dialogos/DialogoConfirmacaoExclusaoRecurso"></div>
+	</div>	
+</section>
+
+</html>

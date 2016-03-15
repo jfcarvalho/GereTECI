@@ -65,10 +65,11 @@ public class CaixaDeSomController {
 		return "redirect:/caixas/novo";
 	}
 	
+	@RequestMapping
 	public ModelAndView pesquisar()
 	{
 		List<CaixaDeSom> todasCaixas = caixas.findAll();
-		ModelAndView mv = new ModelAndView("/pesquisa/PesquisaCaixas");
+		ModelAndView mv = new ModelAndView("/pesquisa/PesquisaCaixaDeSom");
 	    mv.addObject("caixas", todasCaixas);
 		return mv;
 	}
