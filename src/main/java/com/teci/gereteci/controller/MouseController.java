@@ -82,7 +82,7 @@ public class MouseController {
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW_MOUSE);
 		
-		mv.addObject("mouse", mouse);
+		mv.addObject("rec", mouse);
 		mv.addObject(mouse);
 		return mv;
 	}

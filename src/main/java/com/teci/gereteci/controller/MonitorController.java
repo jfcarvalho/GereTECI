@@ -82,7 +82,7 @@ public class MonitorController {
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW_MONITOR);
 		
-		mv.addObject("monitor", monitor);
+		mv.addObject("rec", monitor);
 		mv.addObject(monitor);
 		return mv;
 	}

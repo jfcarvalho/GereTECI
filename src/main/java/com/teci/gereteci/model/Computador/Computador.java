@@ -315,21 +315,23 @@ public class Computador {
 	{
 		return this.recurso_teclado;
 	}
+	
 	public void setRecurso_teclado(Teclado recurso_teclado)
 	{
 		this.recurso_teclado= recurso_teclado;
 	}
-	public Teclado getRecurso_mouse()
+	
+	public Mouse getRecurso_mouse()
 	{
-		return this.recurso_teclado;
+		return this.recurso_mouse;
 	}
 	public void setRecurso_mouse(Mouse recurso_mouse)
 	{
 		this.recurso_mouse= recurso_mouse;
 	}
-	public Teclado getRecurso_caixa()
+	public CaixaDeSom getRecurso_caixa()
 	{
-		return this.recurso_teclado;
+		return this.recurso_caixa;
 	}
 	public void setRecurso_caixa(CaixaDeSom recurso_caixa)
 	{

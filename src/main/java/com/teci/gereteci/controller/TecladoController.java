@@ -81,7 +81,7 @@ public class TecladoController {
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW_TECLADO);
 		
-		mv.addObject("teclado", teclado);
+		mv.addObject("rec", teclado);
 		mv.addObject(teclado);
 		return mv;
 	}

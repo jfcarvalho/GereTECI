@@ -57,6 +57,8 @@ public class ComputadorController {
 	private Impressoras impressoras;
 	@Autowired
 	private Recursos recursos;
+	@Autowired
+	private CaixasDeSom caixas;
 	
 	List<Usuario> todosUsuariosSemComputador = new ArrayList<Usuario>();
 	
@@ -69,7 +71,7 @@ public class ComputadorController {
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
+	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer recurso_caixa,Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
@@ -82,7 +84,14 @@ public class ComputadorController {
 		{
 			Usuario user = usuarios.findOne(usuario_id_usuario);
 			computador.setUsuario(user);
-		}		
+		}
+		if(recurso_caixa != null)
+		{
+			CaixaDeSom caixa = caixas.findOne(recurso_caixa);
+			caixa.setComputador(computador);
+			caixas.save(caixa);
+			computador.setRecurso_caixa(caixa);
+		}
 		computadores.save(computador);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
 		return "redirect:/computadores/novo";
@@ -106,7 +115,7 @@ public class ComputadorController {
 	{
 		//ObjectMapper mapper = new ObjectMapper();
 		
-		System.out.println(">>>>>>> codigo recebido: " + computador.getId_computador());
+		//System.out.println(">>>>>>> codigo recebido: " + computador.getId_computador());
 		//System.out.println(">>>>>>> Codigo de usuario recebido: " + recursos.getDescricao());
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
@@ -263,19 +272,33 @@ public class ComputadorController {
 		return todosMousesDisponiveis;
 	}
 	@ModelAttribute("todasCSDisponiveis")
-	public List<Recurso> todasCsDisponiveis()
+	@RequestMapping("{id_computador}")
+	public List<Recurso> todasCsDisponiveis(@PathVariable("id_computador") Computador computador)
 	{
 		
 		
 		List<Recurso> todosRecursos= recursos.findAll();
 		List<Recurso> todasCSDisponiveis = new ArrayList<>();
 		Iterator it = todosRecursos.iterator();
+		//System.out.println(usuario_id_usuario);
 		while(it.hasNext())
 		{
 			Recurso obj = (Recurso) it.next();
 			if(obj.getComputador() == null && obj.getTipo_recurso().equals("CaixaDeSom"))
+			{
 				todasCSDisponiveis.add(obj);
-			
+				
+			}
+			//&&obj.getComputador().getRecurso_caixa() != null
+			else if(obj.getComputador() != null && obj.getComputador().getRecurso_caixa() != null) 
+			{
+				//System.out.println(obj.getComputador().getRecurso_caixa() + "+" + obj.getComputador().getRecurso_monitor1());
+				if(obj.getComputador().getRecurso_caixa().getId_recurso() == obj.getId_recurso())
+				{
+					todasCSDisponiveis.add(obj);
+				}
+		
+			}
 		}
 		return todasCSDisponiveis;
 	}
