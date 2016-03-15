@@ -26,10 +26,10 @@ import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Midias;
 
 @Controller
-@RequestMapping("/cs")
+@RequestMapping("/caixas")
 
 public class CaixaDeSomController {
-	private static final String CADASTRO_VIEW_CS = "/cadastro/CadastroCS"; 
+	private static final String CADASTRO_VIEW_CS = "/cadastro/CadastroCaixaDeSom"; 
 	@Autowired
 	private CaixasDeSom caixas;
 	@Autowired
@@ -39,7 +39,7 @@ public class CaixaDeSomController {
 	public ModelAndView novaCS()
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW_CS);
-		mv.addObject(new CaixaDeSom());
+		mv.addObject("caixa", new CaixaDeSom());
 		//mv.addObject("todosNiveisUsuario", Nivel.values());
 		return mv;
 	}
@@ -50,7 +50,7 @@ public class CaixaDeSomController {
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW_CS);
 		if(errors.hasErrors())
 		{
-			return "cadastroCS";
+			return "CadastroCaixaDeSom";
 		}
 		if(computador_id_computador != null)
 		{
@@ -62,7 +62,7 @@ public class CaixaDeSomController {
 		}
 		caixas.save(cs);
 		attributes.addFlashAttribute("mensagem", "Caixas de som salva com sucesso!");	
-		return "redirect:/cs/novo";
+		return "redirect:/caixas/novo";
 	}
 	
 	public ModelAndView pesquisar()
@@ -81,7 +81,7 @@ public class CaixaDeSomController {
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW_CS);
 		
-		mv.addObject("cs", cs);
+		mv.addObject("caixa", cs);
 		mv.addObject(cs);
 		return mv;
 	}
@@ -103,7 +103,7 @@ public class CaixaDeSomController {
 		while(it.hasNext())
 		{
 			Computador obj = (Computador) it.next();
-			if(obj.getRecurso_cs() == null) {
+			if(obj.getRecurso_caixa() == null) {
 				System.out.println(obj.getId_impressao());
 				todosComputadoresDisponiveis.add(obj);
 			}

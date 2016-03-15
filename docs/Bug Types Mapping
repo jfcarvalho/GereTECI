@@ -1,0 +1,6 @@
+Bug Types Mapping
+
+Problem:
+"Exception evaluating SpringEL expression: "#fields.hasAnyErrors()" (/mensagem/MensagemErro:6)"
+
+Solution: I had to change attribute from mv.addObject(new CaixaDeSom()) to mv.addObject("caixa", new CaixaDeSom())

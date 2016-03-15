@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
+<head>
+
+<title>Cadastro de Caixas de Som</title>
+</head>
+
+<section layout:fragment="conteudo">
+<form class="form-horizontal" method="POST" action="/caixas" th:object="${caixa}">
+		<div layout:include="/mensagem/MensagemUsuario"></div>
+		<div layout:include="/mensagem/MensagemErro"></div>
+		<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+			<h1 class="panel-title">Nova Caixa de Som</h1>
+		<a class="btn btn-link aw-link-panel" href="/caixas">Voltar para pesquisa</a>
+		</div>
+		</div>
+	
+	
+	<div class="panel-body">
+	<input type="hidden" th:field="*{id_recurso}" />
+		<div class="form-group" >
+			<label for="patrimonio" class="col-sm-2 control-label" >Patrimonio:</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control disable-patrimonio-impressora-input" id="patimonio" name="patrimonio" th:field="*{patrimonio}"/>
+				 <div class="col-sm-6">
+				    <div class="input-group" style="margin-left:-10px">
+				        <input class="disable-patrimonio-impressora-botao" type="checkbox"> Sem patrimônio</input>
+				    </div><!-- /input-group -->
+				  </div><!-- /.col-lg-6 -->
+			</div>
+		</div>
+			<div class="form-group">
+			<label for="marca" class="col-sm-2 control-label">Marca:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="marca" name="marca" th:field="*{marca}" />
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="marca" class="col-sm-2 control-label">Descrição:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="descricao" name="descricao" th:field="*{descricao}" />
+			</div>
+		</div>
+			
+		<div class="form-group">
+			<label for="polegadas" class="col-sm-2 control-label">Tipo de caixa de som:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="tipo_cs" name="tipo_cs" th:field="*{tipo_cs}" />
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="polegadas" class="col-sm-2 control-label">Cor:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="cor" name="cor" th:field="*{cor}" />
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="status" class="col-sm-2 control-label">Situação:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="status">
+					<option th:each="status : ${todosStatusCS}" th:value="${status}" th:text="${status.status}" th:selected="${rec} ? ${rec.status.status} == ${status.status}"></option>
+				</select>
+			</div>
+		</div>
+		
+			<div class="form-group">
+			<label for="computador_id_computador" class="col-sm-2 control-label">Computador Disponível:</label>
+			<div class="col-sm-2">
+				<select class="form-control disable-computador-input" name="computador_id_computador">
+					<option class="disable-computador-option" th:each="computador : ${todosComputadoresDisponiveis}" th:value="${computador.id_computador}" th:text="${computador.patrimonio}"></option>
+				</select>
+				
+				<div class="row">
+  <div class="col-sm-6">
+    <div class="input-group" style="margin-left:5px; width:200px;">
+        <input type="checkbox" class="disable-computador-botao" th:attr="data-id_computador=${caixa.computador} ? ${caixa.computador.id_computador}" th:href="@{/recursos/{id_recurso}/sem_computador(id_recurso=${caixa.id_recurso})}"> Recurso sem computador</input>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+  </div>
+  
+			</div>
+		</div>
+		
+			<div class="form-group">
+     		<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Cadastrar</button>
+			</div>
+		</div>
+		
+		
+	</div>
+	</div>
+</form>
+</section>
+</html>

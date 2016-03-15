@@ -119,7 +119,7 @@
 			<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Monitor(es) Disponivel(eis):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="id_recurso" id="id_recursor">
+				<select class="form-control" name="recurso_monitor1">
 					<option th:each="recurso : ${todosMonitoresDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
 			</div>
@@ -193,7 +193,7 @@
 		<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Usuário:</label>
 			<div class="col-sm-6">
-				<select class="form-control disable-usuario-pc-input" name="usuario_id_usuario" value="">
+				<select class="form-control disable-usuario-pc-input" name="usuario_id_usuario">
 					<option th:each="usuario : ${todosUsuariosComputador}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}"></option>
 					<!--  <option th:value="${pc} and ${pc.usuario} ? ${pc.usuario.id_usuario}" th:text="${pc} and ${pc.usuario}? ${pc.usuario.nome}" th:selected="true"></option> -->
 				</select>
@@ -209,7 +209,7 @@
 	<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Mouse(s) Disponível(is):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="id_recurso">
+				<select class="form-control" name="recurso_mouse">
 					<option th:each="recurso : ${todosMousesDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
 			</div>
@@ -218,8 +218,8 @@
 		<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Caixas de Som Disponível(is):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recurso_cs" >
-					<option th:each="recurso : ${todosRecursosCS}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
+				<select class="form-control" name="recurso_caixa" >
+					<option th:each="recurso : ${todasCSDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
 			</div>
 		</div>

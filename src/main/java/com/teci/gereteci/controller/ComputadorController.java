@@ -69,7 +69,7 @@ public class ComputadorController {
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer recurso_monitor, @RequestParam Integer recurso_teclado, @RequestParam Integer recurso_mouse, Errors errors, RedirectAttributes attributes)
+	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
@@ -81,7 +81,7 @@ public class ComputadorController {
 		if(usuario_id_usuario != null)
 		{
 			Usuario user = usuarios.findOne(usuario_id_usuario);
-			//computador.setUsuario(user);
+			computador.setUsuario(user);
 		}		
 		computadores.save(computador);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
@@ -273,7 +273,7 @@ public class ComputadorController {
 		while(it.hasNext())
 		{
 			Recurso obj = (Recurso) it.next();
-			if(obj.getComputador() == null && obj.getTipo_recurso().equals("Mouse"))
+			if(obj.getComputador() == null && obj.getTipo_recurso().equals("CaixaDeSom"))
 				todasCSDisponiveis.add(obj);
 			
 		}
