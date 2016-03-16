@@ -59,6 +59,14 @@ public class ComputadorController {
 	private Recursos recursos;
 	@Autowired
 	private CaixasDeSom caixas;
+	@Autowired
+	private Monitores monitores;
+	@Autowired
+	private Teclados teclados;
+	@Autowired
+	private Mouses mouses;
+	
+
 	
 	List<Usuario> todosUsuariosSemComputador = new ArrayList<Usuario>();
 	
@@ -71,7 +79,7 @@ public class ComputadorController {
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer recurso_caixa,Errors errors, RedirectAttributes attributes)
+	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer recurso_caixa, @RequestParam Integer recurso_monitor1, @RequestParam Integer recurso_mouse, @RequestParam Integer recurso_teclado, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
@@ -88,9 +96,30 @@ public class ComputadorController {
 		if(recurso_caixa != null)
 		{
 			CaixaDeSom caixa = caixas.findOne(recurso_caixa);
-			caixa.setComputador(computador);
+			caixa.setComputador(computador); 
 			caixas.save(caixa);
 			computador.setRecurso_caixa(caixa);
+		}
+		if(recurso_monitor1 != null)
+		{
+			Monitor monitor = monitores.findOne(recurso_monitor1);
+			monitor.setComputador(computador);
+			monitores.save(monitor);
+			computador.setRecurso_monitor1(monitor);
+		}
+		if(recurso_teclado != null)
+		{
+			Teclado teclado = teclados.findOne(recurso_teclado);
+			teclado.setComputador(computador);
+			teclados.save(teclado);
+			computador.setRecurso_teclado(teclado);
+		}
+		if(recurso_mouse != null)
+		{
+			Mouse mouse = mouses.findOne(recurso_mouse);
+			mouse.setComputador(computador);
+			mouses.save(mouse);
+			computador.setRecurso_mouse(mouse);
 		}
 		computadores.save(computador);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
@@ -178,7 +207,7 @@ public class ComputadorController {
 		while(it.hasNext())
 		{
 			Usuario user = (Usuario) it.next();
-			if(user.getComputador() == null && !(todosUsuariosSemComputador.contains(user)))
+			if(user.getComputador() == null)
 			{
 					todosUsuariosSemComputador.add(user);
 					System.out.println(todosUsuariosSemComputador.size());
@@ -272,8 +301,8 @@ public class ComputadorController {
 		return todosMousesDisponiveis;
 	}
 	@ModelAttribute("todasCSDisponiveis")
-	@RequestMapping("{id_computador}")
-	public List<Recurso> todasCsDisponiveis(@PathVariable("id_computador") Computador computador)
+	
+	public List<Recurso> todasCsDisponiveis()
 	{
 		
 		
@@ -289,16 +318,6 @@ public class ComputadorController {
 				todasCSDisponiveis.add(obj);
 				
 			}
-			//&&obj.getComputador().getRecurso_caixa() != null
-			else if(obj.getComputador() != null && obj.getComputador().getRecurso_caixa() != null) 
-			{
-				//System.out.println(obj.getComputador().getRecurso_caixa() + "+" + obj.getComputador().getRecurso_monitor1());
-				if(obj.getComputador().getRecurso_caixa().getId_recurso() == obj.getId_recurso())
-				{
-					todasCSDisponiveis.add(obj);
-				}
-		
-			}
 		}
 		return todasCSDisponiveis;
 	}
@@ -311,110 +330,7 @@ public class ComputadorController {
 		return todosMonitores;
 	}
 	
-	/*
-	@ModelAttribute("todosMouses")
-	public List<Mouse> todosMouses()
-	{
-		List<Mouse> todosMouses= mouses.findAll();
-		return todosMouses;
-	}
 	
-	@ModelAttribute("todosMousesDisponiveis")
-	public List<Mouse> todasMousesDisponiveis()
-	{
-		
-		
-		List<Mouse> todosMouses= mouses.findAll();
-		List<Mouse> todosMousesDisponiveis = new ArrayList<Mouse>();
-		Iterator it = todosMouses.iterator();
-		while(it.hasNext())
-		{
-			Mouse obj = (Mouse) it.next();
-			if(obj.getComputador() == null)
-				todosMousesDisponiveis.add(obj);
-			
-		}
-		return todosMousesDisponiveis;
-	}
-	
-	@ModelAttribute("todosTeclados")
-	public List<Teclado> todaoTeclados()
-	{
-
-		List<Teclado> todosTeclados= teclados.findAll();	
-		return todosTeclados;
-	}
-	
-	@ModelAttribute("todosTecladosDisponiveis")
-	public List<Teclado> todasTecladosDisponiveis()
-	{
-		
-		
-		List<Teclado> todosRecursos= teclados.findAll();
-		List<Teclado> todosTecladosDisponiveis = new ArrayList<Teclado>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Teclado obj = (Teclado) it.next();
-			if(obj.getComputador() == null)
-				todosTecladosDisponiveis.add(obj);
-			
-		}
-		return todosTecladosDisponiveis;
-	}
-	
-	@ModelAttribute("todasMR")
-	public List<Midia> todasRecursosMR()
-	{
-		List<Midia> todasMR= midias.findAll();
-		return todasMR;
-	}
-	/*
-	@ModelAttribute("todasMRDisponiveis")
-	public List<Midia> todasMRDisponiveis()
-	{
-		
-		
-		List<Midia> todasMR= midias.findAll();
-		List<Midia> todosMRDisponiveis = new ArrayList<Midia>();
-		Iterator it = todasMR.iterator();
-		while(it.hasNext())
-		{
-			Midia obj = (Midia) it.next();
-			if(obj.getComputador() == null)
-				todosMRDisponiveis.add(obj);
-		}
-		return todosMRDisponiveis;
-	}
-	*/
-	/*
-	@ModelAttribute("todasCS")
-	public List<CaixaDeSom> todasCS()
-	{
-		
-		List<CaixaDeSom> todosCS= cs.findAll();
-		return todosCS;
-	}
-	*/
-	/*
-	@ModelAttribute("todosCSDisponiveis")
-	public List<CaixaDeSom> todasCSDisponiveis()
-	{
-		
-		
-		List<CaixaDeSom> todasCS= cs.findAll();
-		List<CaixaDeSom> todosCSDisponiveis = new ArrayList<CaixaDeSom>();
-		Iterator it = todasCS.iterator();
-		while(it.hasNext())
-		{
-			CaixaDeSom obj = (CaixaDeSom) it.next();
-			if(obj.getComputador() == null)
-				todosCSDisponiveis.add(obj);
-			
-		}
-		return todosCSDisponiveis;
-	}
-	*/
 	@RequestMapping(value="/{id_computador}/manutencao", method=RequestMethod.PUT)
 	public @ResponseBody String manutencao(@PathVariable Integer id_computador)
 	{

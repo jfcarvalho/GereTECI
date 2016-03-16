@@ -88,39 +88,20 @@ public class Computador {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "computador_has_impressora", joinColumns = { @JoinColumn(name="computador_id_computador")}, inverseJoinColumns={ @JoinColumn (name = "impressora_id_impressora") })
 	private List<Impressora> impressoras;
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.ALL})
 	@JoinColumn(name="id_recurso_monitor")
 	private Monitor recurso_monitor1;
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.ALL})
 	@JoinColumn(name="id_recurso_teclado")
 	private Teclado recurso_teclado;
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.ALL})
 	@JoinColumn(name="id_recurso_mouse")
 	private Mouse recurso_mouse;
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.ALL})
 	@JoinColumn(name="id_recurso_caixa")
 	private CaixaDeSom recurso_caixa;
-	/*@OneToOne
-	@JoinColumn(name="id_recurso")
-	private Monitor recurso_monitor2;
-	@OneToOne
-	@JoinColumn(name="id_recurso")
-	private Teclado recurso_teclado;
-	@OneToOne
-	@JoinColumn(name="id_recurso")
-	private Mouse recurso_mouse;
-	@OneToOne
-	@JoinColumn(name="id_recurso")
-	private CaixaDeSom recurso_caixa;
-	*/
-	/*@ManyToMany(mappedBy="computadores")
-	
-	private List<LicencaOffice> licencasOffice;
-	*/
-	/*@OneToMany(mappedBy="computador")
-	private List<Recurso> recursos;
-	*/
-	@OneToOne
+
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="usuario_id_usuario")
 	private Usuario usuario;
 	

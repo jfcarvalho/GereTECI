@@ -47,7 +47,7 @@ public abstract class Recurso {
 	@Enumerated(EnumType.STRING)
 	private StatusComputador status;
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="computador_id_computador")
 	private Computador computador;
 	private CategoriaRecurso categoria;
