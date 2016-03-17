@@ -56,6 +56,8 @@ public class CaixaDeSomController {
 		{
 			Computador computer= computadores.findOne(computador_id_computador);
 			cs.setComputador(computer);
+			computer.setRecurso_caixa(cs);
+			computadores.save(computer);
 			//List<Recurso> resources = computer.getRecursos();
 			//resources.add(recurso);
 			//computer.setRecursos(resources);

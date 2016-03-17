@@ -56,6 +56,8 @@ public class TecladoController {
 		{
 			Computador computer= computadores.findOne(computador_id_computador);
 			teclado.setComputador(computer);
+			computer.setRecurso_teclado(teclado);
+			computadores.save(computer);
 			//List<Recurso> resources = computer.getRecursos();
 			//resources.add(recurso);
 			//computer.setRecursos(resources);

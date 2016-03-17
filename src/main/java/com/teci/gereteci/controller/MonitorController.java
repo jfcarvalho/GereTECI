@@ -57,6 +57,7 @@ public class MonitorController {
 			Computador computer= computadores.findOne(computador_id_computador);
 			monitor.setComputador(computer);
 			computer.setRecurso_monitor1(monitor);
+			computadores.save(computer);
 			//List<Recurso> resources = computer.getRecursos();
 			//resources.add(recurso);
 			//computer.setRecursos(resources);

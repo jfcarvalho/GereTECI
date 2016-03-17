@@ -6,7 +6,7 @@
 </head>
 
 <section layout:fragment="conteudo">
-<form class="form-horizontal" method="POST" action="/servicosmanutencao" th:object="${servico}">
+<form class="form-horizontal" method="POST" action="/servicosmanutencao" th:object="${servico_manutencao}">
 		<div layout:include="/mensagem/MensagemUsuario"></div>
 		<div layout:include="/mensagem/MensagemErro"></div>
 		<div class="panel panel-default">
@@ -22,17 +22,31 @@
 	<div class="boxes">
 	<input type="hidden" th:field="*{id_servico}" />
 	
+	<div class="form-group" th:classappend="${#fields.hasErrors('protocolo')} ? has-error">
+			<label for="identificador" class="col-sm-2 control-label">Protocolo:</label>
+			<div class="col-sm-6">
+				<input class ="form-control" type="text"  id="protocolo" name="protocolo" th:field="*{protocolo}"/>
+			</div>
+		</div>
+		
 	<div class="form-group">
 			<label for="data_compra" class="col-sm-2 control-label">Data da Ocorrência:</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="data_solicitacao" name="data_solicitacao" th:field="*{data_solicitacao}" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR" data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom" value="teste"/>
+				<input type="text" class="form-control" id="data_ocorrencia" name="data_ocorrencia" th:field="*{data_ocorrencia}" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR" data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom" value="teste"/>
 			</div>
 		</div>
 		
 		<div class="form-group">
-			<label for="sistema" class="col-sm-2 control-label">Usuário(s) solicitante:</label>
+			<label for="data_compra" class="col-sm-2 control-label">Data de Encerramento:</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="usuario_solicitante" multiple="multiple">
+				<input type="text" class="form-control" id="data_ocorrencia" name="data_ocorrencia" th:field="*{data_ocorrencia}" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR" data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom" value="teste"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="sistema" class="col-sm-2 control-label">Usuário solicitante:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="usuario_solicitante" >
 					<option th:each="usuarios : ${todosUsuariosSolicitacao}" th:value="${usuario}" th:text="${usuario.nome}" th:selected="${us} ? ${us.nome} == ${usuario.nome}"></option>
 				</select>
 			</div>
@@ -47,23 +61,16 @@
 			</div>
 		</div>
 		
-		<div class="form-group">
-			<label for="sistema" class="col-sm-2 control-label">Categoria:</label>
-			<div class="col-sm-6">
-				<select class="form-control" name="categoria">
-					<option th:each="categorias : ${todasCategoriasSolicitacao}" th:value="${categoria}" th:text="${categoria.descricao}" th:selected="${cat} ? ${cat.descricao} == ${categoria.descricao}"></option>
-				</select>
-			</div>
-		</div>
+	
 		
-		
+
 		</div>
-		<!--  <div class="boxes">
+		  <div class="boxes">
 		
 		<div class="form-group" th:classappend="${#fields.hasErrors('descricao_problema')} ? has-error">
 			<label for="descricao_problema" class="col-sm-2 control-label">Descrição do problema:</label>
 			<div class="col-sm-6">
-				<input class ="form-descricao" type="text" class="form-control" id="descricao_problema" name="descricao_problema" th:field="*{descricao_problema}"/>
+				<input class ="form-control" type="text" id="descricao_problema" name="descricao_problema" th:field="*{descricao_problema}" />
 			</div>
 		</div>
 		
@@ -76,12 +83,7 @@
 			</div>
 		</div>
 		
-	<div class="form-group" th:classappend="${#fields.hasErrors('identificador')} ? has-error">
-			<label for="identificador" class="col-sm-2 control-label">Identificador(protocolo):</label>
-			<div class="col-sm-6">
-				<input class ="form-descricao" type="text" class="form-control" id="identificador" name="identificador" th:field="*{identificador}"/>
-			</div>
-		</div>
+	
 	
 	
 		</div>
@@ -91,7 +93,7 @@
 				<button type="submit" class="btn btn-primary">Cadastrar</button>
 			</div>
 		</div>
-	-->	
+	
 	</div>
 	
 	</div>

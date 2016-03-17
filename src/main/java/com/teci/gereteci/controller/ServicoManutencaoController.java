@@ -32,7 +32,7 @@ public class ServicoManutencaoController {
 	public ModelAndView novo()
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		mv.addObject(new ServicoManutencao());
+		mv.addObject("servico_manutencao", new ServicoManutencao());
 		//mv.addObject("todosNiveisUsuario", Nivel.values());
 		return mv;
 	}
@@ -44,8 +44,8 @@ public class ServicoManutencaoController {
 		{
 			return "cadastroServicoManutencao";
 		}
-		List<Usuario> users = usuarios.findAll();
-		servicoManutencao.setSolicitados(users);
+		Usuario user = usuarios.findOne(usuario_id_usuario);
+		servicoManutencao.setSolicitado(user);
 		servicos.save(servicoManutencao);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
 		return "redirect:/servicosmanutencao/novo";

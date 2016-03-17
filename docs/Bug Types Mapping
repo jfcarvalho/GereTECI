@@ -9,3 +9,9 @@ Problem:
 "Request method 'GET' not supported"
 
 Solution: I added @RequestMapping at pesquisar method
+
+Problem:
+
+"Illegal attempt to map a non collection as a @OneToMany, @ManyToMany or @CollectionOfElements:"
+
+Solution: Replace "Servico servico" for "List<Servico> servicos" because it is a 1:N relationship

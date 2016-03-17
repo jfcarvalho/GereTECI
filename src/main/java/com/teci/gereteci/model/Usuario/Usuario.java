@@ -2,6 +2,8 @@ package com.teci.gereteci.model.Usuario;
 
 
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -49,9 +52,8 @@ public class Usuario {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="setor_id_setor")
 	private Setor setor;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="servico")
-	private Servico servico;
+	@OneToMany(mappedBy="solicitado", fetch = FetchType.LAZY,  cascade = {CascadeType.ALL})
+	private List<Servico> servicos_manutencao;	
 	@Size(min=3, max=100, message="O tamanho do campo telefone tem que ser entre 3 e 20")
 	private String usuario_rede;
 	@OneToOne
@@ -147,4 +149,13 @@ public class Usuario {
 	{
 		this.computador = computador;
 	}
+	public List<Servico> getServicos()
+	{
+		return this.servicos_manutencao;
+	}
+	public void setServicos(List<Servico> servicos)
+	{
+		this.servicos_manutencao = servicos;
+	}
+	
 }

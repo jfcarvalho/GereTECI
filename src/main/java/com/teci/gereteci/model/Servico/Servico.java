@@ -3,52 +3,75 @@ package com.teci.gereteci.model.Servico;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.teci.gereteci.model.Usuario.Usuario;
 
+@Inheritance
+@DiscriminatorColumn(name="categoria")
 @Entity
 public abstract class Servico {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
 	private Integer id_servico;
-	private Date dataOcorrencia;
-	@OneToMany(mappedBy="servico")
-	private List<Usuario> solicitados;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date data_ocorrencia;
+	private Date data_encerramento;
+	@ManyToOne
+	@JoinColumn(name="usuario_id_usuario")
+	private Usuario solicitado;
 	
 	@Size(min=1, max=100, message="O tamanho do campo nome tem que ser entre 1 e 20")
-	private String descricaoProblema;
-	
+	private String descricao_problema;
+	@Column(name = "categoria", insertable=false, updatable=false)
 	private Categoria categoria;
 	private StatusServico status;
-	private String identificador;
+	private String protocolo;
 	@OneToOne
 	@JoinColumn(name="atendente")
 	private Usuario atendente;
+	private String descricaoSolucao;
 	
-	public void setDataOcorrencia(Date dataOcorrencia)
+	public Integer getId_servico()
 	{
-		this.dataOcorrencia = dataOcorrencia;
+		return this.id_servico;
 	}
-	public Date getDataOcorrencia()
+	public void setId_servico(Integer Id_servico)
 	{
-		return this.dataOcorrencia;
+		this.id_servico = Id_servico;
 	}
-	public void setSolicitados(List<Usuario> solicitados)
+	public void setData_ocorrencia(Date dataOcorrencia)
 	{
-		this.solicitados = solicitados;
+		this.data_ocorrencia = dataOcorrencia;
 	}
-	public List<Usuario> getSolicitados()
+	public Date getData_ocorrencia()
 	{
-		return this.solicitados;
+		return this.data_ocorrencia;
+	}
+	public void setSolicitado(Usuario solicitado)
+	{
+		this.solicitado = solicitado;
+	}
+	public Usuario getSolicitado()
+	{
+		return this.solicitado;
 	}
 	public void setAtendente(Usuario atendente)
 	{
@@ -58,13 +81,14 @@ public abstract class Servico {
 	{
 		return this.atendente;
 	}
-	public void setIdentificador(String identificador)
+
+	public String getProtocolo()
 	{
-		this.identificador = identificador;
+		return this.protocolo;
 	}
-	public String getIdentificador()
+	public void setProtocolo(String protocolo)
 	{
-		return this.identificador;
+		this.protocolo = protocolo;
 	}
 	public void setCategoria(Categoria categoria)
 	{
@@ -85,14 +109,25 @@ public abstract class Servico {
 	
 	public void setDescricaoProblem(String descricaoProblema)
 	{
-		this.descricaoProblema = descricaoProblema;
+		this.descricao_problema = descricaoProblema;
 	}
 	
-	public String getDescricaoProblema()
+	public String getDescricao_problema()
 	{
-		return this.descricaoProblema;
+		return this.descricao_problema;
 	}
 
+	public void setData_encerramento(Date dataEncerramento)
+	{
+		this.data_encerramento = dataEncerramento;
+	}
+	public Date getData_encerramento()
+	{
+		return this.data_encerramento;
+	}
 	
-	
+	public String getDescricaoSolucao()
+	{
+		return this.descricaoSolucao;
+	}
 }
