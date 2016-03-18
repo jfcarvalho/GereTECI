@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,6 +46,7 @@ public abstract class Servico {
 	private String descricao_problema;
 	@Column(name = "categoria", insertable=false, updatable=false)
 	private String categoria;
+	@Enumerated(EnumType.STRING)
 	private StatusServico status;
 	private String protocolo;
 	@OneToOne

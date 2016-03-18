@@ -5,6 +5,7 @@ public enum StatusComputador {
 	funcionando("Funcionando normalmente"),
 	manutencao("Em manutenção"),
 	com_defeito_para("Defeito e parado");
+	
 	private String status;
 	
 	StatusComputador(String status)
@@ -14,7 +15,7 @@ public enum StatusComputador {
 	
 	public String getStatus()
 	{
-		return status;
+		return this.status;
 	}
 	
 	public void setStatus(String status)

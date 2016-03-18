@@ -1,9 +1,9 @@
 package com.teci.gereteci.model.Servico;
 
 public enum StatusServico {
-	Aberto("Aberto"),
-	Em_andamento("Em andamento"),
-	Fechado("Fechado");
+	aberto("Aberto"),
+	em_andamento("Em andamento"),
+	fechado("Fechado");
 	
 	
 	private String descricao;

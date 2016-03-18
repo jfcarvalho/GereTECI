@@ -95,7 +95,7 @@ public class ServicoManutencaoController {
 	}
 	
 	@ModelAttribute("todasDescricoesServicos")
-	public List<DescricaoManutencao> todosMemoriasComputador() {
+	public List<DescricaoManutencao> todasDescricoesServico() {
 		return Arrays.asList(DescricaoManutencao.values());
 	}
 	@ModelAttribute("todosAtendentes")

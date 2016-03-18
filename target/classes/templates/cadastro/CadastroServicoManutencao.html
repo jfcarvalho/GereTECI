@@ -100,7 +100,7 @@
 			<label for="status" class="col-sm-2 control-label">Situação:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="status">
-					<option th:each="statusMaquina : ${todosStatusServico}" th:value="${statusMaquina}" th:text="${statusMaquina.descricao}" th:selected="${pc} ? ${pc.status.descricao} == ${statusMaquina.descricao}"></option>
+					<option th:each="statusServico : ${todosStatusServico}" th:value="${statusServico}" th:text="${statusServico.descricao}" th:selected="${pc} ? ${pc.status.descricao} == ${statusMaquina.descricao}"></option>
 				</select>	
 			</div>
 			
