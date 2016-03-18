@@ -6,45 +6,54 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("Manutenção")
 public class ServicoManutencao extends Servico {
-	private DescricaoProntaMicro descricaoPronta;
-	private boolean recolhimentoEquipamento;
-	private boolean trocaRecursos;
-	private String recursoTrocado;
+	private DescricaoProntaMicro descricao_pronta;
+	private boolean recolhimento_equipamento;
+	private boolean troca_recursos;
+	private String recurso_recolhido;
+	private String recurso_substituto;
 	
 	
-	public void setDescricaoPronta(DescricaoProntaMicro descricaoPronta)
+	public void setDescricao_pronta(DescricaoProntaMicro descricao_pronta)
 	{
-		this.descricaoPronta = descricaoPronta;
+		this.descricao_pronta = descricao_pronta;
 	}
-	public DescricaoProntaMicro getDescricaoPronta()
+	public DescricaoProntaMicro getDescricao_pronta()
 	{
-		return this.descricaoPronta;
+		return this.descricao_pronta;
 	}
-	public boolean getRecolhimentoEquipamento()
+	public boolean getRecolhimento_equipamento()
 	{
-		return this.recolhimentoEquipamento; 
+		return this.recolhimento_equipamento; 
 	}
-	public void setRecolhimentoEquipamento(boolean recolhimentoEquipamento)
+	public void setRecolhimentoEquipamento(boolean recolhimento_equipamento)
 	{
-		this.recolhimentoEquipamento = recolhimentoEquipamento; 
-	}
-	
-	public boolean getTrocaRecursos()
-	{
-		return this.trocaRecursos; 
-	}
-	public void setTrocaRecursos(boolean trocaRecursos)
-	{
-		this.trocaRecursos = trocaRecursos; 
+		this.recolhimento_equipamento = recolhimento_equipamento; 
 	}
 	
-	public String getRecursoTrocado()
+	public boolean getTroca_recursos()
 	{
-		return this.recursoTrocado; 
+		return this.troca_recursos; 
 	}
-	public void setRecursoTrocado(String recursoTrocado)
+	public void setTroca_recursos(boolean troca_recursos)
 	{
-		this.recursoTrocado= recursoTrocado; 
+		this.troca_recursos = troca_recursos; 
+	}
+	
+	public String getRecurso_recolhido()
+	{
+		return this.recurso_recolhido; 
+	}
+	public void setRecurso_recolhido(String recurso_trocado)
+	{
+		this.recurso_recolhido= recurso_trocado; 
+	}
+	public String getRecurso_substituto()
+	{
+		return this.recurso_substituto; 
+	}
+	public void setRecurso_substituto(String recurso_substituto)
+	{
+		this.recurso_substituto= recurso_substituto; 
 	}
 	
 }

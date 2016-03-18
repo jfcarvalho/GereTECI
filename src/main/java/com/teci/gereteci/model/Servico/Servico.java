@@ -33,6 +33,8 @@ public abstract class Servico {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date data_ocorrencia;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
 	private Date data_encerramento;
 	@ManyToOne
 	@JoinColumn(name="usuario_id_usuario")
@@ -41,13 +43,13 @@ public abstract class Servico {
 	@Size(min=1, max=100, message="O tamanho do campo nome tem que ser entre 1 e 20")
 	private String descricao_problema;
 	@Column(name = "categoria", insertable=false, updatable=false)
-	private Categoria categoria;
+	private String categoria;
 	private StatusServico status;
 	private String protocolo;
 	@OneToOne
 	@JoinColumn(name="atendente")
 	private Usuario atendente;
-	private String descricaoSolucao;
+	private String descricao_solucao;
 	
 	public Integer getId_servico()
 	{
@@ -65,6 +67,8 @@ public abstract class Servico {
 	{
 		return this.data_ocorrencia;
 	}
+	
+	
 	public void setSolicitado(Usuario solicitado)
 	{
 		this.solicitado = solicitado;
@@ -90,11 +94,11 @@ public abstract class Servico {
 	{
 		this.protocolo = protocolo;
 	}
-	public void setCategoria(Categoria categoria)
+	public void setCategoria(String categoria)
 	{
 		this.categoria= categoria;
 	}
-	public Categoria getCategoria()
+	public String getCategoria()
 	{
 		return this.categoria;
 	}
@@ -107,7 +111,7 @@ public abstract class Servico {
 		return this.status;
 	}
 	
-	public void setDescricaoProblem(String descricaoProblema)
+	public void setDescricao_problema(String descricaoProblema)
 	{
 		this.descricao_problema = descricaoProblema;
 	}
@@ -126,8 +130,12 @@ public abstract class Servico {
 		return this.data_encerramento;
 	}
 	
-	public String getDescricaoSolucao()
+	public String getDescricao_solucao()
 	{
-		return this.descricaoSolucao;
+		return this.descricao_solucao;
+	}
+	public void setDescricao_solucao(String solucao)
+	{
+		this.descricao_solucao = solucao;
 	}
 }
