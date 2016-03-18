@@ -6,7 +6,7 @@
 </head>
 
 <section layout:fragment="conteudo">
-<form class="form-horizontal" method="POST" action="/servicosmanutencao" th:object="${servico_manutencao}">
+<form class="form-horizontal" method="POST" action="/servicosmanutencao" th:object="${servico}">
 		<div layout:include="/mensagem/MensagemUsuario"></div>
 		<div layout:include="/mensagem/MensagemErro"></div>
 		<div class="panel panel-default">
@@ -22,7 +22,7 @@
 	<div class="boxes">
 	<input type="hidden" th:field="*{id_servico}" />
 	
-	<div class="form-group" th:classappend="${#fields.hasErrors('protocolo')} ? has-error">
+	<div class="form-group" >
 			<label for="identificador" class="col-sm-2 control-label">Protocolo:</label>
 			<div class="col-sm-6">
 				<input class ="form-control" type="text"  id="protocolo" name="protocolo" th:field="*{protocolo}"/>
@@ -47,7 +47,7 @@
 			<label for="sistema" class="col-sm-2 control-label">Usuário solicitante:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="usuario_id_usuario" >
-					<option th:each="usuario : ${todosSolicitantes}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}" th:selected="${us} ? ${us.nome} == ${usuario.nome}"></option>
+					<option th:each="usuario : ${todosUsuarios}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}" th:selected="${servico.solicitado} ? ${servico.solicitado.nome} == ${usuario.nome}"></option>
 				</select>
 			</div>
 		</div>
@@ -56,7 +56,7 @@
 			<label for="sistema" class="col-sm-2 control-label">Usuário atendente:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="atendente" >
-					<option th:each="usuario : ${todosAtendentes}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}" th:selected="${us} ? ${us.nome} == ${usuario.nome}"></option>
+					<option th:each="usuario : ${todosUsuarios}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}" th:selected="${servico.atendente} ? ${servico.atendente.nome} == ${usuario.nome}"></option>
 				</select>
 			</div>
 		</div>
@@ -64,13 +64,13 @@
 		<div class="form-group" style="margin-left: 10px">
 			
 			<div class="col-sm-6">
-				<input type="checkbox" name="troca_recursos"/>Houve recolhimento do computador?<br/>
+				<input type="checkbox" name="recolhimento_equipamento" th:checked="${servico.recolhimento_equipamento}"/>Houve recolhimento do computador?<br/>
 				<!--   <br/>Computador: <input class ="form-control" type="text" id="recolhimento" name="recolhimento" th:field="*{recolhimento}" /> -->
 			</div>
 		</div>
 		<div>
 		<div class="col-sm-6" style="margin-left: 10px;">
-				<input type="checkbox" name="recolhimento"/>Houve troca de recursos?<br/>
+				<input type="checkbox" name="troca_recursos" th:checked="${servico.troca_recursos}"/>Houve troca de recursos?<br/>
 				<br/><label for="status" class="col-sm-2 control-label">Recurso recolhido:</label> <input class ="form-control" type="text" id="recurso_recolhido" name="recurso_recolhido" th:field="*{recurso_recolhido}" />
 				<br/><label for="status" class="col-sm-2 control-label">Recurso substituto:</label> <input class ="form-control" type="text" id="recurso_substituto" name="recurso_substituto" th:field="*{recurso_substituto}" />
 		</div>
@@ -80,10 +80,10 @@
 		</div>
 		  <div class="boxes">
 		
-		<div class="form-group" th:classappend="${#fields.hasErrors('descricao_problema')} ? has-error">
+		<div class="form-group" >
 			<label for="descricao_problema" class="col-sm-2 control-label">Descrição do problema:</label>
 			<div class="col-sm-6">
-				<textarea rows="8" cols="60" class ="form-control" id="descricao_problema" name="descricao_problema" th:field="*{descricao_problema}"></textarea>
+				<textarea rows="8" cols="170" class ="form-control" id="descricao_problema" name="descricao_problema" th:field="*{descricao_problema}"></textarea>
 			</div>
 		</div>
 		
@@ -91,7 +91,7 @@
 			<label for="descricao_problema" class="col-sm-2 control-label">Descrição pronta:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="descricao_pronta">
-					<option th:each="descricaoPronta : ${todasDescricoesServicos}" th:value="${descricaoPronta}" th:text="${descricaoPronta.descricao}" th:selected="${dp} ? ${dp.descricao} == ${descricaoPronta.descricao}"></option>
+					<option th:each="descricaoPronta : ${todasDescricoesServicos}" th:value="${descricaoPronta}" th:text="${descricaoPronta.descricao}" th:selected="${servico.descricao_pronta} ? ${servico.descricao_pronta} == ${descricaoPronta}"></option>
 				</select>
 			</div>
 		</div>
@@ -100,7 +100,7 @@
 			<label for="status" class="col-sm-2 control-label">Situação:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="status">
-					<option th:each="statusServico : ${todosStatusServico}" th:value="${statusServico}" th:text="${statusServico.descricao}" th:selected="${pc} ? ${pc.status.descricao} == ${statusMaquina.descricao}"></option>
+					<option th:each="statusServico : ${todosStatusServico}" th:value="${statusServico}" th:text="${statusServico.descricao}" th:selected="${servico.status} ? ${servico.status} == ${statusServico}"></option>
 				</select>	
 			</div>
 			

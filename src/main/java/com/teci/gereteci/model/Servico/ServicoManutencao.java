@@ -2,10 +2,13 @@ package com.teci.gereteci.model.Servico;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Entity
 @DiscriminatorValue("Manutenção")
 public class ServicoManutencao extends Servico {
+	@Enumerated(EnumType.STRING)
 	private DescricaoProntaMicro descricao_pronta;
 	private boolean recolhimento_equipamento;
 	private boolean troca_recursos;
@@ -25,7 +28,7 @@ public class ServicoManutencao extends Servico {
 	{
 		return this.recolhimento_equipamento; 
 	}
-	public void setRecolhimentoEquipamento(boolean recolhimento_equipamento)
+	public void setRecolhimento_equipamento(boolean recolhimento_equipamento)
 	{
 		this.recolhimento_equipamento = recolhimento_equipamento; 
 	}

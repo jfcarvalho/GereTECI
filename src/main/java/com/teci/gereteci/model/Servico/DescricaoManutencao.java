@@ -16,7 +16,7 @@ public enum DescricaoManutencao {
 	
 	public String getDescricao()
 	{
-		return descricao;
+		return this.descricao;
 	}
 	
 	public void setDescricao(String descricao)

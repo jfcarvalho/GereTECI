@@ -42,7 +42,7 @@
 					<td class="text-center" th:text="${servico} ? ${servico.solicitado.nome}"></td>
 					<td class="text-center" th:text="${servico} ? ${servico.atendente.nome}"></td>
 					<td class="text-center" th:text="${servico} ? ${servico.solicitado.setor.nome}"></td>
-					<td class="text-center"><div th:switch="${servico.status.descricao}" th:attr="data-role=${servico.id_servico}"><span class="label label-success" th:text="${serico.status.descricao}" th:case="'Fechado'"></span>
+					<td class="text-center"><div th:switch="${servico.status.descricao}" th:attr="data-role=${servico.id_servico}"><span class="label label-success" th:text="${servico.status.descricao}" th:case="'Fechado'"></span>
 																				<span class="label label-warning" th:text="${servico.status.descricao}" th:case="'Em andamento'"></span>
 																													  <span class="label label-danger" th:text="${servico.status.descricao}" th:case="'Aberto'"></span></div></td>
 					<!-- <td class="text-center" th:text="${computador.id_impressao}"></td> -->

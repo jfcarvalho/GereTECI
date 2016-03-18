@@ -38,7 +38,7 @@ public class ServicoManutencaoController {
 	public ModelAndView novo()
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		mv.addObject("servico_manutencao", new ServicoManutencao());
+		mv.addObject("servico", new ServicoManutencao());
 		//mv.addObject("todosNiveisUsuario", Nivel.values());
 		return mv;
 	}
@@ -74,11 +74,11 @@ public class ServicoManutencaoController {
 	{
 		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
 		//Usuario usuario = usuarios.findOne(id_usuario);
-		
+		Usuario solicitante = servicoManutencao.getSolicitado();
+		Usuario usuario_atendente = servicoManutencao.getAtendente();
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		mv.addObject("sm", servicoManutencao);
+		mv.addObject("servico", servicoManutencao);
 		mv.addObject(servicoManutencao);
-		
 		return mv;
 	}
 	
@@ -98,15 +98,11 @@ public class ServicoManutencaoController {
 	public List<DescricaoManutencao> todasDescricoesServico() {
 		return Arrays.asList(DescricaoManutencao.values());
 	}
-	@ModelAttribute("todosAtendentes")
+	@ModelAttribute("todosUsuarios")
 	public List<Usuario> todosAtendentes() {
 		List<Usuario> users = usuarios.findAll();
 		return users;
 	}
-	@ModelAttribute("todosSolicitantes")
-	public List<Usuario> todosSolicitantes() {
-		List<Usuario> users = usuarios.findAll();
-		return users;
-	}
+	
 	
 }
