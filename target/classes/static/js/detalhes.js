@@ -30,3 +30,37 @@ $('#detalhesComputador').on('show.bs.modal', function(event)
 				modal.find('.modal-body span').html('<p><b>Número de patrimonio:</b><i> '+ patrimonio +'</p></i> <b><p>Sistema Operacional:</b><i> '+ sistema + '</i></p><p><b>IP:</b><i> '+ ipComputador + '</i></p><b><p>Máscara:</b><i> '+ mascara +'</i></p><p><b>DNS Preferencial: </b><i>'+ dns_preferencial + '</i></p><p><b>Dns Alternativo: </b><i>'+ dns_alternativo + '</i></p><p><b>Gateway: </b><i>'+gateway+ '</i></p><p><b>Versão do Java: </b><i>'+versao_java+ '</i></p><p><b>Data de compra: </b><i>'+ dataCompra + '</i></p><p><b>Data da última formatação: </b><i>'+ dataFormatacao+'</i></p><p><b>Data do último backup: </b><i>'+ dataBackup + '</i></p><b>ID de impressão: </b><i>'+ id_impressao + '</i></p><p><b>Status: </b><i>'+status+'</p></i>');
 			
 		});
+
+$('#detalhesManutencao').on('show.bs.modal', function(event)
+		{
+			var button = $(event.relatedTarget);
+			var idServico = button.data('id_servico');
+			var protocolo = button.data('protocolo');
+			var data_abertura = button.data('data_abertura');
+			var data_encerramento = button.data('data_encerramento');
+			var solicitante = button.data('solicitante');
+			var atendente = button.data('atendente');
+			var recolhimento = button.data('recolhimento');
+			var trocarecursos = button.data('trocarecursos');
+			var recurso_recolhido = button.data('recurso_recolhido');
+			var recurso_substituido = button.data('recurso_substituto');
+			var descricao_problema = button.data('descricao_problema');
+			var descricao_pronta = button.data('descricao_pronta');
+			var solucao_adotada = button.data('solucao_adotada');
+			var status = button.data('status');
+			
+			var modal = $(this);
+			
+			var form = modal.find('form');
+			var action = form.data('url-base');
+			if(!action.endsWith('/'))
+				{
+					action += '/';
+				}
+			
+				form.attr('action', action + idServico);
+				
+				
+			modal.find('.modal-body span').html('<p><b>Protocolo:</b><i> '+ protocolo +'</p></i> <b><p>Data de abertura:</b><i> '+ data_abertura + '</i></p><p><b>Data de encerraemnto:</b><i> '+ data_encerramento + '</i></p><b><p>Usuário solicitante:</b><i> '+ solicitante +'</i></p><p><b>Usuário Atendente: </b><i>'+ atendente + '</i></p><p><b>A máquina foi recolhida:: </b><i>'+ recolhimento + '</i></p><p><b>Houve troca de recursos?: </b><i>'+trocarecursos+ '</i></p><p><b>Recurso recolhido: </b><i>'+recurso_recolhido+ '</i></p><p><b>Recurso substituido: </b><i>'+ recurso_substituido + '</i></p><p><b>Descrição do problema: </b><i>'+ descricao_problema +'</i></p><p><b>Descricao pronta: </b><i>'+ descricao_pronta + '</i></p><b>Solução adotada: </b><i>'+ solucao_adotada + '</i></p><p><b>Status: </b><i>'+status+'</p></i>');
+			
+		});
