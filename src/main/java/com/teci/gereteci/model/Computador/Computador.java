@@ -97,7 +97,7 @@ public class Computador {
 	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.ALL})
 	@JoinColumn(name="id_recurso_mouse")
 	private Mouse recurso_mouse;
-	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.ALL})
+	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.DETACH})
 	@JoinColumn(name="id_recurso_caixa")
 	private CaixaDeSom recurso_caixa;
 
