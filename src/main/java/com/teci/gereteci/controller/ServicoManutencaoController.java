@@ -83,9 +83,9 @@ public class ServicoManutencaoController {
 	}
 	
 	@RequestMapping(value="{id_servico}", method=RequestMethod.DELETE)
-	public String excluir(@PathVariable Integer id_servicomanutencao, RedirectAttributes attributes)
+	public String excluir(@PathVariable Integer id_servico, RedirectAttributes attributes)
 	{
-		servicos.delete(id_servicomanutencao);
+		servicos.delete(id_servico);
 		attributes.addFlashAttribute("mensagem", "Serivço excluído com sucesso com sucesso!");	
 		return "redirect:/servicosmanutencao";
 	}
