@@ -11,7 +11,7 @@
 		
 		<div class="panel-heading">
 		<div class="clearfix">	
-			<h1 class="panel-title">Servicos de Manutenção</h1>
+			<h1 class="panel-title">Servicos de Internet</h1>
 			<a class="btn btn-link aw-link-panel" href="/servicosinternet/novo">Novo computador</a>
 		</div>
 		</div>
@@ -46,7 +46,7 @@
 																				<span class="label label-warning" th:text="${servico.status.descricao}" th:case="'Em andamento'"></span>
 																													  <span class="label label-danger" th:text="${servico.status.descricao}" th:case="'Aberto'"></span></div></td>
 					<!-- <td class="text-center" th:text="${computador.id_impressao}"></td> -->
-					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/servicosinternet/{id_servico}(id_servico=${servico.id_servico})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalServico" th:attr="data-id_servico=${servico.id_servico},data-protocolo=${servico.protocolo} "><span class="glyphicon glyphicon-remove"></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#detalhesComputador" th:attr="data-id_servico=${servico.id_servico}"><span class="glyphicon glyphicon-eye-open"></span></a><a class="js-atualizar-status-manutencao-computador" th:href="@{/servicosmanutencao/{id_servico}/manutencao(id_computador=${servico.id_servico})}" th:attr="data-id_computador=${servico.id_servico}"><span class="glyphicon glyphicon-wrench"></span></a><a class="js-atualizar-status-baixa-computador" th:href="@{/servicos/{id_servico}/baixa(id_computador=${servico.id_servico})}" th:attr="data-id_computador=${servico.id_servico}"><span class="glyphicon glyphicon-fire"></span></a><a class="js-atualizar-status-conserto-computador" th:href="@{/servicosmanutencao/{id_servico}/consertado(id_computador=${servico.id_servico})}" th:attr="data-id_computador=${servico.id_servico}"><span class="glyphicon glyphicon-ok-sign"></span></a></td>
+					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/servicosinternet/{id_servico}(id_servico=${servico.id_servico})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalServico" th:attr="data-id_servico=${servico.id_servico},data-protocolo=${servico.protocolo} "><span class="glyphicon glyphicon-remove"></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#detalhesInternet" th:attr="data-id_servico=${servico.id_servico}, data-protocolo=${servico.protocolo}, data-data_abertura=${servico.data_ocorrencia}, data-data_encerramento=${servico.data_encerramento}, data-solicitante=${servico.solicitado.nome}, data-atendente=${servico.atendente.nome}, data-proxy=${servico.proxy}, data-trocaip=${servico.trocaip}, data-ipantigo=${servico.ipantigo}, data-ipnovo=${servico.ipnovo}, data-descricao_problema=${servico.descricao_problema}, data-descricao_pronta=${servico.descricao_pronta.descricao}, data-status=${servico.status.descricao}, data-solucao_adotada=${servico.descricao_solucao}"><span class="glyphicon glyphicon-eye-open"></span></a><a class="js-atualizar-status-manutencao-computador" th:href="@{/servicosmanutencao/{id_servico}/manutencao(id_computador=${servico.id_servico})}" th:attr="data-id_computador=${servico.id_servico}"><span class="glyphicon glyphicon-wrench"></span></a><a class="js-atualizar-status-baixa-computador" th:href="@{/servicos/{id_servico}/baixa(id_computador=${servico.id_servico})}" th:attr="data-id_computador=${servico.id_servico}"><span class="glyphicon glyphicon-fire"></span></a><a class="js-atualizar-status-conserto-computador" th:href="@{/servicosmanutencao/{id_servico}/consertado(id_computador=${servico.id_servico})}" th:attr="data-id_computador=${servico.id_servico}"><span class="glyphicon glyphicon-ok-sign"></span></a></td>
 				</tr>
 				
 			<tr>
@@ -58,7 +58,7 @@
 		</div>
 		
 		<div layout:include="/dialogos/DialogoConfirmacaoExclusaoServicoInternet"></div>
-		<div layout:include="/dialogos/DialogoDetalhesComputador"></div>
+		<div layout:include="/dialogos/DialogoDetalhesServicoInternet"></div>
 	</div>	
 </section>
 
