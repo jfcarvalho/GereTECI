@@ -100,6 +100,7 @@ public class ComputadorController {
 			caixas.save(caixa);
 			computador.setRecurso_caixa(caixa);
 		}
+		
 		if(recurso_monitor1 != null)
 		{
 			Monitor monitor = monitores.findOne(recurso_monitor1);
