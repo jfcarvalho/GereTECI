@@ -567,3 +567,84 @@ $('.enable-caixas-pc-check').on('click', function(event)
 	        $(".enable-caixas-pc-lista").attr("disabled", "disabled");
 	      }
 	});
+
+$('.disable-monitor-pc-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-monitor-pc-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-monitor-pc-input").attr("disabled", "disabled");
+			$(".disable-monitor-pc-input").prepend('<input type="hidden" name="recurso_monitor1" value=""/>');
+	      }	
+	  if (!$('.disable-monitor-pc-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-monitor-pc-input").removeAttr("disabled");
+	      }
+	});
+$('.disable-teclado-pc-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-teclado-pc-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-teclado-pc-input").attr("disabled", "disabled");
+			$(".disable-teclado-pc-input").prepend('<input type="hidden" name="recurso_teclado" value=""/>');
+	      }	
+	  if (!$('.disable-teclado-pc-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-teclado-pc-input").removeAttr("disabled");
+	      }
+	});
+$('.disable-mouse-pc-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-mouse-pc-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-mouse-pc-input").attr("disabled", "disabled");
+			$(".disable-mouse-pc-input").prepend('<input type="hidden" name="recurso_mouse" value=""/>');
+	      }	
+	  if (!$('.disable-mouse-pc-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-mouse-pc-input").removeAttr("disabled");
+	      }
+	});
+
+$('.disable-caixa-pc-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-caixa-pc-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-caixa-pc-input").attr("disabled", "disabled");
+			$(".disable-caixa-pc-input").prepend('<input type="hidden" name="recurso_caixa" value=""/>');
+	      }	
+	  if (!$('.disable-caixa-pc-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-caixa-pc-input").removeAttr("disabled");
+	      }
+	});
+$('.disable-setor-usuario-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-setor-usuario-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-setor-usuario-input").attr("disabled", "disabled");
+			$(".disable-setor-usuario-input").prepend('<input type="hidden" name="setor_id_setor" value=""/>');
+	      }	
+	  if (!$('.disable-setor-usuario-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-setor-usuario-input").removeAttr("disabled");
+	      }
+	});
+
+$('.disable-responsavel-setor-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-responsavel-setor-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-responsavel-setor-input").attr("disabled", "disabled");
+			$(".disable-responsavel-setor-botao").prepend('<input type="hidden" name="responsavel" value=""/>');
+	      }	
+	  if (!$('.disable-responsavel-setor-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-responsavel-setor-input").removeAttr("disabled");
+	      }
+	});

@@ -36,9 +36,12 @@
 	<div class="form-group">
 			<label for="responsavel" class="col-sm-2 control-label">Responsável:</label>
 			<div class="col-sm-2">
-				<select class="form-control" name="responsavel">
-					<option th:each="responsavel : ${todosResponsaveisSetor}" th:value="${responsavel.id_usuario}" th:text="${responsavel.nome}" th:selected="${set} ? ${set.responsavel.id_usuario} == ${responsavel.id_usuario}" ></option>
+				<select class="form-control disable-responsavel-setor-input" name="responsavel">
+					<option th:each="responsavel : ${todosResponsaveisSetor}" th:value="${responsavel.id_usuario}" th:text="${responsavel.nome}" th:selected="${set} and ${set.responsavel} ? ${set.responsavel.id_usuario} == ${responsavel.id_usuario}" ></option>
 				</select>
+				<div class="input-group">
+				        <input type="checkbox" class ="disable-responsavel-setor-botao"/> Sem responsável  	
+				    </div><!-- /input-group -->
 			</div>
 		</div>
 		

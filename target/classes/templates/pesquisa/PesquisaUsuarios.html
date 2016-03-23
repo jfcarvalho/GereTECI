@@ -36,7 +36,7 @@
 					<td class="text-center" th:text="${usuario.nome}"></td>
 					<td class="text-center" th:text="${usuario.matricula}"></td>
 					<td class="text-center" th:text="${usuario.cargo}"></td>
-					<td class="text-center" th:text="${usuario.setor.nome}"></td>
+					<td class="text-center" th:text="${usuario.setor} ? ${usuario.setor.nome}"></td>
 					<td class="text-center"><div th:switch="${usuario.nivel_acesso.nivel}"><span class="label label-success" th:text="${usuario.nivel_acesso.nivel}" th:case="'Administrador'"></span>
 																				<span class="label label-warning" th:text="${usuario.nivel_acesso.nivel}" th:case="'Usuário TECI'"></span>
 																													  <span class="label label-danger" th:text="${usuario.nivel_acesso.nivel}" th:case="'Usuário Padrão'"></span></div></td>  

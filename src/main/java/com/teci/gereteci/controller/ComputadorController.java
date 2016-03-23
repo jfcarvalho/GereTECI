@@ -86,6 +86,7 @@ public class ComputadorController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer recurso_caixa, @RequestParam Integer recurso_monitor1, @RequestParam Integer recurso_mouse, @RequestParam Integer recurso_teclado, Errors errors, RedirectAttributes attributes)
 	{
+		Usuario user = new Usuario();
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
 		{
@@ -95,8 +96,9 @@ public class ComputadorController {
 	
 		if(usuario_id_usuario != null)
 		{
-			Usuario user = usuarios.findOne(usuario_id_usuario);
+			user = usuarios.findOne(usuario_id_usuario);
 			computador.setUsuario(user);
+			
 		}
 		if(recurso_caixa != null)
 		{
@@ -127,6 +129,9 @@ public class ComputadorController {
 			computador.setRecurso_mouse(mouse);
 		}
 		computadores.save(computador);
+		Computador pc = computadores.findOne(computador.getId_computador());
+		user.setComputador(pc);
+		usuarios.save(user);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
 		return "redirect:/computadores/novo";
 		

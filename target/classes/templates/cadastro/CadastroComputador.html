@@ -119,19 +119,24 @@
 			<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Monitor(es) Disponivel(eis):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recurso_monitor1">
+				<select class="form-control disable-monitor-pc-input" name="recurso_monitor1">
 					<option th:each="recurso : ${todosMonitoresDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
+				<div class="input-group">
+				        <input type="checkbox" class ="disable-monitor-pc-botao"/> Sem monitor  	
+				    </div>
 			</div>
 		</div>
 		 
 		  <div class="form-group">
 		<label for="" class="col-sm-2 control-label">Teclado(s) Disponívei(s):</label>
 			<div class="col-sm-6">
-			  	<select class="form-control" name="recurso_teclado">
+			  	<select class="form-control disable-teclado-pc-input" name="recurso_teclado">
 					<option th:each="recurso : ${todosTecladosDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' +${recurso.patrimonio}"></option>
 				</select>
-				
+				<div class="input-group">
+				        <input type="checkbox" class ="disable-teclado-pc-botao"/> Sem teclado  	
+				    </div>
 			</div>
 		</div>
 		
@@ -209,18 +214,24 @@
 	<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Mouse(s) Disponível(is):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recurso_mouse">
+				<select class="form-control disable-mouse-pc-input" name="recurso_mouse">
 					<option th:each="recurso : ${todosMousesDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
 			</div>
+			<div class="input-group">
+				        <input type="checkbox" class ="disable-mouse-pc-botao"/> Sem mouse 	
+				    </div>
 		</div>
 		
 		<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Caixas de Som Disponível(is):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recurso_caixa" >
+				<select class="form-control disable-caixa-pc-input" name="recurso_caixa" >
 					<option th:each="recurso : ${todasCSDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
+			</div>
+			<div class="input-group">
+				        <input type="checkbox" class ="disable-caixa-pc-botao"/> Sem caixa de som  	
 			</div>
 		</div>
 		
