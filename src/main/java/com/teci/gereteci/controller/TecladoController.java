@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Computador.StatusComputador;
 import com.teci.gereteci.model.Recurso.Monitor;
+import com.teci.gereteci.model.Recurso.Mouse;
 import com.teci.gereteci.model.Recurso.Teclado;
 import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Monitores;
@@ -118,5 +120,36 @@ public class TecladoController {
 	@ModelAttribute("todosStatusTeclado")
 	public List<StatusComputador> todosStatusMonitor() {
 		return Arrays.asList(StatusComputador.values());
+	}
+	
+	@RequestMapping(value="/{id_recurso}/manutencao", method=RequestMethod.PUT)
+	public @ResponseBody String manutencao(@PathVariable Integer id_recurso)
+	{
+		//Isso aqui vai para camada de serviço
+		Teclado teclado= teclados.findOne(id_recurso);
+		teclado.setStatus(StatusComputador.manutencao);
+		teclados.save(teclado);
+		return StatusComputador.manutencao.getStatus();
+	}
+	
+	@RequestMapping(value="/{id_recurso}/baixa", method=RequestMethod.PUT)
+	public @ResponseBody String baixa(@PathVariable Integer id_recurso)
+	{
+		//Isso aqui vai para camada de serviço
+		Teclado teclado = teclados.findOne(id_recurso);
+		teclado.setStatus(StatusComputador.com_defeito_para);
+		teclados.save(teclado);
+		return StatusComputador.com_defeito_para.getStatus();
+		
+	}
+	
+	@RequestMapping(value="/{id_recurso}/consertado", method=RequestMethod.PUT)
+	public @ResponseBody String consertado(@PathVariable Integer id_recurso)
+	{
+		//Isso aqui vai para camada de serviço
+		Teclado teclado = teclados.findOne(id_recurso);
+		teclado.setStatus(StatusComputador.funcionando);
+		teclados.save(teclado);
+		return StatusComputador.funcionando.getStatus();
 	}
 }

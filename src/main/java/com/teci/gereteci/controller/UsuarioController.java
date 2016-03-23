@@ -60,7 +60,6 @@ public class UsuarioController {
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");	
 		return "redirect:/usuarios/novo";
 	}
-	
 	@RequestMapping
 	public ModelAndView pesquisar()
 	{

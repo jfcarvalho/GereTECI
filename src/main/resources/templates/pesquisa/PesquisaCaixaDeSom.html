@@ -12,7 +12,7 @@
 		<div class="panel-heading">
 		<div class="clearfix">	
 			<h1 class="panel-title">Pesquisa de Caixas de Som</h1>
-			<a class="btn btn-link aw-link-panel" href="/computadores/novo">Nova caixa</a>
+			<a class="btn btn-link aw-link-panel" href="/caixas/novo">Nova caixa</a>
 		</div>
 		</div>
 		<div class="panel-body">
@@ -52,14 +52,14 @@
 				</tr>
 				
 			<tr>
-				<td colspan="6" th:if="${#lists.isEmpty(recursos)}">Nenhum recurso encontrado</td>
+				<td colspan="6" th:if="${#lists.isEmpty(caixas)}">Nenhum recurso encontrado</td>
 			</tr>
 			</tbody>
 		
 		</table>
 		</div>
 		
-		<div layout:include="/dialogos/DialogoConfirmacaoExclusaoRecurso"></div>
+		<div layout:include="/dialogos/DialogoConfirmacaoExclusaoCaixa"></div>
 	</div>	
 </section>
 

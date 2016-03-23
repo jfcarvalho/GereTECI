@@ -90,7 +90,7 @@ public class ServicoInternetController {
 	{
 		servicos.delete(id_servico);
 		attributes.addFlashAttribute("mensagem", "Serivço excluído com sucesso com sucesso!");	
-		return "redirect:/servicosmanutencao";
+		return "redirect:/servicosinternet";
 	}
 	@ModelAttribute("todosStatusServico")
 	public List<StatusServico> todosStatusServico() {

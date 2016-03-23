@@ -111,7 +111,7 @@
 		<label for="" class="col-sm-2 control-label">Impressora(s) Disponívei(s):</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="impressoras" multiple="multiple">
-					<option th:each="impressora : ${todasImpressorasDisponiveisComputador}" th:value="${{impressora.id_impressora}}" th:text="${impressora.marca} + ' - ' + ${impressora.ip} + ' - ' +${impressora.patrimonio}"></option>
+					<option th:each="impressora : ${todasImpressorasComputador}" th:value="${{impressora.id_impressora}}" th:text="${impressora.marca} + ' - ' + ${impressora.ip} + ' - ' +${impressora.patrimonio}"></option>
 				</select>
 			</div>
 		</div>

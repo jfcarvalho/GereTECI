@@ -11,8 +11,8 @@
 		
 		<div class="panel-heading">
 		<div class="clearfix">	
-			<h1 class="panel-title">Pesquisa de Recursos</h1>
-			<a class="btn btn-link aw-link-panel" href="/recursos/novo">Novo recurso</a>
+			<h1 class="panel-title">Pesquisa de Monitores</h1>
+			<a class="btn btn-link aw-link-panel" href="/monitores/novo">Novo monitor</a>
 		</div>
 		</div>
 		<div class="panel-body">
@@ -45,7 +45,7 @@
 					<td class="text-center" th:text="${recurso.polegadas}"></td>
 					<td class="text-center" th:text="${recurso.computador} and ${recurso.computador.usuario} ? ${recurso.computador.usuario.nome}"></td>
 					<td class="text-center" th:text="${recurso.computador}  ? ${recurso.computador.ip}"></td>
-					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/monitores/{id_recurso}(id_recurso=${recurso.id_recurso})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalRecurso" th:attr="data-id_recurso=${recurso.id_recurso}, data-descricao=${recurso.descricao}"><span class="glyphicon glyphicon-remove"></span></a><a class="js-atualizar-status-manutencao-recurso" th:href="@{/recursos/{id_recurso}/manutencao(id_recurso=${recurso.id_recurso})}" th:attr="data-id_recurso=${recurso.id_recurso}"><span class="glyphicon glyphicon-wrench"></span></a><a class="js-atualizar-status-baixa-recurso" th:href="@{/recursos/{id_recurso}/baixa(id_recurso=${recurso.id_recurso})}" th:attr="data-id_recurso=${recurso.id_recurso}"><span class="glyphicon glyphicon-fire"></span></a><a class="js-atualizar-status-conserto-recurso" th:href="@{/recursos/{id_recurso}/consertado(id_recurso=${recurso.id_recurso})}" th:attr="data-id_recurso=${recurso.id_recurso}"><span class="glyphicon glyphicon-ok-sign"></span></a></td>
+					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/monitores/{id_recurso}(id_recurso=${recurso.id_recurso})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalRecurso" th:attr="data-id_recurso=${recurso.id_recurso}, data-descricao=${recurso.descricao}"><span class="glyphicon glyphicon-remove"></span></a><a class="js-atualizar-status-manutencao-recurso" th:href="@{/monitores/{id_recurso}/manutencao(id_recurso=${recurso.id_recurso})}" th:attr="data-id_recurso=${recurso.id_recurso}"><span class="glyphicon glyphicon-wrench"></span></a><a class="js-atualizar-status-baixa-recurso" th:href="@{/monitores/{id_recurso}/baixa(id_recurso=${recurso.id_recurso})}" th:attr="data-id_recurso=${recurso.id_recurso}"><span class="glyphicon glyphicon-fire"></span></a><a class="js-atualizar-status-conserto-recurso" th:href="@{/monitores/{id_recurso}/consertado(id_recurso=${recurso.id_recurso})}" th:attr="data-id_recurso=${recurso.id_recurso}"><span class="glyphicon glyphicon-ok-sign"></span></a></td>
 					
 				</tr>
 				
@@ -57,7 +57,7 @@
 		</table>
 		</div>
 		
-		<div layout:include="/dialogos/DialogoConfirmacaoExclusaoRecurso"></div>
+		<div layout:include="/dialogos/DialogoConfirmacaoExclusaoMonitor"></div>
 	</div>	
 </section>
 

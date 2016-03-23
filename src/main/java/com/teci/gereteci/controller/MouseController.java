@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -117,4 +118,36 @@ public class MouseController {
 	public List<StatusComputador> todosStatusMouses() {
 		return Arrays.asList(StatusComputador.values());
 	}
+	
+	@RequestMapping(value="/{id_recurso}/manutencao", method=RequestMethod.PUT)
+	public @ResponseBody String manutencao(@PathVariable Integer id_recurso)
+	{
+		//Isso aqui vai para camada de serviço
+		Mouse mouse = mouses.findOne(id_recurso);
+		mouse.setStatus(StatusComputador.manutencao);
+		mouses.save(mouse);
+		return StatusComputador.manutencao.getStatus();
+	}
+	
+	@RequestMapping(value="/{id_recurso}/baixa", method=RequestMethod.PUT)
+	public @ResponseBody String baixa(@PathVariable Integer id_recurso)
+	{
+		//Isso aqui vai para camada de serviço
+		Mouse mouse = mouses.findOne(id_recurso);
+		mouse.setStatus(StatusComputador.com_defeito_para);
+		mouses.save(mouse);
+		return StatusComputador.com_defeito_para.getStatus();
+		
+	}
+	
+	@RequestMapping(value="/{id_recurso}/consertado", method=RequestMethod.PUT)
+	public @ResponseBody String consertado(@PathVariable Integer id_recurso)
+	{
+		//Isso aqui vai para camada de serviço
+		Mouse mouse = mouses.findOne(id_recurso);
+		mouse.setStatus(StatusComputador.funcionando);
+		mouses.save(mouse);
+		return StatusComputador.funcionando.getStatus();
+	}
+	
 }

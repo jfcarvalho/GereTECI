@@ -49,6 +49,11 @@ import com.teci.gereteci.repository.*;
 @RequestMapping("/computadores")
 public class ComputadorController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroComputador"; 
+	private static final String EDICAO1_VIEW = "/edicoes/EditarComputador";
+	private static final String EDICAO2_VIEW = "/edicoes/EditarComputadorRecurso";
+	private static final String EDICAO3_VIEW = "/edicoes/EditarComputadorUsuario";
+	private static final String EDICAO4_VIEW = "/edicoes/EditarComputadorBackup";
+	private static final String EDICAO5_VIEW = "/edicoes/EditarComputadorFormatacao";
 	@Autowired
 	private Computadores computadores;
 	@Autowired
@@ -68,7 +73,7 @@ public class ComputadorController {
 	
 
 	
-	List<Usuario> todosUsuariosSemComputador = new ArrayList<Usuario>();
+	
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo()
@@ -100,7 +105,6 @@ public class ComputadorController {
 			caixas.save(caixa);
 			computador.setRecurso_caixa(caixa);
 		}
-		
 		if(recurso_monitor1 != null)
 		{
 			Monitor monitor = monitores.findOne(recurso_monitor1);
@@ -127,6 +131,120 @@ public class ComputadorController {
 		return "redirect:/computadores/novo";
 		
 	}
+	@RequestMapping(value="/{id_computador}/salvar1",method = RequestMethod.POST)
+	public String salvar1(@Validated Computador computador, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		if(errors.hasErrors())
+		{
+			return "cadastroComputador";
+		}
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+		Computador pc = computadores.findOne(computador.getId_computador());
+		pc.setPatrimonio(computador.getPatrimonio());
+		pc.setSistema(computador.getSistema());
+		pc.setArquitetura(computador.getArquitetura());
+		pc.setIp(computador.getIp());
+		pc.setMascara(computador.getMascara());
+		pc.setGateway(computador.getGateway());
+		pc.setDns_preferencial(computador.getDns_preferencial());
+		pc.setDns_alternativo(computador.getDns_alternativo());
+		pc.setVersao_java(computador.getVersao_java());
+		pc.setData_compra(computador.getData_compra());
+		pc.setId_impressao(computador.getId_impressao());
+		pc.setMemoria(computador.getMemoria());
+		pc.setProcessador(computador.getProcessador());
+		pc.setStatus(computador.getStatus());
+		computadores.save(pc);
+		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		return "redirect:/computadores/novo";
+		
+	}
+	@RequestMapping("/{id_computador}/editar1")
+	
+	public ModelAndView editar1(@PathVariable("id_computador") Computador computador)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO1_VIEW);
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+	
+	
+		//computadores.save(computador);
+		//attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		//return "redirect:/computadores/novo";
+		
+		mv.addObject("pc", computador);
+		mv.addObject(computador);
+		
+		return mv;
+	}
+	@RequestMapping("/{id_computador}/editar2")
+	public ModelAndView editar2(@PathVariable("id_computador") Computador computador)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO2_VIEW);
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+	
+	
+		//computadores.save(computador);
+		//attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		//return "redirect:/computadores/novo";
+		
+		mv.addObject("pc", computador);
+		mv.addObject(computador);
+		
+		return mv;
+	}
+	
+	@RequestMapping("/{id_computador}/editar3")
+	public ModelAndView editar3(@PathVariable("id_computador") Computador computador)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO3_VIEW);
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+	
+	
+		//computadores.save(computador);
+		//attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		//return "redirect:/computadores/novo";
+		
+		mv.addObject("pc", computador);
+		mv.addObject(computador);
+		
+		return mv;
+	}
+	
+	@RequestMapping("/{id_computador}/editar4")
+	public ModelAndView editar4(@PathVariable("id_computador") Computador computador)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO4_VIEW);
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+	
+	
+		//computadores.save(computador);
+		//attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		//return "redirect:/computadores/novo";
+		
+		mv.addObject("pc", computador);
+		mv.addObject(computador);
+		
+		return mv;
+	}
+	
+	@RequestMapping("/{id_computador}/editar5")
+	public ModelAndView editar5(@PathVariable("id_computador") Computador computador)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO5_VIEW);
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+	
+	
+		//computadores.save(computador);
+		//attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		//return "redirect:/computadores/novo";
+		
+		mv.addObject("pc", computador);
+		mv.addObject(computador);
+		
+		return mv;
+	}
+	
 	
 	@RequestMapping
 	public ModelAndView pesquisar()
@@ -149,7 +267,7 @@ public class ComputadorController {
 		//System.out.println(">>>>>>> Codigo de usuario recebido: " + recursos.getDescricao());
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
-		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);	
+		ModelAndView mv = new ModelAndView(EDICAO1_VIEW);	
 		mv.addObject("pc", computador);
 		mv.addObject(computador);
 		
@@ -203,7 +321,7 @@ public class ComputadorController {
 	public List<Usuario> todosUsuariosComputador()
 	{
 		List<Usuario> todosUsuarios = usuarios.findAll();
-		
+		List<Usuario> todosUsuariosSemComputador = new ArrayList<Usuario>();
 		Iterator it = todosUsuarios.iterator();
 		while(it.hasNext())
 		{
@@ -225,11 +343,12 @@ public class ComputadorController {
 		return todasImpressoras;
 	}
 	
-	@ModelAttribute("todasImpressorasDisponiveisComputador")
-	public List<Impressora> todasImpressorasDisponiveisComputador()
+	@ModelAttribute("todasImpressorasPertencentesComputador")
+	public List<Impressora> todasImpressorasPertencentesComputador()
 	{
 		List<Impressora> todasImpressoras= impressoras.findAll();
 		List<Impressora> todasImpressorasDisponiveis = new ArrayList<Impressora>();
+		List<Computador> todosComputadores = computadores.findAll();
 		Iterator it = todasImpressoras.iterator();
 		while(it.hasNext())
 		{
