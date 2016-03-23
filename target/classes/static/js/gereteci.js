@@ -503,3 +503,67 @@ $('.testando-layer').on('click', function(event)
 		
 	
 		})
+
+$('.enable-impressoras-pc-check').on('click', function(event)
+		{
+	
+	  if ($('.enable-impressoras-pc-check').is(":checked")) {
+	        // Disable elements.
+		  $(".enable-impressoras-pc-lista").removeAttr("disabled");
+	      }	
+	  if (!$('.enable-impressoras-pc-check').is(":checked")) {
+	        // Enable elements.
+	        $(".enable-impressoras-pc-lista").attr("disabled", "disabled");
+	      }
+	});
+
+$('.enable-monitor-pc-check').on('click', function(event)
+		{
+	
+	  if ($('.enable-monitor-pc-check').is(":checked")) {
+	        // Disable elements.
+		  $(".enable-monitor-pc-lista").removeAttr("disabled");
+	      }	
+	  if (!$('.enable-monitor-pc-check').is(":checked")) {
+	        // Enable elements.
+	        $(".enable-monitor-pc-lista").attr("disabled", "disabled");
+	      }
+	});
+
+$('.enable-mouse-pc-check').on('click', function(event)
+		{
+	
+	  if ($('.enable-mouse-pc-check').is(":checked")) {
+	        // Disable elements.
+		  $(".enable-mouse-pc-lista").removeAttr("disabled");
+	      }	
+	  if (!$('.enable-mouse-pc-check').is(":checked")) {
+	        // Enable elements.
+	        $(".enable-mouse-pc-lista").attr("disabled", "disabled");
+	      }
+	});
+
+$('.enable-teclado-pc-check').on('click', function(event)
+		{
+	
+	  if ($('.enable-teclado-pc-check').is(":checked")) {
+	        // Disable elements.
+		  $(".enable-teclado-pc-lista").removeAttr("disabled");
+	      }	
+	  if (!$('.enable-teclado-pc-check').is(":checked")) {
+	        // Enable elements.
+	        $(".enable-teclado-pc-lista").attr("disabled", "disabled");
+	      }
+	});
+$('.enable-caixas-pc-check').on('click', function(event)
+		{
+	
+	  if ($('.enable-caixas-pc-check').is(":checked")) {
+	        // Disable elements.
+		  $(".enable-caixas-pc-lista").removeAttr("disabled");
+	      }	
+	  if (!$('.enable-caixas-pc-check').is(":checked")) {
+	        // Enable elements.
+	        $(".enable-caixas-pc-lista").attr("disabled", "disabled");
+	      }
+	});

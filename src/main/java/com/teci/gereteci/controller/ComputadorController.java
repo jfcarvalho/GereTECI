@@ -160,6 +160,32 @@ public class ComputadorController {
 		return "redirect:/computadores/novo";
 		
 	}
+	@RequestMapping(value="/{id_computador}/salvar2",method = RequestMethod.POST)
+	public String salvar2(@Validated Computador computador, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		if(errors.hasErrors())
+		{
+			return "cadastroComputador";
+		}
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+		Computador pc = computadores.findOne(computador.getId_computador());
+		if(computador.getImpressoras() != null)
+			pc.setImpressoras(computador.getImpressoras());
+		if(computador.getRecurso_teclado() != null)
+			pc.setRecurso_teclado(computador.getRecurso_teclado());
+		if(computador.getRecurso_monitor1() != null)
+			pc.setRecurso_monitor1(computador.getRecurso_monitor1());
+		if(computador.getRecurso_mouse() != null)
+			pc.setRecurso_mouse(computador.getRecurso_mouse());
+		if(computador.getRecurso_caixa() != null)
+		pc.setRecurso_caixa(computador.getRecurso_caixa());
+		
+		computadores.save(pc);
+		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		return "redirect:/computadores/novo";
+		
+	}
 	@RequestMapping("/{id_computador}/editar1")
 	
 	public ModelAndView editar1(@PathVariable("id_computador") Computador computador)

@@ -38,9 +38,10 @@
 		<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Impressora(s) Disponívei(s):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="impressoras" multiple="multiple">
+				<select class="form-control enable-impressoras-pc-lista" name="impressoras" multiple="multiple" disabled="disabled">
 					<option th:each="impressora : ${todasImpressorasComputador}" th:value="${{impressora.id_impressora}}" th:text="${impressora.marca} + ' - ' + ${impressora.ip} + ' - ' +${impressora.patrimonio}"></option>
 				</select>
+				<div><input type="checkbox" class ="enable-impressoras-pc-check"/>Mudar impressoras</div>
 			</div>
 		</div>
 	
@@ -54,11 +55,13 @@
 			<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Monitor(es) Disponivel(eis):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recurso_monitor1">
+				<select class="form-control enable-monitor-pc-lista" name="recurso_monitor1" disabled="disabled">
 					<option th:each="recurso : ${todosMonitoresDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
+				<div><input type="checkbox" class ="enable-monitor-pc-check"/>Mudar monitor</div>
 			</div>
 		</div>
+		
 		 <div class="form-group">
 		<label for="" class="col-sm-2 control-label">Teclado Escolhido:</label>
 			<div class="col-sm-6">
@@ -72,10 +75,10 @@
 		  <div class="form-group">
 		<label for="" class="col-sm-2 control-label">Teclado(s) Disponívei(s):</label>
 			<div class="col-sm-6">
-			  	<select class="form-control" name="recurso_teclado">
+			  	<select class="form-control enable-teclado-pc-lista" name="recurso_teclado" disabled="disabled">
 					<option th:each="recurso : ${todosTecladosDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' +${recurso.patrimonio}"></option>
 				</select>
-				
+				<div><input type="checkbox" class ="enable-teclado-pc-check"/>Mudar teclado</div>
 			</div>
 		</div>
 		
@@ -90,14 +93,15 @@
 		<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Mouse(s) Disponível(is):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recurso_mouse">
+				<select class="form-control enable-mouse-pc-lista" name="recurso_mouse" disabled="disabled">
 					<option th:each="recurso : ${todosMousesDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
+				<div><input type="checkbox" class ="enable-mouse-pc-check"/>Mudar mouse</div>
 			</div>
 		</div>
 		
 		 <div class="form-group">
-		<label for="" class="col-sm-2 control-label">Caixa de Som Disponível:</label>
+		<label for="" class="col-sm-2 control-label">Caixa de Som escolhida:</label>
 			<div class="col-sm-6">
 				<p th:text="${computador.recurso_caixa.patrimonio}"></p>
 				<p th:text="${computador.recurso_caixa.descricao}"></p>
@@ -107,9 +111,10 @@
 		<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Caixas de Som Disponível(is):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recurso_caixa" >
+				<select class="form-control enable-caixas-pc-lista" name="recurso_caixa" disabled="disabled">
 					<option th:each="recurso : ${todasCSDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
+				<div><input type="checkbox" class ="enable-caixas-pc-check"/>Mudar caixas</div>
 			</div>
 		</div>
 		
