@@ -88,16 +88,16 @@ public class Computador {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "computador_has_impressora", joinColumns = { @JoinColumn(name="computador_id_computador")}, inverseJoinColumns={ @JoinColumn (name = "impressora_id_impressora") })
 	private List<Impressora> impressoras;
-	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.ALL})
+	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST})
 	@JoinColumn(name="id_recurso_monitor")
 	private Monitor recurso_monitor1;
-	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.ALL})
+	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST})
 	@JoinColumn(name="id_recurso_teclado")
 	private Teclado recurso_teclado;
-	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.ALL})
+	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST})
 	@JoinColumn(name="id_recurso_mouse")
 	private Mouse recurso_mouse;
-	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.ALL})
+	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST})
 	@JoinColumn(name="id_recurso_caixa")
 	private CaixaDeSom recurso_caixa;
 

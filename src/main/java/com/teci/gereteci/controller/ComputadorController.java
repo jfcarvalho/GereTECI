@@ -170,17 +170,49 @@ public class ComputadorController {
 		}
 	//	System.out.println(">>>>>> " + usuario_id_usuario);
 		Computador pc = computadores.findOne(computador.getId_computador());
-		if(computador.getImpressoras() != null)
+		if(computador.getImpressoras() != null) {
 			pc.setImpressoras(computador.getImpressoras());
-		if(computador.getRecurso_teclado() != null)
-			pc.setRecurso_teclado(computador.getRecurso_teclado());
-		if(computador.getRecurso_monitor1() != null)
+		}
+		System.out.println(computador.getRecurso_teclado()); 
+		if(computador.getRecurso_teclado() != null) {
+			//System.out.println(">>>>>>>>>>>> "+ pc.getRecurso_teclado().getId_recurso());
+			Teclado t1 = teclados.findOne(pc.getRecurso_teclado().getId_recurso());
+			t1.setComputador(null);
+			teclados.save(t1);
+			Teclado t2 = teclados.findOne(computador.getRecurso_teclado().getId_recurso());
+			pc.setRecurso_teclado(t2);
+			t2.setComputador(pc);
+			teclados.save(t2); //problema aqui
+		}
+		if(computador.getRecurso_monitor1() != null) {
+			Monitor m1 = monitores.findOne(pc.getRecurso_monitor1().getId_recurso());
+			m1.setComputador(null);
+			monitores.save(m1);
+			Monitor m2 = monitores.findOne(computador.getRecurso_monitor1().getId_recurso());
 			pc.setRecurso_monitor1(computador.getRecurso_monitor1());
-		if(computador.getRecurso_mouse() != null)
+			m2.setComputador(pc);
+			monitores.save(m2);
+		}
+		if(computador.getRecurso_mouse() != null) {
+			Mouse mo1 = mouses.findOne(pc.getRecurso_mouse().getId_recurso());
+			mo1.setComputador(null);
+			mouses.save(mo1);
+			Mouse mo2 = mouses.findOne(computador.getRecurso_mouse().getId_recurso());
 			pc.setRecurso_mouse(computador.getRecurso_mouse());
+			mo2.setComputador(pc);
+			mouses.save(mo2);
+		}
 		if(computador.getRecurso_caixa() != null)
-		pc.setRecurso_caixa(computador.getRecurso_caixa());
-		
+		{
+			CaixaDeSom c1 = caixas.findOne(pc.getRecurso_caixa().getId_recurso());
+			c1.setComputador(null);
+			caixas.save(c1);
+			CaixaDeSom c2 = caixas.findOne(computador.getRecurso_caixa().getId_recurso());
+			pc.setRecurso_caixa(computador.getRecurso_caixa());
+			c2.setComputador(pc);
+			caixas.save(c2);
+			
+		}
 		computadores.save(pc);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
 		return "redirect:/computadores/novo";

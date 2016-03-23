@@ -21,6 +21,21 @@
 	<div class="panel-body">
 	<div class="boxes">
 	<input type="hidden" th:field="*{id_computador}" />
+	<input type="hidden" th:field="*{patrimonio}" />
+	<input type="hidden" th:field="*{sistema}" />
+	<input type="hidden" th:field="*{arquitetura}" />
+	<input type="hidden" th:field="*{ip}" />
+	<input type="hidden" th:field="*{mascara}" />
+	<input type="hidden" th:field="*{gateway}" />
+	<input type="hidden" th:field="*{dns_preferencial}" />
+	<input type="hidden" th:field="*{dns_alternativo}" />
+	<input type="hidden" th:field="*{versao_java}" />
+	<input type="hidden" th:field="*{data_compra}" />
+	<input type="hidden" th:field="*{id_impressao}" />
+	<input type="hidden" th:field="*{memoria}" />
+	<input type="hidden" th:field="*{processador}" />
+	<input type="hidden" th:field="*{status}" />
+	
 		<table class="table table-bordered table-striped">
 		<tr th:each="impressora: ${impressorasComputador}">
 			<td class="text-center" th:text="${impressora.patrimonio}"></td>
