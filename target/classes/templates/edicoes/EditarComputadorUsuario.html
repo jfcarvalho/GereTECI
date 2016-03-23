@@ -26,8 +26,8 @@
 		<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Usuario Escolhido:</label>
 			<div class="col-sm-6">
-				<p th:text="${computador.usuario.nome}"></p>
-				<p th:text="${computador.usuario.setor.nome}"></p>
+				<p th:text="${computador.usuario} ? ${computador.usuario.nome} : 'Nenhum até o momento'" ></p>
+				<p th:text="${computador.usuario} ? ${computador.usuario.setor.nome}: 'Nenhum até o momento'"></p>
 			</div>
 		</div>
 		

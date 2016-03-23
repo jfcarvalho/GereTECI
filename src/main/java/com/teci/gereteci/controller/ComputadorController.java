@@ -223,6 +223,26 @@ public class ComputadorController {
 		return "redirect:/computadores/novo";
 		
 	}
+	
+	@RequestMapping(value="/{id_computador}/salvar3",method = RequestMethod.POST)
+	public String salvar3(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		if(errors.hasErrors())
+		{
+			return "cadastroComputador";
+		}
+		Usuario user = usuarios.findOne(usuario_id_usuario);
+		Computador pc = computadores.findOne(computador.getId_computador());
+		user.setComputador(pc);
+		pc.setUsuario(user);
+		computadores.save(pc);
+		usuarios.save(user);
+		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		return "redirect:/computadores/novo";
+		
+	}
+	
 	@RequestMapping("/{id_computador}/editar1")
 	
 	public ModelAndView editar1(@PathVariable("id_computador") Computador computador)
