@@ -38,9 +38,9 @@
 	
 		<table class="table table-bordered table-striped">
 		<tr th:each="impressora: ${impressorasComputador}">
-			<td class="text-center" th:text="${impressora.patrimonio}"></td>
-			<td class="text-center" th:text="${impressora.marca}"></td>
-			<td class="text-center" th:text="${impressora.ip}"></td>
+			<td class="text-center" th:text="${impressora.patrimonio} ? ${impressora.patrimonio}"></td>
+			<td class="text-center" th:text="${impressora.marca} ? ${impressora.marca}"></td>
+			<td class="text-center" th:text="${impressora.ip} ? ${impressora.ip}"></td>
 		</tr>
 		</table>
 		<div class="form-group">
@@ -63,7 +63,7 @@
 		<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Monitor Escolhido:</label>
 			<div class="col-sm-6">
-				<p th:text="${computador.recurso_monitor1.descricao}"></p>
+				<p th:text="${computador.recurso_monitor1} ? ${computador.recurso_monitor1.descricao}"></p>
 			</div>
 		</div>
 		
@@ -80,10 +80,10 @@
 		 <div class="form-group">
 		<label for="" class="col-sm-2 control-label">Teclado Escolhido:</label>
 			<div class="col-sm-6">
-				<p th:text="${computador.recurso_teclado.patrimonio}"></p>
+				<p th:text="${computador.recurso_teclado} ?  ${computador.recurso_teclado.patrimonio}"></p>
 			</div>
 			<div class="col-sm-6">
-				<p th:text="${computador.recurso_teclado.descricao}"></p>
+				<p th:text="${computador.recurso_teclado} ? ${computador.recurso_teclado.descricao}"></p>
 			</div>
 						
 		</div>
@@ -100,8 +100,8 @@
 		 <div class="form-group">
 		<label for="" class="col-sm-2 control-label">Mouse Escolhido:</label>
 			<div class="col-sm-6">
-				<p th:text="${computador.recurso_mouse.patrimonio}"></p>
-				<p th:text="${computador.recurso_mouse.descricao}"></p>
+				<p th:text="${computador.recurso_mouse} ? ${computador.recurso_mouse.patrimonio}"></p>
+				<p th:text="${computador.recurso_mouse} ? ${computador.recurso_mouse.descricao}"></p>
 			</div>
 		</div>
 		
@@ -118,8 +118,8 @@
 		 <div class="form-group">
 		<label for="" class="col-sm-2 control-label">Caixa de Som escolhida:</label>
 			<div class="col-sm-6">
-				<p th:text="${computador.recurso_caixa.patrimonio}"></p>
-				<p th:text="${computador.recurso_caixa.descricao}"></p>
+				<p th:text="${computador.recurso_caixa} ? ${computador.recurso_caixa.patrimonio}"></p>
+				<p th:text="${computador.recurso_caixa} ? ${computador.recurso_caixa.descricao}"></p>
 			</div>
 		</div>
 		
