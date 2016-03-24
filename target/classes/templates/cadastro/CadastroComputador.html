@@ -117,10 +117,22 @@
 		</div>
 	
 			<div class="form-group">
-		<label for="" class="col-sm-2 control-label">Monitor(es) Disponivel(eis):</label>
+		<label for="" class="col-sm-2 control-label">Monitor(es) Primário(s) Disponível(eis) :</label>
 			<div class="col-sm-6">
 				<select class="form-control disable-monitor-pc-input" name="recurso_monitor1">
-					<option th:each="recurso : ${todosMonitoresDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
+					<option th:each="recurso : ${todosMonitoresPrimariosDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
+				</select>
+				<div class="input-group">
+				        <input type="checkbox" class ="disable-monitor-pc-botao"/> Sem monitor  	
+				    </div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+		<label for="" class="col-sm-2 control-label">Monitor(es) Secundário(s) Disponível(eis) :</label>
+			<div class="col-sm-6">
+				<select class="form-control disable-monitor-pc-input" name="recurso_monitor2">
+					<option th:each="recurso : ${todosMonitoresSecundariosDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
 				<div class="input-group">
 				        <input type="checkbox" class ="disable-monitor-pc-botao"/> Sem monitor  	

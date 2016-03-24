@@ -92,6 +92,9 @@ public class Computador {
 	@JoinColumn(name="id_recurso_monitor")
 	private Monitor recurso_monitor1;
 	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST})
+	@JoinColumn(name="id_recurso_monitor_sec")
+	private Monitor recurso_monitor2;
+	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST})
 	@JoinColumn(name="id_recurso_teclado")
 	private Teclado recurso_teclado;
 	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST})
@@ -318,5 +321,14 @@ public class Computador {
 	{
 		this.recurso_caixa= recurso_caixa;
 	}
+	public Monitor getRecurso_monitor2()
+	{
+		return this.recurso_monitor2;
+	}
+	public void setRecurso_monitor2(Monitor monitor2)
+	{
+		this.recurso_monitor2 = monitor2;
+	}
+
 	
 }

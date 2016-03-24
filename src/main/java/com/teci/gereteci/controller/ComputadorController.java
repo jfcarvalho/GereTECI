@@ -84,7 +84,7 @@ public class ComputadorController {
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer recurso_caixa, @RequestParam Integer recurso_monitor1, @RequestParam Integer recurso_mouse, @RequestParam Integer recurso_teclado, Errors errors, RedirectAttributes attributes)
+	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer recurso_caixa, @RequestParam Integer recurso_monitor1, @RequestParam Integer recurso_monitor2, @RequestParam Integer recurso_mouse, @RequestParam Integer recurso_teclado, Errors errors, RedirectAttributes attributes)
 	{
 		Usuario user = new Usuario();
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
@@ -113,6 +113,13 @@ public class ComputadorController {
 			monitor.setComputador(computador);
 			monitores.save(monitor);
 			computador.setRecurso_monitor1(monitor);
+		}
+		if(recurso_monitor2 != null)
+		{
+			Monitor monitor = monitores.findOne(recurso_monitor2);
+			monitor.setComputador(computador);
+			monitores.save(monitor);
+			computador.setRecurso_monitor2(monitor);
 		}
 		if(recurso_teclado != null)
 		{
@@ -197,6 +204,15 @@ public class ComputadorController {
 			pc.setRecurso_monitor1(computador.getRecurso_monitor1());
 			m2.setComputador(pc);
 			monitores.save(m2);
+		}
+		if(computador.getRecurso_monitor2() != null) {
+			Monitor m2 = monitores.findOne(pc.getRecurso_monitor2().getId_recurso());
+			m2.setComputador(null);
+			monitores.save(m2);
+			Monitor m3 = monitores.findOne(computador.getRecurso_monitor2().getId_recurso());
+			pc.setRecurso_monitor2(computador.getRecurso_monitor2());
+			m3.setComputador(pc);
+			monitores.save(m3);
 		}
 		if(computador.getRecurso_mouse() != null) {
 			Mouse mo1 = mouses.findOne(pc.getRecurso_mouse().getId_recurso());
@@ -448,19 +464,41 @@ public class ComputadorController {
 	}
 	
 	
-	@ModelAttribute("todosMonitoresDisponiveis")
-	public List<Recurso> todasRecursosMonitorDisponiveis()
+	@ModelAttribute("todosMonitoresPrimariosDisponiveis")
+	public List<Monitor> todosMonitoresPrimariosDisponiveis()
 	{
 		
 		
-		List<Recurso> todosMonitores= recursos.findAll();
-		List<Recurso> todosMonitoresDisponiveis = new ArrayList<Recurso>();
+		List<Monitor> todosMonitores= monitores.findAll();
+		List<Monitor> todosMonitoresDisponiveis = new ArrayList<Monitor>();
 		Iterator it = todosMonitores.iterator();
 		while(it.hasNext())
 		{
-			Recurso obj = (Recurso) it.next();
+			Monitor obj = (Monitor) it.next();
 			System.out.println(obj.getTipo_recurso());
-			if(obj.getComputador() == null && obj.getTipo_recurso().equals("Monitor")) {
+			System.out.println(obj.getCategoria_monitor());
+			if(obj.getComputador() == null && obj.getCategoria_monitor().getCategoria().equals("Primário")) {
+				//System.out.println(obj.getId_recurso() + obj.getPolegadas());
+				todosMonitoresDisponiveis.add(obj);
+			}
+		}
+		return todosMonitoresDisponiveis;
+	}
+	
+	@ModelAttribute("todosMonitoresSecundariosDisponiveis")
+	public List<Monitor> todosMonitoresSecundariosDisponiveis()
+	{
+		
+		
+		List<Monitor> todosMonitores= monitores.findAll();
+		List<Monitor> todosMonitoresDisponiveis = new ArrayList<Monitor>();
+		Iterator it = todosMonitores.iterator();
+		while(it.hasNext())
+		{
+			Monitor obj = (Monitor) it.next();
+			System.out.println(obj.getTipo_recurso());
+			System.out.println(obj.getCategoria_monitor());
+			if(obj.getComputador() == null && obj.getCategoria_monitor().getCategoria().equals("Secundário")) {
 				//System.out.println(obj.getId_recurso() + obj.getPolegadas());
 				todosMonitoresDisponiveis.add(obj);
 			}

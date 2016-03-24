@@ -21,8 +21,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Computador.StatusComputador;
 import com.teci.gereteci.model.Recurso.CaixaDeSom;
+import com.teci.gereteci.model.Recurso.CategoriaMonitor;
 import com.teci.gereteci.model.Recurso.Monitor;
 import com.teci.gereteci.model.Recurso.Recurso;
+import com.teci.gereteci.model.Usuario.Nivel;
 import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Monitores;
 
@@ -57,7 +59,9 @@ public class MonitorController {
 		{
 			Computador computer= computadores.findOne(computador_id_computador);
 			monitor.setComputador(computer);
-			computer.setRecurso_monitor1(monitor);
+			if(monitor.getCategoria_monitor().getCategoria().equals("Primário"))
+				computer.setRecurso_monitor1(monitor);
+			else {computer.setRecurso_monitor2(monitor);}
 			computadores.save(computer);
 			//List<Recurso> resources = computer.getRecursos();
 			//resources.add(recurso);
@@ -117,6 +121,11 @@ public class MonitorController {
 	@ModelAttribute("todosStatusMonitor")
 	public List<StatusComputador> todosStatusMonitor() {
 		return Arrays.asList(StatusComputador.values());
+	}
+	
+	@ModelAttribute("todasCategoriasMonitor")
+	public List<CategoriaMonitor> todasCategoriasMonitor() {
+		return Arrays.asList(CategoriaMonitor.values());
 	}
 	
 	@RequestMapping(value="/{id_recurso}/manutencao", method=RequestMethod.PUT)
