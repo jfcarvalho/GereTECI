@@ -33,6 +33,8 @@ import com.teci.gereteci.repository.Teclados;
 
 public class TecladoController {
 	private static final String CADASTRO_VIEW_TECLADO = "/cadastro/CadastroTeclado"; 
+	private static final String EDICAO1_VIEW = "/edicoes/EditarTeclado";
+	private static final String EDICAO2_VIEW = "/edicoes/EditarTecladoComputador";
 	@Autowired
 	private Teclados teclados;
 	@Autowired
@@ -46,6 +48,19 @@ public class TecladoController {
 		//mv.addObject("todosNiveisUsuario", Nivel.values());
 		return mv;
 	}
+	
+@RequestMapping("/{id_recurso}/editar1")
+	
+	public ModelAndView editar1(@PathVariable("id_recurso") Teclado teclado)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO1_VIEW);
+		
+		mv.addObject("rec", teclado);
+		mv.addObject(teclado);
+		
+		return mv;
+	}
+
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Validated Teclado teclado, @RequestParam Integer computador_id_computador, Errors errors, RedirectAttributes attributes)
@@ -69,6 +84,74 @@ public class TecladoController {
 		attributes.addFlashAttribute("mensagem", "Teclado salvo com sucesso!");	
 		return "redirect:/teclados/novo";
 	}
+	@RequestMapping(value="/{id_recurso}/salvar1",method = RequestMethod.POST)
+	public String salvar1(@Validated Teclado teclado, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO1_VIEW);
+		if(errors.hasErrors())
+		{
+			return "cadastroComputador";
+		}
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+		Teclado t = teclados.findOne(teclado.getId_recurso());
+		t.setPatrimonio(teclado.getPatrimonio());
+		t.setDescricao(teclado.getDescricao());
+		t.setMarca(teclado.getMarca());
+		t.setCor(teclado.getCor());
+		t.setStatus(teclado.getStatus());
+		t.setFuncoes(teclado.getFuncoes());
+		t.setTipo_teclado(teclado.getTipo_teclado());
+		
+		teclados.save(t);
+		attributes.addFlashAttribute("mensagem", "Mouse salvo com sucesso!");	
+		return "redirect:/teclados/novo";
+		
+	}
+	@RequestMapping(value="/{id_recurso}/salvar2",method = RequestMethod.POST)
+	public String salvar2(@Validated Teclado teclado, @RequestParam Integer computador_id_computador, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO2_VIEW);
+		if(errors.hasErrors())
+		{
+			return "cadastroComputador";
+		}
+//		System.out.println(">>>>>> " + usuario_id_usuario);
+		Teclado t = teclados.findOne(teclado.getId_recurso());
+		System.out.println(">>>>>> ID do monitor: " + teclado.getId_recurso());
+		System.out.println(">>>>>> Tipo de Recurso " + teclado.getTipo_recurso());
+		System.out.println(">>>>>> ID do computador" + computador_id_computador);
+		
+		if(computador_id_computador != null)
+		{
+			if(t.getComputador() != null) {
+				Computador pc = computadores.findOne(t.getComputador().getId_computador()); //computador antigo
+				System.out.println(">>>>> computador antigo" + pc.getId_computador());	
+				pc.setRecurso_teclado(null); //OK
+			}
+			Computador pcnovo = computadores.findOne(computador_id_computador);
+			pcnovo.setRecurso_teclado(t);
+			t.setComputador(pcnovo);
+			teclados.save(t);
+			computadores.save(pcnovo);
+		}
+		teclados.save(t);
+		attributes.addFlashAttribute("mensagem", "Mouse salvo com sucesso!");	
+		return "redirect:/computadores/novo";
+		
+	}
+
+	@RequestMapping("/{id_recurso}/editar2")
+
+	public ModelAndView editar2(@PathVariable("id_recurso") Teclado teclado)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO2_VIEW);
+		
+		mv.addObject("rec", teclado);
+		mv.addObject(teclado);
+		
+		return mv;
+	}
+
 	@RequestMapping
 	public ModelAndView pesquisar()
 	{
