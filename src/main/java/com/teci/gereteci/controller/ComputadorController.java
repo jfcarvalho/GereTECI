@@ -26,7 +26,6 @@ import com.teci.gereteci.model.*;
 import com.teci.gereteci.model.Computador.Arquitetura;
 import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Computador.Memoria;
-import com.teci.gereteci.model.Computador.Recurso;
 import com.teci.gereteci.model.Computador.Sistema;
 import com.teci.gereteci.model.Computador.StatusComputador;
 import com.teci.gereteci.model.Impressora.Impressora;
@@ -34,6 +33,12 @@ import com.teci.gereteci.model.Internet.Dns_alternativo;
 import com.teci.gereteci.model.Internet.Dns_preferencial;
 import com.teci.gereteci.model.Internet.Gateway;
 import com.teci.gereteci.model.Internet.Mascara;
+import com.teci.gereteci.model.Recurso.CaixaDeSom;
+import com.teci.gereteci.model.Recurso.Midia;
+import com.teci.gereteci.model.Recurso.Monitor;
+import com.teci.gereteci.model.Recurso.Mouse;
+import com.teci.gereteci.model.Recurso.Recurso;
+import com.teci.gereteci.model.Recurso.Teclado;
 import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
 
@@ -44,6 +49,11 @@ import com.teci.gereteci.repository.*;
 @RequestMapping("/computadores")
 public class ComputadorController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroComputador"; 
+	private static final String EDICAO1_VIEW = "/edicoes/EditarComputador";
+	private static final String EDICAO2_VIEW = "/edicoes/EditarComputadorRecurso";
+	private static final String EDICAO3_VIEW = "/edicoes/EditarComputadorUsuario";
+	private static final String EDICAO4_VIEW = "/edicoes/EditarComputadorBackup";
+	private static final String EDICAO5_VIEW = "/edicoes/EditarComputadorFormatacao";
 	@Autowired
 	private Computadores computadores;
 	@Autowired
@@ -52,7 +62,18 @@ public class ComputadorController {
 	private Impressoras impressoras;
 	@Autowired
 	private Recursos recursos;
-	List<Usuario> todosUsuariosSemComputador = new ArrayList<Usuario>();
+	@Autowired
+	private CaixasDeSom caixas;
+	@Autowired
+	private Monitores monitores;
+	@Autowired
+	private Teclados teclados;
+	@Autowired
+	private Mouses mouses;
+	
+
+	
+	
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo()
@@ -63,8 +84,9 @@ public class ComputadorController {
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
+	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer recurso_caixa, @RequestParam Integer recurso_monitor1, @RequestParam Integer recurso_monitor2, @RequestParam Integer recurso_mouse, @RequestParam Integer recurso_teclado, Errors errors, RedirectAttributes attributes)
 	{
+		Usuario user = new Usuario();
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
 		{
@@ -74,14 +96,254 @@ public class ComputadorController {
 	
 		if(usuario_id_usuario != null)
 		{
-			Usuario user = usuarios.findOne(usuario_id_usuario);
-			//computador.setUsuario(user);
-		}		
+			user = usuarios.findOne(usuario_id_usuario);
+			computador.setUsuario(user);
+			
+		}
+		if(recurso_caixa != null)
+		{
+			CaixaDeSom caixa = caixas.findOne(recurso_caixa);
+			caixa.setComputador(computador); 
+			caixas.save(caixa);
+			computador.setRecurso_caixa(caixa);
+		}
+		if(recurso_monitor1 != null)
+		{
+			Monitor monitor = monitores.findOne(recurso_monitor1);
+			monitor.setComputador(computador);
+			monitores.save(monitor);
+			computador.setRecurso_monitor1(monitor);
+		}
+		if(recurso_monitor2 != null)
+		{
+			Monitor monitor = monitores.findOne(recurso_monitor2);
+			monitor.setComputador(computador);
+			monitores.save(monitor);
+			computador.setRecurso_monitor2(monitor);
+		}
+		if(recurso_teclado != null)
+		{
+			Teclado teclado = teclados.findOne(recurso_teclado);
+			teclado.setComputador(computador);
+			teclados.save(teclado);
+			computador.setRecurso_teclado(teclado);
+		}
+		if(recurso_mouse != null)
+		{
+			Mouse mouse = mouses.findOne(recurso_mouse);
+			mouse.setComputador(computador);
+			mouses.save(mouse);
+			computador.setRecurso_mouse(mouse);
+		}
 		computadores.save(computador);
+		Computador pc = computadores.findOne(computador.getId_computador());
+		user.setComputador(pc);
+		usuarios.save(user);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
 		return "redirect:/computadores/novo";
 		
 	}
+	@RequestMapping(value="/{id_computador}/salvar1",method = RequestMethod.POST)
+	public String salvar1(@Validated Computador computador, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		if(errors.hasErrors())
+		{
+			return "cadastroComputador";
+		}
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+		Computador pc = computadores.findOne(computador.getId_computador());
+		pc.setPatrimonio(computador.getPatrimonio());
+		pc.setSistema(computador.getSistema());
+		pc.setArquitetura(computador.getArquitetura());
+		pc.setIp(computador.getIp());
+		pc.setMascara(computador.getMascara());
+		pc.setGateway(computador.getGateway());
+		pc.setDns_preferencial(computador.getDns_preferencial());
+		pc.setDns_alternativo(computador.getDns_alternativo());
+		pc.setVersao_java(computador.getVersao_java());
+		pc.setData_compra(computador.getData_compra());
+		pc.setId_impressao(computador.getId_impressao());
+		pc.setMemoria(computador.getMemoria());
+		pc.setProcessador(computador.getProcessador());
+		pc.setStatus(computador.getStatus());
+		computadores.save(pc);
+		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		return "redirect:/computadores/novo";
+		
+	}
+	@RequestMapping(value="/{id_computador}/salvar2",method = RequestMethod.POST)
+	public String salvar2(@Validated Computador computador, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		if(errors.hasErrors())
+		{
+			return "cadastroComputador";
+		}
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+		Computador pc = computadores.findOne(computador.getId_computador());
+		if(computador.getImpressoras() != null) {
+			pc.setImpressoras(computador.getImpressoras());
+		}
+		System.out.println(computador.getRecurso_teclado()); 
+		if(computador.getRecurso_teclado() != null) {
+			//System.out.println(">>>>>>>>>>>> "+ pc.getRecurso_teclado().getId_recurso());
+			Teclado t1 = teclados.findOne(pc.getRecurso_teclado().getId_recurso());
+			t1.setComputador(null);
+			teclados.save(t1);
+			Teclado t2 = teclados.findOne(computador.getRecurso_teclado().getId_recurso());
+			pc.setRecurso_teclado(t2);
+			t2.setComputador(pc);
+			teclados.save(t2); //problema aqui
+		}
+		if(computador.getRecurso_monitor1() != null) {
+			Monitor m1 = monitores.findOne(pc.getRecurso_monitor1().getId_recurso());
+			m1.setComputador(null);
+			monitores.save(m1);
+			Monitor m2 = monitores.findOne(computador.getRecurso_monitor1().getId_recurso());
+			pc.setRecurso_monitor1(computador.getRecurso_monitor1());
+			m2.setComputador(pc);
+			monitores.save(m2);
+		}
+		if(computador.getRecurso_monitor2() != null) {
+			Monitor m2 = monitores.findOne(pc.getRecurso_monitor2().getId_recurso());
+			m2.setComputador(null);
+			monitores.save(m2);
+			Monitor m3 = monitores.findOne(computador.getRecurso_monitor2().getId_recurso());
+			pc.setRecurso_monitor2(computador.getRecurso_monitor2());
+			m3.setComputador(pc);
+			monitores.save(m3);
+		}
+		if(computador.getRecurso_mouse() != null) {
+			Mouse mo1 = mouses.findOne(pc.getRecurso_mouse().getId_recurso());
+			mo1.setComputador(null);
+			mouses.save(mo1);
+			Mouse mo2 = mouses.findOne(computador.getRecurso_mouse().getId_recurso());
+			pc.setRecurso_mouse(computador.getRecurso_mouse());
+			mo2.setComputador(pc);
+			mouses.save(mo2);
+		}
+		if(computador.getRecurso_caixa() != null)
+		{
+			CaixaDeSom c1 = caixas.findOne(pc.getRecurso_caixa().getId_recurso());
+			c1.setComputador(null);
+			caixas.save(c1);
+			CaixaDeSom c2 = caixas.findOne(computador.getRecurso_caixa().getId_recurso());
+			pc.setRecurso_caixa(computador.getRecurso_caixa());
+			c2.setComputador(pc);
+			caixas.save(c2);
+			
+		}
+		computadores.save(pc);
+		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		return "redirect:/computadores/novo";
+		
+	}
+	
+	@RequestMapping(value="/{id_computador}/salvar3",method = RequestMethod.POST)
+	public String salvar3(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		if(errors.hasErrors())
+		{
+			return "cadastroComputador";
+		}
+		Usuario user = usuarios.findOne(usuario_id_usuario);
+		Computador pc = computadores.findOne(computador.getId_computador());
+		user.setComputador(pc);
+		pc.setUsuario(user);
+		computadores.save(pc);
+		usuarios.save(user);
+		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		return "redirect:/computadores/novo";
+		
+	}
+	
+	@RequestMapping("/{id_computador}/editar1")
+	
+	public ModelAndView editar1(@PathVariable("id_computador") Computador computador)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO1_VIEW);
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+	
+	
+		//computadores.save(computador);
+		//attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		//return "redirect:/computadores/novo";
+		
+		mv.addObject("pc", computador);
+		mv.addObject(computador);
+		
+		return mv;
+	}
+	@RequestMapping("/{id_computador}/editar2")
+	public ModelAndView editar2(@PathVariable("id_computador") Computador computador)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO2_VIEW);
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+	
+	
+		//computadores.save(computador);
+		//attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		//return "redirect:/computadores/novo";
+		
+		mv.addObject("pc", computador);
+		mv.addObject(computador);
+		
+		return mv;
+	}
+	
+	@RequestMapping("/{id_computador}/editar3")
+	public ModelAndView editar3(@PathVariable("id_computador") Computador computador)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO3_VIEW);
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+	
+	
+		//computadores.save(computador);
+		//attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		//return "redirect:/computadores/novo";
+		
+		mv.addObject("pc", computador);
+		mv.addObject(computador);
+		
+		return mv;
+	}
+	
+	@RequestMapping("/{id_computador}/editar4")
+	public ModelAndView editar4(@PathVariable("id_computador") Computador computador)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO4_VIEW);
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+	
+	
+		//computadores.save(computador);
+		//attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		//return "redirect:/computadores/novo";
+		
+		mv.addObject("pc", computador);
+		mv.addObject(computador);
+		
+		return mv;
+	}
+	
+	@RequestMapping("/{id_computador}/editar5")
+	public ModelAndView editar5(@PathVariable("id_computador") Computador computador)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO5_VIEW);
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+	
+	
+		//computadores.save(computador);
+		//attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+		//return "redirect:/computadores/novo";
+		
+		mv.addObject("pc", computador);
+		mv.addObject(computador);
+		
+		return mv;
+	}
+	
 	
 	@RequestMapping
 	public ModelAndView pesquisar()
@@ -95,42 +357,17 @@ public class ComputadorController {
 	}
 
 	@RequestMapping("{id_computador}")
+
 	public ModelAndView edicao(@PathVariable("id_computador") Computador computador)
 	{
 		//ObjectMapper mapper = new ObjectMapper();
 		
-		System.out.println(">>>>>>> codigo recebido: " + computador.getId_computador());
-		//System.out.println(">>>>>>> Codigo de usuario recebido: " + computador.getUsuario().getId_usuario());
+		//System.out.println(">>>>>>> codigo recebido: " + computador.getId_computador());
+		//System.out.println(">>>>>>> Codigo de usuario recebido: " + recursos.getDescricao());
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
-		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		
-		List<Recurso> rrecursos = recursos.findAll();
-		List<Recurso> recursosComputador = new ArrayList<Recurso>();
-		Iterator it = rrecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso rec = (Recurso) it.next();
-			if(rec.getComputador() != null) {
-				if(rec.getComputador().getId_computador() == computador.getId_computador())
-				{
-					System.out.println(rec.getDescricao());
-					recursosComputador.add(rec);
-				}
-				else {System.out.print("NÃO PERTENCE!!!");}
-			}
-			else {System.out.print("NULLO!!");}
-		}
-		GsonBuilder b = new GsonBuilder();
-		b.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
-		Gson gson = b.create();
-	    //String json; 
-	    String json = gson.toJson(recursosComputador); //retornando nullo
-		System.out.println(">>>>>>>>>>>> "+ json);
-		//mv.addObject("lista_recursos", json);
-		
+		ModelAndView mv = new ModelAndView(EDICAO1_VIEW);	
 		mv.addObject("pc", computador);
-		
 		mv.addObject(computador);
 		
 		return mv;
@@ -183,12 +420,12 @@ public class ComputadorController {
 	public List<Usuario> todosUsuariosComputador()
 	{
 		List<Usuario> todosUsuarios = usuarios.findAll();
-		
+		List<Usuario> todosUsuariosSemComputador = new ArrayList<Usuario>();
 		Iterator it = todosUsuarios.iterator();
 		while(it.hasNext())
 		{
 			Usuario user = (Usuario) it.next();
-			if(user.getComputador() == null && !(todosUsuariosSemComputador.contains(user)))
+			if(user.getComputador() == null)
 			{
 					todosUsuariosSemComputador.add(user);
 					System.out.println(todosUsuariosSemComputador.size());
@@ -205,11 +442,12 @@ public class ComputadorController {
 		return todasImpressoras;
 	}
 	
-	@ModelAttribute("todasImpressorasDisponiveisComputador")
-	public List<Impressora> todasImpressorasDisponiveisComputador()
+	@ModelAttribute("todasImpressorasPertencentesComputador")
+	public List<Impressora> todasImpressorasPertencentesComputador()
 	{
 		List<Impressora> todasImpressoras= impressoras.findAll();
 		List<Impressora> todasImpressorasDisponiveis = new ArrayList<Impressora>();
+		List<Computador> todosComputadores = computadores.findAll();
 		Iterator it = todasImpressoras.iterator();
 		while(it.hasNext())
 		{
@@ -225,112 +463,51 @@ public class ComputadorController {
 		
 	}
 	
-	@ModelAttribute("todosRecursosComputador")
-	public List<Recurso> todasRecursosComputador()
-	{
-		List<Recurso> todosRecursos= recursos.findAll();
-		return todosRecursos;
-	}
-	@ModelAttribute("todosRecursosMonitorDisponiveis")
-	public List<Recurso> todasRecursosMonitorDisponiveis()
+	
+	@ModelAttribute("todosMonitoresPrimariosDisponiveis")
+	public List<Monitor> todosMonitoresPrimariosDisponiveis()
 	{
 		
 		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosMonitoresDisponiveis = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
+		List<Monitor> todosMonitores= monitores.findAll();
+		List<Monitor> todosMonitoresDisponiveis = new ArrayList<Monitor>();
+		Iterator it = todosMonitores.iterator();
 		while(it.hasNext())
 		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Monitor"))
-			{
-				if(obj.getComputador() == null)
-					todosMonitoresDisponiveis.add(obj);
+			Monitor obj = (Monitor) it.next();
+			System.out.println(obj.getTipo_recurso());
+			System.out.println(obj.getCategoria_monitor());
+			if(obj.getComputador() == null && obj.getCategoria_monitor().getCategoria().equals("Primário")) {
+				//System.out.println(obj.getId_recurso() + obj.getPolegadas());
+				todosMonitoresDisponiveis.add(obj);
 			}
 		}
 		return todosMonitoresDisponiveis;
 	}
 	
-	@ModelAttribute("todosRecursosMonitor")
-	public List<Recurso> todasRecursosMonitor()
+	@ModelAttribute("todosMonitoresSecundariosDisponiveis")
+	public List<Monitor> todosMonitoresSecundariosDisponiveis()
 	{
 		
 		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosMonitores = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
+		List<Monitor> todosMonitores= monitores.findAll();
+		List<Monitor> todosMonitoresDisponiveis = new ArrayList<Monitor>();
+		Iterator it = todosMonitores.iterator();
 		while(it.hasNext())
 		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Monitor"))
-			{
-				todosMonitores.add(obj);
+			Monitor obj = (Monitor) it.next();
+			System.out.println(obj.getTipo_recurso());
+			System.out.println(obj.getCategoria_monitor());
+			if(obj.getComputador() == null && obj.getCategoria_monitor().getCategoria().equals("Secundário")) {
+				//System.out.println(obj.getId_recurso() + obj.getPolegadas());
+				todosMonitoresDisponiveis.add(obj);
 			}
 		}
-		return todosMonitores;
+		return todosMonitoresDisponiveis;
 	}
 	
-	
-	@ModelAttribute("todosRecursosMouse")
-	public List<Recurso> todasRecursosMouse()
-	{
-		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosMouses = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Mouse"))
-			{
-				todosMouses.add(obj);
-			}
-		}
-		return todosMouses;
-	}
-	
-	@ModelAttribute("todosRecursosMouseDisponiveis")
-	public List<Recurso> todasRecursosMouseDisponiveis()
-	{
-		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosMousesDisponiveis = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Mouse"))
-			{
-				if(obj.getComputador() == null)
-					todosMousesDisponiveis.add(obj);
-			}
-		}
-		return todosMousesDisponiveis;
-	}
-	
-	@ModelAttribute("todosRecursosTeclado")
-	public List<Recurso> todasRecursosTeclado()
-	{
-		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosTeclados = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Teclado"))
-			{
-				todosTeclados.add(obj);
-			}
-		}
-		return todosTeclados;
-	}
-	
-	@ModelAttribute("todosRecursosTecladoDisponiveis")
-	public List<Recurso> todasRecursosTecladoDisponiveis()
+	@ModelAttribute("todosTecladosDisponiveis")
+	public List<Recurso> todasTecladosDisponiveis()
 	{
 		
 		
@@ -340,147 +517,60 @@ public class ComputadorController {
 		while(it.hasNext())
 		{
 			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Teclado"))
-			{
-				if(obj.getComputador() == null)
-					todosTecladosDisponiveis.add(obj);
-			}
+			if(obj.getComputador() == null && obj.getTipo_recurso().equals("Teclado"))
+				todosTecladosDisponiveis.add(obj);
+			
 		}
 		return todosTecladosDisponiveis;
 	}
 	
-	@ModelAttribute("todosRecursosMR")
-	public List<Recurso> todasRecursosMR()
+	@ModelAttribute("todosMousesDisponiveis")
+	public List<Recurso> todasMousesDisponiveis()
 	{
 		
 		
 		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosMR = new ArrayList<Recurso>();
+		List<Recurso> todosMousesDisponiveis = new ArrayList<>();
 		Iterator it = todosRecursos.iterator();
 		while(it.hasNext())
 		{
 			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Mídia removível"))
+			if(obj.getComputador() == null && obj.getTipo_recurso().equals("Mouse"))
+				todosMousesDisponiveis.add(obj);
+			
+		}
+		return todosMousesDisponiveis;
+	}
+	@ModelAttribute("todasCSDisponiveis")
+	
+	public List<Recurso> todasCsDisponiveis()
+	{
+		
+		
+		List<Recurso> todosRecursos= recursos.findAll();
+		List<Recurso> todasCSDisponiveis = new ArrayList<>();
+		Iterator it = todosRecursos.iterator();
+		//System.out.println(usuario_id_usuario);
+		while(it.hasNext())
+		{
+			Recurso obj = (Recurso) it.next();
+			if(obj.getComputador() == null && obj.getTipo_recurso().equals("CaixaDeSom"))
 			{
-				todosMR.add(obj);
+				todasCSDisponiveis.add(obj);
+				
 			}
 		}
-		return todosMR;
+		return todasCSDisponiveis;
 	}
 	
-	@ModelAttribute("todosRecursosMRDisponiveis")
-	public List<Recurso> todasRecursosMRDisponiveis()
+	
+	@ModelAttribute("todosMonitores")
+	public List<Recurso> todosMonitores()
 	{
-		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosMRDisponiveis = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Mídia removível"))
-			{
-				if(obj.getComputador() == null)
-					todosMRDisponiveis.add(obj);
-			}
-		}
-		return todosMRDisponiveis;
+		List<Recurso> todosMonitores= recursos.findAll();
+		return todosMonitores;
 	}
 	
-	@ModelAttribute("todosRecursosCS")
-	public List<Recurso> todasRecursosCS()
-	{
-		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosCS = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Caixa de Som"))
-			{
-				todosCS.add(obj);
-			}
-		}
-		return todosCS;
-	}
-	
-	@ModelAttribute("todosRecursosCSDisponiveis")
-	public List<Recurso> todasRecursosCSDisponiveis()
-	{
-		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosCSDisponiveis = new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Caixa de Som"))
-			{
-				todosCSDisponiveis.add(obj);
-			}
-		}
-		return todosCSDisponiveis;
-	}
-	@ModelAttribute("todosRecursosFone")
-	public List<Recurso> todasRecursosFone()
-	{
-		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosFones= new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Fone"))
-			{
-				todosFones.add(obj);
-			}
-		}
-		return todosFones;
-	}
-	@ModelAttribute("todosRecursosOutrosDisponiveis")
-	public List<Recurso> todasRecursosOutrosDisponiveis()
-	{
-		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosOutrosDisponiveis= new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Outros"))
-			{
-				if(obj.getComputador() == null)
-					todosOutrosDisponiveis.add(obj);
-			}
-		}
-		return todosOutrosDisponiveis;
-	}
-	
-	@ModelAttribute("todosRecursosOutros")
-	public List<Recurso> todasRecursosOutros()
-	{
-		
-		
-		List<Recurso> todosRecursos= recursos.findAll();
-		List<Recurso> todosOutros= new ArrayList<Recurso>();
-		Iterator it = todosRecursos.iterator();
-		while(it.hasNext())
-		{
-			Recurso obj = (Recurso) it.next();
-			if(obj.getCategoria().getCategoria().equals("Outros"))
-			{
-				todosOutros.add(obj);
-			}
-		}
-		return todosOutros;
-	}
 	
 	@RequestMapping(value="/{id_computador}/manutencao", method=RequestMethod.PUT)
 	public @ResponseBody String manutencao(@PathVariable Integer id_computador)

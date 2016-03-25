@@ -111,35 +111,44 @@
 		<label for="" class="col-sm-2 control-label">Impressora(s) Disponívei(s):</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="impressoras" multiple="multiple">
-					<option th:each="impressora : ${todasImpressorasDisponiveisComputador}" th:value="${{impressora.id_impressora}}" th:text="${impressora.marca} + ' - ' + ${impressora.ip} + ' - ' +${impressora.patrimonio}"></option>
+					<option th:each="impressora : ${todasImpressorasComputador}" th:value="${{impressora.id_impressora}}" th:text="${impressora.marca} + ' - ' + ${impressora.ip} + ' - ' +${impressora.patrimonio}"></option>
 				</select>
 			</div>
 		</div>
 	
 			<div class="form-group">
-		<label for="" class="col-sm-2 control-label">Monitore(s) Disponivei(s):</label>
+		<label for="" class="col-sm-2 control-label">Monitor(es) Primário(s) Disponível(eis) :</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recursos" multiple="multiple">
-					<option th:each="recurso : ${todosRecursosMonitorDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
+				<select class="form-control disable-monitor1-pc-input" name="recurso_monitor1">
+					<option th:each="recurso : ${todosMonitoresPrimariosDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
+				<div class="input-group">
+				        <input type="checkbox" class ="disable-monitor1-pc-botao"/> Sem monitor  	
+				    </div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+		<label for="" class="col-sm-2 control-label">Monitor(es) Secundário(s) Disponível(eis) :</label>
+			<div class="col-sm-6">
+				<select class="form-control disable-monitor2-pc-input" name="recurso_monitor2">
+					<option th:each="recurso : ${todosMonitoresSecundariosDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
+				</select>
+				<div class="input-group">
+				        <input type="checkbox" class ="disable-monitor2-pc-botao"/> Sem monitor  	
+				    </div>
 			</div>
 		</div>
 		 
 		  <div class="form-group">
 		<label for="" class="col-sm-2 control-label">Teclado(s) Disponívei(s):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recursos" multiple="multiple">
-					<option th:each="recurso : ${todosRecursosTecladoDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' +${recurso.patrimonio}"></option>
+			  	<select class="form-control disable-teclado-pc-input" name="recurso_teclado">
+					<option th:each="recurso : ${todosTecladosDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' +${recurso.patrimonio}"></option>
 				</select>
-			</div>
-		</div>
-		
-		<div class="form-group">
-		<label for="" class="col-sm-2 control-label">Mídia(s) removível(is) disponível(is):</label>
-			<div class="col-sm-6">
-				<select class="form-control" name="recursos" multiple="multiple">
-					<option th:each="recurso : ${todosRecursosMRDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
-				</select>
+				<div class="input-group">
+				        <input type="checkbox" class ="disable-teclado-pc-botao"/> Sem teclado  	
+				    </div>
 			</div>
 		</div>
 		
@@ -201,7 +210,7 @@
 		<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Usuário:</label>
 			<div class="col-sm-6">
-				<select class="form-control disable-usuario-pc-input" name="usuario_id_usuario" value="">
+				<select class="form-control disable-usuario-pc-input" name="usuario_id_usuario">
 					<option th:each="usuario : ${todosUsuariosComputador}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}"></option>
 					<!--  <option th:value="${pc} and ${pc.usuario} ? ${pc.usuario.id_usuario}" th:text="${pc} and ${pc.usuario}? ${pc.usuario.nome}" th:selected="true"></option> -->
 				</select>
@@ -217,27 +226,24 @@
 	<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Mouse(s) Disponível(is):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recursos" multiple="multiple">
-					<option th:each="recurso : ${todosRecursosMouseDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
+				<select class="form-control disable-mouse-pc-input" name="recurso_mouse">
+					<option th:each="recurso : ${todosMousesDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
 			</div>
+			<div class="input-group">
+				        <input type="checkbox" class ="disable-mouse-pc-botao"/> Sem mouse 	
+				    </div>
 		</div>
 		
 		<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Caixas de Som Disponível(is):</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="recursos" multiple="multiple">
-					<option th:each="recurso : ${todosRecursosCS}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
+				<select class="form-control disable-caixa-pc-input" name="recurso_caixa" >
+					<option th:each="recurso : ${todasCSDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
 			</div>
-		</div>
-		
-			<div class="form-group">
-		<label for="" class="col-sm-2 control-label">Outros:</label>
-			<div class="col-sm-6">
-				<select class="form-control" name="recursos" multiple="multiple">
-					<option th:each="recurso : ${todosRecursosOutrosDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
-				</select>
+			<div class="input-group">
+				        <input type="checkbox" class ="disable-caixa-pc-botao"/> Sem caixa de som  	
 			</div>
 		</div>
 		

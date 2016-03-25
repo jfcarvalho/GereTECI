@@ -51,9 +51,12 @@
 		<div class="form-group">
 			<label for="setor_id_setor" class="col-sm-2 control-label">Setor de alocação:</label>
 			<div class="col-sm-2">
-				<select class="form-control" name="setor_id_setor">
-					<option th:each="setor : ${todosSetoresUsuario}" th:value="${setor.id_setor}" th:text="${setor.nome}" th:selected="${su} ? ${su.setor.id_setor} == ${setor.id_setor}"></option>
+				<select class="form-control disable-setor-usuario-input" name="setor_id_setor">
+					<option th:each="setor : ${todosSetoresUsuario}" th:value="${setor.id_setor}" th:text="${setor.nome}" th:selected="${su} and ${su.setor} ? ${su.setor.id_setor} == ${setor.id_setor}"></option>
 				</select>
+				<div class="input-group">
+				        <input type="checkbox" class ="disable-setor-usuario-botao"/> Sem setor  	
+				    </div><!-- /input-group -->
 			</div>
 		</div>
 		<div class="form-group">

@@ -45,8 +45,12 @@ public class SetorController {
 			return "cadastroSetor";
 		}
 		System.out.println(">>>>>>>>> ID DO RESPONSAVEL: "+ responsavel);
-		Usuario user = usuarios.findOne(responsavel);
-		setor.setResponsavel(user);
+		if(responsavel != null)
+		{
+			Usuario user = usuarios.findOne(responsavel);
+			setor.setResponsavel(user);
+		}
+		
 		setores.save(setor);
 		
 		attributes.addFlashAttribute("mensagem", "Setor salvo com sucesso!");	
