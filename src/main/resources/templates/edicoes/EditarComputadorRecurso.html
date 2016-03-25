@@ -36,6 +36,7 @@
 	<input type="hidden" th:field="*{processador}" />
 	<input type="hidden" th:field="*{status}" />
 	
+	
 		<table class="table table-bordered table-striped">
 		<tr th:each="impressora: ${impressorasComputador}">
 			<td class="text-center" th:text="${impressora.patrimonio} ? ${impressora.patrimonio}"></td>
@@ -71,7 +72,7 @@
 		<label for="" class="col-sm-2 control-label">Monitor(es) Disponivel(eis):</label>
 			<div class="col-sm-6">
 				<select class="form-control enable-monitor-pc-lista" name="recurso_monitor1" disabled="disabled">
-					<option th:each="recurso : ${todosMonitoresDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
+					<option th:each="recurso : ${todosMonitoresPrimariosDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
 				<div><input type="checkbox" class ="enable-monitor-pc-check"/>Mudar monitor</div>
 			</div>
@@ -88,7 +89,7 @@
 		<label for="" class="col-sm-2 control-label">Monitor(es) Disponivel(eis):</label>
 			<div class="col-sm-6">
 				<select class="form-control enable-monitor-pc-lista" name="recurso_monitor1" disabled="disabled">
-					<option th:each="recurso : ${todosMonitoresDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
+					<option th:each="recurso : ${todosMonitoresSecundariosDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
 				<div><input type="checkbox" class ="enable-monitor-pc-check"/>Mudar monitor</div>
 			</div>

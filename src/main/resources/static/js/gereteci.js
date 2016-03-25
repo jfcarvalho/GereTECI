@@ -568,17 +568,30 @@ $('.enable-caixas-pc-check').on('click', function(event)
 	      }
 	});
 
-$('.disable-monitor-pc-botao').on('click', function(event)
+$('.disable-monitor1-pc-botao').on('click', function(event)
 		{
 	
-	  if ($('.disable-monitor-pc-botao').is(":checked")) {
+	  if ($('.disable-monitor1-pc-botao').is(":checked")) {
 	        // Disable elements.
-		  $(".disable-monitor-pc-input").attr("disabled", "disabled");
-			$(".disable-monitor-pc-input").prepend('<input type="hidden" name="recurso_monitor1" value=""/>');
+		  $(".disable-monitor1-pc-input").attr("disabled", "disabled");
+			$(".disable-monitor1-pc-input").prepend('<input type="hidden" name="recurso_monitor1" value=""/>');
 	      }	
-	  if (!$('.disable-monitor-pc-botao').is(":checked")) {
+	  if (!$('.disable-monitor1-pc-botao').is(":checked")) {
 	        // Enable elements.
-	        $(".disable-monitor-pc-input").removeAttr("disabled");
+	        $(".disable-monitor1-pc-input").removeAttr("disabled");
+	      }
+	});
+$('.disable-monitor2-pc-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-monitor2-pc-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-monitor2-pc-input").attr("disabled", "disabled");
+			$(".disable-monitor2-pc-input").prepend('<input type="hidden" name="recurso_monitor2" value=""/>');
+	      }	
+	  if (!$('.disable-monitor2-pc-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-monitor2-pc-input").removeAttr("disabled");
 	      }
 	});
 $('.disable-teclado-pc-botao').on('click', function(event)

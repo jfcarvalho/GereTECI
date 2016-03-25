@@ -47,8 +47,10 @@
 			
 		<div class="form-group">
 			<label for="polegadas" class="col-sm-2 control-label">Tipo de teclado:</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" id="tipo_teclado" name="tipo_teclado" th:field="*{tipo_teclado}" />
+			<div class="col-sm-6">
+				<select class="form-control" name="tipo_teclado">
+					<option th:each="tipos : ${todosTiposTeclado}" th:value="${tipos}" th:text="${tipos.tipo}" th:selected="${rec} ? ${rec.tipo_teclado.tipo} == ${tipos.tipo}"></option>
+				</select>
 			</div>
 		</div>
 		
@@ -60,9 +62,10 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="polegadas" class="col-sm-2 control-label">Possui funções:</label>
+			<label for="polegadas" class="col-sm-2 control-label">Possui funções?</label>
 			<div class="col-sm-2">
-				<input type="text" class="form-control" id="funcoes" name="funcoes" th:field="*{funcoes}" />
+				<input type="checkbox" id="funcoes" name="funcoes" th:value="'true'" th:text="'Sim'" th:checked="${teclado.funcoes}"/>
+				<input type="checkbox" id="funcoes" name="funcoes" th:value="'false'" th:text="'Não'" th:checked="!${teclado.funcoes}"/>
 			</div>
 		</div>
 		

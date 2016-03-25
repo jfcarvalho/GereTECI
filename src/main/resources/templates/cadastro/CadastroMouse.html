@@ -46,16 +46,19 @@
 		</div>
 			
 		<div class="form-group">
-			<label for="polegadas" class="col-sm-2 control-label">Tipo de mouse:</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" id="tipo_mouse" name="tipo_mouse" th:field="*{tipo_mouse}" />
-			</div>
+			<label for="tipos" class="col-sm-2 control-label">Tipo de mouse:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="tipo_mouse">
+					<option th:each="tipos : ${todosTiposMouse}" th:value="${tipos}" th:text="${tipos.tipo}" th:selected="${rec} and ${rec.tipo_mouse}? ${rec.tipo_mouse.tipo} == ${tipos.tipo}"></option>
+				</select>
+			</div>	
 		</div>
 
 	<div class="form-group">
 			<label for="polegadas" class="col-sm-2 control-label">Possui Rollagem(Scroll)?:</label>
 			<div class="col-sm-2">
-				<input type="text" class="form-control" id="rolagem" name="rolagem" th:field="*{rolagem}" />
+				<input type="checkbox" id="rolagem" name="rolagem" th:value="'true'" th:text="'Sim'" th:checked="${mouse} ? ${mouse.rolagem}"/>
+				<input type="checkbox" id="rolagem" name="rolagem" th:value="'false'" th:text="'Não'" th:checked="${mouse} ? !${mouse.rolagem}"/>
 			</div>
 		</div>
 		

@@ -23,6 +23,7 @@ import com.teci.gereteci.model.Computador.StatusComputador;
 import com.teci.gereteci.model.Recurso.Monitor;
 import com.teci.gereteci.model.Recurso.Mouse;
 import com.teci.gereteci.model.Recurso.Teclado;
+import com.teci.gereteci.model.Recurso.TipoES;
 import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Monitores;
 import com.teci.gereteci.repository.Teclados;
@@ -120,6 +121,11 @@ public class TecladoController {
 	@ModelAttribute("todosStatusTeclado")
 	public List<StatusComputador> todosStatusMonitor() {
 		return Arrays.asList(StatusComputador.values());
+	}
+	
+	@ModelAttribute("todosTiposTeclado")
+	public List<TipoES> todosTiposTeclado() {
+		return Arrays.asList(TipoES.values());
 	}
 	
 	@RequestMapping(value="/{id_recurso}/manutencao", method=RequestMethod.PUT)

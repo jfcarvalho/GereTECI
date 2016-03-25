@@ -23,7 +23,9 @@ import com.teci.gereteci.model.Computador.StatusComputador;
 import com.teci.gereteci.model.Recurso.CaixaDeSom;
 import com.teci.gereteci.model.Recurso.CategoriaMonitor;
 import com.teci.gereteci.model.Recurso.Monitor;
+import com.teci.gereteci.model.Recurso.Mouse;
 import com.teci.gereteci.model.Recurso.Recurso;
+import com.teci.gereteci.model.Recurso.Teclado;
 import com.teci.gereteci.model.Usuario.Nivel;
 import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Monitores;
@@ -33,6 +35,8 @@ import com.teci.gereteci.repository.Monitores;
 
 public class MonitorController {
 	private static final String CADASTRO_VIEW_MONITOR = "/cadastro/CadastroMonitor"; 
+	private static final String EDICAO1_VIEW = "/edicoes/EditarMonitor";
+	private static final String EDICAO2_VIEW = "/edicoes/EditarMonitorComputador";
 	@Autowired
 	private Monitores monitores;
 	@Autowired
@@ -71,6 +75,96 @@ public class MonitorController {
 		attributes.addFlashAttribute("mensagem", "Monitor salvo com sucesso!");	
 		return "redirect:/monitores/novo";
 	}
+	@RequestMapping(value="/{id_recurso}/salvar1",method = RequestMethod.POST)
+	public String salvar1(@Validated Monitor monitor, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO1_VIEW);
+		if(errors.hasErrors())
+		{
+			return "cadastroComputador";
+		}
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+		Monitor m = monitores.findOne(monitor.getId_recurso());
+		m.setPatrimonio(monitor.getPatrimonio());
+		m.setDescricao(monitor.getDescricao());
+		m.setMarca(monitor.getMarca());
+		m.setStatus(monitor.getStatus());
+		m.setPolegadas(monitor.getPolegadas());
+		m.setCategoria_monitor(monitor.getCategoria_monitor());
+		
+		monitores.save(m);
+		attributes.addFlashAttribute("mensagem", "Monitor salvo com sucesso!");	
+		return "redirect:/monitores/novo";
+		
+	}
+@RequestMapping("/{id_recurso}/editar1")
+	
+	public ModelAndView editar1(@PathVariable("id_recurso") Monitor monitor)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO1_VIEW);
+		
+		mv.addObject("rec", monitor);
+		mv.addObject(monitor);
+		
+		return mv;
+	}
+
+@RequestMapping("/{id_recurso}/editar2")
+
+public ModelAndView editar2(@PathVariable("id_recurso") Monitor monitor)
+{
+	ModelAndView mv = new ModelAndView(EDICAO2_VIEW);
+	
+	mv.addObject("rec", monitor);
+	mv.addObject(monitor);
+	
+	return mv;
+}
+@RequestMapping(value="/{id_recurso}/salvar2",method = RequestMethod.POST)
+public String salvar2(@Validated Monitor monitor, @RequestParam Integer computador_id_computador, Errors errors, RedirectAttributes attributes)
+{
+	ModelAndView mv = new ModelAndView(EDICAO2_VIEW);
+	if(errors.hasErrors())
+	{
+		return "cadastroComputador";
+	}
+//	System.out.println(">>>>>> " + usuario_id_usuario);
+	Monitor m = monitores.findOne(monitor.getId_recurso());
+	System.out.println(">>>>>> ID do monitor: " + monitor.getId_recurso());
+	System.out.println(">>>>>> Tipo de Recurso " + monitor.getTipo_recurso());
+	System.out.println(">>>>>> ID do computador" + computador_id_computador);
+	
+	if(computador_id_computador != null)
+	{
+		Computador pc = computadores.findOne(m.getComputador().getId_computador()); //computador antigo
+		System.out.println(">>>>> computador antigo" + pc.getId_computador());
+		if(m.getCategoria_monitor().getCategoria().equals("Primário"))
+		{
+			pc.setRecurso_monitor1(null); //OK	
+			Computador pcnovo = computadores.findOne(computador_id_computador);
+			pcnovo.setRecurso_monitor1(m);
+			m.setComputador(pcnovo);
+			monitores.save(m);
+			computadores.save(pc);
+		}
+		else if(m.getCategoria_monitor().getCategoria().equals("Secundário"))
+		{
+			pc.setRecurso_monitor2(null);
+			
+			Computador pcnovo = computadores.findOne(computador_id_computador);
+			pc.setRecurso_monitor1(m);
+			m.setComputador(pcnovo);
+			monitores.save(m);
+			computadores.save(pc);
+		}
+		
+	}
+	monitores.save(m);
+	attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
+	return "redirect:/computadores/novo";
+	
+}
+
 	@RequestMapping
 	public ModelAndView pesquisar()
 	{

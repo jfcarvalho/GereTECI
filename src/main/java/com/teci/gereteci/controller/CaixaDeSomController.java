@@ -23,6 +23,7 @@ import com.teci.gereteci.model.Computador.StatusComputador;
 import com.teci.gereteci.model.Recurso.CaixaDeSom;
 import com.teci.gereteci.model.Recurso.Midia;
 import com.teci.gereteci.model.Recurso.Mouse;
+import com.teci.gereteci.model.Recurso.TipoES;
 import com.teci.gereteci.repository.CaixasDeSom;
 import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Midias;
@@ -121,6 +122,12 @@ public class CaixaDeSomController {
 	public List<StatusComputador> todosStatusCS() {
 		return Arrays.asList(StatusComputador.values());
 	}
+	
+	@ModelAttribute("todosTiposCS")
+	public List<TipoES> todosTiposCS() {
+		return Arrays.asList(TipoES.values());
+	}
+
 	
 	@RequestMapping(value="/{id_recurso}/manutencao", method=RequestMethod.PUT)
 	public @ResponseBody String manutencao(@PathVariable Integer id_recurso)

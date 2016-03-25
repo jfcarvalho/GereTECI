@@ -47,8 +47,10 @@
 			
 		<div class="form-group">
 			<label for="polegadas" class="col-sm-2 control-label">Tipo de caixa de som:</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" id="tipo_cs" name="tipo_cs" th:field="*{tipo_cs}" />
+			<div class="col-sm-6">
+				<select class="form-control" name="tipo_cs">
+						<option th:each="tipos : ${todosTiposCS}" th:value="${tipos}" th:text="${tipos.tipo}" th:selected="${rec} ? ${rec.tipo_cs.tipo} == ${tipos.tipo}"></option>
+				</select>
 			</div>
 		</div>
 		

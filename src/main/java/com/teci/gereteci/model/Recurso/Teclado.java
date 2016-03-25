@@ -11,11 +11,11 @@ import javax.persistence.Id;
 public class Teclado extends Recurso {
 	
 	
-	private String tipo_teclado;
+	private TipoES tipo_teclado;
 	private boolean funcoes;
 	private String cor;
 	
-	public String getTipo_teclado()
+	public TipoES getTipo_teclado()
 	{
 		return this.tipo_teclado;
 	}
@@ -25,7 +25,7 @@ public class Teclado extends Recurso {
 		return this.funcoes;
 	}
 	
-	public void setTipo_teclado(String tipo_teclado)
+	public void setTipo_teclado(TipoES tipo_teclado)
 	{
 		this.tipo_teclado= tipo_teclado;
 	}
