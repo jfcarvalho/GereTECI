@@ -88,10 +88,10 @@
 			<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Monitor(es) Disponivel(eis):</label>
 			<div class="col-sm-6">
-				<select class="form-control enable-monitor-pc-lista" name="recurso_monitor1" disabled="disabled">
+				<select class="form-control enable-monitor2-pc-lista" name="recurso_monitor2" disabled="disabled">
 					<option th:each="recurso : ${todosMonitoresSecundariosDisponiveis}" th:value="${recurso.id_recurso}" th:text="${recurso.descricao} + ' - ' + ${recurso.marca} + ' - ' + ${recurso.patrimonio}"></option>
 				</select>
-				<div><input type="checkbox" class ="enable-monitor-pc-check"/>Mudar monitor</div>
+				<div><input type="checkbox" class ="enable-monitor2-pc-check"/>Mudar monitor</div>
 			</div>
 		</div>
 		

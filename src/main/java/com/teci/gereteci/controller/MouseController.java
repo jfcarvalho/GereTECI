@@ -32,6 +32,9 @@ import com.teci.gereteci.repository.Mouses;
 
 public class MouseController {
 	private static final String CADASTRO_VIEW_MOUSE = "/cadastro/CadastroMouse"; 
+	private static final String EDICAO1_VIEW = "/edicoes/EditarMouse";
+	private static final String EDICAO2_VIEW = "/edicoes/EditarMouseComputador";
+	
 	@Autowired
 	private Mouses mouses;
 	@Autowired
@@ -66,7 +69,86 @@ public class MouseController {
 		attributes.addFlashAttribute("mensagem", "Mouse salvo com sucesso!");	
 		return "redirect:/mouses/novo";
 	}
+	@RequestMapping(value="/{id_recurso}/salvar1",method = RequestMethod.POST)
+	public String salvar1(@Validated Mouse mouse, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO1_VIEW);
+		if(errors.hasErrors())
+		{
+			return "cadastroComputador";
+		}
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+		Mouse m = mouses.findOne(mouse.getId_recurso());
+		m.setPatrimonio(mouse.getPatrimonio());
+		m.setDescricao(mouse.getDescricao());
+		m.setMarca(mouse.getMarca());
+		m.setCor(mouse.getCor());
+		m.setStatus(mouse.getStatus());
+		m.setRolagem(mouse.getRolagem());
+		m.setTipo_mouse(mouse.getTipo_mouse());
+		
+		mouses.save(m);
+		attributes.addFlashAttribute("mensagem", "Mouse salvo com sucesso!");	
+		return "redirect:/mouses/novo";
+		
+	}
+@RequestMapping("/{id_recurso}/editar1")
 	
+	public ModelAndView editar1(@PathVariable("id_recurso") Mouse mouse)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO1_VIEW);
+		
+		mv.addObject("rec", mouse);
+		mv.addObject(mouse);
+		
+		return mv;
+	}
+@RequestMapping("/{id_recurso}/editar2")
+
+public ModelAndView editar2(@PathVariable("id_recurso") Mouse mouse)
+{
+	ModelAndView mv = new ModelAndView(EDICAO2_VIEW);
+	
+	mv.addObject("rec", mouse);
+	mv.addObject(mouse);
+	
+	return mv;
+}
+
+@RequestMapping(value="/{id_recurso}/salvar2",method = RequestMethod.POST)
+public String salvar2(@Validated Mouse mouse, @RequestParam Integer computador_id_computador, Errors errors, RedirectAttributes attributes)
+{
+	ModelAndView mv = new ModelAndView(EDICAO2_VIEW);
+	if(errors.hasErrors())
+	{
+		return "cadastroComputador";
+	}
+//	System.out.println(">>>>>> " + usuario_id_usuario);
+	Mouse m = mouses.findOne(mouse.getId_recurso());
+	System.out.println(">>>>>> ID do monitor: " + mouse.getId_recurso());
+	System.out.println(">>>>>> Tipo de Recurso " + mouse.getTipo_recurso());
+	System.out.println(">>>>>> ID do computador" + computador_id_computador);
+	
+	if(computador_id_computador != null)
+	{
+		if(m.getComputador() != null) {
+			Computador pc = computadores.findOne(m.getComputador().getId_computador()); //computador antigo
+			System.out.println(">>>>> computador antigo" + pc.getId_computador());	
+			pc.setRecurso_mouse(null); //OK
+		}
+		Computador pcnovo = computadores.findOne(computador_id_computador);
+		pcnovo.setRecurso_mouse(m);
+		m.setComputador(pcnovo);
+		mouses.save(m);
+		computadores.save(pcnovo);
+	}
+	mouses.save(m);
+	attributes.addFlashAttribute("mensagem", "Mouse salvo com sucesso!");	
+	return "redirect:/computadores/novo";
+	
+}
+
+
 	@RequestMapping
 	public ModelAndView pesquisar()
 	{

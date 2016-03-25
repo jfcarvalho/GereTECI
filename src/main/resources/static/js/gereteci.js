@@ -543,6 +543,20 @@ $('.enable-mouse-pc-check').on('click', function(event)
 	      }
 	});
 
+$('.enable-monitor2-pc-check').on('click', function(event)
+		{
+	
+	  if ($('.enable-monitor2-pc-check').is(":checked")) {
+	        // Disable elements.
+		  $(".enable-monitor2-pc-lista").removeAttr("disabled");
+	      }	
+	  if (!$('.enable-monitor2-pc-check').is(":checked")) {
+	        // Enable elements.
+	        $(".enable-monitor2-pc-lista").attr("disabled", "disabled");
+	      }
+	});
+
+
 $('.enable-teclado-pc-check').on('click', function(event)
 		{
 	

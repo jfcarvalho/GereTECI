@@ -10,11 +10,11 @@ import javax.persistence.Id;
 @DiscriminatorValue("Mouse")
 public class Mouse extends Recurso {
 	
-	private String tipo_mouse; //Se é usb o ps2
+	private TipoES tipo_mouse; //Se é usb o ps2
 	private boolean rolagem;
 	private String cor;
 	
-	public String getTipo_mouse()
+	public TipoES getTipo_mouse()
 	{
 		return this.tipo_mouse;
 	}
@@ -30,7 +30,7 @@ public class Mouse extends Recurso {
 	}
 	
 	
-	public void setTipo_mouse(String tipo_mouse)
+	public void setTipo_mouse(TipoES tipo_mouse)
 	{
 		this.tipo_mouse = tipo_mouse;
 	}
