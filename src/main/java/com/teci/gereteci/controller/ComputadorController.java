@@ -188,36 +188,44 @@ public class ComputadorController {
 		System.out.println(computador.getRecurso_teclado()); 
 		if(computador.getRecurso_teclado() != null) {
 			//System.out.println(">>>>>>>>>>>> "+ pc.getRecurso_teclado().getId_recurso());
-			Teclado t1 = teclados.findOne(pc.getRecurso_teclado().getId_recurso());
-			t1.setComputador(null);
-			teclados.save(t1);
+			if(pc.getRecurso_teclado() != null) {
+				Teclado t1 = teclados.findOne(pc.getRecurso_teclado().getId_recurso());
+				t1.setComputador(null);
+				teclados.save(t1);
+			}
 			Teclado t2 = teclados.findOne(computador.getRecurso_teclado().getId_recurso());
 			pc.setRecurso_teclado(t2);
 			t2.setComputador(pc);
 			teclados.save(t2); //problema aqui
 		}
 		if(computador.getRecurso_monitor1() != null) {
-			Monitor m1 = monitores.findOne(pc.getRecurso_monitor1().getId_recurso());
-			m1.setComputador(null);
-			monitores.save(m1);
+			if(pc.getRecurso_monitor1() != null) {
+				Monitor m1 = monitores.findOne(pc.getRecurso_monitor1().getId_recurso());
+				m1.setComputador(null);
+				monitores.save(m1);
+			}
 			Monitor m2 = monitores.findOne(computador.getRecurso_monitor1().getId_recurso());
 			pc.setRecurso_monitor1(computador.getRecurso_monitor1());
 			m2.setComputador(pc);
 			monitores.save(m2);
 		}
 		if(computador.getRecurso_monitor2() != null) {
-			Monitor m2 = monitores.findOne(pc.getRecurso_monitor2().getId_recurso());
-			m2.setComputador(null);
-			monitores.save(m2);
+			if(pc.getRecurso_monitor1() != null) {
+				Monitor m2 = monitores.findOne(pc.getRecurso_monitor2().getId_recurso());
+				m2.setComputador(null);
+				monitores.save(m2);
+			}
 			Monitor m3 = monitores.findOne(computador.getRecurso_monitor2().getId_recurso());
 			pc.setRecurso_monitor2(computador.getRecurso_monitor2());
 			m3.setComputador(pc);
 			monitores.save(m3);
 		}
 		if(computador.getRecurso_mouse() != null) {
-			Mouse mo1 = mouses.findOne(pc.getRecurso_mouse().getId_recurso());
-			mo1.setComputador(null);
-			mouses.save(mo1);
+			if(pc.getRecurso_mouse() != null) {
+				Mouse mo1 = mouses.findOne(pc.getRecurso_mouse().getId_recurso());
+				mo1.setComputador(null);
+				mouses.save(mo1);
+			}
 			Mouse mo2 = mouses.findOne(computador.getRecurso_mouse().getId_recurso());
 			pc.setRecurso_mouse(computador.getRecurso_mouse());
 			mo2.setComputador(pc);
@@ -225,9 +233,11 @@ public class ComputadorController {
 		}
 		if(computador.getRecurso_caixa() != null)
 		{
-			CaixaDeSom c1 = caixas.findOne(pc.getRecurso_caixa().getId_recurso());
-			c1.setComputador(null);
-			caixas.save(c1);
+			if(pc.getRecurso_caixa() != null) {
+				CaixaDeSom c1 = caixas.findOne(pc.getRecurso_caixa().getId_recurso());
+				c1.setComputador(null);
+				caixas.save(c1);
+			}
 			CaixaDeSom c2 = caixas.findOne(computador.getRecurso_caixa().getId_recurso());
 			pc.setRecurso_caixa(computador.getRecurso_caixa());
 			c2.setComputador(pc);
