@@ -33,6 +33,8 @@ import com.teci.gereteci.repository.Midias;
 
 public class CaixaDeSomController {
 	private static final String CADASTRO_VIEW_CS = "/cadastro/CadastroCaixaDeSom"; 
+	private static final String EDICAO1_VIEW = "/edicoes/EditarCaixa";
+	private static final String EDICAO2_VIEW = "/edicoes/EditarCaixaComputador";
 	@Autowired
 	private CaixasDeSom caixas;
 	@Autowired
@@ -70,6 +72,62 @@ public class CaixaDeSomController {
 		return "redirect:/caixas/novo";
 	}
 	
+	@RequestMapping(value="/{id_recurso}/salvar1",method = RequestMethod.POST)
+	public String salvar1(@Validated CaixaDeSom caixa, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO1_VIEW);
+		if(errors.hasErrors())
+		{
+			return "cadastroComputador";
+		}
+	//	System.out.println(">>>>>> " + usuario_id_usuario);
+		CaixaDeSom c = caixas.findOne(caixa.getId_recurso());
+		c.setPatrimonio(caixa.getPatrimonio());
+		c.setDescricao(caixa.getDescricao());
+		c.setMarca(caixa.getMarca());
+		c.setCor(caixa.getCor());
+		c.setStatus(caixa.getStatus());
+		c.setTipo_cs(caixa.getTipo_cs());
+		
+		caixas.save(c);
+		attributes.addFlashAttribute("mensagem", "Caixa de som salva com sucesso!");	
+		return "redirect:/caixas/novo";
+		
+	}
+	
+	@RequestMapping(value="/{id_recurso}/salvar2",method = RequestMethod.POST)
+	public String salvar2(@Validated CaixaDeSom caixa, @RequestParam Integer computador_id_computador, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO2_VIEW);
+		if(errors.hasErrors())
+		{
+			return "cadastroComputador";
+		}
+//		System.out.println(">>>>>> " + usuario_id_usuario);
+		CaixaDeSom c = caixas.findOne(caixa.getId_recurso());
+		System.out.println(">>>>>> ID do monitor: " + caixa.getId_recurso());
+		System.out.println(">>>>>> Tipo de Recurso " + caixa.getTipo_recurso());
+		System.out.println(">>>>>> ID do computador" + computador_id_computador);
+		
+		if(computador_id_computador != null)
+		{
+			if(c.getComputador() != null) {
+				Computador pc = computadores.findOne(c.getComputador().getId_computador()); //computador antigo
+				System.out.println(">>>>> computador antigo" + pc.getId_computador());	
+				pc.setRecurso_caixa(null); //OK
+			}
+			Computador pcnovo = computadores.findOne(computador_id_computador);
+			pcnovo.setRecurso_caixa(c);
+			c.setComputador(pcnovo);
+			caixas.save(c);
+			computadores.save(pcnovo);
+		}
+		caixas.save(c);
+		attributes.addFlashAttribute("mensagem", "Mouse salvo com sucesso!");	
+		return "redirect:/caixas/";
+		
+	}
+	
 	@RequestMapping
 	public ModelAndView pesquisar()
 	{
@@ -91,7 +149,30 @@ public class CaixaDeSomController {
 		mv.addObject(cs);
 		return mv;
 	}
+@RequestMapping("/{id_recurso}/editar1")
 	
+	public ModelAndView editar1(@PathVariable("id_recurso") CaixaDeSom caixa)
+	{
+		ModelAndView mv = new ModelAndView(EDICAO1_VIEW);
+		
+		mv.addObject("caixa", caixa);
+		mv.addObject(caixa);
+		
+		return mv;
+	}
+
+@RequestMapping("/{id_recurso}/editar2")
+
+public ModelAndView editar2(@PathVariable("id_recurso") CaixaDeSom caixa)
+{
+	ModelAndView mv = new ModelAndView(EDICAO2_VIEW);
+	
+	mv.addObject("caixa", caixa);
+	mv.addObject(caixa);
+	
+	return mv;
+}
+
 	@RequestMapping(value="{id_recurso}", method=RequestMethod.DELETE)
 	public String excluir(@PathVariable Integer id_recurso, RedirectAttributes attributes)
 	{
