@@ -87,7 +87,7 @@ public class CaixaDeSomController {
 		c.setMarca(caixa.getMarca());
 		c.setCor(caixa.getCor());
 		c.setStatus(caixa.getStatus());
-		c.setTipo_cs(caixa.getTipo_cs());
+		c.setTipoes(caixa.getTipoes());
 		
 		caixas.save(c);
 		attributes.addFlashAttribute("mensagem", "Caixa de som salva com sucesso!");	
@@ -176,6 +176,13 @@ public ModelAndView editar2(@PathVariable("id_recurso") CaixaDeSom caixa)
 	@RequestMapping(value="{id_recurso}", method=RequestMethod.DELETE)
 	public String excluir(@PathVariable Integer id_recurso, RedirectAttributes attributes)
 	{
+		CaixaDeSom caixa = caixas.findOne(id_recurso);
+		if(caixa.getComputador() != null)
+		{
+			Computador pc = computadores.findOne(caixa.getComputador().getId_computador());
+			pc.setRecurso_mouse(null);
+			computadores.save(pc);
+		}
 		caixas.delete(id_recurso);
 		attributes.addFlashAttribute("mensagem", "Caixa de Som excluída com sucesso com sucesso!");	
 		return "redirect:/caixas";

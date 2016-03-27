@@ -140,8 +140,10 @@ public class ComputadorController {
 		}
 		computadores.save(computador);
 		Computador pc = computadores.findOne(computador.getId_computador());
-		user.setComputador(pc);
-		usuarios.save(user);
+		if(usuario_id_usuario != null) {
+			user.setComputador(pc);
+			usuarios.save(user);
+		}
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
 		return "redirect:/computadores/novo";
 		

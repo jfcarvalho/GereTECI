@@ -100,7 +100,7 @@ public class TecladoController {
 		t.setCor(teclado.getCor());
 		t.setStatus(teclado.getStatus());
 		t.setFuncoes(teclado.getFuncoes());
-		t.setTipo_teclado(teclado.getTipo_teclado());
+		t.setTipoes(teclado.getTipoes());
 		
 		teclados.save(t);
 		attributes.addFlashAttribute("mensagem", "Mouse salvo com sucesso!");	
@@ -177,6 +177,13 @@ public class TecladoController {
 	@RequestMapping(value="{id_recurso}", method=RequestMethod.DELETE)
 	public String excluir(@PathVariable Integer id_recurso, RedirectAttributes attributes)
 	{
+		Teclado teclado = teclados.findOne(id_recurso);
+		if(teclado.getComputador() != null)
+		{
+			Computador pc = computadores.findOne(teclado.getComputador().getId_computador());
+			pc.setRecurso_teclado(null);
+			computadores.save(pc);
+		}
 		teclados.delete(id_recurso);
 		attributes.addFlashAttribute("mensagem", "Teclado excluido com sucesso com sucesso!");	
 		return "redirect:/teclados";

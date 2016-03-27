@@ -44,7 +44,7 @@
 																				<span class="label label-warning" th:text="${recurso.status.status}" th:case="'Em manutenção'"></span>
 																													  <span class="label label-danger" th:text="${recurso.status.status}" th:case="'Defeito e parado'"></span></div></td>  
 					<td class="text-center" th:text="${recurso.descricao} ? ${recurso.descricao}"></td>
-					<td class="text-center" th:text="${recurso.tipo_teclado}"></td>
+					<td class="text-center" th:text="${recurso.tipoes}"></td>
 					<td class="text-center" th:text="${recurso.funcoes}"></td>
 					<td class="text-center" th:text="${recurso.cor}"></td>
 					<td class="text-center" th:text="${recurso.computador} and ${recurso.computador.usuario} ? ${recurso.computador.usuario.nome}"></td>

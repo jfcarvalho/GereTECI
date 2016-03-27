@@ -21,6 +21,7 @@ import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Computador.StatusComputador;
 import com.teci.gereteci.model.Recurso.Midia;
 import com.teci.gereteci.model.Recurso.Monitor;
+import com.teci.gereteci.model.Recurso.TipoES;
 import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Midias;
 
@@ -45,26 +46,19 @@ public class MidiaController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Midia midia, @RequestParam Integer computador_id_computador, Errors errors, RedirectAttributes attributes)
+	public String salvar(@Validated Midia midia,  Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW_MIDIA);
 		if(errors.hasErrors())
 		{
 			return "cadastroMidia";
 		}
-		if(computador_id_computador != null)
-		{
-			Computador computer= computadores.findOne(computador_id_computador);
-			midia.setComputador(computer);
-			//List<Recurso> resources = computer.getRecursos();
-			//resources.add(recurso);
-			//computer.setRecursos(resources);
-		}
+		
 		midias.save(midia);
 		attributes.addFlashAttribute("mensagem", "Midia salva com sucesso!");	
 		return "redirect:/midias/novo";
 	}
-	
+	@RequestMapping
 	public ModelAndView pesquisar()
 	{
 		List<Midia> todasMidias= midias.findAll();
@@ -98,6 +92,10 @@ public class MidiaController {
 	@ModelAttribute("todosStatusMidia")
 	public List<StatusComputador> todosStatusMidia() {
 		return Arrays.asList(StatusComputador.values());
+	}
+	@ModelAttribute("todosTiposMidia")
+	public List<TipoES> todosTiposMidia() {
+		return Arrays.asList(TipoES.values());
 	}
 	
 }

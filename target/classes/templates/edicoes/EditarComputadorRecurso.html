@@ -47,7 +47,7 @@
 		<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Impressora(s) Escolhida(s):</label>
 			<div class="col-sm-6">
-				<p th:each="impressora : ${todasImpressorasComputador}" th:text="${impressora.marca} + ' - ' + ${impressora.ip} + ' - ' +${impressora.patrimonio}"></p>
+				<p th:text="${computador.impressoras}"></p>
 			</div>
 		</div>
 		

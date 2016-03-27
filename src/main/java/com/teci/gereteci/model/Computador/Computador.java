@@ -85,7 +85,7 @@ public class Computador {
 	@Enumerated(EnumType.STRING)
 	private Memoria memoria;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade= {CascadeType.REMOVE})
+	@ManyToMany(fetch = FetchType.LAZY, cascade= {CascadeType.PERSIST})
 	@JoinTable(name = "computador_has_impressora", joinColumns = { @JoinColumn(name="computador_id_computador")}, inverseJoinColumns={ @JoinColumn (name = "impressora_id_impressora") })
 	private List<Impressora> impressoras;
 	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST})

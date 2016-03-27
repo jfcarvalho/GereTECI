@@ -61,6 +61,8 @@ public class MouseController {
 		{
 			Computador computer= computadores.findOne(computador_id_computador);
 			mouse.setComputador(computer);
+			computer.setRecurso_mouse(mouse);
+			computadores.save(computer);
 			//List<Recurso> resources = computer.getRecursos();
 			//resources.add(recurso);
 			//computer.setRecursos(resources);
@@ -85,7 +87,7 @@ public class MouseController {
 		m.setCor(mouse.getCor());
 		m.setStatus(mouse.getStatus());
 		m.setRolagem(mouse.getRolagem());
-		m.setTipo_mouse(mouse.getTipo_mouse());
+		m.setTipoes(mouse.getTipoes());
 		
 		mouses.save(m);
 		attributes.addFlashAttribute("mensagem", "Mouse salvo com sucesso!");	
@@ -174,6 +176,13 @@ public String salvar2(@Validated Mouse mouse, @RequestParam Integer computador_i
 	@RequestMapping(value="{id_recurso}", method=RequestMethod.DELETE)
 	public String excluir(@PathVariable Integer id_recurso, RedirectAttributes attributes)
 	{
+		Mouse mouse = mouses.findOne(id_recurso);
+		if(mouse.getComputador() != null)
+		{
+			Computador pc = computadores.findOne(mouse.getComputador().getId_computador());
+			pc.setRecurso_mouse(null);
+			computadores.save(pc);
+		}
 		mouses.delete(id_recurso);
 		attributes.addFlashAttribute("mensagem", "Mouse excluido com sucesso com sucesso!");	
 		return "redirect:/mouses";
