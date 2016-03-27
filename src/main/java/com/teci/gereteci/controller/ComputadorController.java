@@ -33,6 +33,7 @@ import com.teci.gereteci.model.Internet.Dns_alternativo;
 import com.teci.gereteci.model.Internet.Dns_preferencial;
 import com.teci.gereteci.model.Internet.Gateway;
 import com.teci.gereteci.model.Internet.Mascara;
+import com.teci.gereteci.model.Licenca.LicencaOffice;
 import com.teci.gereteci.model.Recurso.CaixaDeSom;
 import com.teci.gereteci.model.Recurso.Midia;
 import com.teci.gereteci.model.Recurso.Monitor;
@@ -70,6 +71,8 @@ public class ComputadorController {
 	private Teclados teclados;
 	@Autowired
 	private Mouses mouses;
+	@Autowired
+	private LicencasOffice licencasOffice;
 	
 
 	
@@ -386,7 +389,102 @@ public class ComputadorController {
 	@RequestMapping(value="{id_computador}", method=RequestMethod.DELETE)
 	public String excluir(@PathVariable Integer id_computador, RedirectAttributes attributes)
 	{
-		computadores.delete(id_computador);
+		Computador pc = computadores.findOne(id_computador);
+		if(pc.getUsuario() != null) {
+			Usuario user = usuarios.findOne(pc.getUsuario().getId_usuario());
+			if(user.getComputador() != null)
+			{
+				user.setComputador(null); 
+			}
+			pc.setUsuario(null);
+			usuarios.save(user);
+		}
+		if(pc.getRecurso_caixa() != null) {
+			CaixaDeSom cs = caixas.findOne(pc.getRecurso_caixa().getId_recurso());
+			if(cs.getComputador() != null)
+			{
+				cs.setComputador(null); 
+			}
+			pc.setRecurso_caixa(null);
+			caixas.save(cs);
+		}
+		if(pc.getRecurso_teclado() != null) {
+			Teclado teclado = teclados.findOne(pc.getRecurso_teclado().getId_recurso());
+			if(teclado.getComputador() != null)
+			{
+				teclado.setComputador(null); 
+			}
+			pc.setRecurso_teclado(null);
+			teclados.save(teclado);
+		}
+		if(pc.getRecurso_mouse() != null) {
+			Mouse mouse = mouses.findOne(pc.getRecurso_mouse().getId_recurso());
+			if(mouse.getComputador() != null)
+			{
+				mouse.setComputador(null); 
+			}
+			pc.setRecurso_mouse(null);
+			mouses.save(mouse);
+			
+		}
+		if(pc.getRecurso_monitor1() != null) {
+			Monitor monitor = monitores.findOne(pc.getRecurso_monitor1().getId_recurso());
+			if(monitor.getComputador() != null)
+			{
+				monitor.setComputador(null); 
+			}
+			pc.setRecurso_monitor1(null);
+			monitores.save(monitor);
+		}
+		if(pc.getRecurso_monitor2() != null) {
+			Monitor monitor = monitores.findOne(pc.getRecurso_monitor2().getId_recurso());
+			if(monitor.getComputador() != null)
+			{
+				monitor.setComputador(null); 
+			}
+			pc.setRecurso_monitor2(null);
+		}
+		List<Impressora> print = impressoras.findAll();
+
+		Iterator it = print.iterator();
+		while(it.hasNext())
+		{
+			Impressora impressora = (Impressora) it.next();
+			Impressora impressora2 = impressoras.findOne(impressora.getId_impressora());
+			List<Computador> pcs = impressora2.getComputadores();
+			Iterator it2 = pcs.iterator();
+			while(it2.hasNext())
+			{
+				Computador pc2 = (Computador) it2.next();
+				if(pc2.getId_computador().equals(id_computador))
+				{
+					pcs.remove(id_computador);
+				}
+			}
+			impressoras.save(impressora2);
+		}
+		List<LicencaOffice> lo = licencasOffice.findAll();
+
+		Iterator itlo = lo.iterator();
+		while(itlo.hasNext())
+		{
+			LicencaOffice lo2 = (LicencaOffice) itlo.next();
+			LicencaOffice lo3 = licencasOffice.findOne(lo2.getId_licencaoffice());
+			List<Computador> pcs = lo3.getComputadores();
+			Iterator itlo2 = pcs.iterator();
+			while(itlo2.hasNext())
+			{
+				Computador pc2 = (Computador) itlo2.next();
+				if(pc2.getId_computador().equals(id_computador))
+				{
+					pcs.remove(id_computador);
+				}
+			}
+			licencasOffice.save(lo3);
+		}
+		
+		//computadores.save(pc);
+		computadores.delete(pc.getId_computador());
 		attributes.addFlashAttribute("mensagem", "Computador excluido com sucesso com sucesso!");	
 		return "redirect:/computadores";
 	}

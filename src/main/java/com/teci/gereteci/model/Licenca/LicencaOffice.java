@@ -5,6 +5,7 @@ package com.teci.gereteci.model.Licenca;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -39,7 +40,7 @@ public class LicencaOffice {
 	@Enumerated(EnumType.STRING)
 	private PlanoOffice plano;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER, cascade={CascadeType.REMOVE})
 	@JoinTable(name = "computador_has_licenca_office", joinColumns = { @JoinColumn(name="licenca_office_id_licencaoffice")}, inverseJoinColumns={ @JoinColumn (name = "computador_id_computador") })
 	private List<Computador> computadores;
 	
