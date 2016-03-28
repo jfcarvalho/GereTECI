@@ -54,7 +54,7 @@
 		</div>
 		<div class="form-group" >		
 		<div class="col-sm-6" style="margin-left: 10px;">
-				<input type="checkbox" name="troca_recursos" th:checked="${servico.visita_oi}"/>Não houve pedido de usuário<br/>
+				<input type="checkbox" name="sem_solicitante" th:checked="!${servico.solicitado}"/>Não houve pedido de usuário<br/>
 		</div>
 		</div>
 		
@@ -69,7 +69,7 @@
 		</div>
 		<div class="form-group" >		
 		<div class="col-sm-6" style="margin-left: 10px;">
-				<input type="checkbox" name="troca_recursos" th:checked="${servico.visita_oi}"/>Houve visita do técnico da Oi??<br/>
+				<input type="checkbox" name="visita_oi" th:checked="${servico.visita_oi}"/>Houve visita do técnico da Oi??<br/>
 		</div>
 		</div>					
 		<div class="form-group" >
@@ -94,7 +94,7 @@
 		</div>
 		<div class="form-group" >		
 		<div class="col-sm-6" style="margin-left: 10px;">
-				<input type="checkbox" name="troca_recursos" th:checked="${servico.visita_oi}"/>Houve troca de ramais?<br/>
+				<input type="checkbox" name="troca_ramal" th:checked="${servico.troca_ramal}"/>Houve troca de ramais?<br/>
 		</div>
 		</div>					
 	

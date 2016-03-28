@@ -17,9 +17,66 @@ public class ServicoInternet extends Servico {
 	private DescricaoProntaInternet descricao_pronta;
 	private boolean trocaip;
 	private boolean proxy;
+	private boolean visita_oi;
+	private boolean rds_aberto;
 	private String Ipantigo;
 	private String Ipnovo;
+	private String visitante_oi;
+	private String protocolo_oi;
+	private String numero_rds
+	private Date data_visita;
+	private Date data_rds;
 	
+	public boolean getVisita_oi()
+	{
+		return this.visita_oi;
+	}
+
+
+	public boolean getRds_aberto()
+	{
+		return this.visita_oi;
+	}
+
+	public void setVisita_oi(boolean visita_oi)
+	{
+		this.visita_oi = visita_oi;
+	}
+	public void setRds_aberto(boolean rds_aberto)
+	{
+		this.rds_aberto = rds_aberto;
+	}
+
+	public String getVisitante_oi()
+	{
+		return this.visitante_oi;
+	}
+
+	public String getProtocolo_oi()
+	{
+		return this.protocolo_oi;
+	}
+	public void setProtocolo_oi(String protocolo_oi)
+	{
+		return this.protocolo_oi;
+	}
+
+	public String getNumero_rds()
+	{
+		return this.numero_rds;
+	}
+
+	public void setVisita_oi(boolean visita_oi)
+	{
+		this.visita_oi = visita_oi;
+	}
+	public void setRds_aberto(boolean rds_aberto)
+	{
+		this.rds_aberto = rds_aberto;
+	}
+	
+	
+
 	
 	public void setDescricao_pronta(DescricaoProntaInternet descricaoPronta)
 	{

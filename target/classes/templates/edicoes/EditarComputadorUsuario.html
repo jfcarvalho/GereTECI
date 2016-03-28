@@ -24,15 +24,19 @@
 		
 	
 		<div class="form-group">
-		<label for="" class="col-sm-2 control-label">Usuario Escolhido:</label>
+		<label for="" class="col-sm-2 control-label">Usuarios escolhidos:</label>
 			<div class="col-sm-6">
-				<p th:text="${computador.usuario} ? ${computador.usuario.nome} : 'Nenhum até o momento'" ></p>
-				<p th:text="${computador.usuario} ? ${computador.usuario.setor.nome}: 'Nenhum até o momento'"></p>
+				Usuário Primário:<p th:text="${computador.usuario} ? ${computador.usuario.nome} : 'Sem informação do nome de usuario'"></p>
+				Setor: <p th:text="${computador.usuario} and ${computador.usuario.setor} ? ${computador.usuario.setor.nome}: 'Sem informação do nome do setor'"></p>
+				
+				Usuário Secundário: <p th:text="${computador.usuario_sec} ? ${computador.usuario_sec.nome} : 'Sem informações do nome de usuário'" ></p>
+				Setor: <p th:text="${computador.usuario} and ${computador.usuario_sec.setor} ? ${computador.usuario_sec.setor.nome}: 'Sem informação do nome do setor'"></p>
+			
 			</div>
 		</div>
 		
 			<div class="form-group">
-		<label for="" class="col-sm-2 control-label">Usuarios sem computador:</label>
+		<label for="" class="col-sm-2 control-label">Usuarios sem computador(Primário):</label>
 			<div class="col-sm-6">
 				<select class="form-control disable-usuario-pc-input" name="usuario_id_usuario">
 					<option th:each="usuario : ${todosUsuariosComputador}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}"></option>
@@ -40,7 +44,17 @@
 				</select>
 			</div>
 		</div>
-		 
+		
+		<div class="form-group">
+		<label for="" class="col-sm-2 control-label">Usuarios sem computador(Secundário):</label>
+			<div class="col-sm-6">
+				<select class="form-control disable-usuario-pc-input" name="usuario_sec">
+					<option th:each="usuario : ${todosUsuariosComputador}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}"></option>
+					<!--  <option th:value="${pc} and ${pc.usuario} ? ${pc.usuario.id_usuario}" th:text="${pc} and ${pc.usuario}? ${pc.usuario.nome}" th:selected="true"></option> -->
+				</select>
+			</div>
+		</div>
+				 
 			<div class="form-group">
      		<div class="col-sm-offset-2 col-sm-10">
 				<button type="submit" class="btn btn-primary">Cadastrar</button>

@@ -208,7 +208,7 @@
 		</div>
 		
 		<div class="form-group">
-		<label for="" class="col-sm-2 control-label">Usuário:</label>
+		<label for="" class="col-sm-2 control-label">Usuário primário:</label>
 			<div class="col-sm-6">
 				<select class="form-control disable-usuario-pc-input" name="usuario_id_usuario">
 					<option th:each="usuario : ${todosUsuariosComputador}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}"></option>
@@ -218,6 +218,22 @@
 				 <div class="col-sm-6" style="width:180px">
 				    <div class="input-group">
 				        <input type="checkbox" class ="disable-usuario-pc-botao"/> Sem usuário  	
+				    </div><!-- /input-group -->
+				  </div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+		<label for="" class="col-sm-2 control-label">Usuário secundário:</label>
+			<div class="col-sm-6">
+				<select class="form-control disable-usuario2-pc-input" name="usuario_sec">
+					<option th:each="usuario : ${todosUsuariosComputador}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}"></option>
+					<!--  <option th:value="${pc} and ${pc.usuario} ? ${pc.usuario.id_usuario}" th:text="${pc} and ${pc.usuario}? ${pc.usuario.nome}" th:selected="true"></option> -->
+				</select>
+				
+				 <div class="col-sm-6" style="width:180px">
+				    <div class="input-group">
+				        <input type="checkbox" class ="disable-usuario2-pc-botao"/> Sem usuário  	
 				    </div><!-- /input-group -->
 				  </div>
 			</div>

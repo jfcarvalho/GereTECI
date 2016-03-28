@@ -105,11 +105,11 @@ public class UsuarioController {
 			System.out.println(">>>>>>>>>>>>>>>>>> +" + u.getComputador().getIp());
 			System.out.println(">>>>>>>>>>>>>>>>>> +" + u.getComputador().getUsuario());
 			if (u.getComputador() != null) {
-			Computador computador = computadores.findOne(u.getComputador().getId_computador());
-			System.out.println(">>>>>> " + computador.getIp());
-			System.out.println(">>>>>> " + computador.getUsuario().getNome());
-			computador.setUsuario(null);
-			computadores.save(computador);
+				Computador computador = computadores.findOne(u.getComputador().getId_computador());
+				System.out.println(">>>>>> " + computador.getIp());
+				System.out.println(">>>>>> " + computador.getUsuario().getNome());
+				computador.setUsuario(null);
+				computadores.save(computador);
 		}
 		if(u.getSetor() != null) {
 			System.out.println(">>>>>>>>>>>>>>>>>> +" + u.getSetor());

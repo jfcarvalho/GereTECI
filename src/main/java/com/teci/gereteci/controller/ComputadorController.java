@@ -87,9 +87,10 @@ public class ComputadorController {
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer recurso_caixa, @RequestParam Integer recurso_monitor1, @RequestParam Integer recurso_monitor2, @RequestParam Integer recurso_mouse, @RequestParam Integer recurso_teclado, Errors errors, RedirectAttributes attributes)
+	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer usuario_sec, @RequestParam Integer recurso_caixa, @RequestParam Integer recurso_monitor1, @RequestParam Integer recurso_monitor2, @RequestParam Integer recurso_mouse, @RequestParam Integer recurso_teclado, Errors errors, RedirectAttributes attributes)
 	{
 		Usuario user = new Usuario();
+		Usuario user2 = new Usuario();
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
 		{
@@ -101,6 +102,12 @@ public class ComputadorController {
 		{
 			user = usuarios.findOne(usuario_id_usuario);
 			computador.setUsuario(user);
+			
+		}
+		if(usuario_sec != null)
+		{
+			user2 = usuarios.findOne(usuario_sec);
+			computador.setUsuario_sec(user2);
 			
 		}
 		if(recurso_caixa != null)
@@ -144,6 +151,12 @@ public class ComputadorController {
 			user.setComputador(pc);
 			usuarios.save(user);
 		}
+		if(usuario_sec != null)
+		{
+			user2.setComputador(pc);
+			usuarios.save(user2);
+		}
+		
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
 		return "redirect:/computadores/novo";
 		
@@ -256,7 +269,7 @@ public class ComputadorController {
 	}
 	
 	@RequestMapping(value="/{id_computador}/salvar3",method = RequestMethod.POST)
-	public String salvar3(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
+	public String salvar3(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer usuario_sec, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
@@ -264,11 +277,16 @@ public class ComputadorController {
 			return "cadastroComputador";
 		}
 		Usuario user = usuarios.findOne(usuario_id_usuario);
+		Usuario user2 = usuarios.findOne(usuario_sec);
 		Computador pc = computadores.findOne(computador.getId_computador());
 		user.setComputador(pc);
+		user2.setComputador(pc);
 		pc.setUsuario(user);
+		pc.setUsuario_sec(user2);
+		
 		computadores.save(pc);
 		usuarios.save(user);
+		usuarios.save(user2);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
 		return "redirect:/computadores/novo";
 		
@@ -400,6 +418,16 @@ public class ComputadorController {
 			}
 			pc.setUsuario(null);
 			usuarios.save(user);
+		}
+		if(pc.getUsuario_sec() != null)
+		{
+			Usuario user2 = usuarios.findOne(pc.getUsuario_sec().getId_usuario());
+			if(user2.getComputador() != null)
+			{
+				user2.setComputador(null); 
+			}
+			pc.setUsuario_sec(null);
+			usuarios.save(user2);
 		}
 		if(pc.getRecurso_caixa() != null) {
 			CaixaDeSom cs = caixas.findOne(pc.getRecurso_caixa().getId_recurso());
