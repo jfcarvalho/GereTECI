@@ -276,6 +276,7 @@ public class ComputadorController {
 		{
 			return "cadastroComputador";
 		}
+		
 		Usuario user = usuarios.findOne(usuario_id_usuario);
 		Usuario user2 = usuarios.findOne(usuario_sec);
 		Computador pc = computadores.findOne(computador.getId_computador());

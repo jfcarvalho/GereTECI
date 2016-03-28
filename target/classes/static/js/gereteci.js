@@ -451,6 +451,20 @@ $('.disable-usuario-pc-botao').on('click', function(event)
 	      }
 	});
 
+$('.disable-usuario2-pc-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-usuario2-pc-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-usuario2-pc-input").attr("disabled", "disabled");
+			$(".disable-usuario2-pc-input").prepend('<input type="hidden" name="usuario_sec" value=""/>');
+	      }	
+	  if (!$('.disable-usuario2-pc-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-usuario2-pc-input").removeAttr("disabled");
+	      }
+	});
+
 $('.disable-patrimonio-impressora-botao').on('click', function(event)
 		{
 	
