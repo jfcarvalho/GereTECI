@@ -42,7 +42,6 @@ public abstract class Servico {
 	@JoinColumn(name="usuario_id_usuario")
 	private Usuario solicitado;
 	
-	@Size(min=1, max=100, message="O tamanho do campo nome tem que ser entre 1 e 20")
 	private String descricao_problema;
 	@Column(name = "categoria", insertable=false, updatable=false)
 	private String categoria;

@@ -1,20 +1,23 @@
 package com.teci.gereteci.model.Recurso;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@DiscriminatorValue("Midia")
+
 public class Midia extends Recurso {
 	
 	
-	private String tipo_midia;
+	private TipoES tipoes;
 	private String capacidade;
 	
-	public String getTipo_midia()
+	public TipoES getTipoes()
 	{
-		return this.tipo_midia;
+		return this.tipoes;
 	}
 	
 	public String getCapacidade()
@@ -22,9 +25,9 @@ public class Midia extends Recurso {
 		return this.capacidade;
 	}
 	
-	public void setTipo_midia(String tipo_midia)
+	public void setTipoes(TipoES tipoes)
 	{
-		this.tipo_midia= tipo_midia;
+		this.tipoes= tipoes;
 	}
 	public void setCapacidade(String capacidade)
 	{

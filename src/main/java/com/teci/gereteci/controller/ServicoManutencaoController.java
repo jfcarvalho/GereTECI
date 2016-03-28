@@ -1,6 +1,8 @@
 package com.teci.gereteci.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.Computador.Memoria;
 import com.teci.gereteci.model.Computador.StatusComputador;
+import com.teci.gereteci.model.Recurso.Recurso;
 import com.teci.gereteci.model.Servico.DescricaoManutencao;
 import com.teci.gereteci.model.Servico.ServicoManutencao;
 import com.teci.gereteci.model.Servico.StatusServico;
@@ -103,6 +106,19 @@ public class ServicoManutencaoController {
 		List<Usuario> users = usuarios.findAll();
 		return users;
 	}
-	
+	@ModelAttribute("todosUsuariosTECI")
+	public List<Usuario> todosAtendentesTECI() {
+		List<Usuario> users = usuarios.findAll();
+		List<Usuario> todosUsuariosTECI = new ArrayList<Usuario>();
+		Iterator it = users.iterator();
+		while(it.hasNext())
+		{
+			Usuario obj = (Usuario) it.next();
+			if(obj.getNivel_acesso().getNivel().equals("Administrador") || obj.getNivel_acesso().getNivel().equals("Usuário TECI"))
+				todosUsuariosTECI.add(obj);
+			
+		}
+		return todosUsuariosTECI;
+	}
 	
 }

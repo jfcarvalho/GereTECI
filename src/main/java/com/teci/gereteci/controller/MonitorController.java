@@ -190,9 +190,21 @@ public String salvar2(@Validated Monitor monitor, @RequestParam Integer computad
 	@RequestMapping(value="{id_recurso}", method=RequestMethod.DELETE)
 	public String excluir(@PathVariable Integer id_recurso, RedirectAttributes attributes)
 	{
+		Monitor monitor = monitores.findOne(id_recurso);
+		if(monitor.getComputador() != null)
+		{
+			Computador pc = computadores.findOne(monitor.getComputador().getId_computador());
+			if (monitor.getCategoria_monitor().getCategoria().equals("Primário"))
+				pc.setRecurso_monitor1(null);
+			else
+				pc.setRecurso_monitor1(null);
+			computadores.save(pc);
+		}
 		monitores.delete(id_recurso);
 		attributes.addFlashAttribute("mensagem", "Monitor excluido com sucesso com sucesso!");	
 		return "redirect:/monitores";
+		
+		
 	}
 	
 	@ModelAttribute("todosComputadoresDisponiveis")

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
+<head>
+
+<title>Cadastro de Serviço de Rede</title>
+</head>
+
+<section layout:fragment="conteudo">
+<form class="form-horizontal" method="POST" action="/servicosemail" th:object="${servico}">
+		<div layout:include="/mensagem/MensagemUsuario"></div>
+		<div layout:include="/mensagem/MensagemErro"></div>
+		<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+			<h1 class="panel-title">Novo Serviço de Rede</h1>
+		<a class="btn btn-link aw-link-panel" href="/servicosemail">Voltar para pesquisa</a>
+		</div>
+		</div>
+	
+	
+	<div class="panel-body">
+	<div class="boxes">
+	<input type="hidden" th:field="*{id_servico}" />
+	
+	<div class="form-group" >
+			<label for="identificador" class="col-sm-2 control-label">Protocolo:</label>
+			<div class="col-sm-6">
+				<input class ="form-control" type="text"  id="protocolo" name="protocolo" th:field="*{protocolo}"/>
+			</div>
+		</div>
+		
+	<div class="form-group">
+			<label for="data_compra" class="col-sm-2 control-label">Data da Ocorrência:</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="data_ocorrencia" name="data_ocorrencia" th:field="*{data_ocorrencia}" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR" data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom" value="teste"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="data_compra" class="col-sm-2 control-label">Data de Encerramento:</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="data_encerramento" name="data_encerramento" th:field="*{data_encerramento}" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR" data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom" value="teste"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="sistema" class="col-sm-2 control-label">Usuário solicitante:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="usuario_id_usuario" >
+					<option th:each="usuario : ${todosUsuarios}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}" th:selected="${servico.solicitado} ? ${servico.solicitado.nome} == ${usuario.nome}"></option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="sistema" class="col-sm-2 control-label">Usuário atendente:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="atendente" >
+					<option th:each="usuario : ${todosUsuariosTECI}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}" th:selected="${servico.atendente} ? ${servico.atendente.nome} == ${usuario.nome}"></option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="form-group" style="margin-left: 10px">
+			
+			<div class="col-sm-6">
+				<input type="checkbox" name="criacao_usuario" th:checked="${servico.criacao_usuario}"/>Houve criação de nova conta de usuário?<br/>
+				<input type="checkbox" name="alteracao_usuario" th:checked="${servico.alteracao_usuario}"/>Houve alteração da conta de usuário?<br/>
+				<input type="checkbox" name="exclusao_usuario" th:checked="${servico.exclusao_usuario}"/>Houve exclusão de conta de usuário?<br/>
+				<input type="checkbox" name="troca_senha" th:checked="${servico.troca_senha}"/>Houve troca de senha?<br/>
+				  <input type="checkbox" name="mudanca_plano" th:checked="${servico.mudanca_plano}"/>Houve mudança de plano?<br/>
+				   <br/>Usuário/Conta: <input class ="form-control" type="text" id="conta" name="conta" th:field="*{conta}" /> 
+			</div>
+		</div>
+		<div>
+		
+		</div>
+		
+
+		</div>
+		  <div class="boxes">
+		
+		<div class="form-group" >
+			<label for="descricao_problema" class="col-sm-2 control-label">Descrição do problema:</label>
+			<div class="col-sm-6">
+				<textarea rows="8" cols="170" class ="form-control" id="descricao_problema" name="descricao_problema" th:field="*{descricao_problema}"></textarea>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="descricao_problema" class="col-sm-2 control-label">Descrição pronta:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="descricao_pronta">
+					<option th:each="descricaoPronta : ${todasDescricoesServicos}" th:value="${descricaoPronta}" th:text="${descricaoPronta.descricao}" th:selected="${servico.descricao_pronta} ? ${servico.descricao_pronta} == ${descricaoPronta}"></option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="status" class="col-sm-2 control-label">Situação:</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="status">
+					<option th:each="statusServico : ${todosStatusServico}" th:value="${statusServico}" th:text="${statusServico.descricao}" th:selected="${servico.status} ? ${servico.status} == ${statusServico}"></option>
+				</select>	
+			</div>
+			
+			
+		
+		</div>
+		<div class="form-group">
+			<label for="descricao_problema" class="col-sm-2 control-label">Solução adotada:</label>
+			<div class="col-sm-6">
+				<textarea rows="8" cols="60" class ="form-control" id="descricao_solucao" name="descricao_solucao" th:field="*{descricao_solucao}"></textarea>
+			</div>
+		</div>
+		
+		
+		
+	
+	
+		</div>
+				
+			<div class="form-group">
+     		<div class="col-sm-offset-2 col-sm-10">
+				<br/><button type="submit" class="btn btn-primary">Cadastrar</button>
+			</div>
+		</div>
+	
+	</div>
+	
+	</div>
+</form>
+</section>
+</html>

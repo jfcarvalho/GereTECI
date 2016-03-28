@@ -8,12 +8,12 @@ import javax.persistence.Entity;
 @DiscriminatorValue("CaixaDeSom")
 public class CaixaDeSom extends Recurso {
 	
-	private String tipo_cs;
+	private String tipoes;
 	private String cor;
 	
-	public String getTipo_cs()
+	public String getTipoes()
 	{
-		return this.tipo_cs;
+		return this.tipoes;
 	}
 	
 	public String getCor()
@@ -21,9 +21,9 @@ public class CaixaDeSom extends Recurso {
 		return this.cor;
 	}
 	
-	public void setTipo_cs(String tipo_cs)
+	public void setTipoes(String tipo_cs)
 	{
-		this.tipo_cs= tipo_cs;
+		this.tipoes= tipo_cs;
 	}
 	public void setCor(String cor)
 	{

@@ -33,6 +33,7 @@ import com.teci.gereteci.model.Internet.Dns_alternativo;
 import com.teci.gereteci.model.Internet.Dns_preferencial;
 import com.teci.gereteci.model.Internet.Gateway;
 import com.teci.gereteci.model.Internet.Mascara;
+import com.teci.gereteci.model.Licenca.LicencaOffice;
 import com.teci.gereteci.model.Recurso.CaixaDeSom;
 import com.teci.gereteci.model.Recurso.Midia;
 import com.teci.gereteci.model.Recurso.Monitor;
@@ -70,6 +71,8 @@ public class ComputadorController {
 	private Teclados teclados;
 	@Autowired
 	private Mouses mouses;
+	@Autowired
+	private LicencasOffice licencasOffice;
 	
 
 	
@@ -84,9 +87,10 @@ public class ComputadorController {
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer recurso_caixa, @RequestParam Integer recurso_monitor1, @RequestParam Integer recurso_monitor2, @RequestParam Integer recurso_mouse, @RequestParam Integer recurso_teclado, Errors errors, RedirectAttributes attributes)
+	public String salvar(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer usuario_sec, @RequestParam Integer recurso_caixa, @RequestParam Integer recurso_monitor1, @RequestParam Integer recurso_monitor2, @RequestParam Integer recurso_mouse, @RequestParam Integer recurso_teclado, Errors errors, RedirectAttributes attributes)
 	{
 		Usuario user = new Usuario();
+		Usuario user2 = new Usuario();
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
 		{
@@ -98,6 +102,12 @@ public class ComputadorController {
 		{
 			user = usuarios.findOne(usuario_id_usuario);
 			computador.setUsuario(user);
+			
+		}
+		if(usuario_sec != null)
+		{
+			user2 = usuarios.findOne(usuario_sec);
+			computador.setUsuario_sec(user2);
 			
 		}
 		if(recurso_caixa != null)
@@ -137,8 +147,16 @@ public class ComputadorController {
 		}
 		computadores.save(computador);
 		Computador pc = computadores.findOne(computador.getId_computador());
-		user.setComputador(pc);
-		usuarios.save(user);
+		if(usuario_id_usuario != null) {
+			user.setComputador(pc);
+			usuarios.save(user);
+		}
+		if(usuario_sec != null)
+		{
+			user2.setComputador(pc);
+			usuarios.save(user2);
+		}
+		
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
 		return "redirect:/computadores/novo";
 		
@@ -210,7 +228,7 @@ public class ComputadorController {
 			monitores.save(m2);
 		}
 		if(computador.getRecurso_monitor2() != null) {
-			if(pc.getRecurso_monitor1() != null) {
+			if(pc.getRecurso_monitor2() != null) {
 				Monitor m2 = monitores.findOne(pc.getRecurso_monitor2().getId_recurso());
 				m2.setComputador(null);
 				monitores.save(m2);
@@ -251,19 +269,25 @@ public class ComputadorController {
 	}
 	
 	@RequestMapping(value="/{id_computador}/salvar3",method = RequestMethod.POST)
-	public String salvar3(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
+	public String salvar3(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer usuario_sec, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
 		{
 			return "cadastroComputador";
 		}
+		
 		Usuario user = usuarios.findOne(usuario_id_usuario);
+		Usuario user2 = usuarios.findOne(usuario_sec);
 		Computador pc = computadores.findOne(computador.getId_computador());
 		user.setComputador(pc);
+		user2.setComputador(pc);
 		pc.setUsuario(user);
+		pc.setUsuario_sec(user2);
+		
 		computadores.save(pc);
 		usuarios.save(user);
+		usuarios.save(user2);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
 		return "redirect:/computadores/novo";
 		
@@ -386,7 +410,112 @@ public class ComputadorController {
 	@RequestMapping(value="{id_computador}", method=RequestMethod.DELETE)
 	public String excluir(@PathVariable Integer id_computador, RedirectAttributes attributes)
 	{
-		computadores.delete(id_computador);
+		Computador pc = computadores.findOne(id_computador);
+		if(pc.getUsuario() != null) {
+			Usuario user = usuarios.findOne(pc.getUsuario().getId_usuario());
+			if(user.getComputador() != null)
+			{
+				user.setComputador(null); 
+			}
+			pc.setUsuario(null);
+			usuarios.save(user);
+		}
+		if(pc.getUsuario_sec() != null)
+		{
+			Usuario user2 = usuarios.findOne(pc.getUsuario_sec().getId_usuario());
+			if(user2.getComputador() != null)
+			{
+				user2.setComputador(null); 
+			}
+			pc.setUsuario_sec(null);
+			usuarios.save(user2);
+		}
+		if(pc.getRecurso_caixa() != null) {
+			CaixaDeSom cs = caixas.findOne(pc.getRecurso_caixa().getId_recurso());
+			if(cs.getComputador() != null)
+			{
+				cs.setComputador(null); 
+			}
+			pc.setRecurso_caixa(null);
+			caixas.save(cs);
+		}
+		if(pc.getRecurso_teclado() != null) {
+			Teclado teclado = teclados.findOne(pc.getRecurso_teclado().getId_recurso());
+			if(teclado.getComputador() != null)
+			{
+				teclado.setComputador(null); 
+			}
+			pc.setRecurso_teclado(null);
+			teclados.save(teclado);
+		}
+		if(pc.getRecurso_mouse() != null) {
+			Mouse mouse = mouses.findOne(pc.getRecurso_mouse().getId_recurso());
+			if(mouse.getComputador() != null)
+			{
+				mouse.setComputador(null); 
+			}
+			pc.setRecurso_mouse(null);
+			mouses.save(mouse);
+			
+		}
+		if(pc.getRecurso_monitor1() != null) {
+			Monitor monitor = monitores.findOne(pc.getRecurso_monitor1().getId_recurso());
+			if(monitor.getComputador() != null)
+			{
+				monitor.setComputador(null); 
+			}
+			pc.setRecurso_monitor1(null);
+			monitores.save(monitor);
+		}
+		if(pc.getRecurso_monitor2() != null) {
+			Monitor monitor = monitores.findOne(pc.getRecurso_monitor2().getId_recurso());
+			if(monitor.getComputador() != null)
+			{
+				monitor.setComputador(null); 
+			}
+			pc.setRecurso_monitor2(null);
+		}
+		List<Impressora> print = impressoras.findAll();
+
+		Iterator it = print.iterator();
+		while(it.hasNext())
+		{
+			Impressora impressora = (Impressora) it.next();
+			Impressora impressora2 = impressoras.findOne(impressora.getId_impressora());
+			List<Computador> pcs = impressora2.getComputadores();
+			Iterator it2 = pcs.iterator();
+			while(it2.hasNext())
+			{
+				Computador pc2 = (Computador) it2.next();
+				if(pc2.getId_computador().equals(id_computador))
+				{
+					pcs.remove(id_computador);
+				}
+			}
+			impressoras.save(impressora2);
+		}
+		List<LicencaOffice> lo = licencasOffice.findAll();
+
+		Iterator itlo = lo.iterator();
+		while(itlo.hasNext())
+		{
+			LicencaOffice lo2 = (LicencaOffice) itlo.next();
+			LicencaOffice lo3 = licencasOffice.findOne(lo2.getId_licencaoffice());
+			List<Computador> pcs = lo3.getComputadores();
+			Iterator itlo2 = pcs.iterator();
+			while(itlo2.hasNext())
+			{
+				Computador pc2 = (Computador) itlo2.next();
+				if(pc2.getId_computador().equals(id_computador))
+				{
+					pcs.remove(id_computador);
+				}
+			}
+			licencasOffice.save(lo3);
+		}
+		
+		//computadores.save(pc);
+		computadores.delete(pc.getId_computador());
 		attributes.addFlashAttribute("mensagem", "Computador excluido com sucesso com sucesso!");	
 		return "redirect:/computadores";
 	}

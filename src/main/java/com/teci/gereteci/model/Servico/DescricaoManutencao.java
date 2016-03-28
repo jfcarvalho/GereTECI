@@ -5,7 +5,8 @@ package com.teci.gereteci.model.Servico;
 public enum DescricaoManutencao {
 	desc1("Recurso com defeito"),
 	desc2("Atualização de software"),
-	desc3("Software não funcionando corretamente");
+	desc3("Software não funcionando corretamente"),
+	desc4("Outros");
 	
 	private String descricao;
 	

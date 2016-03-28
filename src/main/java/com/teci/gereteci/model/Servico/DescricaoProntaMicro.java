@@ -10,7 +10,8 @@ public enum DescricaoProntaMicro {
 	desc7("Computador fora da Rede Interna"),
 	desc8("Computador fora da Internet e Rede Interna"),
 	desc9("Trocar senha do email corporativo"),
-	desc10("Trocar senha de acesso a rede");
+	desc10("Trocar senha de acesso a rede"),
+	desc11("Outros");
 	
 	private String descricao;
 	

@@ -3,7 +3,8 @@ package com.teci.gereteci.model.Servico;
 public enum DescricaoProntaInternet {
 	desc1("Problema no Switch(Exclamação amarela)"),
 	desc2("Problema no Switch(X vermelho)"),
-	desc3("Problema no Proxy");
+	desc3("Problema no Proxy"),
+	desc4("Outros");
 	
 	private String descricao;
 	

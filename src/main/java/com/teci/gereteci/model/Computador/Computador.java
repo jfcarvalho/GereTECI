@@ -84,8 +84,8 @@ public class Computador {
 	private String processador;
 	@Enumerated(EnumType.STRING)
 	private Memoria memoria;
-
-	@ManyToMany(fetch = FetchType.LAZY)
+	private boolean atualizar_java;
+	@ManyToMany(fetch = FetchType.LAZY, cascade= {CascadeType.PERSIST})
 	@JoinTable(name = "computador_has_impressora", joinColumns = { @JoinColumn(name="computador_id_computador")}, inverseJoinColumns={ @JoinColumn (name = "impressora_id_impressora") })
 	private List<Impressora> impressoras;
 	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST})
@@ -107,6 +107,10 @@ public class Computador {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="usuario_id_usuario")
 	private Usuario usuario;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="usuario_sec")
+	private Usuario usuario_sec;
 	
 
 	
@@ -285,6 +289,14 @@ public class Computador {
 	public void setUsuario(Usuario usuario)
 	{
 		this.usuario = usuario;
+	}
+	public Usuario getUsuario_sec()
+	{
+		return this.usuario_sec;
+	}
+	public void setUsuario_sec(Usuario usuario)
+	{
+		this.usuario_sec = usuario;
 	}
 	public Monitor getRecurso_monitor1()
 	{
