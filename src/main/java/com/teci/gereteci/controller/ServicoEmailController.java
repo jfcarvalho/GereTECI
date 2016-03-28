@@ -1,6 +1,8 @@
 package com.teci.gereteci.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,5 +112,18 @@ public class ServicoEmailController {
 		return users;
 	}
 	
-	
+	@ModelAttribute("todosUsuariosTECI")
+	public List<Usuario> todosAtendentesTECI() {
+		List<Usuario> users = usuarios.findAll();
+		List<Usuario> todosUsuariosTECI = new ArrayList<Usuario>();
+		Iterator it = users.iterator();
+		while(it.hasNext())
+		{
+			Usuario obj = (Usuario) it.next();
+			if(obj.getNivel_acesso().getNivel().equals("Administrador") || obj.getNivel_acesso().getNivel().equals("Usuário TECI"))
+				todosUsuariosTECI.add(obj);
+			
+		}
+		return todosUsuariosTECI;
+	}
 }

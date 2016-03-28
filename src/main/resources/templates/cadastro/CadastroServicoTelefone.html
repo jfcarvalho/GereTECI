@@ -63,7 +63,7 @@
 			<label for="sistema" class="col-sm-2 control-label">Usuário atendente:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="atendente" >
-					<option th:each="usuario : ${todosUsuarios}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}" th:selected="${servico.atendente} ? ${servico.atendente.nome} == ${usuario.nome}"></option>
+					<option th:each="usuario : ${todosUsuariosTECI}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}" th:selected="${servico.atendente} ? ${servico.atendente.nome} == ${usuario.nome}"></option>
 				</select>
 			</div>
 		</div>

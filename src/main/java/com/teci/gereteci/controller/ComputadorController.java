@@ -228,7 +228,7 @@ public class ComputadorController {
 			monitores.save(m2);
 		}
 		if(computador.getRecurso_monitor2() != null) {
-			if(pc.getRecurso_monitor1() != null) {
+			if(pc.getRecurso_monitor2() != null) {
 				Monitor m2 = monitores.findOne(pc.getRecurso_monitor2().getId_recurso());
 				m2.setComputador(null);
 				monitores.save(m2);
