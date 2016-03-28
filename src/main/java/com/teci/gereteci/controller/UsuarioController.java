@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.*;
+import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Setor.Setor;
 import com.teci.gereteci.model.Usuario.Nivel;
 import com.teci.gereteci.model.Usuario.Usuario;
@@ -29,6 +30,15 @@ public class UsuarioController {
 	private Usuarios usuarios;
 	@Autowired
 	private Setores setores;
+	@Autowired
+	private Computadores computadores;
+	@Autowired
+	private ServicosInternet sinternet;
+	@Autowired
+	private ServicosManutencao smanutencao;
+	@Autowired
+	private ServicosRede srede;
+	
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo()
@@ -49,11 +59,15 @@ public class UsuarioController {
 			return "cadastroUsuario";
 		}
 		//WTF?
-		Setor sector = setores.findOne(setor_id_setor);
-		usuario.setSetor(sector);
-		List<Usuario> users = sector.getUsuarios();
-		users.add(usuario);
-		sector.setUsuarios(users);
+		if(setor_id_setor != null) {
+			Setor sector = setores.findOne(setor_id_setor);
+			usuario.setSetor(sector);
+			List<Usuario> users = sector.getUsuarios();
+			users.add(usuario);
+			sector.setUsuarios(users);
+		}
+		
+		
 		
 		usuarios.save(usuario);
 		
@@ -84,8 +98,36 @@ public class UsuarioController {
 	@RequestMapping(value="{id_usuario}", method=RequestMethod.DELETE)
 	public String excluir(@PathVariable Integer id_usuario, RedirectAttributes attributes)
 	{
-		usuarios.delete(id_usuario);
+		
+		Usuario u = usuarios.findOne(id_usuario);
+			System.out.println(">>>>>>>>>>>>>>>>>> +" + u.getId_usuario());
+			System.out.println(">>>>>>>>>>>>>>>>>> +" + u.getComputador().getId_computador());
+			System.out.println(">>>>>>>>>>>>>>>>>> +" + u.getComputador().getIp());
+			System.out.println(">>>>>>>>>>>>>>>>>> +" + u.getComputador().getUsuario());
+			if (u.getComputador() != null) {
+				Computador computador = computadores.findOne(u.getComputador().getId_computador());
+				System.out.println(">>>>>> " + computador.getIp());
+				System.out.println(">>>>>> " + computador.getUsuario().getNome());
+				computador.setUsuario(null);
+				computadores.save(computador);
+		}
+		if(u.getSetor() != null) {
+			System.out.println(">>>>>>>>>>>>>>>>>> +" + u.getSetor());
+			System.out.println(">>>>>>>>>>>>>>>>>> +" + u.getSetor().getResponsavel());
+			Setor s = setores.findOne(u.getSetor().getId_setor());
+			List<Usuario> users = s.getUsuarios();
+			users.remove(s.getId_setor());
+			s.setUsuarios(users);
+			if(s.getResponsavel() != null) {
+				if(s.getResponsavel().getId_usuario() == id_usuario)
+				{
+					s.setResponsavel(null);
+				}
+			}
+			setores.save(s);
+		}
 		attributes.addFlashAttribute("mensagem", "Usuário excluido com sucesso com sucesso!");	
+		usuarios.delete(id_usuario);
 		return "redirect:/usuarios";
 	}
 	@ModelAttribute("todosNiveisUsuario")

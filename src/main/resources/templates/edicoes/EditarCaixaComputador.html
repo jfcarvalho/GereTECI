@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
+<head>
+
+<title>Edição de caixa de som</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+<form class="form-horizontal" method="POST" action="/caixas/{id_recurso}/salvar2" th:object="${caixa}">
+		<div layout:include="/mensagem/MensagemUsuario"></div>
+		<div layout:include="/mensagem/MensagemErro"></div>
+		<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+			<h1 class="panel-title">Nova Caixa de Som</h1>
+		<a class="btn btn-link aw-link-panel" href="/caixas">Voltar para pesquisa</a>
+		</div>
+		</div>
+		
+<div class="panel-body">
+	<input type="hidden" th:field="*{id_recurso}" />
+	<input type="hidden" th:field="*{patrimonio}" />
+	<input type="hidden" th:field="*{descricao}" />
+	<input type="hidden" th:field="*{marca}" />
+	<input type="hidden" th:field="*{status}" />
+	<input type="hidden" th:field="*{tipo_recurso}" />
+	<input type="hidden" th:field="*{tipo_cs}" />
+			<div class="form-group">
+		<label for="" class="col-sm-2 control-label">Computador Escolhido:</label>
+			<div class="col-sm-6">
+				<p th:text="${caixa.computador} ? ${caixa.computador.patrimonio} : 'Nenhum escolhido' " ></p>
+				<p th:text="${caixa.computador} ? ${caixa.computador.ip} : 'Nenhum escolhido' " ></p>
+				
+			</div>
+		</div>
+		<div><input type="checkbox" class ="enable-monitor-pc-check" style="margin-left:40px"/>Mudar Computador</div>
+		
+		<div class="form-group">
+			<label for="computador_id_computador" class="col-sm-2 control-label">Computador Disponível:</label>
+			<div class="col-sm-2">
+				<select class="form-control enable-monitor-pc-lista" name="computador_id_computador" disabled="disabled">
+					<option th:each="computador : ${todosComputadoresDisponiveis}" th:value="${computador.id_computador}" th:text="${computador.patrimonio}"></option>
+				</select>
+				
+				<div class="row">
+  <div class="col-sm-6">
+    <div class="input-group" style="margin-left:5px; width:200px;">
+        <input type="checkbox" class="enable-monitor-pc-check" th:attr="data-id_computador=${caixa.computador} ? ${caixa.computador.id_computador}" th:href="@{/recursos/{id_recurso}/sem_computador(id_recurso=${caixa.id_recurso})}"> Recurso sem computador</input>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+  </div>
+  
+			</div>
+		</div>
+	
+	<div class="form-group">
+     		<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Cadastrar</button>
+			</div>
+		</div>
+		
+	</div>
+	</div>
+	</form>
+</section>
+</html>

@@ -4,7 +4,8 @@ public enum DescricaoProntaRede {
 	desc1("Servidor com pouca memória na pasta raiz de diretório"),
 	desc2("Servidor com problema no Active Directory"),
 	desc3("Servidor com problema na impressão"),
-	desc4("Servidor com problema no gerenciamento de usuários");
+	desc4("Servidor com problema no gerenciamento de usuários"),
+	desc5("Outros");
 	
 	private String descricao;
 	

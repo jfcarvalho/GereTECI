@@ -2,28 +2,75 @@ package com.teci.gereteci.model.Servico;
 
 import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import com.teci.gereteci.model.Computador.Computador;
 
+@Entity
+@DiscriminatorValue("Rede")
+
 public class ServicoRede extends Servico {
-	private DescricaoProntaRede descricaoPronta;
-	private List<Computador> computadores;
+	private boolean criacao_usuario;
+	private boolean alteracao_usuario;
+	private boolean exclusao_usuario;
+	private boolean senha_expirada;
+	private String usuario;
 	
-	public void setComputadores(List<Computador> computadores)
+	
+	private DescricaoProntaRede descricao_pronta;
+	
+		
+	public void setDescricaoPronta(DescricaoProntaRede descricao_pronta)
 	{
-		this.computadores = computadores;
+		this.descricao_pronta = descricao_pronta;
 	}
-	public List<Computador> getComputadores()
+	public DescricaoProntaRede getDescricao_pronta()
 	{
-		return this.computadores;
+		return this.descricao_pronta;
+	}
+	public boolean getCriacao_usuario()
+	{
+		return this.criacao_usuario;
+	}
+	public void setCriacao_usuario(boolean criacao_usuario)
+	{
+		this.criacao_usuario = criacao_usuario;
+	}
+	public boolean getExclusao_usuario()
+	{
+		return this.exclusao_usuario;
+	}
+	public void setExclusao_usuario(boolean exclusao_usuario)
+	{
+		this.exclusao_usuario = exclusao_usuario;
+	}
+	public boolean getAlteracao_usuario()
+	{
+		return this.alteracao_usuario;
+	}
+	public boolean getSenha_expirada()
+	{
+		return this.senha_expirada;
+	}
+	public void setSenha_expirada(boolean senha_expirada)
+	{
+		this.senha_expirada = senha_expirada;
+	}
+	public void setAlteracao_usuario(boolean alteracao_usuario)
+	{
+		this.alteracao_usuario = alteracao_usuario;
 	}
 	
-	public void setDescricaoPronta(DescricaoProntaRede descricaoPronta)
+	public String getUsuario()
 	{
-		this.descricaoPronta = descricaoPronta;
+		return this.usuario;
 	}
-	public DescricaoProntaRede getDescricaoPronta()
+	public void setUsuario(String usuario)
 	{
-		return this.descricaoPronta;
+		this.usuario = usuario;
 	}
+	
+	
 	
 }

@@ -32,6 +32,10 @@ import com.teci.gereteci.model.Internet.Dns_preferencial;
 import com.teci.gereteci.model.Internet.Gateway;
 import com.teci.gereteci.model.Internet.Mascara;
 import com.teci.gereteci.model.Licenca.LicencaOffice;
+import com.teci.gereteci.model.Recurso.CaixaDeSom;
+import com.teci.gereteci.model.Recurso.Monitor;
+import com.teci.gereteci.model.Recurso.Mouse;
+import com.teci.gereteci.model.Recurso.Teclado;
 import com.teci.gereteci.model.Usuario.Usuario;
 
 
@@ -80,20 +84,33 @@ public class Computador {
 	private String processador;
 	@Enumerated(EnumType.STRING)
 	private Memoria memoria;
-
-	@ManyToMany(fetch = FetchType.LAZY)
+	private boolean atualizar_java;
+	@ManyToMany(fetch = FetchType.LAZY, cascade= {CascadeType.PERSIST})
 	@JoinTable(name = "computador_has_impressora", joinColumns = { @JoinColumn(name="computador_id_computador")}, inverseJoinColumns={ @JoinColumn (name = "impressora_id_impressora") })
 	private List<Impressora> impressoras;
-	/*@ManyToMany(mappedBy="computadores")
-	
-	private List<LicencaOffice> licencasOffice;
-	*/
-	/*@OneToMany(mappedBy="computador")
-	private List<Recurso> recursos;
-	*/
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST})
+	@JoinColumn(name="id_recurso_monitor")
+	private Monitor recurso_monitor1;
+	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST})
+	@JoinColumn(name="id_recurso_monitor_sec")
+	private Monitor recurso_monitor2;
+	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST})
+	@JoinColumn(name="id_recurso_teclado")
+	private Teclado recurso_teclado;
+	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST})
+	@JoinColumn(name="id_recurso_mouse")
+	private Mouse recurso_mouse;
+	@OneToOne(fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST})
+	@JoinColumn(name="id_recurso_caixa")
+	private CaixaDeSom recurso_caixa;
+
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="usuario_id_usuario")
 	private Usuario usuario;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="usuario_sec")
+	private Usuario usuario_sec;
 	
 
 	
@@ -273,7 +290,57 @@ public class Computador {
 	{
 		this.usuario = usuario;
 	}
+	public Usuario getUsuario_sec()
+	{
+		return this.usuario_sec;
+	}
+	public void setUsuario_sec(Usuario usuario)
+	{
+		this.usuario_sec = usuario;
+	}
+	public Monitor getRecurso_monitor1()
+	{
+		return this.recurso_monitor1;
+	}
+	public void setRecurso_monitor1(Monitor recurso_monitor)
+	{
+		this.recurso_monitor1= recurso_monitor;
+	}
 	
+	public Teclado getRecurso_teclado()
+	{
+		return this.recurso_teclado;
+	}
 	
+	public void setRecurso_teclado(Teclado recurso_teclado)
+	{
+		this.recurso_teclado= recurso_teclado;
+	}
+	
+	public Mouse getRecurso_mouse()
+	{
+		return this.recurso_mouse;
+	}
+	public void setRecurso_mouse(Mouse recurso_mouse)
+	{
+		this.recurso_mouse= recurso_mouse;
+	}
+	public CaixaDeSom getRecurso_caixa()
+	{
+		return this.recurso_caixa;
+	}
+	public void setRecurso_caixa(CaixaDeSom recurso_caixa)
+	{
+		this.recurso_caixa= recurso_caixa;
+	}
+	public Monitor getRecurso_monitor2()
+	{
+		return this.recurso_monitor2;
+	}
+	public void setRecurso_monitor2(Monitor monitor2)
+	{
+		this.recurso_monitor2 = monitor2;
+	}
+
 	
 }

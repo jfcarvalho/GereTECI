@@ -18,6 +18,27 @@ $('#confirmacaoExclusaoModal').on('show.bs.modal', function(event)
 	
 });
 
+$('#confirmacaoExclusaoModal').on('show.bs.modal', function(event)
+		{
+			var button = $(event.relatedTarget);
+			var codigoUsuario = button.data('id_usuario');
+			var nomeUsuario = button.data('nome');
+			
+			var modal = $(this);
+			var form = modal.find('form');
+			var action = form.data('url-base');
+			if(!action.endsWith('/'))
+				{
+					action += '/';
+				}
+			
+				form.attr('action', action + codigoUsuario);
+				modal.find('.modal-body span').html('Tem certeza que deseja excluir o usuario <strong>' + nomeUsuario + '</strong>?');
+			
+			
+		});
+
+
 $('#confirmacaoExclusaoModalComputador').on('show.bs.modal', function(event)
 		{
 			var button = $(event.relatedTarget);
@@ -34,6 +55,25 @@ $('#confirmacaoExclusaoModalComputador').on('show.bs.modal', function(event)
 			
 				form.attr('action', action + codigoComputador);
 				modal.find('.modal-body span').html('Tem certeza que deseja excluir o conmputador de IP: <strong>' + ipComputador + '</strong>?');
+			
+			
+		});
+$('#confirmacaoExclusaoModalServico').on('show.bs.modal', function(event)
+		{
+			var button = $(event.relatedTarget);
+			var protocolo = button.data('protocolo');
+			var servico = button.data('id_servico');
+			
+			var modal = $(this);
+			var form = modal.find('form');
+			var action = form.data('url-base');
+			if(!action.endsWith('/'))
+				{
+					action += '/';
+				}
+			
+				form.attr('action', action + servico);
+				modal.find('.modal-body span').html('Tem certeza que deseja excluir o servico de protocolo: <strong>' + protocolo + '</strong>?');
 			
 			
 		});
@@ -411,6 +451,20 @@ $('.disable-usuario-pc-botao').on('click', function(event)
 	      }
 	});
 
+$('.disable-usuario2-pc-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-usuario2-pc-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-usuario2-pc-input").attr("disabled", "disabled");
+			$(".disable-usuario2-pc-input").prepend('<input type="hidden" name="usuario_sec" value=""/>');
+	      }	
+	  if (!$('.disable-usuario2-pc-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-usuario2-pc-input").removeAttr("disabled");
+	      }
+	});
+
 $('.disable-patrimonio-impressora-botao').on('click', function(event)
 		{
 	
@@ -463,3 +517,175 @@ $('.testando-layer').on('click', function(event)
 		
 	
 		})
+
+$('.enable-impressoras-pc-check').on('click', function(event)
+		{
+	
+	  if ($('.enable-impressoras-pc-check').is(":checked")) {
+	        // Disable elements.
+		  $(".enable-impressoras-pc-lista").removeAttr("disabled");
+	      }	
+	  if (!$('.enable-impressoras-pc-check').is(":checked")) {
+	        // Enable elements.
+	        $(".enable-impressoras-pc-lista").attr("disabled", "disabled");
+	      }
+	});
+
+$('.enable-monitor-pc-check').on('click', function(event)
+		{
+	
+	  if ($('.enable-monitor-pc-check').is(":checked")) {
+	        // Disable elements.
+		  $(".enable-monitor-pc-lista").removeAttr("disabled");
+	      }	
+	  if (!$('.enable-monitor-pc-check').is(":checked")) {
+	        // Enable elements.
+	        $(".enable-monitor-pc-lista").attr("disabled", "disabled");
+	      }
+	});
+
+$('.enable-mouse-pc-check').on('click', function(event)
+		{
+	
+	  if ($('.enable-mouse-pc-check').is(":checked")) {
+	        // Disable elements.
+		  $(".enable-mouse-pc-lista").removeAttr("disabled");
+	      }	
+	  if (!$('.enable-mouse-pc-check').is(":checked")) {
+	        // Enable elements.
+	        $(".enable-mouse-pc-lista").attr("disabled", "disabled");
+	      }
+	});
+
+$('.enable-monitor2-pc-check').on('click', function(event)
+		{
+	
+	  if ($('.enable-monitor2-pc-check').is(":checked")) {
+	        // Disable elements.
+		  $(".enable-monitor2-pc-lista").removeAttr("disabled");
+	      }	
+	  if (!$('.enable-monitor2-pc-check').is(":checked")) {
+	        // Enable elements.
+	        $(".enable-monitor2-pc-lista").attr("disabled", "disabled");
+	      }
+	});
+
+
+$('.enable-teclado-pc-check').on('click', function(event)
+		{
+	
+	  if ($('.enable-teclado-pc-check').is(":checked")) {
+	        // Disable elements.
+		  $(".enable-teclado-pc-lista").removeAttr("disabled");
+	      }	
+	  if (!$('.enable-teclado-pc-check').is(":checked")) {
+	        // Enable elements.
+	        $(".enable-teclado-pc-lista").attr("disabled", "disabled");
+	      }
+	});
+$('.enable-caixas-pc-check').on('click', function(event)
+		{
+	
+	  if ($('.enable-caixas-pc-check').is(":checked")) {
+	        // Disable elements.
+		  $(".enable-caixas-pc-lista").removeAttr("disabled");
+	      }	
+	  if (!$('.enable-caixas-pc-check').is(":checked")) {
+	        // Enable elements.
+	        $(".enable-caixas-pc-lista").attr("disabled", "disabled");
+	      }
+	});
+
+$('.disable-monitor1-pc-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-monitor1-pc-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-monitor1-pc-input").attr("disabled", "disabled");
+			$(".disable-monitor1-pc-input").prepend('<input type="hidden" name="recurso_monitor1" value=""/>');
+	      }	
+	  if (!$('.disable-monitor1-pc-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-monitor1-pc-input").removeAttr("disabled");
+	      }
+	});
+$('.disable-monitor2-pc-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-monitor2-pc-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-monitor2-pc-input").attr("disabled", "disabled");
+			$(".disable-monitor2-pc-input").prepend('<input type="hidden" name="recurso_monitor2" value=""/>');
+	      }	
+	  if (!$('.disable-monitor2-pc-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-monitor2-pc-input").removeAttr("disabled");
+	      }
+	});
+$('.disable-teclado-pc-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-teclado-pc-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-teclado-pc-input").attr("disabled", "disabled");
+			$(".disable-teclado-pc-input").prepend('<input type="hidden" name="recurso_teclado" value=""/>');
+	      }	
+	  if (!$('.disable-teclado-pc-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-teclado-pc-input").removeAttr("disabled");
+	      }
+	});
+$('.disable-mouse-pc-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-mouse-pc-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-mouse-pc-input").attr("disabled", "disabled");
+			$(".disable-mouse-pc-input").prepend('<input type="hidden" name="recurso_mouse" value=""/>');
+	      }	
+	  if (!$('.disable-mouse-pc-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-mouse-pc-input").removeAttr("disabled");
+	      }
+	});
+
+$('.disable-caixa-pc-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-caixa-pc-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-caixa-pc-input").attr("disabled", "disabled");
+			$(".disable-caixa-pc-input").prepend('<input type="hidden" name="recurso_caixa" value=""/>');
+	      }	
+	  if (!$('.disable-caixa-pc-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-caixa-pc-input").removeAttr("disabled");
+	      }
+	});
+$('.disable-setor-usuario-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-setor-usuario-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-setor-usuario-input").attr("disabled", "disabled");
+			$(".disable-setor-usuario-input").prepend('<input type="hidden" name="setor_id_setor" value=""/>');
+	      }	
+	  if (!$('.disable-setor-usuario-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-setor-usuario-input").removeAttr("disabled");
+	      }
+	});
+
+$('.disable-responsavel-setor-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-responsavel-setor-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-responsavel-setor-input").attr("disabled", "disabled");
+			$(".disable-responsavel-setor-botao").prepend('<input type="hidden" name="responsavel" value=""/>');
+	      }	
+	  if (!$('.disable-responsavel-setor-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-responsavel-setor-input").removeAttr("disabled");
+	      }
+	});
