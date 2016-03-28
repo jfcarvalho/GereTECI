@@ -180,9 +180,10 @@ public ModelAndView editar2(@PathVariable("id_recurso") CaixaDeSom caixa)
 		if(caixa.getComputador() != null)
 		{
 			Computador pc = computadores.findOne(caixa.getComputador().getId_computador());
-			pc.setRecurso_mouse(null);
+			pc.setRecurso_caixa(null);
 			computadores.save(pc);
 		}
+		caixa.setComputador(null);
 		caixas.delete(id_recurso);
 		attributes.addFlashAttribute("mensagem", "Caixa de Som excluída com sucesso com sucesso!");	
 		return "redirect:/caixas";
