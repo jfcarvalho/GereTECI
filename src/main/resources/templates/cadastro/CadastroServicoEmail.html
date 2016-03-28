@@ -2,18 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
 <head>
 
-<title>Cadastro de Serviço de Internet</title>
+<title>Cadastro de Serviço de Rede</title>
 </head>
 
 <section layout:fragment="conteudo">
-<form class="form-horizontal" method="POST" action="/servicosinternet" th:object="${servico}">
+<form class="form-horizontal" method="POST" action="/servicosemail" th:object="${servico}">
 		<div layout:include="/mensagem/MensagemUsuario"></div>
 		<div layout:include="/mensagem/MensagemErro"></div>
 		<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="clearfix">
-			<h1 class="panel-title">Novo Serviço de Manutenção</h1>
-		<a class="btn btn-link aw-link-panel" href="/servicosinternet">Voltar para pesquisa</a>
+			<h1 class="panel-title">Novo Serviço de Rede</h1>
+		<a class="btn btn-link aw-link-panel" href="/servicosemail">Voltar para pesquisa</a>
 		</div>
 		</div>
 	
@@ -64,26 +64,19 @@
 		<div class="form-group" style="margin-left: 10px">
 			
 			<div class="col-sm-6">
-				<input type="checkbox" name="proxy" th:checked="${servico.proxy}"/>Houve reinicialização do proxy?<br/>
-				<!--   <br/>Computador: <input class ="form-control" type="text" id="recolhimento" name="recolhimento" th:field="*{recolhimento}" /> -->
+				<input type="checkbox" name="criacao_usuario" th:checked="${servico.criacao_usuario}"/>Houve criação de nova conta de usuário?<br/>
+				<input type="checkbox" name="alteracao_usuario" th:checked="${servico.alteracao_usuario}"/>Houve alteração da conta de usuário?<br/>
+				<input type="checkbox" name="exclusao_usuario" th:checked="${servico.exclusao_usuario}"/>Houve exclusão de conta de usuário?<br/>
+				<input type="checkbox" name="troca_senha" th:checked="${servico.troca_senha}"/>Houve troca de senha?<br/>
+				  <input type="checkbox" name="mudanca_plano" th:checked="${servico.mudanca_plano}"/>Houve mudança de plano?<br/>
+				   <br/>Usuário/Conta: <input class ="form-control" type="text" id="conta" name="conta" th:field="*{conta}" /> 
 			</div>
 		</div>
 		<div>
-		<div class="col-sm-6" style="margin-left: 10px;">
-				<input type="checkbox" name="trocaip" th:checked="${servico.trocaip}"/>Houve troca de IP?<br/>
-				<br/><label for="status" class="col-sm-8 control-label">IP Antigo:</label> <input class ="form-control" type="text" id="ipantigo" name="ipantigo" th:field="*{ipantigo}" />
-				<br/><label for="status" class="col-sm-8 control-label">IP Novo:</label> <input class ="form-control" type="text" id="ipnovo" name="ipnovo" th:field="*{ipnovo}" /><br/>
-		</div>
+		
 		</div>
 		
-		
-		
-		<div class="col-sm-6" style="margin-left: 10px;">
-				<input type="checkbox" name="visita_oi" th:checked="${servico.visita_oi}"/>Houve visita da OI?<br/>
-				<br/><label for="status" class="col-sm-8 control-label">Nome do visitante:</label> <input class ="form-control" type="text" id="nome_tecnico" name="nome_tecnico" th:field="*{nome_tecnico}" />
-				<br/><label for="status" class="col-sm-8 control-label">Data da visita:</label><input type="text" class="form-control" id="data_visita" name="data_visita" th:field="*{data_visita}" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR" data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom" value="teste"/>
-				<br/><label for="status" class="col-sm-8 control-label">Protocolo(OI):</label> <input class ="form-control" type="text" id="protocolo_servico" name="protocolo_sevico" th:field="*{protocolo_servico}" />
-		</div>
+
 		</div>
 		  <div class="boxes">
 		
@@ -122,14 +115,7 @@
 		</div>
 		
 		
-		<div>
-		<div class="col-sm-6">
-				<input type="checkbox" name="rds_aberto" th:checked="${servico.rds_aberto}"/>Foi aberto uma RDS?<br/>
-				<br/><label for="status" class="col-sm-8 control-label">Numero da RDS:</label> <input class ="form-control" type="text" id="numero_rds" name="numero_rds" th:field="*{numero_rds}" />
-				<br/><label for="status" class="col-sm-8 control-label">Data de abertura:</label><input type="text" class="form-control" id="data_rds" name="data_rds" th:field="*{data_rds}" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR" data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom" value="teste"/>
-
-		</div>
-		</div>
+		
 	
 	
 		</div>
