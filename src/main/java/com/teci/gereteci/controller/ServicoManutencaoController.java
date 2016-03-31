@@ -1,7 +1,9 @@
 package com.teci.gereteci.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -32,6 +34,7 @@ import com.teci.gereteci.repository.Usuarios;
 @RequestMapping("/servicosmanutencao")
 public class ServicoManutencaoController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoManutencao"; 
+	private static final String CADASTRO_VIEW2 = "/cadastro/EdicaoServicoManutencao"; 
 	@Autowired
 	private Usuarios usuarios;
 	@Autowired
@@ -54,12 +57,48 @@ public class ServicoManutencaoController {
 			return "cadastroServicoManutencao";
 		}
 		Usuario user = usuarios.findOne(usuario_id_usuario);
+		String array[] = new String[3];
+		String protocolo = "CTB";
+		long numero = servicos.count()+1;
+		Date data = new Date(System.currentTimeMillis());  
+		SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd"); 
+		//System.out.print(formatarDate.format(data).toString());
+		
+		array = formatarDate.format(data).toString().split("-");
+		
+		protocolo = protocolo + "M" + array[0] + array[1] + "-" + numero;
+		servicoManutencao.setSolicitado(user);
+		servicoManutencao.setProtocolo(protocolo);
+		servicos.save(servicoManutencao);
+		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
+		return "redirect:/servicosmanutencao/novo";
+	
+	}
+	public String salvar1(@Validated ServicoManutencao servicoManutencao, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		if(errors.hasErrors())
+		{
+			return "cadastroServicoManutencao";
+		}
+		Usuario user = usuarios.findOne(usuario_id_usuario);
+		String array[] = new String[3];
+		String protocolo = "CTB";
+		long numero = servicos.count()+1;
+		Date data = new Date(System.currentTimeMillis());  
+		SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd"); 
+		//System.out.print(formatarDate.format(data).toString());
+		
+		array = formatarDate.format(data).toString().split("-");
+		
+		protocolo = protocolo + "M" + array[0] + array[1] + "-" + numero;
 		servicoManutencao.setSolicitado(user);
 		servicos.save(servicoManutencao);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
 		return "redirect:/servicosmanutencao/novo";
 	
 	}
+	
 	@RequestMapping
 	public ModelAndView pesquisar()
 	{
@@ -80,6 +119,18 @@ public class ServicoManutencaoController {
 		Usuario solicitante = servicoManutencao.getSolicitado();
 		Usuario usuario_atendente = servicoManutencao.getAtendente();
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		mv.addObject("servico", servicoManutencao);
+		mv.addObject(servicoManutencao);
+		return mv;
+	}
+	
+	public ModelAndView edicao1(@PathVariable("id_servico") ServicoManutencao servicoManutencao)
+	{
+		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
+		//Usuario usuario = usuarios.findOne(id_usuario);
+		Usuario solicitante = servicoManutencao.getSolicitado();
+		Usuario usuario_atendente = servicoManutencao.getAtendente();
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW2);
 		mv.addObject("servico", servicoManutencao);
 		mv.addObject(servicoManutencao);
 		return mv;

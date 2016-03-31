@@ -2,6 +2,7 @@ package com.teci.gereteci.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -29,6 +30,11 @@ import com.teci.gereteci.repository.ServicosInternet;
 import com.teci.gereteci.repository.ServicosManutencao;
 import com.teci.gereteci.repository.Usuarios;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 
 @Controller
 @RequestMapping("/servicosinternet")
@@ -39,11 +45,14 @@ public class ServicoInternetController {
 	@Autowired
 	private ServicosInternet servicos;
 	
+	
 	@RequestMapping("/novo")
 	public ModelAndView novo()
 	{
+		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject("servico", new ServicoInternet());
+	
 		//mv.addObject("todosNiveisUsuario", Nivel.values());
 		return mv;
 	}
@@ -51,11 +60,23 @@ public class ServicoInternetController {
 	public String salvar(@Validated ServicoInternet servicoInternet, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		String array[] = new String[3];
+		String protocolo = "CTB";
+		long numero = servicos.count()+1;
+		Date data = new Date(System.currentTimeMillis());  
+		SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd"); 
+		//System.out.print(formatarDate.format(data).toString());
+		
+		array = formatarDate.format(data).toString().split("-");
+		
+		protocolo = protocolo + "I" + array[0] + array[1] + "-" + numero;
+		//System.out.print(protocolo);
 		if(errors.hasErrors())
 		{
 			return "cadastroServicoInternet";
 		}
 		Usuario user = usuarios.findOne(usuario_id_usuario);
+		servicoInternet.setProtocolo(protocolo);
 		servicoInternet.setSolicitado(user);
 		servicos.save(servicoInternet);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
