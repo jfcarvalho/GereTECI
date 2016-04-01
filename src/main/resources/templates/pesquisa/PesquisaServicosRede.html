@@ -39,14 +39,14 @@
 					<td class="text-center" th:text="${servico} ? ${servico.protocolo}"></td>
 					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
 					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia}"></td>
-					<td class="text-center" th:text="${servico} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico} and ${servico.solicitado} ? ${servico.solicitado.nome}: 'Manutenção preventiva'"></td>
 					<td class="text-center" th:text="${servico} ? ${servico.atendente.nome}"></td>
-					<td class="text-center" th:text="${servico} ? ${servico.solicitado.setor.nome}"></td>
+					<td class="text-center" th:text="${servico} and ${servico.solicitado} and ${servico.solicitado.setor} ? ${servico.solicitado.setor.nome}:'Não informado'"></td>
 					<td class="text-center"><div th:switch="${servico.status.descricao}" th:attr="data-role=${servico.id_servico}"><span class="label label-success" th:text="${servico.status.descricao}" th:case="'Fechado'"></span>
 																				<span class="label label-warning" th:text="${servico.status.descricao}" th:case="'Em andamento'"></span>
 																													  <span class="label label-danger" th:text="${servico.status.descricao}" th:case="'Aberto'"></span></div></td>
 					<!-- <td class="text-center" th:text="${computador.id_impressao}"></td> -->
-					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/servicosrede/{id_servico}(id_servico=${servico.id_servico})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#detalhesRede" th:attr="data-protocolo=${servico.protocolo}, data-data_abertura=${servico.data_ocorrencia}, data-data_encerramento=${servico.data_encerramento}, data-solicitante=${servico.solicitado.nome}, data-atendente=${servico.atendente.nome}, data-id_computador=${servico.id_servico}, data-criacao_usuario=${servico.criacao_usuario}, data-alteracao_usuario=${servico.alteracao_usuario}, data-exclusao_usuario=${servico.exclusao_usuario}, data-senha_expirada=${servico.senha_expirada}, data-usuario=${servico.usuario}, data-status=${servico.status.descricao}, data-solucao_adotada=${servico.descricao_solucao}, data-descricao_problema=${servico.descricao_problema}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/servicosrede/{id_servico}(id_servico=${servico.id_servico})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#detalhesRede" th:attr="data-protocolo=${servico.protocolo}, data-data_abertura=${servico.data_ocorrencia}, data-data_encerramento=${servico.data_encerramento}, data-solicitante=${servico.solicitado} ? ${servico.solicitado.nome} : 'null', data-atendente=${servico.atendente.nome}, data-id_computador=${servico.id_servico}, data-criacao_usuario=${servico.criacao_usuario}, data-alteracao_usuario=${servico.alteracao_usuario}, data-exclusao_usuario=${servico.exclusao_usuario}, data-senha_expirada=${servico.senha_expirada}, data-usuario=${servico.usuario}, data-status=${servico.status.descricao}, data-solucao_adotada=${servico.descricao_solucao}, data-descricao_problema=${servico.descricao_problema}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
 				</tr>
 				
 			<tr>

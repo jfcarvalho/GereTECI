@@ -689,3 +689,17 @@ $('.disable-responsavel-setor-botao').on('click', function(event)
 	        $(".disable-responsavel-setor-input").removeAttr("disabled");
 	      }
 	});
+
+$('.disable-solicitante-manutencao-botao').on('click', function(event)
+		{
+	
+	  if ($('.disable-solicitante-manutencao-botao').is(":checked")) {
+	        // Disable elements.
+		  $(".disable-solicitante-manutencao-input").attr("disabled", "disabled");
+			$(".disable-solicitante-manutencao-input").prepend('<input type="hidden" name="usuario_id_usuario" value=""/>');
+	      }	
+	  if (!$('.disable-solicitante-manutencao-botao').is(":checked")) {
+	        // Enable elements.
+	        $(".disable-solicitante-manutencao-input").removeAttr("disabled");
+	      }
+	});

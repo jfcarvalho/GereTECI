@@ -53,8 +53,10 @@ public class ServicoManutencaoController {
 		{
 			return "cadastroServicoManutencao";
 		}
-		Usuario user = usuarios.findOne(usuario_id_usuario);
-		servicoManutencao.setSolicitado(user);
+		if(usuario_id_usuario != null) {
+			Usuario user = usuarios.findOne(usuario_id_usuario);
+			servicoManutencao.setSolicitado(user);
+		}
 		servicos.save(servicoManutencao);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
 		return "redirect:/servicosmanutencao/novo";
