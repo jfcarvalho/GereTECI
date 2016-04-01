@@ -1,7 +1,9 @@
 package com.teci.gereteci.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -37,6 +39,7 @@ import com.teci.gereteci.repository.Usuarios;
 @RequestMapping("/servicosemail")
 public class ServicoEmailController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoEmail"; 
+	private static final String CADASTRO_VIEW2 = "/edicoes/EdicaoServicoEmail"; 
 	@Autowired
 	private Usuarios usuarios;
 	@Autowired
@@ -59,12 +62,43 @@ public class ServicoEmailController {
 			return "cadastroServicoInternet";
 		}
 		Usuario user = usuarios.findOne(usuario_id_usuario);
+		String array[] = new String[3];
+		String protocolo = "CTB";
+		long numero = servicos.count()+1;
+		Date data = new Date(System.currentTimeMillis());  
+		SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd"); 
+		//System.out.print(formatarDate.format(data).toString());
+		
+		array = formatarDate.format(data).toString().split("-");
+		
+		protocolo = protocolo + "E" + array[0] + array[1] + "-" + numero;
+		servicoEmail.setSolicitado(user);
+		servicoEmail.setProtocolo(protocolo);
+		
 		servicoEmail.setSolicitado(user);
 		servicos.save(servicoEmail);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
 		return "redirect:/servicosemail/novo";
 	
 	}
+	@RequestMapping(value="/{id_servico}/salvar1",method = RequestMethod.POST)
+	public String salvar1(@Validated ServicoEmail servicoEmail, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW2);
+		if(errors.hasErrors())
+		{
+			return "cadastroServicoEmail";
+		}
+		//ServicoManutencao servico = servicos.findOne(servicoManutencao.getId_servico());
+		//servicoManutencao.setProtocolo(servico.getProtocolo()); 
+		//System.out.print(formatarDate.format(data).toString());
+		
+		servicos.save(servicoEmail);
+		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
+		return "redirect:/servicosmanutencao/novo";
+	
+	}
+	
 	@RequestMapping
 	public ModelAndView pesquisar()
 	{
@@ -85,6 +119,19 @@ public class ServicoEmailController {
 		Usuario solicitante = servicoEmail.getSolicitado();
 		Usuario usuario_atendente = servicoEmail.getAtendente();
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		mv.addObject("servico", servicoEmail);
+		mv.addObject(servicoEmail);
+		return mv;
+	}
+	
+	@RequestMapping("/{id_servico}/editar1")
+	public ModelAndView edicao1(@PathVariable("id_servico") ServicoEmail servicoEmail)
+	{
+		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
+		//Usuario usuario = usuarios.findOne(id_usuario);
+		Usuario solicitante = servicoEmail.getSolicitado();
+		Usuario usuario_atendente = servicoEmail.getAtendente();
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW2);
 		mv.addObject("servico", servicoEmail);
 		mv.addObject(servicoEmail);
 		return mv;

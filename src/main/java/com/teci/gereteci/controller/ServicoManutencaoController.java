@@ -82,8 +82,8 @@ public class ServicoManutencaoController {
 		{
 			return "cadastroServicoManutencao";
 		}
-		ServicoManutencao servico = servicos.findOne(servicoManutencao.getId_servico());
-		servicoManutencao.setProtocolo(servico.getProtocolo()); 
+		//ServicoManutencao servico = servicos.findOne(servicoManutencao.getId_servico());
+		//servicoManutencao.setProtocolo(servico.getProtocolo()); 
 		//System.out.print(formatarDate.format(data).toString());
 		
 		servicos.save(servicoManutencao);
