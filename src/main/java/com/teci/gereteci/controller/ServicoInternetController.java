@@ -40,6 +40,7 @@ import java.text.SimpleDateFormat;
 @RequestMapping("/servicosinternet")
 public class ServicoInternetController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoInternet"; 
+	private static final String CADASTRO_VIEW2 = "/edicoes/EdicaoServicoInternet"; 
 	@Autowired
 	private Usuarios usuarios;
 	@Autowired
@@ -83,6 +84,25 @@ public class ServicoInternetController {
 		return "redirect:/servicosinternet/novo";
 	
 	}
+	
+	@RequestMapping(value="/{id_servico}/salvar1",method = RequestMethod.POST)
+	public String salvar1(@Validated ServicoInternet servicoInternet, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW2);
+		if(errors.hasErrors())
+		{
+			return "cadastroServicoManutencao";
+		}
+		ServicoInternet servico = servicos.findOne(servicoInternet.getId_servico());
+		//servicoInternet.setProtocolo(servico.getProtocolo()); 
+		//System.out.print(formatarDate.format(data).toString());
+		
+		servicos.save(servicoInternet);
+		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
+		return "redirect:/servicosmanutencao/novo";
+	
+	}
+	
 	@RequestMapping
 	public ModelAndView pesquisar()
 	{
@@ -103,6 +123,19 @@ public class ServicoInternetController {
 		Usuario solicitante = servicoInternet.getSolicitado();
 		Usuario usuario_atendente = servicoInternet.getAtendente();
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		mv.addObject("servico", servicoInternet);
+		mv.addObject(servicoInternet);
+		return mv;
+	}
+	
+	@RequestMapping("/{id_servico}/editar1")
+	public ModelAndView edicao1(@PathVariable("id_servico") ServicoInternet servicoInternet)
+	{
+		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
+		//Usuario usuario = usuarios.findOne(id_usuario);
+		Usuario solicitante = servicoInternet.getSolicitado();
+		Usuario usuario_atendente = servicoInternet.getAtendente();
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW2);
 		mv.addObject("servico", servicoInternet);
 		mv.addObject(servicoInternet);
 		return mv;
