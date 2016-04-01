@@ -34,7 +34,7 @@ import com.teci.gereteci.repository.Usuarios;
 @RequestMapping("/servicosmanutencao")
 public class ServicoManutencaoController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoManutencao"; 
-	private static final String CADASTRO_VIEW2 = "/cadastro/EdicaoServicoManutencao"; 
+	private static final String CADASTRO_VIEW2 = "/edicoes/EdicaoServicoManutencao"; 
 	@Autowired
 	private Usuarios usuarios;
 	@Autowired
@@ -74,25 +74,18 @@ public class ServicoManutencaoController {
 		return "redirect:/servicosmanutencao/novo";
 	
 	}
+	@RequestMapping(value="/{id_servico}/salvar1",method = RequestMethod.POST)
 	public String salvar1(@Validated ServicoManutencao servicoManutencao, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
 	{
-		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW2);
 		if(errors.hasErrors())
 		{
 			return "cadastroServicoManutencao";
 		}
-		Usuario user = usuarios.findOne(usuario_id_usuario);
-		String array[] = new String[3];
-		String protocolo = "CTB";
-		long numero = servicos.count()+1;
-		Date data = new Date(System.currentTimeMillis());  
-		SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd"); 
+		ServicoManutencao servico = servicos.findOne(servicoManutencao.getId_servico());
+		servicoManutencao.setProtocolo(servico.getProtocolo()); 
 		//System.out.print(formatarDate.format(data).toString());
 		
-		array = formatarDate.format(data).toString().split("-");
-		
-		protocolo = protocolo + "M" + array[0] + array[1] + "-" + numero;
-		servicoManutencao.setSolicitado(user);
 		servicos.save(servicoManutencao);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
 		return "redirect:/servicosmanutencao/novo";
@@ -123,7 +116,7 @@ public class ServicoManutencaoController {
 		mv.addObject(servicoManutencao);
 		return mv;
 	}
-	
+	@RequestMapping("/{id_servico}/editar1")
 	public ModelAndView edicao1(@PathVariable("id_servico") ServicoManutencao servicoManutencao)
 	{
 		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);

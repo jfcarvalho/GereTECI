@@ -6,7 +6,9 @@ public enum DescricaoManutencao {
 	desc1("Recurso com defeito"),
 	desc2("Atualização de software"),
 	desc3("Software não funcionando corretamente"),
-	desc4("Outros");
+	desc4("Instalação de Software"),
+	desc5("Hardware"),
+	desc6("Outros");
 	
 	private String descricao;
 	
