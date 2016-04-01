@@ -93,7 +93,7 @@ public class ServicoInternetController {
 		{
 			return "cadastroServicoManutencao";
 		}
-		ServicoInternet servico = servicos.findOne(servicoInternet.getId_servico());
+		//ServicoInternet servico = servicos.findOne(servicoInternet.getId_servico());
 		//servicoInternet.setProtocolo(servico.getProtocolo()); 
 		//System.out.print(formatarDate.format(data).toString());
 		

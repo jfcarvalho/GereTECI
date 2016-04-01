@@ -1,7 +1,9 @@
 package com.teci.gereteci.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,6 +36,7 @@ import com.teci.gereteci.repository.Usuarios;
 @RequestMapping("/servicosrede")
 public class ServicoRedeController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoRede"; 
+	private static final String CADASTRO_VIEW2 = "/edicoes/EdicaoServicoRede"; 
 	@Autowired
 	private Usuarios usuarios;
 	@Autowired
@@ -51,12 +54,39 @@ public class ServicoRedeController {
 	public String salvar(@Validated ServicoRede servicoRede, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		String array[] = new String[3];
+		String protocolo = "CTB";
+		long numero = servicos.count()+1;
+		Date data = new Date(System.currentTimeMillis());  
+		SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd"); 
+		//System.out.print(formatarDate.format(data).toString());
+		
+		array = formatarDate.format(data).toString().split("-");
+		
+		protocolo = protocolo + "R" + array[0] + array[1] + "-" + numero;
+		//System.out.print(protocolo);
+		if(errors.hasErrors())
+		{
+			return "cadastroServicoInternet";
+		}
+		Usuario user = usuarios.findOne(usuario_id_usuario);
+		servicoRede.setProtocolo(protocolo);
+		servicoRede.setSolicitado(user);
+		servicos.save(servicoRede);
+		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
+		return "redirect:/servicosrede/novo";
+	
+	}
+	@RequestMapping(value="/{id_servico}/salvar1",method = RequestMethod.POST)
+	public String salvar1(@Validated ServicoRede servicoRede, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		if(errors.hasErrors())
 		{
 			return "cadastroServicoRede";
 		}
-		Usuario user = usuarios.findOne(usuario_id_usuario);
-		servicoRede.setSolicitado(user);
+		//Usuario user = usuarios.findOne(usuario_id_usuario);
+		//servicoRede.setSolicitado(user);
 		servicos.save(servicoRede);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
 		return "redirect:/servicosrede/novo";
@@ -82,6 +112,17 @@ public class ServicoRedeController {
 		Usuario solicitante = servicoRede.getSolicitado();
 		Usuario usuario_atendente = servicoRede.getAtendente();
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		mv.addObject("servico", servicoRede);
+		mv.addObject(servicoRede);
+		return mv;
+	}
+	@RequestMapping("/{id_servico}/editar1")
+	public ModelAndView edicao1(@PathVariable("id_servico") ServicoRede servicoRede)
+	{
+		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
+		//Usuario usuario = usuarios.findOne(id_usuario);
+		
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW2);
 		mv.addObject("servico", servicoRede);
 		mv.addObject(servicoRede);
 		return mv;
