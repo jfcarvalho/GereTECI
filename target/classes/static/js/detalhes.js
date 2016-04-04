@@ -50,6 +50,18 @@ $('#detalhesManutencao').on('show.bs.modal', function(event)
 			var status = button.data('status');
 			
 			var modal = $(this);
+			if(trocarecursos)
+				{
+					trocarecursos = 'sim';
+				}
+			else { trocarecursos = 'não';}
+			
+			
+			if(recolhimento)
+			{
+				recolhimento = 'sim';
+			}
+		else { recolhimento = 'não';}
 			
 			var form = modal.find('form');
 			var action = form.data('url-base');
@@ -116,6 +128,29 @@ $('#detalhesRede').on('show.bs.modal', function(event)
 			var solucao_adotada = button.data('solucao_adotada');
 			var status = button.data('status');
 			
+			if(criacao_usuario)
+			{
+				criacao_usuario = 'sim';
+			}
+		else { criacao_usuario = 'não';}
+			
+			if(alteracao_usuario)
+			{
+				alteracao_usuario = 'sim';
+			}
+		else { alteracao_usuario = 'não';}
+			if(exclusao_usuario)
+			{
+				exclusao_usuario = 'sim';
+			}
+		else { exclusao_usuario = 'não';}
+			if(senha_expirada)
+			{
+				senha_expirada = 'sim';
+			}
+		else { senha_expirada = 'não';}
+	
+	
 			var modal = $(this);
 			
 			var form = modal.find('form');
@@ -187,7 +222,27 @@ $('#detalhesEmail').on('show.bs.modal', function(event)
 	var mudanca_plano = button.data('mudanca_plano');
 	var conta = button.data('conta');
 	var modal = $(this);
+	if(criacao_usuario)
+	{
+		criacao_usuario = 'sim';
+	}
+else { criacao_usuario = 'não';}
 	
+	if(alteracao_usuario)
+	{
+		alteracao_usuario = 'sim';
+	}
+else { alteracao_usuario = 'não';}
+	if(exclusao_usuario)
+	{
+		exclusao_usuario = 'sim';
+	}
+else { exclusao_usuario = 'não';}
+	if(senha_expirada)
+	{
+		senha_expirada = 'sim';
+	}
+else { senha_expirada = 'não';}
 	var form = modal.find('form');
 	var action = form.data('url-base');
 	if(!action.endsWith('/'))
