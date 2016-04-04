@@ -58,10 +58,10 @@
 		<div class="form-group" style="margin-left: 10px">
 			
 			<div class="col-sm-6">
-				<input type="checkbox" name="proxy" th:checked="${servico.criacao_usuario}"/>Houve criação de nova conta de usuário?<br/>
-				<input type="checkbox" name="proxy" th:checked="${servico.alteracao_usuario}"/>Houve alteração da conta de usuário?<br/>
-				<input type="checkbox" name="proxy" th:checked="${servico.exclusao_usuario}"/>Houve exclusão de conta de usuário?<br/>
-				<input type="checkbox" name="proxy" th:checked="${servico.senha_expirada}"/>Houve senha de conta de usuário expirada?<br/>
+				<input type="checkbox" name="criacao_usuario" th:checked="${servico.criacao_usuario}"/>Houve criação de nova conta de usuário?<br/>
+				<input type="checkbox" name="alteracao_usuario" th:checked="${servico.alteracao_usuario}"/>Houve alteração da conta de usuário?<br/>
+				<input type="checkbox" name="exclusao_usuario" th:checked="${servico.exclusao_usuario}"/>Houve exclusão de conta de usuário?<br/>
+				<input type="checkbox" name="senha_expirada" th:checked="${servico.senha_expirada}"/>Houve senha de conta de usuário expirada?<br/>
 				   <br/>Usuário/Conta: <input class ="form-control" type="text" id="usuario" name="usuario" th:field="*{usuario}" /> 
 			</div>
 		</div>

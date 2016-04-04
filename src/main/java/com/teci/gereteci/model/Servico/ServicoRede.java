@@ -21,7 +21,7 @@ public class ServicoRede extends Servico {
 	private DescricaoProntaRede descricao_pronta;
 	
 		
-	public void setDescricaoPronta(DescricaoProntaRede descricao_pronta)
+	public void setDescricao_pronta(DescricaoProntaRede descricao_pronta)
 	{
 		this.descricao_pronta = descricao_pronta;
 	}
