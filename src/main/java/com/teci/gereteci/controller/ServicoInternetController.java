@@ -76,9 +76,14 @@ public class ServicoInternetController {
 		{
 			return "cadastroServicoInternet";
 		}
-		Usuario user = usuarios.findOne(usuario_id_usuario);
+
 		servicoInternet.setProtocolo(protocolo);
-		servicoInternet.setSolicitado(user);
+
+		if(usuario_id_usuario != null) {
+			Usuario user = usuarios.findOne(usuario_id_usuario);
+			servicoInternet.setSolicitado(user);
+		}
+
 		servicos.save(servicoInternet);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
 		return "redirect:/servicosinternet/novo";

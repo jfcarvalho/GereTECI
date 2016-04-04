@@ -40,11 +40,18 @@
 		<div class="form-group">
 			<label for="sistema" class="col-sm-2 control-label">Usuário solicitante:</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="usuario_id_usuario" >
+				<select class="form-control disable-solicitante-manutencao-input" name="usuario_id_usuario" >
 					<option th:each="usuario : ${todosUsuarios}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}" th:selected="${servico.solicitado} ? ${servico.solicitado.nome} == ${usuario.nome}"></option>
 				</select>
 			</div>
+			<div class="col-sm-6" style="width:180px">
+				    <div class="input-group">
+				        <input type="checkbox" class ="disable-solicitante-manutencao-botao"/> Manutenção preventiva  	
+				    </div><!-- /input-group -->
 		</div>
+		</div>
+		
+		
 		
 		<div class="form-group">
 			<label for="sistema" class="col-sm-2 control-label">Usuário atendente:</label>

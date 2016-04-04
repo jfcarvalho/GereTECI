@@ -56,6 +56,7 @@ public class ServicoManutencaoController {
 		{
 			return "cadastroServicoManutencao";
 		}
+
 		Usuario user = usuarios.findOne(usuario_id_usuario);
 		String array[] = new String[3];
 		String protocolo = "CTB";
@@ -67,8 +68,12 @@ public class ServicoManutencaoController {
 		array = formatarDate.format(data).toString().split("-");
 		
 		protocolo = protocolo + "M" + array[0] + array[1] + "-" + numero;
-		servicoManutencao.setSolicitado(user);
+		if(usuario_id_usuario != null) {
+			Usuario user = usuarios.findOne(usuario_id_usuario);
+			servicoManutencao.setSolicitado(user);
+		}
 		servicoManutencao.setProtocolo(protocolo);
+
 		servicos.save(servicoManutencao);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
 		return "redirect:/servicosmanutencao/novo";
