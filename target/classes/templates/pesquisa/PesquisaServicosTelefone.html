@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
+<head>
+<title>Pesquisa de Computadores</title>
+</head>
+
+<section layout:fragment="conteudo">
+<div layout:include="/mensagem/MensagemUsuario"></div>
+
+<div class="panel panel-default">
+		
+		<div class="panel-heading">
+		<div class="clearfix">	
+			<h1 class="panel-title">Servicos de Telefone</h1>
+			<a class="btn btn-link aw-link-panel" href="/servicostelefone/novo">Novo serviço</a>
+		</div>
+		</div>
+		<div class="panel-body">
+		
+		<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				<th class="text-center col-md-2">Protocolo</th>
+				<!-- <th class="text-center col-md-2">Arquitetura</th> -->
+				<th class="text-center col-md-2">Data de Ocorrência</th>
+				<th class="text-center col-md-2">Usuário Solicitante</th>
+				<!--  <th class="text-center col-md-2">ID de Impressão</th> -->
+				<th class="text-center col-md-2">Usuário Atendente</th>
+				<th class="text-center col-md-2">Setor</th>
+				<th class="text-center col-md-2">Status</th>
+				<th class="text-center col-md-2">Ação</th>				
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${servicos}">
+					<td class="text-center" th:text="${servico} ? ${servico.protocolo} : 'Não informado'" ></td>
+					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
+					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia} : 'Não informado' "></td>
+					<td class="text-center" th:text="${servico} and ${servico.solicitado} ? ${servico.solicitado.nome} : 'Não informado' "></td>
+					<td class="text-center" th:text="${servico} ? ${servico.atendente.nome}"></td>
+					<td class="text-center" th:text="${servico} and ${servico.solicitado} and ${servico.solicitado.setor} ? ${servico.solicitado.setor.nome} : 'Não informado'" ></td>
+					<td class="text-center"><div th:switch="${servico.status.descricao}" th:attr="data-role=${servico.id_servico}"><span class="label label-success" th:text="${servico.status.descricao}" th:case="'Fechado'"></span>
+																				<span class="label label-warning" th:text="${servico.status.descricao}" th:case="'Em andamento'"></span>
+																													  <span class="label label-danger" th:text="${servico.status.descricao}" th:case="'Aberto'"></span></div></td>
+					<!-- <td class="text-center" th:text="${computador.id_impressao}"></td> -->
+					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/servicostelefone/{id_servico}(id_servico=${servico.id_servico})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalServico" th:attr="data-id_servico=${servico.id_servico}, data-protocolo=${servico.protocolo}"><span class="glyphicon glyphicon-remove"></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#detalhesTelefone" th:attr="data-id_computador=${servico.id_servico}, data-nome_tecnico=${servico.nome_tecnico}, data-data_visita=${servico.data_visita}, data-protocolo_servico=${servico.protocolo_servico}, data-ramais_trocados=${servico.ramais_trocados}, data-id_servico=${servico.id_servico}, data-protocolo=${servico.protocolo}, data-data_abertura=${servico.data_ocorrencia}, data-data_encerramento=${servico.data_encerramento}, data-solicitante=${servico.solicitado.nome}, data-atendente=${servico.atendente.nome}, data-descricao_pronta=${servico.descricao_pronta.descricao}, data-status=${servico.status.descricao}, data-solucao_adotada=${servico.descricao_solucao}, data-visita_oi=${servico.visita_oi}, data-troca_ramal=${servico.troca_ramal}"><span class="glyphicon glyphicon-eye-open"></span></a><a class="js-atualizar-status-manutencao-computador" th:href="@{/servicosmanutencao/{id_servico}/manutencao(id_computador=${servico.id_servico})}" th:attr="data-id_computador=${servico.id_servico}"><span class="glyphicon glyphicon-wrench"></span></a><a class="js-atualizar-status-baixa-computador" th:href="@{/servicos/{id_servico}/baixa(id_computador=${servico.id_servico})}" th:attr="data-id_computador=${servico.id_servico}"><span class="glyphicon glyphicon-fire"></span></a><a class="js-atualizar-status-conserto-computador" th:href="@{/servicosmanutencao/{id_servico}/consertado(id_computador=${servico.id_servico})}" th:attr="data-id_computador=${servico.id_servico}"><span class="glyphicon glyphicon-ok-sign"></span></a></td>
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(servicos)}">Nenhum serviço cadastrado encontrado</td>
+			</tr>
+			</tbody>
+		
+		</table>
+		</div>
+		
+		<div layout:include="/dialogos/DialogoConfirmacaoExclusaoServicoTelefone"></div>
+		<div layout:include="/dialogos/DialogoDetalhesServicoTelefone"></div>
+	</div>	
+</section>
+
+</html>
