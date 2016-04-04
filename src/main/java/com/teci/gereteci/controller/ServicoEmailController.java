@@ -93,6 +93,12 @@ public class ServicoEmailController {
 		//servicoManutencao.setProtocolo(servico.getProtocolo()); 
 		//System.out.print(formatarDate.format(data).toString());
 		
+		
+		if(usuario_id_usuario != null)
+		{
+			Usuario user = usuarios.findOne(usuario_id_usuario);
+			servicoEmail.setSolicitado(user);
+		}
 		servicos.save(servicoEmail);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
 		return "redirect:/servicosmanutencao/novo";

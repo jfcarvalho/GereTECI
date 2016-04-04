@@ -92,7 +92,10 @@ public class ServicoManutencaoController {
 		//ServicoManutencao servico = servicos.findOne(servicoManutencao.getId_servico());
 		//servicoManutencao.setProtocolo(servico.getProtocolo()); 
 		//System.out.print(formatarDate.format(data).toString());
-		
+		if(usuario_id_usuario != null) {
+			Usuario user = usuarios.findOne(usuario_id_usuario);
+			servicoManutencao.setSolicitado(user);
+		}
 		servicos.save(servicoManutencao);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
 		return "redirect:/servicosmanutencao/novo";
