@@ -23,11 +23,11 @@ import javax.validation.constraints.Size;
 import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Servico.Servico;
 import com.teci.gereteci.model.Setor.Setor;
-
+import java.lang.Comparable;
 @Entity
 
 
-public class Usuario {
+public class Usuario implements Comparable<Usuario>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_usuario;
@@ -156,6 +156,15 @@ public class Usuario {
 	public void setServicos(List<Servico> servicos)
 	{
 		this.servicos_manutencao = servicos;
+	}
+
+	@Override
+	public int compareTo(Usuario user) {
+		if(user.getNome().compareTo(this.nome) == 0) {
+			return -1;
+		}
+		
+			return 0;
 	}
 	
 }
