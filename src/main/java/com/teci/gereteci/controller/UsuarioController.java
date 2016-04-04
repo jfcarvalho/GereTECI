@@ -1,6 +1,8 @@
 package com.teci.gereteci.controller;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,6 +141,19 @@ public class UsuarioController {
 	public List<Setor> todosSetoresUsuario()
 	{
 		List<Setor> todosSetores= setores.findAll();
+		Comparator<Setor> comparator = new Comparator<Setor>() {
+		    public int compare(Setor u1, Setor u2) {
+		    	if(u2.getNome().compareTo(u1.getNome()) < 0) {
+					return 0;
+				}
+		    	if(u2.getNome().compareTo(u1.getNome()) > 0) {
+					return -1;
+				}
+				
+				return 0;
+		    }
+		};
+		Collections.sort(todosSetores, comparator);
 		return todosSetores;
 	}
 	

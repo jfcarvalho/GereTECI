@@ -3,6 +3,8 @@ package com.teci.gereteci.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -162,6 +164,19 @@ public class ServicoEmailController {
 	@ModelAttribute("todosUsuarios")
 	public List<Usuario> todosAtendentes() {
 		List<Usuario> users = usuarios.findAll();
+		Comparator<Usuario> comparator = new Comparator<Usuario>() {
+		    public int compare(Usuario u1, Usuario u2) {
+		    	if(u2.getNome().compareTo(u1.getNome()) < 0) {
+					return 0;
+				}
+		    	if(u2.getNome().compareTo(u1.getNome()) > 0) {
+					return -1;
+				}
+				
+				return 0;
+		    }
+		};
+		Collections.sort(users, comparator);
 		return users;
 	}
 	
@@ -177,6 +192,19 @@ public class ServicoEmailController {
 				todosUsuariosTECI.add(obj);
 			
 		}
+		Comparator<Usuario> comparator = new Comparator<Usuario>() {
+		    public int compare(Usuario u1, Usuario u2) {
+		    	if(u2.getNome().compareTo(u1.getNome()) < 0) {
+					return 0;
+				}
+		    	if(u2.getNome().compareTo(u1.getNome()) > 0) {
+					return -1;
+				}
+				
+				return 0;
+		    }
+		};
+		Collections.sort(todosUsuariosTECI, comparator);
 		return todosUsuariosTECI;
 	}
 }
