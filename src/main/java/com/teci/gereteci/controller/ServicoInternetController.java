@@ -28,6 +28,7 @@ import com.teci.gereteci.model.Servico.ServicoInternet;
 import com.teci.gereteci.model.Servico.ServicoManutencao;
 import com.teci.gereteci.model.Servico.StatusServico;
 import com.teci.gereteci.model.Usuario.Usuario;
+import com.teci.gereteci.repository.PesquisasInternet;
 import com.teci.gereteci.repository.ServicosInternet;
 import com.teci.gereteci.repository.ServicosManutencao;
 import com.teci.gereteci.repository.Usuarios;
@@ -35,6 +36,7 @@ import com.teci.gereteci.repository.Usuarios;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 
@@ -47,6 +49,8 @@ public class ServicoInternetController {
 	private Usuarios usuarios;
 	@Autowired
 	private ServicosInternet servicos;
+	@Autowired
+	private PesquisasInternet servicosAtendente;
 	
 	
 	@RequestMapping("/novo")
@@ -113,18 +117,164 @@ public class ServicoInternetController {
 	
 	}
 	
-	@RequestMapping
-	public ModelAndView pesquisar()
+	@RequestMapping(method= RequestMethod.GET)
+	public ModelAndView pesquisar(String busca, String atendenteop, String solicitante, String setor, String status, String data_ocorrencia, String data_encerramento, String descricao_problema) throws ParseException
 	{
-		List<ServicoInternet> todosServicosInternet = servicos.findAll();
-		//List<Computador> todosComputadores = computadores.findAll();
-		List<Usuario> todosUsuarios = usuarios.findAll();
-		ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosInternet");
-	    mv.addObject("servicos", todosServicosInternet);
-		mv.addObject("usuarios", todosUsuarios);
-	    return mv;
+		//List<ServicoManutencao> todosServicosManutencao = servicos.findAll();
+		//Usuario user = usuarios.findOne(14);
+		if(atendenteop != null) {
+			if(busca != null && atendenteop.equals("on")) {
+				System.out.println(busca);
+				System.out.println(busca);
+				List<Usuario> teste = usuarios.findByNomeContaining(busca);
+				Usuario teste2 = teste.get(0);
+				System.out.println(teste2.getNome());
+				List<ServicoInternet> todosServicosInternet = servicosAtendente.findByAtendente(teste2);
+				//List<Computador> todosComputadores = computadores.findAll();
+				List<Usuario> todosUsuarios = usuarios.findAll();
+				ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosInternet");
+			    mv.addObject("servicos", todosServicosInternet);
+				mv.addObject("usuarios", todosUsuarios);
+				return mv;
+			}
+		}
+		else  
+		if(solicitante != null) {
+			if(busca != null && solicitante.equals("on"))
+		{
+			List<Usuario> teste = usuarios.findByNomeContaining(busca);
+			Usuario teste2 = teste.get(0);
+			System.out.println(teste2.getNome());
+			List<ServicoInternet> todosServicosInternet = servicosAtendente.findBySolicitado(teste2);
+			//List<Computador> todosComputadores = computadores.findAll();
+			List<Usuario> todosUsuarios = usuarios.findAll();
+			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosInternet");
+		    mv.addObject("servicos", todosServicosInternet);
+			mv.addObject("usuarios", todosUsuarios);
+			return mv;
+		}
 	}
-
+		else
+			if(status != null)
+			{
+				if(busca != null && status.equals("on")) 
+				{
+					StatusServico sServico; 
+					if(busca.equals("Fechado"))
+					{
+						sServico = StatusServico.fechado;
+					}
+						else if(busca.equals("Em andamento"))
+						{
+							sServico = StatusServico.em_andamento;
+						}
+						else{
+							sServico = StatusServico.aberto;
+						}
+					List<ServicoInternet> todosServicosInternet = servicosAtendente.findByStatus(sServico);
+					//List<Computador> todosComputadores = computadores.findAll();
+					ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosInternet");
+				    mv.addObject("servicos", todosServicosInternet);
+					return mv;
+				}
+			}
+			else
+				if(data_ocorrencia != null)
+				{
+					if(busca != null && data_ocorrencia.equals("on")) 
+					{	
+						
+						List<ServicoInternet> servicosInternet = servicos.findAll();
+						List<ServicoInternet> servicosInternet2 = new ArrayList<ServicoInternet>();
+						Iterator it = servicosInternet.iterator();
+						while(it.hasNext())
+						{
+							ServicoInternet serv = (ServicoInternet) it.next();
+							if(serv.getData_ocorrencia().toString().contains(busca))
+							{
+								servicosInternet2.add(serv);
+							}
+						}	
+						//List<Computador> todosComputadores = computadores.findAll();
+						ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosInternet");
+					    mv.addObject("servicos", servicosInternet2);
+						return mv;
+					}
+				}
+				else
+					if(data_encerramento != null)
+					{
+						if(busca != null && data_encerramento.equals("on")) 
+						{	
+							
+							List<ServicoInternet> servicosInternet = servicos.findAll();
+							List<ServicoInternet> servicosInternet2 = new ArrayList<ServicoInternet>();
+							Iterator it = servicosInternet.iterator();
+							while(it.hasNext())
+							{
+								ServicoInternet serv = (ServicoInternet) it.next();
+								if(serv.getData_ocorrencia().toString().contains(busca))
+								{
+									servicosInternet2.add(serv);
+								}
+							}	
+							//List<Computador> todosComputadores = computadores.findAll();
+							ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosInternet");
+						    mv.addObject("servicos", servicosInternet2);
+							return mv;
+						}
+					}
+					else
+						if(setor != null)
+						{
+							if(busca != null && setor.equals("on")) 
+							{	
+								List<ServicoInternet> servicosInternet = servicos.findAll();
+								List<ServicoInternet> servicosInternet2 = new ArrayList<ServicoInternet>();
+								Iterator it = servicosInternet.iterator();
+								while(it.hasNext())
+								{
+									ServicoInternet serv = (ServicoInternet) it.next();
+									if(serv.getSolicitado() != null && serv.getSolicitado().getSetor() != null) {
+										if(serv.getSolicitado().getSetor().getSigla().contains(busca))
+										{
+											servicosInternet2.add(serv);
+										}
+									}	
+								}
+								ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosInternet");
+							    mv.addObject("servicos", servicosInternet2);
+								return mv;
+							}
+						}
+						else
+							if(descricao_problema != null)
+							{
+								if(busca != null && descricao_problema.equals("on")) 
+								{	
+									List<ServicoInternet> servicosInternet = servicos.findAll();
+									List<ServicoInternet> servicosInternet2 = new ArrayList<ServicoInternet>();
+									Iterator it = servicosInternet.iterator();
+									while(it.hasNext())
+									{
+										ServicoInternet serv = (ServicoInternet) it.next();
+										if(serv.getDescricao_problema().contains(busca)) {
+												servicosInternet2.add(serv);
+										}	
+									}
+									ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosInternet");
+								    mv.addObject("servicos", servicosInternet2);
+									return mv;
+								}
+							}
+		   List<ServicoInternet> todosServicosInternet = servicos.findAll();
+		   List<Usuario> todosUsuarios = usuarios.findAll();
+			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosInternet");
+		    mv.addObject("servicos", todosServicosInternet);
+			mv.addObject("usuarios", todosUsuarios);
+	    
+		return mv;
+	}
 	@RequestMapping("{id_servico}")
 	public ModelAndView edicao(@PathVariable("id_servico") ServicoInternet servicoInternet)
 	{

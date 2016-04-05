@@ -12,21 +12,26 @@
 		<div class="panel-heading">
 		<div class="clearfix">	
 			<h1 class="panel-title">Servicos de Rede</h1>
+			<form method="GET" action="/servicosrede">
 			<div class="col-lg-3">
    				 <div class="input-group">
-     				 <input type="text" class="form-control" placeholder="Pesquise aqui..."/>
+     				 <input type="text" class="form-control" placeholder="Pesquise aqui..." name="busca"/>
     				  <span class="input-group-btn">
-       					 <button class="btn btn-default" type="button">Go!</button>
+       					 <button class="btn btn-default" type="submit">Go!</button>
       				</span>
    				 </div>
  			 </div>
- 			   <div class="col-lg-6">
- 			 	<input type="radio" name ="solicitante" value="solicitante" /> Solicitante
- 			 	<input type="radio" name ="solicitante" value="solicitante" /> Atendente
- 			 	<input type="radio" name ="solicitante" value="solicitante" /> Setor
- 			 	<input type="radio" name ="solicitante" value="solicitante" /> Status
- 			 	<input type="radio" name ="solicitante" value="solicitante" /> Data de ocorrência
+ 			 <div class="col-lg-12">
+ 			 	<input type="radio" name ="solicitante" /> Solicitante
+ 			 	<input type="radio" name ="atendenteop"/> Atendente
+ 			 	<input type="radio" name ="setor" /> Setor
+ 			 	<input type="radio" name ="status" /> Status
+ 			 	<input type="radio" name ="data_ocorrencia" /> Data de ocorrência
+ 			 	<input type="radio" name ="data_encerramento" /> Data de encerramento
+ 			 	<input type="radio" name ="descricao_problema" /> Descrição do problema
  			 </div>
+ 			  
+ 			</form>
 			<a class="btn btn-link aw-link-panel" href="/servicosrede/novo">Novo serviço</a>
 		</div>
 		</div>
