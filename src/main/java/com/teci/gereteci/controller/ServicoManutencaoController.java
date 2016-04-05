@@ -1,5 +1,7 @@
 package com.teci.gereteci.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -104,8 +106,9 @@ public class ServicoManutencaoController {
 	
 	}
 	
+	
 	@RequestMapping(method= RequestMethod.GET)
-	public ModelAndView pesquisar(String busca, String atendenteop, String solicitante, String setor, String status, String data_ocorrencia)
+	public ModelAndView pesquisar(String busca, String atendenteop, String solicitante, String setor, String status, String data_ocorrencia) throws ParseException
 	{
 		//List<ServicoManutencao> todosServicosManutencao = servicos.findAll();
 		//Usuario user = usuarios.findOne(14);
@@ -126,6 +129,7 @@ public class ServicoManutencaoController {
 			}
 		}
 		else  
+		if(solicitante != null) {
 			if(busca != null && solicitante.equals("on"))
 		{
 			List<Usuario> teste = usuarios.findByNomeContaining(busca);
@@ -139,6 +143,54 @@ public class ServicoManutencaoController {
 			mv.addObject("usuarios", todosUsuarios);
 			return mv;
 		}
+	}
+		else
+			if(status != null)
+			{
+				if(busca != null && status.equals("on")) 
+				{
+					StatusServico sServico; 
+					if(busca.equals("Fechado"))
+					{
+						sServico = StatusServico.fechado;
+					}
+						else if(busca.equals("Em andamento"))
+						{
+							sServico = StatusServico.em_andamento;
+						}
+						else{
+							sServico = StatusServico.aberto;
+						}
+					List<ServicoManutencao> todosServicosManutencao = servicosAtendente.findByStatus(sServico);
+					//List<Computador> todosComputadores = computadores.findAll();
+					ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+				    mv.addObject("servicos", todosServicosManutencao);
+					return mv;
+				}
+			}
+			else
+				if(data_ocorrencia != null)
+				{
+					if(busca != null && data_ocorrencia.equals("on")) 
+					{	
+						
+						List<ServicoManutencao> servicosManutencao = servicos.findAll();
+						List<ServicoManutencao> servicosManutencao2 = new ArrayList<ServicoManutencao>();
+						Iterator it = servicosManutencao.iterator();
+						while(it.hasNext())
+						{
+							ServicoManutencao serv = (ServicoManutencao) it.next();
+							if(serv.getData_ocorrencia().toString().contains(busca))
+							{
+								servicosManutencao2.add(serv);
+							}
+						}	
+						//List<Computador> todosComputadores = computadores.findAll();
+						ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+					    mv.addObject("servicos", servicosManutencao2);
+						return mv;
+					}
+				}
 		   List<ServicoManutencao> todosServicosManutencao = servicos.findAll();
 		   List<Usuario> todosUsuarios = usuarios.findAll();
 			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
