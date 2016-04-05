@@ -1,5 +1,7 @@
 package com.teci.gereteci.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +32,7 @@ import com.teci.gereteci.model.Servico.StatusServico;
 import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.ServicosManutencao;
 import com.teci.gereteci.repository.Usuarios;
-
+import com.teci.gereteci.repository.PesquisasManutencao;
 
 @Controller
 @RequestMapping("/servicosmanutencao")
@@ -41,6 +43,8 @@ public class ServicoManutencaoController {
 	private Usuarios usuarios;
 	@Autowired
 	private ServicosManutencao servicos;
+	@Autowired
+	private PesquisasManutencao servicosAtendente;
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo()
@@ -102,16 +106,164 @@ public class ServicoManutencaoController {
 	
 	}
 	
-	@RequestMapping
-	public ModelAndView pesquisar()
+	
+	@RequestMapping(method= RequestMethod.GET)
+	public ModelAndView pesquisar(String busca, String atendenteop, String solicitante, String setor, String status, String data_ocorrencia, String data_encerramento, String descricao_problema) throws ParseException
 	{
-		List<ServicoManutencao> todosServicosManutencao = servicos.findAll();
-		//List<Computador> todosComputadores = computadores.findAll();
-		List<Usuario> todosUsuarios = usuarios.findAll();
-		ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
-	    mv.addObject("servicos", todosServicosManutencao);
-		mv.addObject("usuarios", todosUsuarios);
-	    return mv;
+		//List<ServicoManutencao> todosServicosManutencao = servicos.findAll();
+		//Usuario user = usuarios.findOne(14);
+		if(atendenteop != null) {
+			if(busca != null && atendenteop.equals("on")) {
+				System.out.println(busca);
+				System.out.println(busca);
+				List<Usuario> teste = usuarios.findByNomeContaining(busca);
+				Usuario teste2 = teste.get(0);
+				System.out.println(teste2.getNome());
+				List<ServicoManutencao> todosServicosManutencao = servicosAtendente.findByAtendente(teste2);
+				//List<Computador> todosComputadores = computadores.findAll();
+				List<Usuario> todosUsuarios = usuarios.findAll();
+				ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+			    mv.addObject("servicos", todosServicosManutencao);
+				mv.addObject("usuarios", todosUsuarios);
+				return mv;
+			}
+		}
+		else  
+		if(solicitante != null) {
+			if(busca != null && solicitante.equals("on"))
+		{
+			List<Usuario> teste = usuarios.findByNomeContaining(busca);
+			Usuario teste2 = teste.get(0);
+			System.out.println(teste2.getNome());
+			List<ServicoManutencao> todosServicosManutencao = servicosAtendente.findBySolicitado(teste2);
+			//List<Computador> todosComputadores = computadores.findAll();
+			List<Usuario> todosUsuarios = usuarios.findAll();
+			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+		    mv.addObject("servicos", todosServicosManutencao);
+			mv.addObject("usuarios", todosUsuarios);
+			return mv;
+		}
+	}
+		else
+			if(status != null)
+			{
+				if(busca != null && status.equals("on")) 
+				{
+					StatusServico sServico; 
+					if(busca.equals("Fechado"))
+					{
+						sServico = StatusServico.fechado;
+					}
+						else if(busca.equals("Em andamento"))
+						{
+							sServico = StatusServico.em_andamento;
+						}
+						else{
+							sServico = StatusServico.aberto;
+						}
+					List<ServicoManutencao> todosServicosManutencao = servicosAtendente.findByStatus(sServico);
+					//List<Computador> todosComputadores = computadores.findAll();
+					ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+				    mv.addObject("servicos", todosServicosManutencao);
+					return mv;
+				}
+			}
+			else
+				if(data_ocorrencia != null)
+				{
+					if(busca != null && data_ocorrencia.equals("on")) 
+					{	
+						
+						List<ServicoManutencao> servicosManutencao = servicos.findAll();
+						List<ServicoManutencao> servicosManutencao2 = new ArrayList<ServicoManutencao>();
+						Iterator it = servicosManutencao.iterator();
+						while(it.hasNext())
+						{
+							ServicoManutencao serv = (ServicoManutencao) it.next();
+							if(serv.getData_ocorrencia().toString().contains(busca))
+							{
+								servicosManutencao2.add(serv);
+							}
+						}	
+						//List<Computador> todosComputadores = computadores.findAll();
+						ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+					    mv.addObject("servicos", servicosManutencao2);
+						return mv;
+					}
+				}
+				else
+					if(data_encerramento != null)
+					{
+						if(busca != null && data_encerramento.equals("on")) 
+						{	
+							
+							List<ServicoManutencao> servicosManutencao = servicos.findAll();
+							List<ServicoManutencao> servicosManutencao2 = new ArrayList<ServicoManutencao>();
+							Iterator it = servicosManutencao.iterator();
+							while(it.hasNext())
+							{
+								ServicoManutencao serv = (ServicoManutencao) it.next();
+								if(serv.getData_ocorrencia().toString().contains(busca))
+								{
+									servicosManutencao2.add(serv);
+								}
+							}	
+							//List<Computador> todosComputadores = computadores.findAll();
+							ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+						    mv.addObject("servicos", servicosManutencao2);
+							return mv;
+						}
+					}
+					else
+						if(setor != null)
+						{
+							if(busca != null && setor.equals("on")) 
+							{	
+								List<ServicoManutencao> servicosManutencao = servicos.findAll();
+								List<ServicoManutencao> servicosManutencao2 = new ArrayList<ServicoManutencao>();
+								Iterator it = servicosManutencao.iterator();
+								while(it.hasNext())
+								{
+									ServicoManutencao serv = (ServicoManutencao) it.next();
+									if(serv.getSolicitado() != null && serv.getSolicitado().getSetor() != null) {
+										if(serv.getSolicitado().getSetor().getSigla().contains(busca))
+										{
+											servicosManutencao2.add(serv);
+										}
+									}	
+								}
+								ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+							    mv.addObject("servicos", servicosManutencao2);
+								return mv;
+							}
+						}
+						else
+							if(descricao_problema != null)
+							{
+								if(busca != null && descricao_problema.equals("on")) 
+								{	
+									List<ServicoManutencao> servicosManutencao = servicos.findAll();
+									List<ServicoManutencao> servicosManutencao2 = new ArrayList<ServicoManutencao>();
+									Iterator it = servicosManutencao.iterator();
+									while(it.hasNext())
+									{
+										ServicoManutencao serv = (ServicoManutencao) it.next();
+										if(serv.getDescricao_problema().contains(busca)) {
+												servicosManutencao2.add(serv);
+										}	
+									}
+									ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+								    mv.addObject("servicos", servicosManutencao2);
+									return mv;
+								}
+							}
+		   List<ServicoManutencao> todosServicosManutencao = servicos.findAll();
+		   List<Usuario> todosUsuarios = usuarios.findAll();
+			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+		    mv.addObject("servicos", todosServicosManutencao);
+			mv.addObject("usuarios", todosUsuarios);
+	    
+		return mv;
 	}
 
 	@RequestMapping("{id_servico}")

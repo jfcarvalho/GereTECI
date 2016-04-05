@@ -1,5 +1,6 @@
 package com.teci.gereteci.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,17 +24,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.Computador.Memoria;
 import com.teci.gereteci.model.Computador.StatusComputador;
-import com.teci.gereteci.model.Servico.DescricaoManutencao;
 import com.teci.gereteci.model.Servico.DescricaoProntaEmail;
 import com.teci.gereteci.model.Servico.DescricaoProntaInternet;
 import com.teci.gereteci.model.Servico.ServicoEmail;
 import com.teci.gereteci.model.Servico.ServicoInternet;
-import com.teci.gereteci.model.Servico.ServicoManutencao;
+import com.teci.gereteci.model.Servico.ServicoEmail;
 import com.teci.gereteci.model.Servico.StatusServico;
 import com.teci.gereteci.model.Usuario.Usuario;
+import com.teci.gereteci.repository.PesquisasEmail;
+import com.teci.gereteci.repository.PesquisasRede;
 import com.teci.gereteci.repository.ServicosEmail;
 import com.teci.gereteci.repository.ServicosInternet;
-import com.teci.gereteci.repository.ServicosManutencao;
+import com.teci.gereteci.repository.ServicosEmail;
 import com.teci.gereteci.repository.Usuarios;
 
 
@@ -46,6 +48,8 @@ public class ServicoEmailController {
 	private Usuarios usuarios;
 	@Autowired
 	private ServicosEmail servicos;
+	@Autowired
+	private PesquisasEmail servicosAtendente;
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo()
@@ -91,8 +95,8 @@ public class ServicoEmailController {
 		{
 			return "cadastroServicoEmail";
 		}
-		//ServicoManutencao servico = servicos.findOne(servicoManutencao.getId_servico());
-		//servicoManutencao.setProtocolo(servico.getProtocolo()); 
+		//ServicoEmail servico = servicos.findOne(servicoEmail.getId_servico());
+		//servicoEmail.setProtocolo(servico.getProtocolo()); 
 		//System.out.print(formatarDate.format(data).toString());
 		
 		
@@ -107,16 +111,163 @@ public class ServicoEmailController {
 	
 	}
 	
-	@RequestMapping
-	public ModelAndView pesquisar()
+	@RequestMapping(method= RequestMethod.GET)
+	public ModelAndView pesquisar(String busca, String atendenteop, String solicitante, String setor, String status, String data_ocorrencia, String data_encerramento, String descricao_problema) throws ParseException
 	{
-		List<ServicoEmail> todosServicosEmail = servicos.findAll();
-		//List<Computador> todosComputadores = computadores.findAll();
-		List<Usuario> todosUsuarios = usuarios.findAll();
-		ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosEmail");
-	    mv.addObject("servicos", todosServicosEmail);
-		mv.addObject("usuarios", todosUsuarios);
-	    return mv;
+		//List<ServicoEmail> todosServicosEmail = servicos.findAll();
+		//Usuario user = usuarios.findOne(14);
+		if(atendenteop != null) {
+			if(busca != null && atendenteop.equals("on")) {
+				System.out.println(busca);
+				System.out.println(busca);
+				List<Usuario> teste = usuarios.findByNomeContaining(busca);
+				Usuario teste2 = teste.get(0);
+				System.out.println(teste2.getNome());
+				List<ServicoEmail> todosServicosEmail = servicosAtendente.findByAtendente(teste2);
+				//List<Computador> todosComputadores = computadores.findAll();
+				List<Usuario> todosUsuarios = usuarios.findAll();
+				ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosEmail");
+			    mv.addObject("servicos", todosServicosEmail);
+				mv.addObject("usuarios", todosUsuarios);
+				return mv;
+			}
+		}
+		else  
+		if(solicitante != null) {
+			if(busca != null && solicitante.equals("on"))
+		{
+			List<Usuario> teste = usuarios.findByNomeContaining(busca);
+			Usuario teste2 = teste.get(0);
+			System.out.println(teste2.getNome());
+			List<ServicoEmail> todosServicosEmail = servicosAtendente.findBySolicitado(teste2);
+			//List<Computador> todosComputadores = computadores.findAll();
+			List<Usuario> todosUsuarios = usuarios.findAll();
+			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosEmail");
+		    mv.addObject("servicos", todosServicosEmail);
+			mv.addObject("usuarios", todosUsuarios);
+			return mv;
+		}
+	}
+		else
+			if(status != null)
+			{
+				if(busca != null && status.equals("on")) 
+				{
+					StatusServico sServico; 
+					if(busca.equals("Fechado"))
+					{
+						sServico = StatusServico.fechado;
+					}
+						else if(busca.equals("Em andamento"))
+						{
+							sServico = StatusServico.em_andamento;
+						}
+						else{
+							sServico = StatusServico.aberto;
+						}
+					List<ServicoEmail> todosServicosEmail = servicosAtendente.findByStatus(sServico);
+					//List<Computador> todosComputadores = computadores.findAll();
+					ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosEmail");
+				    mv.addObject("servicos", todosServicosEmail);
+					return mv;
+				}
+			}
+			else
+				if(data_ocorrencia != null)
+				{
+					if(busca != null && data_ocorrencia.equals("on")) 
+					{	
+						
+						List<ServicoEmail> servicosEmail = servicos.findAll();
+						List<ServicoEmail> servicosEmail2 = new ArrayList<ServicoEmail>();
+						Iterator it = servicosEmail.iterator();
+						while(it.hasNext())
+						{
+							ServicoEmail serv = (ServicoEmail) it.next();
+							if(serv.getData_ocorrencia().toString().contains(busca))
+							{
+								servicosEmail2.add(serv);
+							}
+						}	
+						//List<Computador> todosComputadores = computadores.findAll();
+						ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosEmail");
+					    mv.addObject("servicos", servicosEmail2);
+						return mv;
+					}
+				}
+				else
+					if(data_encerramento != null)
+					{
+						if(busca != null && data_encerramento.equals("on")) 
+						{	
+							
+							List<ServicoEmail> servicosEmail = servicos.findAll();
+							List<ServicoEmail> servicosEmail2 = new ArrayList<ServicoEmail>();
+							Iterator it = servicosEmail.iterator();
+							while(it.hasNext())
+							{
+								ServicoEmail serv = (ServicoEmail) it.next();
+								if(serv.getData_ocorrencia().toString().contains(busca))
+								{
+									servicosEmail2.add(serv);
+								}
+							}	
+							//List<Computador> todosComputadores = computadores.findAll();
+							ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosEmail");
+						    mv.addObject("servicos", servicosEmail2);
+							return mv;
+						}
+					}
+					else
+						if(setor != null)
+						{
+							if(busca != null && setor.equals("on")) 
+							{	
+								List<ServicoEmail> servicosEmail = servicos.findAll();
+								List<ServicoEmail> servicosEmail2 = new ArrayList<ServicoEmail>();
+								Iterator it = servicosEmail.iterator();
+								while(it.hasNext())
+								{
+									ServicoEmail serv = (ServicoEmail) it.next();
+									if(serv.getSolicitado() != null && serv.getSolicitado().getSetor() != null) {
+										if(serv.getSolicitado().getSetor().getSigla().contains(busca))
+										{
+											servicosEmail2.add(serv);
+										}
+									}	
+								}
+								ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosEmail");
+							    mv.addObject("servicos", servicosEmail2);
+								return mv;
+							}
+						}
+						else
+							if(descricao_problema != null)
+							{
+								if(busca != null && descricao_problema.equals("on")) 
+								{	
+									List<ServicoEmail> servicosEmail = servicos.findAll();
+									List<ServicoEmail> servicosEmail2 = new ArrayList<ServicoEmail>();
+									Iterator it = servicosEmail.iterator();
+									while(it.hasNext())
+									{
+										ServicoEmail serv = (ServicoEmail) it.next();
+										if(serv.getDescricao_problema().contains(busca)) {
+												servicosEmail2.add(serv);
+										}	
+									}
+									ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosEmail");
+								    mv.addObject("servicos", servicosEmail2);
+									return mv;
+								}
+							}
+		   List<ServicoEmail> todosServicosEmail = servicos.findAll();
+		   List<Usuario> todosUsuarios = usuarios.findAll();
+			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosEmail");
+		    mv.addObject("servicos", todosServicosEmail);
+			mv.addObject("usuarios", todosUsuarios);
+	    
+		return mv;
 	}
 
 	@RequestMapping("{id_servico}")
