@@ -108,7 +108,7 @@ public class ServicoManutencaoController {
 	
 	
 	@RequestMapping(method= RequestMethod.GET)
-	public ModelAndView pesquisar(String busca, String atendenteop, String solicitante, String setor, String status, String data_ocorrencia) throws ParseException
+	public ModelAndView pesquisar(String busca, String atendenteop, String solicitante, String setor, String status, String data_ocorrencia, String data_encerramento, String descricao_problema) throws ParseException
 	{
 		//List<ServicoManutencao> todosServicosManutencao = servicos.findAll();
 		//Usuario user = usuarios.findOne(14);
@@ -191,6 +191,72 @@ public class ServicoManutencaoController {
 						return mv;
 					}
 				}
+				else
+					if(data_encerramento != null)
+					{
+						if(busca != null && data_encerramento.equals("on")) 
+						{	
+							
+							List<ServicoManutencao> servicosManutencao = servicos.findAll();
+							List<ServicoManutencao> servicosManutencao2 = new ArrayList<ServicoManutencao>();
+							Iterator it = servicosManutencao.iterator();
+							while(it.hasNext())
+							{
+								ServicoManutencao serv = (ServicoManutencao) it.next();
+								if(serv.getData_ocorrencia().toString().contains(busca))
+								{
+									servicosManutencao2.add(serv);
+								}
+							}	
+							//List<Computador> todosComputadores = computadores.findAll();
+							ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+						    mv.addObject("servicos", servicosManutencao2);
+							return mv;
+						}
+					}
+					else
+						if(setor != null)
+						{
+							if(busca != null && setor.equals("on")) 
+							{	
+								List<ServicoManutencao> servicosManutencao = servicos.findAll();
+								List<ServicoManutencao> servicosManutencao2 = new ArrayList<ServicoManutencao>();
+								Iterator it = servicosManutencao.iterator();
+								while(it.hasNext())
+								{
+									ServicoManutencao serv = (ServicoManutencao) it.next();
+									if(serv.getSolicitado() != null && serv.getSolicitado().getSetor() != null) {
+										if(serv.getSolicitado().getSetor().getSigla().contains(busca))
+										{
+											servicosManutencao2.add(serv);
+										}
+									}	
+								}
+								ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+							    mv.addObject("servicos", servicosManutencao2);
+								return mv;
+							}
+						}
+						else
+							if(descricao_problema != null)
+							{
+								if(busca != null && descricao_problema.equals("on")) 
+								{	
+									List<ServicoManutencao> servicosManutencao = servicos.findAll();
+									List<ServicoManutencao> servicosManutencao2 = new ArrayList<ServicoManutencao>();
+									Iterator it = servicosManutencao.iterator();
+									while(it.hasNext())
+									{
+										ServicoManutencao serv = (ServicoManutencao) it.next();
+										if(serv.getDescricao_problema().contains(busca)) {
+												servicosManutencao2.add(serv);
+										}	
+									}
+									ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+								    mv.addObject("servicos", servicosManutencao2);
+									return mv;
+								}
+							}
 		   List<ServicoManutencao> todosServicosManutencao = servicos.findAll();
 		   List<Usuario> todosUsuarios = usuarios.findAll();
 			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
