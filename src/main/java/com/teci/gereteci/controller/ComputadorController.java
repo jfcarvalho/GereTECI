@@ -1,5 +1,6 @@
 package com.teci.gereteci.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -42,6 +43,7 @@ import com.teci.gereteci.model.Recurso.Monitor;
 import com.teci.gereteci.model.Recurso.Mouse;
 import com.teci.gereteci.model.Recurso.Recurso;
 import com.teci.gereteci.model.Recurso.Teclado;
+import com.teci.gereteci.model.Setor.Setor;
 import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
 
@@ -380,7 +382,7 @@ public class ComputadorController {
 		return mv;
 	}
 	
-	
+	/*
 	@RequestMapping
 	public ModelAndView pesquisar()
 	{
@@ -391,7 +393,42 @@ public class ComputadorController {
 		mv.addObject("usuarios", todosUsuarios);
 	    return mv;
 	}
-
+	*/
+	
+	@RequestMapping(method= RequestMethod.GET)
+	public ModelAndView pesquisar(String busca, String ip, String nome, String setor, String status) throws ParseException
+	{
+		//List<ServicoManutencao> todosServicosManutencao = servicos.findAll();
+		//Usuario user = usuarios.findOne(14);
+		if(ip != null) {
+			if(busca != null && ip.equals("on")) {
+				List<Computador> todosComputadores = computadores.findByIpContaining(busca);
+				ModelAndView mv = new ModelAndView("/pesquisa/PesquisaComputadores");
+				mv.addObject("computadores", todosComputadores);
+				return mv;
+			}
+		}
+			/*else
+						if(nome != null)
+						{
+							if(busca != null && nome.equals("on")) 
+							{	
+								Setor s = setores.findBySigla(busca);
+								List<Usuario> users = usuarios.findBySetor(s);
+								ModelAndView mv = new ModelAndView("/pesquisa/PesquisaUsuarios");
+							    mv.addObject("usuarios", users);
+								return mv;
+							}
+						}
+		   */
+		   List<Computador> todosComputadores = computadores.findAll();
+			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaComputadores");
+			mv.addObject("computadores", todosComputadores);
+	    
+		return mv;
+	}
+	
+	
 	@RequestMapping("{id_computador}")
 
 	public ModelAndView edicao(@PathVariable("id_computador") Computador computador)
