@@ -51,7 +51,7 @@ import com.teci.gereteci.repository.*;
 
 
 @Controller
-@RequestMapping("/computadores")
+@RequestMapping("/gereteci/computadores")
 public class ComputadorController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroComputador"; 
 	private static final String EDICAO1_VIEW = "/edicoes/EditarComputador";
@@ -162,7 +162,7 @@ public class ComputadorController {
 		}
 		
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
-		return "redirect:/computadores/novo";
+		return "redirect:/gereteci/computadores/novo";
 		
 	}
 	@RequestMapping(value="/{id_computador}/salvar1",method = RequestMethod.POST)
@@ -191,7 +191,7 @@ public class ComputadorController {
 		pc.setStatus(computador.getStatus());
 		computadores.save(pc);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
-		return "redirect:/computadores/novo";
+		return "redirect:/gereteci/computadores/novo";
 		
 	}
 	@RequestMapping(value="/{id_computador}/salvar2",method = RequestMethod.POST)
@@ -268,11 +268,11 @@ public class ComputadorController {
 		}
 		computadores.save(pc);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
-		return "redirect:/computadores/novo";
+		return "redirect:/gereteci/computadores/novo";
 		
 	}
 	
-	@RequestMapping(value="/{id_computador}/salvar3",method = RequestMethod.POST)
+	@RequestMapping(value="/computadores/{id_computador}/salvar3",method = RequestMethod.POST)
 	public String salvar3(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer usuario_sec, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
@@ -293,7 +293,7 @@ public class ComputadorController {
 		usuarios.save(user);
 		usuarios.save(user2);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
-		return "redirect:/computadores/novo";
+		return "redirect:/gereteci/computadores/novo";
 		
 	}
 	
@@ -365,7 +365,7 @@ public class ComputadorController {
 		return mv;
 	}
 	
-	@RequestMapping("/{id_computador}/editar5")
+	@RequestMapping("/computadores/{id_computador}/editar5")
 	public ModelAndView editar5(@PathVariable("id_computador") Computador computador)
 	{
 		ModelAndView mv = new ModelAndView(EDICAO5_VIEW);
@@ -556,7 +556,7 @@ public class ComputadorController {
 		//computadores.save(pc);
 		computadores.delete(pc.getId_computador());
 		attributes.addFlashAttribute("mensagem", "Computador excluido com sucesso com sucesso!");	
-		return "redirect:/computadores";
+		return "redirect:/gereteci/computadores";
 	}
 	@ModelAttribute("todosSistemasComputador")
 	public List<Sistema> todosSistemasComputador() {

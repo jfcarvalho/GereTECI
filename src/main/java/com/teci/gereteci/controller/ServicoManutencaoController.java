@@ -35,7 +35,7 @@ import com.teci.gereteci.repository.Usuarios;
 import com.teci.gereteci.repository.PesquisasManutencao;
 
 @Controller
-@RequestMapping("/servicosmanutencao")
+@RequestMapping("/gereteci/servicosmanutencao")
 public class ServicoManutencaoController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoManutencao"; 
 	private static final String CADASTRO_VIEW2 = "/edicoes/EdicaoServicoManutencao"; 
@@ -82,7 +82,7 @@ public class ServicoManutencaoController {
 
 		servicos.save(servicoManutencao);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/servicosmanutencao/novo";
+		return "redirect:/gereteci/servicosmanutencao/novo";
 	
 	}
 	@RequestMapping(value="/{id_servico}/salvar1",method = RequestMethod.POST)
@@ -102,7 +102,7 @@ public class ServicoManutencaoController {
 		}
 		servicos.save(servicoManutencao);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/servicosmanutencao/novo";
+		return "redirect:/gereteci/servicosmanutencao/novo";
 	
 	}
 	

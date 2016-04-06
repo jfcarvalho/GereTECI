@@ -41,7 +41,7 @@ import java.text.SimpleDateFormat;
 
 
 @Controller
-@RequestMapping("/servicosinternet")
+@RequestMapping("/gereteci/servicosinternet")
 public class ServicoInternetController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoInternet"; 
 	private static final String CADASTRO_VIEW2 = "/edicoes/EdicaoServicoInternet"; 
@@ -92,7 +92,7 @@ public class ServicoInternetController {
 
 		servicos.save(servicoInternet);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/servicosinternet/novo";
+		return "redirect:/gereteci/servicosinternet/novo";
 	
 	}
 	
@@ -113,7 +113,7 @@ public class ServicoInternetController {
 		}
 		servicos.save(servicoInternet);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/servicosmanutencao/novo";
+		return "redirect:/gereteci/servicosmanutencao/novo";
 	
 	}
 	

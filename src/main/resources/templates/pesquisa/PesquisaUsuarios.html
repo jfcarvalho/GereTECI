@@ -12,7 +12,7 @@
 		<div class="panel-heading">
 		<div class="clearfix">	
 			<h1 class="panel-title">Pesquisa de Usuários</h1>
-			<form method="GET" action="/usuarios">
+			<form method="GET" action="/gereteci/usuarios">
 			<div class="col-lg-3">
    				 <div class="input-group">
      				 <input type="text" class="form-control" placeholder="Pesquise aqui..." name="busca"/>
@@ -27,7 +27,7 @@
  			 </div>
  			  
  			</form>
-			<a class="btn btn-link aw-link-panel" href="/usuarios/novo">Novo usuário</a>
+			<a class="btn btn-link aw-link-panel" href="/gereteci/usuarios/novo">Novo usuário</a>
 		</div>
 		</div>
 		<div class="panel-body">
@@ -55,7 +55,7 @@
 					<td class="text-center"><div th:switch="${usuario.nivel_acesso.nivel}"><span class="label label-success" th:text="${usuario.nivel_acesso.nivel}" th:case="'Administrador'"></span>
 																				<span class="label label-warning" th:text="${usuario.nivel_acesso.nivel}" th:case="'Usuário TECI'"></span>
 																													  <span class="label label-danger" th:text="${usuario.nivel_acesso.nivel}" th:case="'Usuário Padrão'"></span></div></td>  
-					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/usuarios/{id_usuario}(id_usuario=${usuario.id_usuario})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal" th:attr="data-id_usuario=${usuario.id_usuario}, data-nome=${usuario.nome}"><span class="glyphicon glyphicon-remove"></span></a></td>
+					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/gereteci/usuarios/{id_usuario}(id_usuario=${usuario.id_usuario})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal" th:attr="data-id_usuario=${usuario.id_usuario}, data-nome=${usuario.nome}"><span class="glyphicon glyphicon-remove"></span></a></td>
 					
 				</tr>
 				

@@ -29,7 +29,7 @@ import com.teci.gereteci.repository.Monitores;
 import com.teci.gereteci.repository.Teclados;
 
 @Controller
-@RequestMapping("/teclados")
+@RequestMapping("/gereteci/teclados")
 
 public class TecladoController {
 	private static final String CADASTRO_VIEW_TECLADO = "/cadastro/CadastroTeclado"; 
@@ -82,7 +82,7 @@ public class TecladoController {
 		}
 		teclados.save(teclado);
 		attributes.addFlashAttribute("mensagem", "Teclado salvo com sucesso!");	
-		return "redirect:/teclados/novo";
+		return "redirect:/gereteci/teclados/novo";
 	}
 	@RequestMapping(value="/{id_recurso}/salvar1",method = RequestMethod.POST)
 	public String salvar1(@Validated Teclado teclado, Errors errors, RedirectAttributes attributes)
@@ -136,7 +136,7 @@ public class TecladoController {
 		}
 		teclados.save(t);
 		attributes.addFlashAttribute("mensagem", "Mouse salvo com sucesso!");	
-		return "redirect:/computadores/novo";
+		return "redirect:/gereteci/computadores/novo";
 		
 	}
 
@@ -186,7 +186,7 @@ public class TecladoController {
 		}
 		teclados.delete(id_recurso);
 		attributes.addFlashAttribute("mensagem", "Teclado excluido com sucesso com sucesso!");	
-		return "redirect:/teclados";
+		return "redirect:/gereteci/teclados";
 	}
 	
 	@ModelAttribute("todosComputadoresDisponiveis")

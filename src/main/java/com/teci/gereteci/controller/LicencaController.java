@@ -21,7 +21,7 @@ import com.teci.gereteci.model.Licenca.Licenca;
 import com.teci.gereteci.repository.*;
 
 @Controller
-@RequestMapping("/licencas")
+@RequestMapping("/gereteci/licencas")
 public class LicencaController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroLicenca"; 
 	@Autowired
@@ -51,7 +51,7 @@ public class LicencaController {
 		licencas.save(licenca);
 		
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");	
-		return "redirect:/licencas/novo";
+		return "redirect:/gereteci/licencas/novo";
 	}
 	@RequestMapping
 	public ModelAndView pesquisar()
@@ -79,7 +79,7 @@ public class LicencaController {
 	{
 		licencas.delete(id_licenca);
 		attributes.addFlashAttribute("mensagem", "Licença excluida com sucesso com sucesso!");	
-		return "redirect:/licencas";
+		return "redirect:/gereteci/licencas";
 	}
 
 

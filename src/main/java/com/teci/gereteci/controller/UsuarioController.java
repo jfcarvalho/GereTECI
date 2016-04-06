@@ -30,7 +30,7 @@ import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
 
 @Controller
-@RequestMapping("/usuarios")
+@RequestMapping("/gereteci/usuarios")
 public class UsuarioController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroUsuario"; 
 	@Autowired
@@ -79,7 +79,7 @@ public class UsuarioController {
 		usuarios.save(usuario);
 		
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");	
-		return "redirect:/usuarios/novo";
+		return "redirect:/gereteci/usuarios/novo";
 	}
 	
 	@RequestMapping(method= RequestMethod.GET)
@@ -160,7 +160,7 @@ public class UsuarioController {
 		}
 		attributes.addFlashAttribute("mensagem", "Usuário excluido com sucesso com sucesso!");	
 		usuarios.delete(id_usuario);
-		return "redirect:/usuarios";
+		return "redirect:/gereteci/usuarios";
 	}
 	@ModelAttribute("todosNiveisUsuario")
 	public List<Nivel> todosNiveisUsuario() {

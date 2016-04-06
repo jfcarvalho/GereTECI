@@ -34,7 +34,7 @@ import com.teci.gereteci.repository.Usuarios;
 
 
 @Controller
-@RequestMapping("/servicostelefone")
+@RequestMapping("/gereteci/servicostelefone")
 public class ServicoTelefoneController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoTelefone"; 
 	@Autowired
@@ -62,7 +62,7 @@ public class ServicoTelefoneController {
 		servicoTelefone.setSolicitado(user);
 		servicos.save(servicoTelefone);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/servicosrede/novo";
+		return "redirect:/gereteci/servicosrede/novo";
 	
 	}
 	@RequestMapping

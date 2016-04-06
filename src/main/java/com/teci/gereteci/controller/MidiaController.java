@@ -26,7 +26,7 @@ import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Midias;
 
 @Controller
-@RequestMapping("/midias")
+@RequestMapping("/gereteci/midias")
 
 
 public class MidiaController {
@@ -56,7 +56,7 @@ public class MidiaController {
 		
 		midias.save(midia);
 		attributes.addFlashAttribute("mensagem", "Midia salva com sucesso!");	
-		return "redirect:/midias/novo";
+		return "redirect:/gereteci/midias/novo";
 	}
 	@RequestMapping
 	public ModelAndView pesquisar()
@@ -85,7 +85,7 @@ public class MidiaController {
 	{
 		midias.delete(id_recurso);
 		attributes.addFlashAttribute("mensagem", "Midia Removível excluída com sucesso com sucesso!");	
-		return "redirect:/midias";
+		return "redirect:/gereteci/midias";
 	}
 
 

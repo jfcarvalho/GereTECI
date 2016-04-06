@@ -29,7 +29,7 @@ import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Midias;
 
 @Controller
-@RequestMapping("/caixas")
+@RequestMapping("/gereteci/caixas")
 
 public class CaixaDeSomController {
 	private static final String CADASTRO_VIEW_CS = "/cadastro/CadastroCaixaDeSom"; 
@@ -69,7 +69,7 @@ public class CaixaDeSomController {
 		}
 		caixas.save(cs);
 		attributes.addFlashAttribute("mensagem", "Caixas de som salva com sucesso!");	
-		return "redirect:/caixas/novo";
+		return "redirect:/gereteci/caixas/novo";
 	}
 	
 	@RequestMapping(value="/{id_recurso}/salvar1",method = RequestMethod.POST)
@@ -91,7 +91,7 @@ public class CaixaDeSomController {
 		
 		caixas.save(c);
 		attributes.addFlashAttribute("mensagem", "Caixa de som salva com sucesso!");	
-		return "redirect:/caixas/novo";
+		return "redirect:/gereteci/caixas/novo";
 		
 	}
 	
@@ -186,7 +186,7 @@ public ModelAndView editar2(@PathVariable("id_recurso") CaixaDeSom caixa)
 		caixa.setComputador(null);
 		caixas.delete(id_recurso);
 		attributes.addFlashAttribute("mensagem", "Caixa de Som excluída com sucesso com sucesso!");	
-		return "redirect:/caixas";
+		return "redirect:/gereteci/caixas";
 	}
 	
 	@ModelAttribute("todosComputadoresDisponiveis")
