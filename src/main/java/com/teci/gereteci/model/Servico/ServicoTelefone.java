@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -14,7 +16,7 @@ import com.teci.gereteci.model.Usuario.Usuario;
 @DiscriminatorValue("Telefone")
 
 public class ServicoTelefone extends Servico {
-	
+	@Enumerated(EnumType.STRING)
 	private DescricaoProntaTelefone descricao_pronta;
 	private boolean troca_ramal;
 	private boolean visita_oi;

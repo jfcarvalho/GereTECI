@@ -1,7 +1,10 @@
 package com.teci.gereteci.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -27,6 +30,8 @@ import com.teci.gereteci.model.Servico.ServicoRede;
 import com.teci.gereteci.model.Servico.ServicoTelefone;
 import com.teci.gereteci.model.Servico.StatusServico;
 import com.teci.gereteci.model.Usuario.Usuario;
+import com.teci.gereteci.repository.PesquisasManutencao;
+import com.teci.gereteci.repository.PesquisasTelefone;
 import com.teci.gereteci.repository.ServicosManutencao;
 import com.teci.gereteci.repository.ServicosRede;
 import com.teci.gereteci.repository.ServicosTelefone;
@@ -37,10 +42,13 @@ import com.teci.gereteci.repository.Usuarios;
 @RequestMapping("/gereteci/servicostelefone")
 public class ServicoTelefoneController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoTelefone"; 
+	private static final String CADASTRO_VIEW2 = "/cadastro/CadastroServicoTelefone"; 
 	@Autowired
 	private Usuarios usuarios;
 	@Autowired
 	private ServicosTelefone servicos;
+	@Autowired
+	private PesquisasTelefone servicosAtendente;
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo()
@@ -58,25 +66,235 @@ public class ServicoTelefoneController {
 		{
 			return "cadastroServicoTelefone";
 		}
-		Usuario user = usuarios.findOne(usuario_id_usuario);
-		servicoTelefone.setSolicitado(user);
+		String array[] = new String[3];
+		String protocolo = "CTB";
+		long numero = servicos.count()+1;
+		Date data = new Date(System.currentTimeMillis());  
+		SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd"); 
+		//System.out.print(formatarDate.format(data).toString());
+		
+		array = formatarDate.format(data).toString().split("-");
+		
+		protocolo = protocolo + "T" + array[0] + array[1] + "-" + numero;
+		if(usuario_id_usuario != null) {
+			Usuario user = usuarios.findOne(usuario_id_usuario);
+			servicoTelefone.setSolicitado(user);
+		}
+		servicoTelefone.setProtocolo(protocolo);
+
 		servicos.save(servicoTelefone);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/gereteci/servicosrede/novo";
+		return "redirect:/gereteci/servicotelefone/novo";
 	
 	}
-	@RequestMapping
-	public ModelAndView pesquisar()
+	
+	@RequestMapping(value="/{id_servico}/salvar1",method = RequestMethod.POST)
+	public String salvar1(@Validated ServicoTelefone servicoTelefone, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
 	{
-		List<ServicoTelefone> todosServicosTelefone = servicos.findAll();
-		//List<Computador> todosComputadores = computadores.findAll();
-		List<Usuario> todosUsuarios = usuarios.findAll();
-		ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosTelefone");
-	    mv.addObject("servicos", todosServicosTelefone);
-		mv.addObject("usuarios", todosUsuarios);
-	    return mv;
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW2);
+		if(errors.hasErrors())
+		{
+			return "cadastroServicoTelefone";
+		}
+		//ServicoManutencao servico = servicos.findOne(servicoManutencao.getId_servico());
+		//servicoManutencao.setProtocolo(servico.getProtocolo()); 
+		//System.out.print(formatarDate.format(data).toString());
+		if(usuario_id_usuario != null) {
+			Usuario user = usuarios.findOne(usuario_id_usuario);
+			servicoTelefone.setSolicitado(user);
+		}
+		servicos.save(servicoTelefone);
+		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
+		return "redirect:/gereteci/servicostelefone/novo";
+	
+	}
+	
+	
+	@RequestMapping(method= RequestMethod.GET)
+	public ModelAndView pesquisar(String busca, String atendenteop, String solicitante, String setor, String status, String data_ocorrencia, String data_encerramento, String descricao_problema) throws ParseException
+	{
+		//List<ServicoManutencao> todosServicosManutencao = servicos.findAll();
+		//Usuario user = usuarios.findOne(14);
+		if(atendenteop != null) {
+			if(busca != null && atendenteop.equals("on")) {
+				System.out.println(busca);
+				System.out.println(busca);
+				List<Usuario> teste = usuarios.findByNomeContaining(busca);
+				Usuario teste2 = teste.get(0);
+				System.out.println(teste2.getNome());
+				List<ServicoTelefone> todosServicosManutencao = servicosAtendente.findByAtendente(teste2);
+				//List<Computador> todosComputadores = computadores.findAll();
+				List<Usuario> todosUsuarios = usuarios.findAll();
+				ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosTelefone");
+			    mv.addObject("servicos", todosServicosManutencao);
+				mv.addObject("usuarios", todosUsuarios);
+				return mv;
+			}
+		}
+		else  
+		if(solicitante != null) {
+			if(busca != null && solicitante.equals("on"))
+		{
+			List<Usuario> teste = usuarios.findByNomeContaining(busca);
+			Usuario teste2 = teste.get(0);
+			System.out.println(teste2.getNome());
+			List<ServicoTelefone> todosServicosManutencao = servicosAtendente.findBySolicitado(teste2);
+			//List<Computador> todosComputadores = computadores.findAll();
+			List<Usuario> todosUsuarios = usuarios.findAll();
+			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosTelefone");
+		    mv.addObject("servicos", todosServicosManutencao);
+			mv.addObject("usuarios", todosUsuarios);
+			return mv;
+		}
+	}
+		else
+			if(status != null)
+			{
+				if(busca != null && status.equals("on")) 
+				{
+					StatusServico sServico; 
+					if(busca.equals("Fechado"))
+					{
+						sServico = StatusServico.fechado;
+					}
+						else if(busca.equals("Em andamento"))
+						{
+							sServico = StatusServico.em_andamento;
+						}
+						else{
+							sServico = StatusServico.aberto;
+						}
+					List<ServicoTelefone> todosServicosManutencao = servicosAtendente.findByStatus(sServico);
+					//List<Computador> todosComputadores = computadores.findAll();
+					ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+				    mv.addObject("servicos", todosServicosManutencao);
+					return mv;
+				}
+			}
+			else
+				if(data_ocorrencia != null)
+				{
+					if(busca != null && data_ocorrencia.equals("on")) 
+					{	
+						
+						List<ServicoTelefone> servicosTelefone = servicos.findAll();
+						List<ServicoTelefone> servicosTelefone2 = new ArrayList<ServicoTelefone>();
+						Iterator it = servicosTelefone.iterator();
+						while(it.hasNext())
+						{
+							ServicoTelefone serv = (ServicoTelefone) it.next();
+							if(serv.getData_ocorrencia().toString().contains(busca))
+							{
+								servicosTelefone2.add(serv);
+							}
+						}	
+						//List<Computador> todosComputadores = computadores.findAll();
+						ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+					    mv.addObject("servicos", servicosTelefone2);
+						return mv;
+					}
+				}
+				else
+					if(data_encerramento != null)
+					{
+						if(busca != null && data_encerramento.equals("on")) 
+						{	
+							
+							List<ServicoTelefone> servicosTelefone = servicos.findAll();
+							List<ServicoTelefone> servicosTelefone2 = new ArrayList<ServicoTelefone>();
+							Iterator it = servicosTelefone.iterator();
+							while(it.hasNext())
+							{
+								ServicoTelefone serv = (ServicoTelefone) it.next();
+								if(serv.getData_ocorrencia().toString().contains(busca))
+								{
+									servicosTelefone2.add(serv);
+								}
+							}	
+							//List<Computador> todosComputadores = computadores.findAll();
+							ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+						    mv.addObject("servicos", servicosTelefone2);
+							return mv;
+						}
+					}
+					else
+						if(setor != null)
+						{
+							if(busca != null && setor.equals("on")) 
+							{	
+								List<ServicoTelefone> servicosTelefone = servicos.findAll();
+								List<ServicoTelefone> servicosTelefone2 = new ArrayList<ServicoTelefone>();
+								Iterator it = servicosTelefone.iterator();
+								while(it.hasNext())
+								{
+									ServicoTelefone serv = (ServicoTelefone) it.next();
+									if(serv.getSolicitado() != null && serv.getSolicitado().getSetor() != null) {
+										if(serv.getSolicitado().getSetor().getSigla().contains(busca))
+										{
+											servicosTelefone2.add(serv);
+										}
+									}	
+								}
+								ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+							    mv.addObject("servicos", servicosTelefone2);
+								return mv;
+							}
+						}
+						else
+							if(descricao_problema != null)
+							{
+								if(busca != null && descricao_problema.equals("on")) 
+								{	
+									List<ServicoTelefone> servicosTelefone = servicos.findAll();
+									List<ServicoTelefone> servicosTelefone2 = new ArrayList<ServicoTelefone>();
+									Iterator it = servicosTelefone.iterator();
+									while(it.hasNext())
+									{
+										ServicoTelefone serv = (ServicoTelefone) it.next();
+										if(serv.getDescricao_problema().contains(busca)) {
+												servicosTelefone2.add(serv);
+										}	
+									}
+									ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
+								    mv.addObject("servicos", servicosTelefone2);
+									return mv;
+								}
+							}
+		   List<ServicoTelefone> todosServicosManutencao = servicos.findAll();
+		   List<Usuario> todosUsuarios = usuarios.findAll();
+			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosTelefone");
+		    mv.addObject("servicos", todosServicosManutencao);
+			mv.addObject("usuarios", todosUsuarios);
+	    
+		return mv;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("{id_servico}")
 	public ModelAndView edicao(@PathVariable("id_servico") ServicoTelefone servicoTelefone)
 	{
@@ -85,6 +303,18 @@ public class ServicoTelefoneController {
 		Usuario solicitante = servicoTelefone.getSolicitado();
 		Usuario usuario_atendente = servicoTelefone.getAtendente();
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		mv.addObject("servico", servicoTelefone);
+		mv.addObject(servicoTelefone);
+		return mv;
+	}
+	@RequestMapping("/{id_servico}/editar1")
+	public ModelAndView edicao1(@PathVariable("id_servico") ServicoTelefone servicoTelefone)
+	{
+		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
+		//Usuario usuario = usuarios.findOne(id_usuario);
+		Usuario solicitante = servicoTelefone.getSolicitado();
+		Usuario usuario_atendente = servicoTelefone.getAtendente();
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW2);
 		mv.addObject("servico", servicoTelefone);
 		mv.addObject(servicoTelefone);
 		return mv;

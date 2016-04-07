@@ -21,13 +21,6 @@
 	<div class="panel-body">
 	<div class="boxes">
 	<input type="hidden" th:field="*{id_servico}" />
-	
-	<div class="form-group" >
-			<label for="identificador" class="col-sm-2 control-label">Protocolo:</label>
-			<div class="col-sm-6">
-				<input class ="form-control" type="text"  id="protocolo" name="protocolo" th:field="*{protocolo}"/>
-			</div>
-		</div>
 		
 	<div class="form-group">
 			<label for="data_compra" class="col-sm-2 control-label">Data da Ocorrência:</label>
@@ -46,17 +39,17 @@
 		<div class="form-group">
 			<label for="sistema" class="col-sm-2 control-label">Usuário solicitante:</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="usuario_id_usuario" >
+				<select class="form-control disable-solicitante-manutencao-input" name="usuario_id_usuario" >
 					<option th:each="usuario : ${todosUsuarios}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}" th:selected="${servico.solicitado} ? ${servico.solicitado.nome} == ${usuario.nome}"></option>
 				</select>
 			</div>
-			
+			<div class="col-sm-6" style="width:180px">
+				    <div class="input-group">
+				        <input type="checkbox" class ="disable-solicitante-manutencao-botao"/> Manutenção preventiva  	
+				    </div><!-- /input-group -->
 		</div>
-		<div class="form-group" >		
-		<div class="col-sm-6" style="margin-left: 10px;">
-				<input type="checkbox" name="sem_solicitante" th:checked="!${servico.solicitado}"/>Não houve pedido de usuário<br/>
 		</div>
-		</div>
+		
 		
 		
 		<div class="form-group">
