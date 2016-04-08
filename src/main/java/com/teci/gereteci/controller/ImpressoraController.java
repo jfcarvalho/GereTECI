@@ -27,7 +27,7 @@ import com.teci.gereteci.model.Setor.Setor;
 import com.teci.gereteci.repository.*;
 
 @Controller
-@RequestMapping("/gereteci/impressoras")
+@RequestMapping("/impressoras")
 public class ImpressoraController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroImpressora"; 
 	@Autowired
@@ -53,7 +53,7 @@ public class ImpressoraController {
 		impressoras.save(impressora);
 		
 		attributes.addFlashAttribute("mensagem", "Impressora salvo com sucesso!");	
-		return "redirect:/gereteci/impressoras/novo";
+		return "redirect:/impressoras/novo";
 	}
 	@RequestMapping
 	public ModelAndView pesquisar()

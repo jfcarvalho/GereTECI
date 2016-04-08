@@ -31,7 +31,7 @@ import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Monitores;
 
 @Controller
-@RequestMapping("/gereteci/monitores")
+@RequestMapping("/monitores")
 
 public class MonitorController {
 	private static final String CADASTRO_VIEW_MONITOR = "/cadastro/CadastroMonitor"; 
@@ -73,7 +73,7 @@ public class MonitorController {
 		}
 		monitores.save(monitor);
 		attributes.addFlashAttribute("mensagem", "Monitor salvo com sucesso!");	
-		return "redirect:/gereteci/monitores/novo";
+		return "redirect:/monitores/novo";
 	}
 	@RequestMapping(value="/{id_recurso}/salvar1",method = RequestMethod.POST)
 	public String salvar1(@Validated Monitor monitor, Errors errors, RedirectAttributes attributes)

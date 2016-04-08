@@ -29,7 +29,7 @@ import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Midias;
 
 @Controller
-@RequestMapping("/gereteci/caixas")
+@RequestMapping("/caixas")
 
 public class CaixaDeSomController {
 	private static final String CADASTRO_VIEW_CS = "/cadastro/CadastroCaixaDeSom"; 
@@ -69,7 +69,7 @@ public class CaixaDeSomController {
 		}
 		caixas.save(cs);
 		attributes.addFlashAttribute("mensagem", "Caixas de som salva com sucesso!");	
-		return "redirect:/gereteci/caixas/novo";
+		return "redirect:/caixas/novo";
 	}
 	
 	@RequestMapping(value="/{id_recurso}/salvar1",method = RequestMethod.POST)

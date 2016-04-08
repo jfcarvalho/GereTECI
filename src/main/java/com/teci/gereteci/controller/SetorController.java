@@ -23,7 +23,7 @@ import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
 
 @Controller
-@RequestMapping("/gereteci/setores")
+@RequestMapping("/setores")
 public class SetorController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroSetor"; 
 	@Autowired
@@ -56,7 +56,7 @@ public class SetorController {
 		setores.save(setor);
 		
 		attributes.addFlashAttribute("mensagem", "Setor salvo com sucesso!");	
-		return "redirect:/gereteci/setores/novo";
+		return "redirect:/setores/novo";
 	}
 	@RequestMapping
 	public ModelAndView pesquisar()
@@ -81,7 +81,7 @@ public class SetorController {
 	{
 		setores.delete(id_setor);
 		attributes.addFlashAttribute("mensagem", "Setor excluido com sucesso com sucesso!");	
-		return "redirect:/gereteci/setores";
+		return "redirect:/setores";
 	}
 	
 	@ModelAttribute("todosResponsaveisSetor")

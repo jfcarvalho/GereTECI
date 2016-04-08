@@ -21,7 +21,7 @@ import com.teci.gereteci.model.Licenca.PlanoOffice;
 import com.teci.gereteci.repository.*;
 
 @Controller
-@RequestMapping("/gereteci/licencasoffice")
+@RequestMapping("/licencasoffice")
 public class LicencaOfficeController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroLicencaOffice"; 
 	@Autowired
@@ -49,7 +49,7 @@ public class LicencaOfficeController {
 		licencasOffice.save(licencaOffice);
 		
 		attributes.addFlashAttribute("mensagem", "Licença Office salvo com sucesso!");	
-		return "redirect:/gereteci/licencasoffice/novo";
+		return "redirect:/licencasoffice/novo";
 	}
 	@RequestMapping
 	public ModelAndView pesquisar()
@@ -77,7 +77,7 @@ public class LicencaOfficeController {
 	{
 		licencasOffice.delete(id_licencaoffice);
 		attributes.addFlashAttribute("mensagem", "Licença Office excluida com sucesso com sucesso!");	
-		return "redirect:/gereteci/licencasoffice";
+		return "redirect:/licencasoffice";
 	}
 	@ModelAttribute("todosPlanosLicencaOffice")
 	public List<PlanoOffice> todosPlanosLicencaOffice() {

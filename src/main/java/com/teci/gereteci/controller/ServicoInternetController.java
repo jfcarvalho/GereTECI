@@ -41,7 +41,7 @@ import java.text.SimpleDateFormat;
 
 
 @Controller
-@RequestMapping("/gereteci/servicosinternet")
+@RequestMapping("/servicosinternet")
 public class ServicoInternetController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoInternet"; 
 	private static final String CADASTRO_VIEW2 = "/edicoes/EdicaoServicoInternet"; 
@@ -92,7 +92,7 @@ public class ServicoInternetController {
 
 		servicos.save(servicoInternet);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/gereteci/servicosinternet/novo";
+		return "redirect:/servicosinternet/novo";
 	
 	}
 	
@@ -102,7 +102,7 @@ public class ServicoInternetController {
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW2);
 		if(errors.hasErrors())
 		{
-			return "cadastroServicoManutencao";
+			return "cadastroServicoInternet";
 		}
 		//ServicoInternet servico = servicos.findOne(servicoInternet.getId_servico());
 		//servicoInternet.setProtocolo(servico.getProtocolo()); 
@@ -113,7 +113,7 @@ public class ServicoInternetController {
 		}
 		servicos.save(servicoInternet);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/gereteci/servicosmanutencao/novo";
+		return "redirect:/servicosinternet/novo";
 	
 	}
 	
@@ -275,7 +275,7 @@ public class ServicoInternetController {
 	    
 		return mv;
 	}
-	@RequestMapping("{id_servico}")
+/*	@RequestMapping("{id_servico}")
 	public ModelAndView edicao(@PathVariable("id_servico") ServicoInternet servicoInternet)
 	{
 		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
@@ -287,8 +287,8 @@ public class ServicoInternetController {
 		mv.addObject(servicoInternet);
 		return mv;
 	}
-	
-	@RequestMapping("/{id_servico}/editar1")
+	*/
+	@RequestMapping(value="{id_servico}",method=RequestMethod.GET)
 	public ModelAndView edicao1(@PathVariable("id_servico") ServicoInternet servicoInternet)
 	{
 		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);

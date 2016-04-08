@@ -30,7 +30,7 @@ import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
 
 @Controller
-@RequestMapping("/gereteci/usuarios")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroUsuario"; 
 	@Autowired
@@ -79,7 +79,7 @@ public class UsuarioController {
 		usuarios.save(usuario);
 		
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");	
-		return "redirect:/gereteci/usuarios/novo";
+		return "redirect:/usuarios/novo";
 	}
 	
 	@RequestMapping(method= RequestMethod.GET)
@@ -132,10 +132,6 @@ public class UsuarioController {
 	{
 		
 		Usuario u = usuarios.findOne(id_usuario);
-			System.out.println(">>>>>>>>>>>>>>>>>> +" + u.getId_usuario());
-			System.out.println(">>>>>>>>>>>>>>>>>> +" + u.getComputador().getId_computador());
-			System.out.println(">>>>>>>>>>>>>>>>>> +" + u.getComputador().getIp());
-			System.out.println(">>>>>>>>>>>>>>>>>> +" + u.getComputador().getUsuario());
 			if (u.getComputador() != null) {
 				Computador computador = computadores.findOne(u.getComputador().getId_computador());
 				System.out.println(">>>>>> " + computador.getIp());
@@ -160,7 +156,7 @@ public class UsuarioController {
 		}
 		attributes.addFlashAttribute("mensagem", "Usuário excluido com sucesso com sucesso!");	
 		usuarios.delete(id_usuario);
-		return "redirect:/gereteci/usuarios";
+		return "redirect:/usuarios";
 	}
 	@ModelAttribute("todosNiveisUsuario")
 	public List<Nivel> todosNiveisUsuario() {

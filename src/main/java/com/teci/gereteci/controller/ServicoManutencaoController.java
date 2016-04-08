@@ -35,7 +35,7 @@ import com.teci.gereteci.repository.Usuarios;
 import com.teci.gereteci.repository.PesquisasManutencao;
 
 @Controller
-@RequestMapping("/gereteci/servicosmanutencao")
+@RequestMapping("/servicosmanutencao")
 public class ServicoManutencaoController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoManutencao"; 
 	private static final String CADASTRO_VIEW2 = "/edicoes/EdicaoServicoManutencao"; 
@@ -102,7 +102,7 @@ public class ServicoManutencaoController {
 		}
 		servicos.save(servicoManutencao);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/gereteci/servicosmanutencao/novo";
+		return "redirect:/servicosmanutencao/novo";
 	
 	}
 	
@@ -266,19 +266,8 @@ public class ServicoManutencaoController {
 		return mv;
 	}
 
-	@RequestMapping("{id_servico}")
-	public ModelAndView edicao(@PathVariable("id_servico") ServicoManutencao servicoManutencao)
-	{
-		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
-		//Usuario usuario = usuarios.findOne(id_usuario);
-		Usuario solicitante = servicoManutencao.getSolicitado();
-		Usuario usuario_atendente = servicoManutencao.getAtendente();
-		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		mv.addObject("servico", servicoManutencao);
-		mv.addObject(servicoManutencao);
-		return mv;
-	}
-	@RequestMapping("/{id_servico}/editar1")
+	
+	@RequestMapping(value="{id_servico}",method=RequestMethod.GET)
 	public ModelAndView edicao1(@PathVariable("id_servico") ServicoManutencao servicoManutencao)
 	{
 		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);

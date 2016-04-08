@@ -39,7 +39,7 @@ import com.teci.gereteci.repository.Usuarios;
 
 
 @Controller
-@RequestMapping("/gereteci/servicostelefone")
+@RequestMapping("/servicostelefone")
 public class ServicoTelefoneController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoTelefone"; 
 	private static final String CADASTRO_VIEW2 = "/cadastro/CadastroServicoTelefone"; 
@@ -84,7 +84,7 @@ public class ServicoTelefoneController {
 
 		servicos.save(servicoTelefone);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/gereteci/servicotelefone/novo";
+		return "redirect:/servicotelefone/novo";
 	
 	}
 	
@@ -105,7 +105,7 @@ public class ServicoTelefoneController {
 		}
 		servicos.save(servicoTelefone);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/gereteci/servicostelefone/novo";
+		return "redirect:/servicostelefone/novo";
 	
 	}
 	
@@ -268,32 +268,6 @@ public class ServicoTelefoneController {
 	    
 		return mv;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@RequestMapping("{id_servico}")
 	public ModelAndView edicao(@PathVariable("id_servico") ServicoTelefone servicoTelefone)
@@ -307,7 +281,7 @@ public class ServicoTelefoneController {
 		mv.addObject(servicoTelefone);
 		return mv;
 	}
-	@RequestMapping("/{id_servico}/editar1")
+	@RequestMapping(value="{id_servico}/editar1")
 	public ModelAndView edicao1(@PathVariable("id_servico") ServicoTelefone servicoTelefone)
 	{
 		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
@@ -357,3 +331,4 @@ public class ServicoTelefoneController {
 	}
 	
 }
+

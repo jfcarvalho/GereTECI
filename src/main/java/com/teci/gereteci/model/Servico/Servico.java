@@ -30,6 +30,7 @@ import com.teci.gereteci.model.Usuario.Usuario;
 public abstract class Servico {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_servico")
 	
 	private Integer id_servico;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")

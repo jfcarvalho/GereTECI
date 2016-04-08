@@ -6,14 +6,14 @@
 </head>
 
 <section layout:fragment="conteudo">
-<form class="form-horizontal" method="POST" action="/gereteci/servicostelefone/{id_servico}/salvar1" th:object="${servico}">
+<form class="form-horizontal" method="POST" action="/servicostelefone/{id_servico}/salvar1" th:object="${servico}">
 		<div layout:include="/mensagem/MensagemUsuario"></div>
 		<div layout:include="/mensagem/MensagemErro"></div>
 		<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="clearfix">
 			<h1 class="panel-title">Novo Serviço de Manutenção</h1>
-		<a class="btn btn-link aw-link-panel" href="/gereteci/servicostelefone">Voltar para pesquisa</a>
+		<a class="btn btn-link aw-link-panel" href="/servicostelefone">Voltar para pesquisa</a>
 		</div>
 		</div>
 	
@@ -136,10 +136,6 @@
 			</div>
 		</div>
 		
-		
-		
-	
-	
 		</div>
 				
 			<div class="form-group">

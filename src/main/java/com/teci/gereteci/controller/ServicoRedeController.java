@@ -38,7 +38,7 @@ import com.teci.gereteci.repository.Usuarios;
 
 
 @Controller
-@RequestMapping("/gereteci/servicosrede")
+@RequestMapping("/servicosrede")
 public class ServicoRedeController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoRede"; 
 	private static final String CADASTRO_VIEW2 = "/edicoes/EdicaoServicoRede"; 
@@ -84,7 +84,7 @@ public class ServicoRedeController {
 		servicoRede.setProtocolo(protocolo);
 		servicos.save(servicoRede);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/gereteci/servicosrede/novo";
+		return "redirect:/servicosrede/novo";
 	
 	}
 	@RequestMapping(value="/{id_servico}/salvar1",method = RequestMethod.POST)
@@ -103,7 +103,7 @@ public class ServicoRedeController {
 		}
 		servicos.save(servicoRede);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/gereteci/servicosrede/novo";
+		return "redirect:/servicosrede/novo";
 	
 	}
 	@RequestMapping(method= RequestMethod.GET)
@@ -277,7 +277,7 @@ public class ServicoRedeController {
 		mv.addObject(servicoRede);
 		return mv;
 	}
-	@RequestMapping("/{id_servico}/editar1")
+	@RequestMapping("{id_servico}/editar1")
 	public ModelAndView edicao1(@PathVariable("id_servico") ServicoRede servicoRede)
 	{
 		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);

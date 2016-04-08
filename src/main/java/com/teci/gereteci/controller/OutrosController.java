@@ -28,7 +28,7 @@ import com.teci.gereteci.repository.Midias;
 import com.teci.gereteci.repository.Outross;
 
 @Controller
-@RequestMapping("/gereteci/outros")
+@RequestMapping("/outros")
 
 
 public class OutrosController {
@@ -58,7 +58,7 @@ public class OutrosController {
 		
 		outross.save(outros);
 		attributes.addFlashAttribute("mensagem", "Midia salva com sucesso!");	
-		return "redirect:/gereteci/outros/novo";
+		return "redirect:/outros/novo";
 	}
 	@RequestMapping
 	public ModelAndView pesquisar()

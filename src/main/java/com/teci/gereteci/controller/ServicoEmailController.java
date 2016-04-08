@@ -40,7 +40,7 @@ import com.teci.gereteci.repository.Usuarios;
 
 
 @Controller
-@RequestMapping("/gereteci/servicosemail")
+@RequestMapping("/servicosemail")
 public class ServicoEmailController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoEmail"; 
 	private static final String CADASTRO_VIEW2 = "/edicoes/EdicaoServicoEmail"; 
@@ -84,7 +84,7 @@ public class ServicoEmailController {
 		servicoEmail.setSolicitado(user);
 		servicos.save(servicoEmail);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/gereteci/servicosemail/novo";
+		return "redirect:/servicosemail/novo";
 	
 	}
 	@RequestMapping(value="/{id_servico}/salvar1",method = RequestMethod.POST)
@@ -107,7 +107,7 @@ public class ServicoEmailController {
 		}
 		servicos.save(servicoEmail);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/gereteci/servicosmanutencao/novo";
+		return "redirect:/servicosmanutencao/novo";
 	
 	}
 	
@@ -271,19 +271,6 @@ public class ServicoEmailController {
 	}
 
 	@RequestMapping("{id_servico}")
-	public ModelAndView edicao(@PathVariable("id_servico") ServicoEmail servicoEmail)
-	{
-		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
-		//Usuario usuario = usuarios.findOne(id_usuario);
-		Usuario solicitante = servicoEmail.getSolicitado();
-		Usuario usuario_atendente = servicoEmail.getAtendente();
-		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		mv.addObject("servico", servicoEmail);
-		mv.addObject(servicoEmail);
-		return mv;
-	}
-	
-	@RequestMapping("/{id_servico}/editar1")
 	public ModelAndView edicao1(@PathVariable("id_servico") ServicoEmail servicoEmail)
 	{
 		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);

@@ -51,7 +51,7 @@ import com.teci.gereteci.repository.*;
 
 
 @Controller
-@RequestMapping("/gereteci/computadores")
+@RequestMapping("/computadores")
 public class ComputadorController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroComputador"; 
 	private static final String EDICAO1_VIEW = "/edicoes/EditarComputador";
@@ -162,7 +162,7 @@ public class ComputadorController {
 		}
 		
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
-		return "redirect:/gereteci/computadores/novo";
+		return "redirect:/computadores/novo";
 		
 	}
 	@RequestMapping(value="/{id_computador}/salvar1",method = RequestMethod.POST)
@@ -191,7 +191,7 @@ public class ComputadorController {
 		pc.setStatus(computador.getStatus());
 		computadores.save(pc);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
-		return "redirect:/gereteci/computadores/novo";
+		return "redirect:/computadores/novo";
 		
 	}
 	@RequestMapping(value="/{id_computador}/salvar2",method = RequestMethod.POST)
@@ -268,7 +268,7 @@ public class ComputadorController {
 		}
 		computadores.save(pc);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
-		return "redirect:/gereteci/computadores/novo";
+		return "redirect:/computadores/novo";
 		
 	}
 	
@@ -293,7 +293,7 @@ public class ComputadorController {
 		usuarios.save(user);
 		usuarios.save(user2);
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
-		return "redirect:/gereteci/computadores/novo";
+		return "redirect:/computadores/novo";
 		
 	}
 	
@@ -556,7 +556,7 @@ public class ComputadorController {
 		//computadores.save(pc);
 		computadores.delete(pc.getId_computador());
 		attributes.addFlashAttribute("mensagem", "Computador excluido com sucesso com sucesso!");	
-		return "redirect:/gereteci/computadores";
+		return "redirect:/computadores";
 	}
 	@ModelAttribute("todosSistemasComputador")
 	public List<Sistema> todosSistemasComputador() {

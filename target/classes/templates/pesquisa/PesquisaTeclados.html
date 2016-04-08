@@ -12,7 +12,7 @@
 		<div class="panel-heading">
 		<div class="clearfix">	
 			<h1 class="panel-title">Pesquisa de Teclados</h1>
-			<a class="btn btn-link aw-link-panel" href="/gereteci/teclados/novo">Novo teclado</a>
+			<a class="btn btn-link aw-link-panel" href="/teclados/novo">Novo teclado</a>
 		</div>
 		</div>
 		<div class="panel-body">
@@ -49,7 +49,7 @@
 					<td class="text-center" th:text="${recurso.cor}"></td>
 					<td class="text-center" th:text="${recurso.computador} and ${recurso.computador.usuario} ? ${recurso.computador.usuario.nome}"></td>
 					<td class="text-center" th:text="${recurso.computador}  ? ${recurso.computador.ip}"></td>
-					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/gereteci/teclados/{id_recurso}(id_recurso=${recurso.id_recurso})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalRecurso" th:attr="data-id_recurso=${recurso.id_recurso}, data-descricao=${recurso.descricao}"><span class="glyphicon glyphicon-remove"></span></a><a class="js-atualizar-status-manutencao-recurso" th:href="@{/gereteci/teclados/{id_recurso}/manutencao(id_recurso=${recurso.id_recurso})}" th:attr="data-id_recurso=${recurso.id_recurso}"><span class="glyphicon glyphicon-wrench"></span></a><a class="js-atualizar-status-baixa-recurso" th:href="@{/gereteci/teclados/{id_recurso}/baixa(id_recurso=${recurso.id_recurso})}" th:attr="data-id_recurso=${recurso.id_recurso}"><span class="glyphicon glyphicon-fire"></span></a><a class="js-atualizar-status-conserto-recurso" th:href="@{/gereteci/teclados/{id_recurso}/consertado(id_recurso=${recurso.id_recurso})}" th:attr="data-id_recurso=${recurso.id_recurso}"><span class="glyphicon glyphicon-ok-sign"></span></a></td>
+					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/teclados/{id_recurso}(id_recurso=${recurso.id_recurso})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalRecurso" th:attr="data-id_recurso=${recurso.id_recurso}, data-descricao=${recurso.descricao}"><span class="glyphicon glyphicon-remove"></span></a><a class="js-atualizar-status-manutencao-recurso" th:href="@{/teclados/{id_recurso}/manutencao(id_recurso=${recurso.id_recurso})}" th:attr="data-id_recurso=${recurso.id_recurso}"><span class="glyphicon glyphicon-wrench"></span></a><a class="js-atualizar-status-baixa-recurso" th:href="@{/teclados/{id_recurso}/baixa(id_recurso=${recurso.id_recurso})}" th:attr="data-id_recurso=${recurso.id_recurso}"><span class="glyphicon glyphicon-fire"></span></a><a class="js-atualizar-status-conserto-recurso" th:href="@{/teclados/{id_recurso}/consertado(id_recurso=${recurso.id_recurso})}" th:attr="data-id_recurso=${recurso.id_recurso}"><span class="glyphicon glyphicon-ok-sign"></span></a></td>
 					
 				</tr>
 				
