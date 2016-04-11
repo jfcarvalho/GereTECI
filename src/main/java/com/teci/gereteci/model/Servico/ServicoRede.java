@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 import com.teci.gereteci.model.Computador.Computador;
 
@@ -17,7 +19,7 @@ public class ServicoRede extends Servico {
 	private boolean senha_expirada;
 	private String usuario;
 	
-	
+	@Enumerated(EnumType.STRING)
 	private DescricaoProntaRede descricao_pronta;
 	
 		
