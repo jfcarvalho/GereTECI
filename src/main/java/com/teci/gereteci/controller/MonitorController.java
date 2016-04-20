@@ -31,7 +31,7 @@ import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Monitores;
 
 @Controller
-@RequestMapping("/monitores")
+@RequestMapping("/gereteci/monitores")
 
 public class MonitorController {
 	private static final String CADASTRO_VIEW_MONITOR = "/cadastro/CadastroMonitor"; 
@@ -73,7 +73,7 @@ public class MonitorController {
 		}
 		monitores.save(monitor);
 		attributes.addFlashAttribute("mensagem", "Monitor salvo com sucesso!");	
-		return "redirect:/monitores/novo";
+		return "redirect:/gereteci/monitores/novo";
 	}
 	@RequestMapping(value="/{id_recurso}/salvar1",method = RequestMethod.POST)
 	public String salvar1(@Validated Monitor monitor, Errors errors, RedirectAttributes attributes)
@@ -94,7 +94,7 @@ public class MonitorController {
 		
 		monitores.save(m);
 		attributes.addFlashAttribute("mensagem", "Monitor salvo com sucesso!");	
-		return "redirect:/monitores/novo";
+		return "redirect:/gereteci/monitores/novo";
 		
 	}
 @RequestMapping("/{id_recurso}/editar1")
@@ -121,7 +121,7 @@ public ModelAndView editar2(@PathVariable("id_recurso") Monitor monitor)
 	return mv;
 }
 @RequestMapping(value="/{id_recurso}/salvar2",method = RequestMethod.POST)
-public String salvar2(@Validated Monitor monitor, @RequestParam Integer computador_id_computador, Errors errors, RedirectAttributes attributes)
+public String salvar2(Monitor monitor, @RequestParam Integer computador_id_computador, Errors errors, RedirectAttributes attributes)
 {
 	ModelAndView mv = new ModelAndView(EDICAO2_VIEW);
 	if(errors.hasErrors())
@@ -161,7 +161,7 @@ public String salvar2(@Validated Monitor monitor, @RequestParam Integer computad
 	}
 	monitores.save(m);
 	attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
-	return "redirect:/computadores/novo";
+	return "redirect:/gereteci/monitores/novo";
 	
 }
 
@@ -202,7 +202,7 @@ public String salvar2(@Validated Monitor monitor, @RequestParam Integer computad
 		}
 		monitores.delete(id_recurso);
 		attributes.addFlashAttribute("mensagem", "Monitor excluido com sucesso com sucesso!");	
-		return "redirect:/monitores";
+		return "redirect:/gereteci/monitores";
 		
 		
 	}

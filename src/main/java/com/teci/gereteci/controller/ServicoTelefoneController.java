@@ -1,7 +1,11 @@
 package com.teci.gereteci.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,9 +38,10 @@ import com.teci.gereteci.repository.Usuarios;
 
 
 @Controller
-@RequestMapping("/servicostelefone")
+@RequestMapping("/gereteci/servicostelefone")
 public class ServicoTelefoneController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoTelefone"; 
+	private static final String CADASTRO_VIEW2 = "/edicoes/EdicaoServicoTelefone";
 	@Autowired
 	private Usuarios usuarios;
 	@Autowired
@@ -58,13 +63,50 @@ public class ServicoTelefoneController {
 		{
 			return "cadastroServicoTelefone";
 		}
-		Usuario user = usuarios.findOne(usuario_id_usuario);
-		servicoTelefone.setSolicitado(user);
+		String array[] = new String[3];
+		String protocolo = "CTB";
+		long numero = servicos.count()+1;
+		Date data = new Date(System.currentTimeMillis());  
+		SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd"); 
+		//System.out.print(formatarDate.format(data).toString());
+		
+		array = formatarDate.format(data).toString().split("-");
+		
+		protocolo = protocolo + "T" + array[0] + array[1] + "-" + numero;
+		if(usuario_id_usuario != null) {
+			Usuario user = usuarios.findOne(usuario_id_usuario);
+			servicoTelefone.setSolicitado(user);
+		}
+		servicoTelefone.setProtocolo(protocolo);
+
 		servicos.save(servicoTelefone);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/servicosrede/novo";
+		return "redirect:/gereteci/servicostelefone/novo";
 	
 	}
+	
+	@RequestMapping(value="/{id_servico}/salvar1",method = RequestMethod.POST)
+	public String salvar1(ServicoTelefone servicoTelefone, @RequestParam Integer usuario_id_usuario, Errors errors, RedirectAttributes attributes)
+	{
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW2);
+		if(errors.hasErrors())
+		{
+			return "cadastroServicoTelefone";
+		}
+		//ServicoManutencao servico = servicos.findOne(servicoManutencao.getId_servico());
+		//servicoManutencao.setProtocolo(servico.getProtocolo()); 
+		//System.out.print(formatarDate.format(data).toString());
+		if(usuario_id_usuario != null) {
+			Usuario user = usuarios.findOne(usuario_id_usuario);
+			servicoTelefone.setSolicitado(user);
+		}
+		servicos.save(servicoTelefone);
+		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
+		return "redirect:/servicostelefone/novo";
+	
+	}
+	
+	
 	@RequestMapping
 	public ModelAndView pesquisar()
 	{
@@ -85,6 +127,19 @@ public class ServicoTelefoneController {
 		Usuario solicitante = servicoTelefone.getSolicitado();
 		Usuario usuario_atendente = servicoTelefone.getAtendente();
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		mv.addObject("servico", servicoTelefone);
+		mv.addObject(servicoTelefone);
+		return mv;
+	}
+	
+	@RequestMapping(value="/{id_servico}/editar1")
+	public ModelAndView edicao1(@PathVariable("id_servico") ServicoTelefone servicoTelefone)
+	{
+		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
+		//Usuario usuario = usuarios.findOne(id_usuario);
+		Usuario solicitante = servicoTelefone.getSolicitado();
+		Usuario usuario_atendente = servicoTelefone.getAtendente();
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW2);
 		mv.addObject("servico", servicoTelefone);
 		mv.addObject(servicoTelefone);
 		return mv;
@@ -111,6 +166,7 @@ public class ServicoTelefoneController {
 		List<Usuario> users = usuarios.findAll();
 		return users;
 	}
+
 	@ModelAttribute("todosUsuariosTECI")
 	public List<Usuario> todosAtendentesTECI() {
 		List<Usuario> users = usuarios.findAll();
@@ -123,7 +179,40 @@ public class ServicoTelefoneController {
 				todosUsuariosTECI.add(obj);
 			
 		}
+		Comparator<Usuario> comparator = new Comparator<Usuario>() {
+		    public int compare(Usuario u1, Usuario u2) {
+		    	if(u2.getNome().compareTo(u1.getNome()) < 0) {
+					return 0;
+				}
+		    	if(u2.getNome().compareTo(u1.getNome()) > 0) {
+					return -1;
+				}
+				
+				return 0;
+		    }
+		};
+		Collections.sort(todosUsuariosTECI, comparator);
+		
 		return todosUsuariosTECI;
+	}
+	
+	@ModelAttribute("todosUsuarios")
+	public List<Usuario> todosUsuarios() {
+		List<Usuario> users = usuarios.findAll();
+		Comparator<Usuario> comparator = new Comparator<Usuario>() {
+		    public int compare(Usuario u1, Usuario u2) {
+		    	if(u2.getNome().compareTo(u1.getNome()) < 0) {
+					return 0;
+				}
+		    	if(u2.getNome().compareTo(u1.getNome()) > 0) {
+					return -1;
+				}
+				
+				return 0;
+		    }
+		};
+		Collections.sort(users, comparator);
+		return users;
 	}
 	
 }

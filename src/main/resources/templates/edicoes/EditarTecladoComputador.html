@@ -7,14 +7,14 @@
 
 <section layout:fragment="conteudo">
 
-<form class="form-horizontal" method="POST" action="/teclados/{id_recurso}/salvar2" th:object="${teclado}">
+<form class="form-horizontal" method="POST" action="/gereteci/teclados/{id_recurso}/salvar2" th:object="${teclado}">
 		<div layout:include="/mensagem/MensagemUsuario"></div>
 		<div layout:include="/mensagem/MensagemErro"></div>
 		<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="clearfix">
 			<h1 class="panel-title">Novo Teclado</h1>
-		<a class="btn btn-link aw-link-panel" href="/teclados">Voltar para pesquisa</a>
+		<a class="btn btn-link aw-link-panel" href="/gereteci/teclados">Voltar para pesquisa</a>
 		</div>
 		</div>
 		<div class="panel-body">
@@ -26,7 +26,7 @@
 	<input type="hidden" th:field="*{tipo_recurso}" />
 	<input type="hidden" th:field="*{cor}" />
 	<input type="hidden" th:field="*{funcoes}" />
-	<input type="hidden" th:field="*{tipo_teclado}" />
+	<input type="hidden" th:field="*{tipoes}" />
 			<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Computador Escolhido:</label>
 			<div class="col-sm-6">

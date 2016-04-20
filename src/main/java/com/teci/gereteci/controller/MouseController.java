@@ -28,7 +28,7 @@ import com.teci.gereteci.repository.Monitores;
 import com.teci.gereteci.repository.Mouses;
 
 @Controller
-@RequestMapping("/mouses")
+@RequestMapping("/gereteci/mouses")
 
 public class MouseController {
 	private static final String CADASTRO_VIEW_MOUSE = "/cadastro/CadastroMouse"; 
@@ -69,7 +69,7 @@ public class MouseController {
 		}
 		mouses.save(mouse);
 		attributes.addFlashAttribute("mensagem", "Mouse salvo com sucesso!");	
-		return "redirect:/mouses/novo";
+		return "redirect:/gereteci/mouses/novo";
 	}
 	@RequestMapping(value="/{id_recurso}/salvar1",method = RequestMethod.POST)
 	public String salvar1(@Validated Mouse mouse, Errors errors, RedirectAttributes attributes)
@@ -91,7 +91,7 @@ public class MouseController {
 		
 		mouses.save(m);
 		attributes.addFlashAttribute("mensagem", "Mouse salvo com sucesso!");	
-		return "redirect:/mouses/novo";
+		return "redirect:/gereteci/mouses/novo";
 		
 	}
 @RequestMapping("/{id_recurso}/editar1")
@@ -146,7 +146,7 @@ public String salvar2(@Validated Mouse mouse, @RequestParam Integer computador_i
 	}
 	mouses.save(m);
 	attributes.addFlashAttribute("mensagem", "Mouse salvo com sucesso!");	
-	return "redirect:/computadores/novo";
+	return "redirect:/gereteci/computadores/novo";
 	
 }
 
@@ -185,7 +185,7 @@ public String salvar2(@Validated Mouse mouse, @RequestParam Integer computador_i
 		}
 		mouses.delete(id_recurso);
 		attributes.addFlashAttribute("mensagem", "Mouse excluido com sucesso com sucesso!");	
-		return "redirect:/mouses";
+		return "redirect:/gereteci/mouses";
 	}
 	
 	@ModelAttribute("todosComputadoresDisponiveis")

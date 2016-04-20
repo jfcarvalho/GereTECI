@@ -9,18 +9,18 @@ import javax.persistence.Enumerated;
 @DiscriminatorValue("Manutenção")
 public class ServicoManutencao extends Servico {
 	@Enumerated(EnumType.STRING)
-	private DescricaoProntaMicro descricao_pronta;
+	private DescricaoManutencao descricao_pronta;
 	private boolean recolhimento_equipamento;
 	private boolean troca_recursos;
 	private String recurso_recolhido;
 	private String recurso_substituto;
 	
 	
-	public void setDescricao_pronta(DescricaoProntaMicro descricao_pronta)
+	public void setDescricao_pronta(DescricaoManutencao descricao_pronta)
 	{
 		this.descricao_pronta = descricao_pronta;
 	}
-	public DescricaoProntaMicro getDescricao_pronta()
+	public DescricaoManutencao getDescricao_pronta()
 	{
 		return this.descricao_pronta;
 	}

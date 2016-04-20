@@ -32,10 +32,10 @@ import com.teci.gereteci.model.Servico.StatusServico;
 import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.ServicosManutencao;
 import com.teci.gereteci.repository.Usuarios;
-import com.teci.gereteci.repository.PesquisasManutencao;
+
 
 @Controller
-@RequestMapping("/servicosmanutencao")
+@RequestMapping("/gereteci/servicosmanutencao")
 public class ServicoManutencaoController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoManutencao"; 
 	private static final String CADASTRO_VIEW2 = "/edicoes/EdicaoServicoManutencao"; 
@@ -44,7 +44,7 @@ public class ServicoManutencaoController {
 	@Autowired
 	private ServicosManutencao servicos;
 	@Autowired
-	private PesquisasManutencao servicosAtendente;
+	private ServicosManutencao servicosAtendente;
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo()
@@ -82,7 +82,7 @@ public class ServicoManutencaoController {
 
 		servicos.save(servicoManutencao);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/servicosmanutencao/novo";
+		return "redirect:/gereteci/servicosmanutencao/novo";
 	
 	}
 	@RequestMapping(value="/{id_servico}/salvar1",method = RequestMethod.POST)
@@ -102,7 +102,7 @@ public class ServicoManutencaoController {
 		}
 		servicos.save(servicoManutencao);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/servicosmanutencao/novo";
+		return "redirect:/gereteci/servicosmanutencao/novo";
 	
 	}
 	
@@ -144,7 +144,7 @@ public class ServicoManutencaoController {
 			return mv;
 		}
 	}
-		else
+		/*else
 			if(status != null)
 			{
 				if(busca != null && status.equals("on")) 
@@ -168,6 +168,7 @@ public class ServicoManutencaoController {
 					return mv;
 				}
 			}
+			*/
 			else
 				if(data_ocorrencia != null)
 				{
@@ -260,9 +261,38 @@ public class ServicoManutencaoController {
 		   List<ServicoManutencao> todosServicosManutencao = servicos.findAll();
 		   List<Usuario> todosUsuarios = usuarios.findAll();
 			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
-		    mv.addObject("servicos", todosServicosManutencao);
+		/*	Comparator<ServicoManutencao> sm = new Comparator<ServicoManutencao>() {
+			    public int compare(ServicoManutencao m1, ServicoManutencao m2) {
+			    	if(m2.getId_servico() > m1.getId_servico()) {
+						return 0;
+					}
+			    	if(m2.getId_servico() < m1.getId_servico()) {
+						return -1;
+					}
+					
+					return 1;
+			    }
+			};
+			*/
+			Collections.reverse(todosServicosManutencao);
+			List<ServicoManutencao> novaListaLimitada = new ArrayList<ServicoManutencao>();
+			int contador = 0; 
+			for (ServicoManutencao servico : todosServicosManutencao)
+			{
+				if(contador < 10 ) {
+					novaListaLimitada.add(servico);
+					contador++;
+				}
+				else {break;}
+			}
+			System.out.println( todosServicosManutencao.size());
+			//if(todosServicosManutencao.size() > 10) {
+				//mv.addObject("servicos", todosServicosManutencao.subList(todosServicosManutencao.size()-10 ,todosServicosManutencao.size()));
+			//}
+			//else { mv.addObject("servicos", todosServicosManutencao); }
+			mv.addObject("servicos", novaListaLimitada);
 			mv.addObject("usuarios", todosUsuarios);
-	    
+			
 		return mv;
 	}
 

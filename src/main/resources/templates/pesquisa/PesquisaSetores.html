@@ -12,7 +12,7 @@
 		<div class="panel-heading">
 		<div class="clearfix">	
 			<h1 class="panel-title">Pesquisa de Setores</h1>
-			<a class="btn btn-link aw-link-panel" href="/setores/novo">Novo setor</a>
+			<a class="btn btn-link aw-link-panel" href="/gereteci/setores/novo">Novo setor</a>
 		</div>
 		</div>
 		<div class="panel-body">
@@ -35,7 +35,7 @@
 					<td class="text-center" th:text="${setor.nome}"></td>
 					<td class="text-center" th:text="${setor.sigla}"></td>
 					<td class="text-center" th:text="${setor.responsavel} ? ${setor.responsavel.nome}"></td>
-					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/setores/{id_setor}(id_setor=${setor.id_setor})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalSetor" th:attr="data-id_setor=${setor.id_setor}, data-nome=${setor.nome}"><span class="glyphicon glyphicon-remove"></span></a></td>
+					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/gereteci/setores/{id_setor}(id_setor=${setor.id_setor})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalSetor" th:attr="data-id_setor=${setor.id_setor}, data-nome=${setor.nome}"><span class="glyphicon glyphicon-remove"></span></a></td>
 					
 				</tr>
 				

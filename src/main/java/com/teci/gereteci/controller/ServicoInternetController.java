@@ -28,7 +28,6 @@ import com.teci.gereteci.model.Servico.ServicoInternet;
 import com.teci.gereteci.model.Servico.ServicoManutencao;
 import com.teci.gereteci.model.Servico.StatusServico;
 import com.teci.gereteci.model.Usuario.Usuario;
-import com.teci.gereteci.repository.PesquisasInternet;
 import com.teci.gereteci.repository.ServicosInternet;
 import com.teci.gereteci.repository.ServicosManutencao;
 import com.teci.gereteci.repository.Usuarios;
@@ -41,7 +40,7 @@ import java.text.SimpleDateFormat;
 
 
 @Controller
-@RequestMapping("/servicosinternet")
+@RequestMapping("/gereteci/servicosinternet")
 public class ServicoInternetController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoInternet"; 
 	private static final String CADASTRO_VIEW2 = "/edicoes/EdicaoServicoInternet"; 
@@ -50,7 +49,7 @@ public class ServicoInternetController {
 	@Autowired
 	private ServicosInternet servicos;
 	@Autowired
-	private PesquisasInternet servicosAtendente;
+	private ServicosInternet servicosAtendente;
 	
 	
 	@RequestMapping("/novo")
@@ -92,7 +91,7 @@ public class ServicoInternetController {
 
 		servicos.save(servicoInternet);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/servicosinternet/novo";
+		return "redirect:/gereteci/servicosinternet/novo";
 	
 	}
 	
@@ -113,7 +112,7 @@ public class ServicoInternetController {
 		}
 		servicos.save(servicoInternet);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/servicosmanutencao/novo";
+		return "redirect:/gereteci/servicosmanutencao/novo";
 	
 	}
 	
@@ -154,7 +153,7 @@ public class ServicoInternetController {
 			return mv;
 		}
 	}
-		else
+		/*else
 			if(status != null)
 			{
 				if(busca != null && status.equals("on")) 
@@ -178,6 +177,7 @@ public class ServicoInternetController {
 					return mv;
 				}
 			}
+			*/
 			else
 				if(data_ocorrencia != null)
 				{
@@ -267,11 +267,26 @@ public class ServicoInternetController {
 									return mv;
 								}
 							}
-		   List<ServicoInternet> todosServicosInternet = servicos.findAll();
-		   List<Usuario> todosUsuarios = usuarios.findAll();
-			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosInternet");
-		    mv.addObject("servicos", todosServicosInternet);
-			mv.addObject("usuarios", todosUsuarios);
+		List<ServicoInternet> todosServicosInternet = servicos.findAll();
+		List<Usuario> todosUsuarios = usuarios.findAll();
+		Collections.reverse(todosServicosInternet);
+		ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosInternet");
+		if( todosServicosInternet.size() < 10) {
+		List<ServicoInternet> novaListaLimitada = new ArrayList<ServicoInternet>();
+		int contador = 0; 
+		for (ServicoInternet servico : todosServicosInternet)
+		{
+			if(contador < 10 ) {
+				novaListaLimitada.add(servico);
+				contador++;
+			}
+			else {break;}
+			}
+		 mv.addObject("servicos", novaListaLimitada);
+		}
+		else {mv.addObject("servicos", todosServicosInternet);}
+			    
+		mv.addObject("usuarios", todosUsuarios);
 	    
 		return mv;
 	}

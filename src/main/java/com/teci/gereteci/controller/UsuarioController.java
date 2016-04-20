@@ -1,8 +1,11 @@
 package com.teci.gereteci.controller;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +22,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.*;
 import com.teci.gereteci.model.Computador.Computador;
+import com.teci.gereteci.model.Servico.ServicoManutencao;
+import com.teci.gereteci.model.Servico.StatusServico;
 import com.teci.gereteci.model.Setor.Setor;
 import com.teci.gereteci.model.Usuario.Nivel;
 import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
 
 @Controller
-@RequestMapping("/usuarios")
+@RequestMapping("/gereteci/usuarios")
 public class UsuarioController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroUsuario"; 
 	@Autowired
@@ -74,14 +79,39 @@ public class UsuarioController {
 		usuarios.save(usuario);
 		
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");	
-		return "redirect:/usuarios/novo";
+		return "redirect:/gereteci/usuarios/novo";
 	}
-	@RequestMapping
-	public ModelAndView pesquisar()
+	
+	@RequestMapping(method= RequestMethod.GET)
+	public ModelAndView pesquisar(String busca, String nome, String setor) throws ParseException
 	{
-		List<Usuario> todosUsuarios = usuarios.findAll();
-		ModelAndView mv = new ModelAndView("/pesquisa/PesquisaUsuarios");
-	    mv.addObject("usuarios", todosUsuarios);
+		//List<ServicoManutencao> todosServicosManutencao = servicos.findAll();
+		//Usuario user = usuarios.findOne(14);
+		if(nome != null) {
+			if(busca != null && nome.equals("on")) {
+				List<Usuario> todosUsuarios = usuarios.findByNomeContaining(busca);
+				ModelAndView mv = new ModelAndView("/pesquisa/PesquisaUsuarios");
+				mv.addObject("usuarios", todosUsuarios);
+				return mv;
+			}
+		}
+			else
+						if(setor != null)
+						{
+							if(busca != null && setor.equals("on")) 
+							{	
+								Setor s = setores.findBySigla(busca);
+								List<Usuario> users = usuarios.findBySetor(s);
+								ModelAndView mv = new ModelAndView("/pesquisa/PesquisaUsuarios");
+							    mv.addObject("usuarios", users);
+								return mv;
+							}
+						}
+		   
+		   List<Usuario> todosUsuarios = usuarios.findAll();
+			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaUsuarios");
+			mv.addObject("usuarios", todosUsuarios);
+	    
 		return mv;
 	}
 	
@@ -130,7 +160,7 @@ public class UsuarioController {
 		}
 		attributes.addFlashAttribute("mensagem", "Usuário excluido com sucesso com sucesso!");	
 		usuarios.delete(id_usuario);
-		return "redirect:/usuarios";
+		return "redirect:/gereteci/usuarios";
 	}
 	@ModelAttribute("todosNiveisUsuario")
 	public List<Nivel> todosNiveisUsuario() {

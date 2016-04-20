@@ -6,14 +6,14 @@
 </head>
 
 <section layout:fragment="conteudo">
-<form class="form-horizontal" method="POST" action="/caixas" th:object="${caixa}">
+<form class="form-horizontal" method="POST" action="/gereteci/caixas" th:object="${caixa}">
 		<div layout:include="/mensagem/MensagemUsuario"></div>
 		<div layout:include="/mensagem/MensagemErro"></div>
 		<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="clearfix">
 			<h1 class="panel-title">Nova Caixa de Som</h1>
-		<a class="btn btn-link aw-link-panel" href="/caixas">Voltar para pesquisa</a>
+		<a class="btn btn-link aw-link-panel" href="/gereteci/caixas">Voltar para pesquisa</a>
 		</div>
 		</div>
 	
@@ -80,7 +80,7 @@
 				<div class="row">
   <div class="col-sm-6">
     <div class="input-group" style="margin-left:5px; width:200px;">
-        <input type="checkbox" class="disable-computador-botao" th:attr="data-id_computador=${caixa.computador} ? ${caixa.computador.id_computador}" th:href="@{/recursos/{id_recurso}/sem_computador(id_recurso=${caixa.id_recurso})}"> Recurso sem computador</input>
+        <input type="checkbox" class="disable-computador-botao" th:attr="data-id_computador=${caixa.computador} ? ${caixa.computador.id_computador}" th:href="@{/gereteci/recursos/{id_recurso}/sem_computador(id_recurso=${caixa.id_recurso})}"> Recurso sem computador</input>
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
   </div>

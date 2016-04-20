@@ -31,8 +31,6 @@ import com.teci.gereteci.model.Servico.ServicoInternet;
 import com.teci.gereteci.model.Servico.ServicoEmail;
 import com.teci.gereteci.model.Servico.StatusServico;
 import com.teci.gereteci.model.Usuario.Usuario;
-import com.teci.gereteci.repository.PesquisasEmail;
-import com.teci.gereteci.repository.PesquisasRede;
 import com.teci.gereteci.repository.ServicosEmail;
 import com.teci.gereteci.repository.ServicosInternet;
 import com.teci.gereteci.repository.ServicosEmail;
@@ -40,7 +38,7 @@ import com.teci.gereteci.repository.Usuarios;
 
 
 @Controller
-@RequestMapping("/servicosemail")
+@RequestMapping("/gereteci/servicosemail")
 public class ServicoEmailController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoEmail"; 
 	private static final String CADASTRO_VIEW2 = "/edicoes/EdicaoServicoEmail"; 
@@ -49,7 +47,7 @@ public class ServicoEmailController {
 	@Autowired
 	private ServicosEmail servicos;
 	@Autowired
-	private PesquisasEmail servicosAtendente;
+	private ServicosEmail servicosAtendente;
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo()
@@ -84,7 +82,7 @@ public class ServicoEmailController {
 		servicoEmail.setSolicitado(user);
 		servicos.save(servicoEmail);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/servicosemail/novo";
+		return "redirect:/gereteci/servicosemail/novo";
 	
 	}
 	@RequestMapping(value="/{id_servico}/salvar1",method = RequestMethod.POST)
@@ -107,7 +105,7 @@ public class ServicoEmailController {
 		}
 		servicos.save(servicoEmail);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/servicosmanutencao/novo";
+		return "redirect:/gereteci/servicosmanutencao/novo";
 	
 	}
 	
@@ -148,7 +146,7 @@ public class ServicoEmailController {
 			return mv;
 		}
 	}
-		else
+		/*else
 			if(status != null)
 			{
 				if(busca != null && status.equals("on")) 
@@ -172,6 +170,7 @@ public class ServicoEmailController {
 					return mv;
 				}
 			}
+			*/
 			else
 				if(data_ocorrencia != null)
 				{

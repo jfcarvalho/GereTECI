@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.teci.gereteci.model.Usuario.Usuario;
 
 @Entity
@@ -21,6 +23,7 @@ public class ServicoTelefone extends Servico {
 	private boolean troca_ramal;
 	private boolean visita_oi;
 	private String nome_tecnico;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date data_visita;
 	private String protocolo_servico;

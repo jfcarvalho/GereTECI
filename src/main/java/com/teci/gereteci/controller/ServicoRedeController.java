@@ -30,15 +30,14 @@ import com.teci.gereteci.model.Servico.ServicoRede;
 import com.teci.gereteci.model.Servico.ServicoRede;
 import com.teci.gereteci.model.Servico.StatusServico;
 import com.teci.gereteci.model.Usuario.Usuario;
-import com.teci.gereteci.repository.PesquisasManutencao;
-import com.teci.gereteci.repository.PesquisasRede;
+
 import com.teci.gereteci.repository.ServicosRede;
 import com.teci.gereteci.repository.ServicosRede;
 import com.teci.gereteci.repository.Usuarios;
 
 
 @Controller
-@RequestMapping("/servicosrede")
+@RequestMapping("/gereteci/servicosrede")
 public class ServicoRedeController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroServicoRede"; 
 	private static final String CADASTRO_VIEW2 = "/edicoes/EdicaoServicoRede"; 
@@ -47,7 +46,7 @@ public class ServicoRedeController {
 	@Autowired
 	private ServicosRede servicos;
 	@Autowired
-	private PesquisasRede servicosAtendente;
+	private ServicosRede servicosAtendente;
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo()
@@ -84,7 +83,7 @@ public class ServicoRedeController {
 		servicoRede.setProtocolo(protocolo);
 		servicos.save(servicoRede);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/servicosrede/novo";
+		return "redirect:/gereteci/servicosrede/novo";
 	
 	}
 	@RequestMapping(value="/{id_servico}/salvar1",method = RequestMethod.POST)
@@ -103,7 +102,7 @@ public class ServicoRedeController {
 		}
 		servicos.save(servicoRede);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
-		return "redirect:/servicosrede/novo";
+		return "redirect:/gereteci/servicosrede/novo";
 	
 	}
 	@RequestMapping(method= RequestMethod.GET)
@@ -143,7 +142,7 @@ public class ServicoRedeController {
 			return mv;
 		}
 	}
-		else
+		/*else
 			if(status != null)
 			{
 				if(busca != null && status.equals("on")) 
@@ -167,6 +166,7 @@ public class ServicoRedeController {
 					return mv;
 				}
 			}
+			*/
 			else
 				if(data_ocorrencia != null)
 				{

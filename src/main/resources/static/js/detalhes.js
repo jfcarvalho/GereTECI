@@ -61,7 +61,17 @@ $('#detalhesManutencao').on('show.bs.modal', function(event)
 			{
 				recolhimento = 'sim';
 			}
-		else { recolhimento = 'não';}
+			else {recolhimento = 'não';}
+			if(!recurso_recolhido)
+			{
+				recurso_recolhido = 'Não houve recurso recolhido';
+			}
+			
+		if(!recurso_substituido)
+		{
+			recurso_substituido = 'Não houve recurso substituído';
+		}
+		
 			
 			var form = modal.find('form');
 			var action = form.data('url-base');
@@ -73,7 +83,7 @@ $('#detalhesManutencao').on('show.bs.modal', function(event)
 				form.attr('action', action + idServico);
 				
 				
-			modal.find('.modal-body span').html('<p><b>Protocolo:</b><i> '+ protocolo +'</p></i> <b><p>Data de abertura:</b><i> '+ data_abertura + '</i></p><p><b>Data de encerraemnto:</b><i> '+ data_encerramento + '</i></p><b><p>Usuário solicitante:</b><i> '+ solicitante +'</i></p><p><b>Usuário Atendente: </b><i>'+ atendente + '</i></p><p><b>A máquina foi recolhida:: </b><i>'+ recolhimento + '</i></p><p><b>Houve troca de recursos?: </b><i>'+trocarecursos+ '</i></p><p><b>Recurso recolhido: </b><i>'+recurso_recolhido+ '</i></p><p><b>Recurso substituido: </b><i>'+ recurso_substituido + '</i></p><p><b>Descrição do problema: </b><i>'+ descricao_problema +'</i></p><p><b>Descricao pronta: </b><i>'+ descricao_pronta + '</i></p><b>Solução adotada: </b><i>'+ solucao_adotada + '</i></p><p><b>Status: </b><i>'+status+'</p></i>');
+			modal.find('.modal-body span').html('<p><b>Protocolo:</b><i> '+ protocolo +'</p></i> <b><p>Data de abertura:</b><i> '+ data_abertura + '</i></p><p><b>Data de encerramento:</b><i> '+ data_encerramento + '</i></p><b><p>Usuário solicitante:</b><i> '+ solicitante +'</i></p><p><b>Usuário Atendente: </b><i>'+ atendente + '</i></p><p><b>A máquina foi recolhida:: </b><i>'+ recolhimento + '</i></p><p><b>Houve troca de recursos?: </b><i>'+trocarecursos+ '</i></p><p><b>Recurso recolhido: </b><i>'+recurso_recolhido+ '</i></p><p><b>Recurso substituido: </b><i>'+ recurso_substituido + '</i></p><p><b>Descrição do problema: </b><i>'+ descricao_problema +'</i></p><p><b>Descricao pronta: </b><i>'+ descricao_pronta + '</i></p><b>Solução adotada: </b><i>'+ solucao_adotada + '</i></p><p><b>Status: </b><i>'+status+'</p></i>');
 			
 		});
 
@@ -106,8 +116,26 @@ $('#detalhesInternet').on('show.bs.modal', function(event)
 			
 				form.attr('action', action + idServico);
 				
+				if(proxy)
+				{
+					proxy = 'sim';
+				}
+			else { proxy = 'não';}
+				if(trocaip)
+				{
+					trocaip = 'sim';
+				}
+			else { trocaip = 'não';}
+				if(!ipantigo)
+				{
+					ipantigo = 'Não houve troca de ip';
+				}
+				if(!ipnovo)
+				{
+					ipnovo = 'Não houve troca de ip';
+				}
 				
-			modal.find('.modal-body span').html('<p><b>Protocolo:</b><i> '+ protocolo +'</p></i> <b><p>Data de abertura:</b><i> '+ data_abertura + '</i></p><p><b>Data de encerraemnto:</b><i> '+ data_encerramento + '</i></p><b><p>Usuário solicitante:</b><i> '+ solicitante +'</i></p><p><b>Usuário Atendente: </b><i>'+ atendente + '</i></p><p><b>Houve reinicialização do proxy:: </b><i>'+ proxy + '</i></p><p><b>Houve troca ip?: </b><i>'+trocaip+ '</i></p><p><b>Ip Antigo: </b><i>'+ ipantigo + '</i></p><p><b>IP Novo: </b><i>'+ ipnovo + '</i></p><p><b>Descrição do problema: </b><i>'+ descricao_problema +'</i></p><p><b>Descricao pronta: </b><i>'+ descricao_pronta + '</i></p><b>Solução adotada: </b><i>'+ solucao_adotada + '</i></p><p><b>Status: </b><i>'+status+'</p></i>');
+			modal.find('.modal-body span').html('<p><b>Protocolo:</b><i> '+ protocolo +'</p></i> <b><p>Data de abertura:</b><i> '+ data_abertura + '</i></p><p><b>Data de encerramento:</b><i> '+ data_encerramento + '</i></p><b><p>Usuário solicitante:</b><i> '+ solicitante +'</i></p><p><b>Usuário Atendente: </b><i>'+ atendente + '</i></p><p><b>Houve reinicialização do proxy?: </b><i>'+ proxy + '</i></p><p><b>Houve troca ip?: </b><i>'+trocaip+ '</i></p><p><b>Ip Antigo: </b><i>'+ ipantigo + '</i></p><p><b>IP Novo: </b><i>'+ ipnovo + '</i></p><p><b>Descrição do problema: </b><i>'+ descricao_problema +'</i></p><p><b>Descricao pronta: </b><i>'+ descricao_pronta + '</i></p><b>Solução adotada: </b><i>'+ solucao_adotada + '</i></p><p><b>Status: </b><i>'+status+'</p></i>');
 			
 		});
 $('#detalhesRede').on('show.bs.modal', function(event)
@@ -228,11 +256,18 @@ $('#detalhesEmail').on('show.bs.modal', function(event)
 	}
 else { criacao_usuario = 'não';}
 	
+	if(mudanca_plano)
+	{
+		mudanca_plano = 'sim';
+	}
+else { mudanca_plano = 'não';}
+	
 	if(alteracao_usuario)
 	{
 		alteracao_usuario = 'sim';
 	}
 else { alteracao_usuario = 'não';}
+	
 	if(exclusao_usuario)
 	{
 		exclusao_usuario = 'sim';
