@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
 <head>
 
 <title>Relatório de serviços mensal</title>
@@ -8,8 +8,8 @@
 <section layout:fragment="conteudo">
 <center><h1>Relatório de serviços mensal</h1></center>
 
-<h4>Mês de referência: Março</h4>
-<h4>Ano de referência: Ano</h4>
+<h4>Mês de referência: Março - Abril</h4>
+<h4>Ano de referência: 2016</h4>
 
 <div class="left" style="float:left; padding:10px;">
 <p><b>Total de serviços prestados no mês: </b><div th:text="${n_total}"></div> </p>
@@ -112,377 +112,438 @@
   </td>
  </tr>
 </table>
-
-<p>Serviços de Manutenção por categoria</p>
-
-<table class="table table-bordered table-striped">
- <tr>
-  <td>
-  <p><o:p>&nbsp;</o:p></p>
-  </td>
-  <td>
-  <p>Recurso com defeito</p>
-  </td>
-  <td>
-  <p>Atualização de Software</p>
-  </td>
-  <td>
-  <p >Software não funcionando corretamente</p>
-  </td>
-  <td >
-  <p >Problemas na impressão</p>
-  </td>
-  <td >
-  <p >Outros</p>
-  </td>
- </tr>
- <tr>
-  <td >
-  <p >Aberto</p>
-  </td>
-  <td>
-  <p ><o:p ></o:p></p>
-  </td>
-  <td>
-  <p ><o:p>y</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>z</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>w</o:p></p>
-  </td>
-  <td>
-  <p ><o:p>s</o:p></p>
-  </td>
- </tr>
- <tr >
-  <td>
-  <p>Em andamento</p>
-  </td>
-  <td>
-  <p><o:p>xx</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>yy</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>zz</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>ww</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>ss</o:p></p>
-  </td>
- </tr>
- <tr>
-  <td>
-  <p>Resolvido</p>
-  </td>
-  <td>
-  <p><o:p>xxx</o:p></p>
-  </td>
-  <td>
-  <p><o:p>yyy</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>zzz</o:p></p>
-  </td>
-  <td><p><o:p>www</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>sss</o:p></p>
-  </td>
- </tr>
-</table>
-
-<p>Serviços de Internet por categoria</p>
-
-<table class="table table-bordered table-striped">
- <tr>
-  <td>
-  <p><o:p>&nbsp;</o:p></p>
-  </td>
-  <td>
-  <p>Problema no Switch(exclamação amarela)</p>
-  </td>
-  <td>
-  <p>Problema no Switch(exclamação vermelho)</p>
-  </td>
-  <td>
-  <p >Problema no proxy</p>
-  </td>
-  <td >
-  <p >Problemas na impressão</p>
-  </td>
-  <td >
-  <p >Conflito de IP</p>
-  </td>
- </tr>
- <tr>
-  <td >
-  <p >Aberto</p>
-  </td>
-  <td>
-  <p ><o:p>x</o:p></p>
-  </td>
-  <td>
-  <p ><o:p>y</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>z</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>w</o:p></p>
-  </td>
-  <td>
-  <p ><o:p>s</o:p></p>
-  </td>
- </tr>
- <tr >
-  <td>
-  <p>Em andamento</p>
-  </td>
-  <td>
-  <p><o:p>xx</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>yy</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>zz</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>ww</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>ss</o:p></p>
-  </td>
- </tr>
- <tr>
-  <td>
-  <p>Resolvido</p>
-  </td>
-  <td>
-  <p><o:p>xxx</o:p></p>
-  </td>
-  <td>
-  <p><o:p>yyy</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>zzz</o:p></p>
-  </td>
-  <td><p><o:p>www</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>sss</o:p></p>
-  </td>
- </tr>
-</table>
-
-<p>Serviços de Rede por categoria</p>
+<br/>
 
 
-<table class="table table-bordered table-striped">
- <tr>
-  <td>
-  <p><o:p>&nbsp;</o:p></p>
-  </td>
-  <td>
-  <p>Espaço no servidor</p>
-  </td>
-  <td>
-  <p>Active Directory</p>
-  </td>
-  <td>
-  <p >Impressora na rede</p>
-  </td>
-  <td >
-  <p >Manutenção de contas</p>
-  </td>
-  <td >
-  <p >Outros</p>
-  </td>
- </tr>
- <tr>
-  <td >
-  <p >Aberto</p>
-  </td>
-  <td>
-  <p ><o:p>x</o:p></p>
-  </td>
-  <td>
-  <p ><o:p>y</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>z</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>w</o:p></p>
-  </td>
-  <td>
-  <p ><o:p>s</o:p></p>
-  </td>
- </tr>
- <tr >
-  <td>
-  <p>Em andamento</p>
-  </td>
-  <td>
-  <p><o:p>xx</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>yy</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>zz</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>ww</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>ss</o:p></p>
-  </td>
- </tr>
- <tr>
-  <td>
-  <p>Resolvido</p>
-  </td>
-  <td>
-  <p><o:p>xxx</o:p></p>
-  </td>
-  <td>
-  <p><o:p>yyy</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>zzz</o:p></p>
-  </td>
-  <td><p><o:p>www</o:p></p>
-  </td>
-  <td >
-  <p ><o:p>sss</o:p></p>
-  </td>
- </tr>
-</table>
-
-<p>Serviços em que houve visita da OI: x</p>
-<table class="table table-bordered table-striped">
-		
-			<thead>
-				<tr>
-				<th class="text-center col-md-2">Abertura</th>
-				<th class="text-center col-md-2">Encerramento</th>
-				<th class="text-center col-md-2">Visitante</th>
-				<th class="text-center col-md-2">Protocolo</th>		
-				<th class="text-center col-md-2">Descrição</th>
-				<th class="text-center col-md-8">Solução adotada</th>
-				<th class="text-center col-md-8">Status</th>
-				
-				</tr>
-				
-			</thead>
-			<tbody>
-				<tr>
-					
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>																							
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>
-				</tr>
-				<tr>
-					
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>																							
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>
-				</tr>
-				<tr>
-					
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>																							
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>
-				</tr>
-				<tr>
-					
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>																							
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>
-				</tr>
-								
-			</tbody>
-		
-</table>
-
-
-<p>Serviços em que houve abertura de RDS: x</p>
 
 <table class="table table-bordered table-striped">
 		
 			<thead>
 				<tr>
-				<th class="text-center col-md-2">Abertura</th>
-				<th class="text-center col-md-2">Encerramento</th>
-				<th class="text-center col-md-2">Visitante</th>
-				<th class="text-center col-md-2">Número de RDS</th>		
-				<th class="text-center col-md-2">Descrição</th>
-				<th class="text-center col-md-8">Solução adotada</th>
-				<th class="text-center col-md-8">Status</th>
+				<th class="text-center col-md-2">Categoria</th>
+				<!-- <th class="text-center col-md-2">Arquitetura</th> -->
+				<th class="text-center col-md-2">Data de Ocorrência</th>
+				<th class="text-center col-md-2">Usuário Solicitante</th>
+				<!--  <th class="text-center col-md-2">ID de Impressão</th> -->
+				<th class="text-center col-md-2">Usuário Atendente</th>
+				<th class="text-center col-md-2">Setor</th>
+				<th class="text-center col-md-2">Descricão do problema</th>				
 				
 				</tr>
 				
 			</thead>
 			<tbody>
-				<tr>
-					
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>																							
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>
+				<tr th:each="servico : ${sabertos}">
+					<td class="text-center" th:text="${servico} ? ${servico.categoria}"></td>
+					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
+					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia}"></td>
+
+					<td class="text-center" th:text="${servico} and ${servico.solicitado} ? ${servico.solicitado.nome}:'Ninguém'"></td>
+					<td class="text-center" th:text="${servico} and ${servico.atendente} ? ${servico.atendente.nome}: 'Ninguém'"></td>
+					<td class="text-center" th:text="${servico} and ${servico.solicitado} and ${servico.solicitado.setor} ? ${servico.solicitado.setor.sigla}:'Sem setor'"></td>
+					<!-- <td class="text-center" th:text="${computador.id_impressao}"></td> -->
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 				</tr>
-				<tr>
-					
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>																							
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>
-				</tr>
-				<tr>
-					
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>																							
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>
-					<td>a</td>
-				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(sabertos)}">Nenhum serviço em aberto encontrado</td>
+			</tr>
 			</tbody>
 		
-</table>
+		</table>
+		<br/>
+		<br/>
+		
+		<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				<th class="text-center col-md-2">Categoria</th>
+				<!-- <th class="text-center col-md-2">Arquitetura</th> -->
+				<th class="text-center col-md-2">Data de Ocorrência</th>
+				<th class="text-center col-md-2">Usuário Solicitante</th>
+				<!--  <th class="text-center col-md-2">ID de Impressão</th> -->
+				<th class="text-center col-md-2">Usuário Atendente</th>
+				<th class="text-center col-md-2">Setor</th>
+				<th class="text-center col-md-2">Descricão do problema</th>				
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${sandamento}">
+					<td class="text-center" th:text="${servico} ? ${servico.categoria}"></td>
+					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
+					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia}"></td>
+
+					<td class="text-center" th:text="${servico} and ${servico.solicitado} ? ${servico.solicitado.nome}:'Ninguém'"></td>
+					<td class="text-center" th:text="${servico} and ${servico.atendente} ? ${servico.atendente.nome}: 'Ninguém'"></td>
+					<td class="text-center" th:text="${servico} and ${servico.solicitado} and ${servico.solicitado.setor} ? ${servico.solicitado.setor.sigla}:'Sem setor'"></td>
+					<!-- <td class="text-center" th:text="${computador.id_impressao}"></td> -->
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(sandamento)}">Nenhum serviço em andamento encontrado</td>
+			</tr>
+			</tbody>
+		
+		</table>
+	<br/>
+	<br/>	
+	<p>Serviços em que houve visita da OI: <span th:text="${n_servicos_visita_oi}"></span></p>
+		<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				<th class="text-center col-md-2">Data de Abertura</th>
+				<!-- <th class="text-center col-md-2">Arquitetura</th> -->
+				<th class="text-center col-md-2">Data de Encerramento</th>
+				<th class="text-center col-md-2">Nome do Visitante</th>
+				<!--  <th class="text-center col-md-2">ID de Impressão</th> -->
+				<th class="text-center col-md-2">Protocolo OI</th>
+				<th class="text-center col-md-2">Descrição do problema</th>
+				<th class="text-center col-md-2">Solução adotada</th>				
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${svisita_oi}">
+					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia}"></td>
+					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
+					<td class="text-center" th:text="${servico} ? ${servico.data_encerramento}"></td>
+
+					<td class="text-center" th:text="${servico} and ${servico.nome_tecnico} ? ${servico.solicitado.nome}:'Ninguém'"></td>
+					<td class="text-center" th:text="${servico.protocolo_servico}"></td>
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<!-- <td class="text-center" th:text="${computador.id_impressao}"></td> -->
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(svisita_oi)}">Nenhum serviço em andamento encontrado</td>
+			</tr>
+			</tbody>
+		
+		</table>
+		<br/>
+		<br/>
+<!--  
+<p>Relatório por funcionário</p>
+
+<h2><p>Ariana:</p></h2>
+
+<p>Serviços de Manutenção:</p>
+
+<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				
+				<th class="text-center col-md-2">Data de abertura</th>
+				<th class="text-center col-md-2">Data de finalização</th>
+				<th class="text-center col-md-2">Setor</th>
+				<th class="text-center col-md-2">Solicitante</th>
+				<th class="text-center col-md-1">Descrição do Problema</th>
+				<th class="text-center col-md-1">Solução adotada</th>
+				<th class="text-center col-md-2">Status</th>
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${servicos_ariana_manutencao}">
+					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento}"></td>
+					<td class="text-center" th:text="${servico.solicitado.setor.nome}"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+					<td class="text-center" th:text="${servico.status}"></td>
+					
+				</tr>
+				
+			  <tr>
+				<td colspan="6" th:if="${#lists.isEmpty(servicos_ariana_manutencao)}">Nenhum Serviço cadastrado</td>
+			</tr> 
+			</tbody>
+		
+		</table>
+
+<p>Serviços de Intenet:</p>
+
+<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				
+				<th class="text-center col-md-2">Data de abertura</th>
+				<th class="text-center col-md-2">Data de finalização</th>
+				<th class="text-center col-md-2">Setor</th>
+				<th class="text-center col-md-2">Solicitante</th>
+				<th class="text-center col-md-1">Descrição do Problema</th>
+				<th class="text-center col-md-1">Solução adotada</th>
+				<th class="text-center col-md-2">Status</th>
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${servicos_ariana_internet}">
+					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento}"></td>
+					<td class="text-center" th:text="${servico.solicitado.setor.nome}"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+					<td class="text-center" th:text="${servico.status}"></td>
+					
+				</tr>
+				
+			  <tr>
+				<td colspan="6" th:if="${#lists.isEmpty(servicos_ariana_internet)}">Nenhum Serviço cadastrado</td>
+			</tr> 
+			</tbody>
+		
+		</table>
+
+<p>Serviços de Rede:</p>
+
+<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				
+				<th class="text-center col-md-2">Data de abertura</th>
+				<th class="text-center col-md-2">Data de finalização</th>
+				<th class="text-center col-md-2">Setor</th>
+				<th class="text-center col-md-2">Solicitante</th>
+				<th class="text-center col-md-1">Descrição do Problema</th>
+				<th class="text-center col-md-1">Solução adotada</th>
+				<th class="text-center col-md-2">Status</th>
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${servicos_ariana_rede}">
+					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento}"></td>
+					<td class="text-center" th:text="${servico.solicitado.setor.nome}"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+					<td class="text-center" th:text="${servico.status}"></td>
+					
+				</tr>
+				
+			  <tr>
+				<td colspan="6" th:if="${#lists.isEmpty(servicos_ariana_rede)}">Nenhum Serviço cadastrado</td>
+			</tr> 
+			</tbody>
+		
+		</table>
+		
+		
+<h2><p>Uiran:</p></h2>
+
+		<p>Serviços de Manutenção:</p>
+
+<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				
+				<th class="text-center col-md-2">Data de abertura</th>
+				<th class="text-center col-md-2">Data de finalização</th>
+				<th class="text-center col-md-2">Setor</th>
+				<th class="text-center col-md-2">Solicitante</th>
+				<th class="text-center col-md-1">Descrição do Problema</th>
+				<th class="text-center col-md-1">Solução adotada</th>
+				<th class="text-center col-md-2">Status</th>
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${servicos_uiran_manutencao}">
+					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento}"></td>
+					<td class="text-center" th:text="${servico.solicitado.setor.nome}"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+					<td class="text-center" th:text="${servico.status}"></td>
+					
+				</tr>
+				
+			  <tr>
+				<td colspan="6" th:if="${#lists.isEmpty(servicos_uiran_manutencao)}">Nenhum Serviço cadastrado</td>
+			</tr> 
+			</tbody>
+		
+		</table>
+
+<p>Serviços de Intenet:</p>
+
+<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				
+				<th class="text-center col-md-2">Data de abertura</th>
+				<th class="text-center col-md-2">Data de finalização</th>
+				<th class="text-center col-md-2">Setor</th>
+				<th class="text-center col-md-2">Solicitante</th>
+				<th class="text-center col-md-1">Descrição do Problema</th>
+				<th class="text-center col-md-1">Solução adotada</th>
+				<th class="text-center col-md-2">Status</th>
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${servicos_uiran_internet}">
+					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento}"></td>
+					<td class="text-center" th:text="${servico.solicitado.setor.nome}"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+					<td class="text-center" th:text="${servico.status}"></td>
+					
+				</tr>
+				
+			  <tr>
+				<td colspan="6" th:if="${#lists.isEmpty(servicos_uiran_internet)}">Nenhum Serviço cadastrado</td>
+			</tr> 
+			</tbody>
+		
+		</table>
+
+<p>Serviços de Rede:</p>
+
+<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				
+				<th class="text-center col-md-2">Data de abertura</th>
+				<th class="text-center col-md-2">Data de finalização</th>
+				<th class="text-center col-md-2">Setor</th>
+				<th class="text-center col-md-2">Solicitante</th>
+				<th class="text-center col-md-1">Descrição do Problema</th>
+				<th class="text-center col-md-1">Solução adotada</th>
+				<th class="text-center col-md-2">Status</th>
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${servicos_uiran_rede}">
+					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento}"></td>
+					<td class="text-center" th:text="${servico.solicitado.setor.nome}"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+					<td class="text-center" th:text="${servico.status}"></td>
+					
+				</tr>
+				
+			  <tr>
+				<td colspan="6" th:if="${#lists.isEmpty(servicos_uiran_rede)}">Nenhum Serviço cadastrado</td>
+			</tr> 
+			</tbody>
+		
+		</table>
+		
+		
+		
+		
+		
+-->				
+
+<p>Serviços em que houve abertura de RDS: <span th:text="${n_servicos_rds}"></span></p>
+
+<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				<th class="text-center col-md-2">Data de Abertura</th>
+				<!-- <th class="text-center col-md-2">Arquitetura</th> -->
+				<th class="text-center col-md-2">Data de Encerramento</th>
+				<th class="text-center col-md-2">Número da RDS</th>
+				<!--  <th class="text-center col-md-2">ID de Impressão</th> -->
+				<th class="text-center col-md-2">Data de abertura(RDS)</th>
+				<th class="text-center col-md-2">Descrição do problema</th>
+				<th class="text-center col-md-2">Solução adotada</th>				
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${saberturards}">
+					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia}"></td>
+					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
+					<td class="text-center" th:text="${servico} ? ${servico.data_encerramento}"></td>
+					<td class="text-center" th:text="${servico.numero_rds}"></td>
+					<td class="text-center" th:text="${servico.data_rds}"></td>
+					<!-- <td class="text-center" th:text="${computador.id_impressao}"></td> -->
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(saberturards)}">Nenhum serviço em andamento encontrado</td>
+			</tr>
+			</tbody>
+		
+		</table>
+	<br/>
+	<br/>
 
 </div>
 
+<p>Office 365</p>
+<p> <span>x</span></p>
+<p> <span>x</span></p>
+<p>: <span>x</span></p>
+<p>: <span>x</span></p>
+<p>: <span>x</span></p>
 
+
+
+<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				<th class="text-center col-md-2">Contas criadas:</th>
+				<!-- <th class="text-center col-md-2">Arquitetura</th> -->
+				<th class="text-center col-md-2">Contas com alterações de dados:</th>
+				<th class="text-center col-md-2">Contas excluídas</th>
+				<!--  <th class="text-center col-md-2">ID de Impressão</th> -->
+				<th class="text-center col-md-2">Senhas trocadas</th>
+				<th class="text-center col-md-2">Mundança de planos</th>
+				
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr>
+					<td class="text-center" th:text="${servico} ? ${servico.categoria}"></td>
+					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
+					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia}"></td>
+
+					<td class="text-center" th:text="${servico} and ${servico.solicitado} ? ${servico.solicitado.nome}:'Ninguém'"></td>
+					<td class="text-center" th:text="${servico} and ${servico.atendente} ? ${servico.atendente.nome}: 'Ninguém'"></td>
+					<td class="text-center" th:text="${servico} and ${servico.solicitado} and ${servico.solicitado.setor} ? ${servico.solicitado.setor.sigla}:'Sem setor'"></td>
+					<!-- <td class="text-center" th:text="${computador.id_impressao}"></td> -->
+					
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(sabertos)}">Nenhum serviço em aberto encontrado</td>
+			</tr>
+			</tbody>
+		
+		</table>
+		
 </section>
 </html>

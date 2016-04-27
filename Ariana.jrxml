@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.1.final using JasperReports Library version 6.2.1  -->
+<!-- 2016-04-26T17:28:17 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ariana" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e97d2c7a-e8b1-4b1a-8355-42c532147b07">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="gereteci.xml"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#B5E1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="teste" uuid="acf8b577-998f-4449-9693-62acade47fb7">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="gereteci.xml"/>
+		<queryString>
+			<![CDATA[SELECT * FROM gereteci.servico WHERE atendente = '5']]>
+		</queryString>
+		<field name="categoria" class="java.lang.String"/>
+		<field name="data_encerramento" class="java.sql.Date"/>
+		<field name="data_ocorrencia" class="java.sql.Date"/>
+		<field name="descricao_problema" class="java.lang.String"/>
+		<field name="descricao_solucao" class="java.lang.String"/>
+		<field name="protocolo" class="java.lang.String"/>
+		<field name="status" class="java.lang.String"/>
+		<group name="categoria">
+			<groupExpression><![CDATA[$F{categoria}]]></groupExpression>
+		</group>
+		<group name="data_encerramento">
+			<groupExpression><![CDATA[$F{data_encerramento}]]></groupExpression>
+		</group>
+		<group name="data_ocorrencia">
+			<groupExpression><![CDATA[$F{data_ocorrencia}]]></groupExpression>
+		</group>
+		<group name="descricao_problema">
+			<groupExpression><![CDATA[$F{descricao_problema}]]></groupExpression>
+		</group>
+		<group name="descricao_solucao">
+			<groupExpression><![CDATA[$F{descricao_solucao}]]></groupExpression>
+		</group>
+		<group name="protocolo">
+			<groupExpression><![CDATA[$F{protocolo}]]></groupExpression>
+		</group>
+		<group name="status">
+			<groupExpression><![CDATA[$F{status}]]></groupExpression>
+		</group>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT * FROM gereteci.servico WHERE atendente = '5']]>
+	</queryString>
+	<field name="categoria" class="java.lang.String"/>
+	<field name="data_ocorrencia" class="java.sql.Date"/>
+	<field name="data_encerramento" class="java.sql.Date"/>
+	<field name="descricao_problema" class="java.lang.String"/>
+	<field name="descricao_solucao" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<group name="categoria">
+		<groupExpression><![CDATA[$F{categoria}]]></groupExpression>
+	</group>
+	<group name="data_ocorrencia">
+		<groupExpression><![CDATA[$F{data_ocorrencia}]]></groupExpression>
+	</group>
+	<group name="data_encerramento">
+		<groupExpression><![CDATA[$F{data_encerramento}]]></groupExpression>
+	</group>
+	<group name="descricao_problema">
+		<groupExpression><![CDATA[$F{descricao_problema}]]></groupExpression>
+	</group>
+	<group name="descricao_solucao">
+		<groupExpression><![CDATA[$F{descricao_solucao}]]></groupExpression>
+	</group>
+	<group name="status">
+		<groupExpression><![CDATA[$F{status}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="247" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="20" width="790" height="200" uuid="be23efe8-2bac-4d8e-af1c-d1637acf5c93">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="teste" uuid="b617e5b6-7779-4e8c-9dc3-e2ebe30134d6">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="cd07e60b-445e-47b6-bc1a-819a7c2e3ade">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="947318e1-00f1-4aa1-abcf-7936806813da"/>
+								<text><![CDATA[categoria]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30"/>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="e01e127f-9a99-46db-b28c-124dcdf4bbde"/>
+								<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="120" uuid="ffeabbd9-7354-4cf7-93fa-dab2edff4950">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="120" height="30" uuid="94ee2e5d-11fd-47de-b6df-ebf4705d832e"/>
+								<text><![CDATA[data_encerramento]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30"/>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="120" height="30" uuid="e17a972b-7e18-4658-b170-8477f200bc10"/>
+								<textFieldExpression><![CDATA[$F{data_encerramento}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="120" uuid="a99fecca-cd68-4a48-ad0e-aa018e83b255">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="120" height="30" uuid="4ece8759-2266-4e83-8121-5bc4207bd7c8"/>
+								<text><![CDATA[data_ocorrencia]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30"/>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="120" height="30" uuid="5dcc8b7e-e224-48ab-9424-165bcf5b8a03"/>
+								<textFieldExpression><![CDATA[$F{data_ocorrencia}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="130" uuid="040e9174-622e-4bd0-9b08-d03ba4693ac9">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="130" height="30" uuid="904a6db4-4aa9-40bf-a651-37ee9f394610"/>
+								<text><![CDATA[descricao_problema]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30"/>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="130" height="30" uuid="cd9cd23f-d510-44b3-b3ba-7a9b2d8bae9f"/>
+								<textFieldExpression><![CDATA[$F{descricao_problema}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="105" uuid="76601755-c0b7-4d43-bf91-d9206b7c6982">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="105" height="30" uuid="6e2b4485-4772-4994-adbb-44b0fa2bd38c"/>
+								<text><![CDATA[descricao_solucao]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30"/>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="105" height="30" uuid="075f0e91-a527-4752-8599-a203eb867bbb"/>
+								<textFieldExpression><![CDATA[$F{descricao_solucao}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="9e12d068-8d56-4477-9957-5f0cfbd956ba">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="941531cf-c589-437f-8245-810fc64f7b56"/>
+								<text><![CDATA[protocolo]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30"/>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="70" height="30" uuid="ed0f0a50-758f-4ecc-8617-dc136cb4bee1"/>
+								<textFieldExpression><![CDATA[$F{protocolo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="120" uuid="52226b33-2814-41cf-8d54-f61b7ac6d7b9">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="120" height="30" uuid="9864bb94-6439-49f7-bf41-fd2c880c0eeb"/>
+								<text><![CDATA[status]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30"/>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="120" height="30" uuid="4426965c-2d21-4dc2-87ad-ca95553bd722"/>
+								<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
