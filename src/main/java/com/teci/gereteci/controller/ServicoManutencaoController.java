@@ -144,7 +144,7 @@ public class ServicoManutencaoController {
 			return mv;
 		}
 	}
-		/*else
+		else
 			if(status != null)
 			{
 				if(busca != null && status.equals("on")) 
@@ -168,7 +168,7 @@ public class ServicoManutencaoController {
 					return mv;
 				}
 			}
-			*/
+			
 			else
 				if(data_ocorrencia != null)
 				{

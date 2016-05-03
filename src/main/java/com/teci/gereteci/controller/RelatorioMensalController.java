@@ -46,7 +46,7 @@ public class RelatorioMensalController {
 	private ServicosTelefone stelefone;
 	@Autowired
 	private Servicos servicosGerais;
-	
+
 	private static final String RELATORIO_PATH = "/relatorios/RelatorioMensal";
 	
 	@RequestMapping("/gereteci/relatoriomensal")
@@ -84,6 +84,17 @@ public class RelatorioMensalController {
 		List<ServicoManutencao> servicosUiranManutencao = servicosManutencaoAtendente(manutencao, "Uiran Passos");
 		List<ServicoRede> servicosUiranRede = servicosRedeAtendente(redes, "Uiran Passos");
 		List<ServicoInternet> servicosUiranInternet = servicosInternetAtendente(internet, "Uiran Passos");
+		
+		List<ServicoManutencao> servicosJeanManutencao = servicosManutencaoAtendente(manutencao, "Jean Carvalho");
+		List<ServicoRede> servicosJeanRede = servicosRedeAtendente(redes, "Jean Carvalho");
+		List<ServicoInternet> servicosJeanInternet = servicosInternetAtendente(internet, "Jean Carvalho");
+		List<ServicoEmail> servicosJeanEmail = servicosEmailAtendente(emails, "Jean Carvalho");
+		
+		List<ServicoManutencao> servicosRomeuManutencao = servicosManutencaoAtendente(manutencao, "Romeu Oliveira");
+		List<ServicoRede> servicosRomeuRede = servicosRedeAtendente(redes, "Romeu Oliveira");
+		List<ServicoInternet> servicosRomeuInternet = servicosInternetAtendente(internet, "Romeu Oliveira");
+		List<ServicoEmail> servicosRomeuEmail = servicosEmailAtendente(emails, "Romeu Oliveira");
+		List<ServicoTelefone> servicosRomeuTelefone = servicosTelefoneAtendente(telefones, "Jean Carvalho");
 		
 		//List<ServicoManutencao> servicosArianaManutencao = servicosManutencaoAtendente(manutencao, "Romeu Oliveira");
 		
@@ -163,14 +174,112 @@ public class RelatorioMensalController {
 		mv.addObject("servicos_ariana_rede", servicosArianaRede);
 		mv.addObject("servicos_ariana_internet", servicosArianaInternet);
 		
+		mv.addObject("servicos_romeu_manutencao", servicosRomeuManutencao);
+		mv.addObject("servicos_romeu_rede", servicosRomeuRede);
+		mv.addObject("servicos_romeu_internet", servicosRomeuInternet);
+		mv.addObject("servicos_romeu_email", servicosRomeuEmail);
+		mv.addObject("servicos_romeu_email", servicosRomeuTelefone);
+		
 		mv.addObject("servicos_uiran_manutencao", servicosUiranManutencao);
 		mv.addObject("servicos_uiran_rede", servicosUiranRede);
 		mv.addObject("servicos_uiran_internet", servicosUiranInternet);
-		mv.addObject("sabertos", sAbertos);
-		mv.addObject("sandamento", sAndamento);
+		
+		mv.addObject("servicos_jean_manutencao", servicosJeanManutencao);
+		mv.addObject("servicos_jean_rede", servicosJeanRede);
+		mv.addObject("servicos_jean_internet", servicosJeanInternet);
+		mv.addObject("servicos_jean_email", servicosJeanEmail);
+		
+		
+		//mv.addObject("sabertos", sAbertos);
+		//mv.addObject("sandamento", sAndamento);
 		mv.addObject("svisita_oi", servicosVisitaOi);
 		mv.addObject("saberturards", servicosAberturaRds);
 		
+		
+		List<ServicoEmail> contasCriadas = servicosEmailContas(emails, 0);
+		List<ServicoEmail> contasEditadas = servicosEmailContas(emails, 1);
+		List<ServicoEmail> contasExcluidas = servicosEmailContas(emails, 2);
+		List<ServicoEmail> contasSenhaTrocada = servicosEmailContas(emails, 3);
+		List<ServicoEmail> contasMudancaPlanos = servicosEmailContas(emails, 4);
+	
+		int nContasCriadas = contasCriadas.size();
+		int nContasEditadas = contasEditadas.size();
+		int nContasExcluidas = contasExcluidas.size();
+		int nContasSenhasTrocadas = contasSenhaTrocada.size();
+		int nContasMudancaPlanos = contasMudancaPlanos.size();
+		
+		mv.addObject("n_contas_criadas", nContasCriadas);
+		mv.addObject("n_contas_editadas", nContasEditadas);
+		mv.addObject("n_contas_excluidas", nContasExcluidas);
+		mv.addObject("n_contas_senhas_trocadas", nContasSenhasTrocadas);
+		mv.addObject("n_contas_mudanca_planos", nContasMudancaPlanos);
+		
+		mv.addObject("contas_criadas", contasCriadas);
+		mv.addObject("contas_editadas", contasEditadas);
+		mv.addObject("contas_excluidas", contasExcluidas);
+		mv.addObject("contas_senha_trocada", contasSenhaTrocada);
+		mv.addObject("contas_mudanca_plano", contasMudancaPlanos);
+		
+		List<Servico> abertosAriana = servicosAbertos(sgLista, "Ariana Souza Silva");
+		List<Servico> abertosUiran = servicosAbertos(sgLista, "Uiran Passos");
+		List<Servico> abertosJean = servicosAbertos(sgLista, "Jean Carvalho");
+		List<Servico> abertosRomeu = servicosAbertos(sgLista, "Romeu Oliveira");
+		
+		List<Servico> andamentoAriana = servicosAndamento(sgLista, "Ariana Souza Silva");
+		List<Servico> andamentoUiran = servicosAndamento(sgLista, "Uiran Passos");
+		List<Servico> andamentoJean = servicosAndamento(sgLista, "Jean Carvalho");
+		List<Servico> andamentoRomeu = servicosAndamento(sgLista, "Romeu Oliveira");
+		
+		List<Servico> fechadoAriana = servicosFechados(sgLista, "Ariana Souza Silva");
+		List<Servico> fechadoUiran = servicosFechados(sgLista, "Uiran Passos");
+		List<Servico> fechadoJean = servicosFechados(sgLista, "Jean Carvalho");
+		List<Servico> fechadoRomeu = servicosFechados(sgLista, "Romeu Oliveira");
+		
+		
+		int nArianaAbertos = abertosAriana.size();
+		int nArianaAndamento = andamentoAriana.size();
+		int nArianaFechados = fechadoAriana.size();
+		int nArianaTotal = nArianaAbertos+nArianaAndamento+nArianaFechados;
+		
+		int nUiranAbertos = abertosUiran.size();
+		int nUiranAndamento = andamentoUiran.size();
+		int nUiranFechados = fechadoUiran.size();
+		int nUiranTotal = nUiranAbertos+nUiranAndamento+nUiranFechados;
+		
+		int nJeanAbertos = abertosJean.size();
+		int nJeanAndamento = andamentoJean.size();
+		int nJeanFechados = fechadoJean.size();
+		int nJeanTotal = nJeanAbertos+nJeanAndamento+nJeanFechados;
+		
+		int nRomeuAbertos = abertosRomeu.size();
+		int nRomeuAndamento = andamentoRomeu.size();
+		int nRomeuFechados = fechadoRomeu.size();
+		int nRomeuTotal = nRomeuAbertos+nRomeuAndamento+nRomeuFechados;
+		
+		mv.addObject("n_ariana_abertos", nArianaAbertos);
+		mv.addObject("n_ariana_andamento", nArianaAndamento);
+		mv.addObject("n_ariana_fechado", nArianaFechados);
+		mv.addObject("n_ariana_total", nArianaTotal);
+		
+		mv.addObject("n_uiran_abertos", nUiranAbertos);
+		mv.addObject("n_uiran_andamento", nUiranAndamento);
+		mv.addObject("n_uiran_fechado", nUiranFechados);
+		mv.addObject("n_uiran_total", nUiranTotal);
+		
+		
+		mv.addObject("n_jean_abertos", nJeanAbertos);
+		mv.addObject("n_jean_andamento", nJeanAndamento);
+		mv.addObject("n_jean_fechado", nJeanFechados);
+		mv.addObject("n_jean_total", nJeanTotal);
+		
+		mv.addObject("n_romeu_abertos", nRomeuAbertos);
+		mv.addObject("n_romeu_andamento", nRomeuAndamento);
+		mv.addObject("n_romeu_fechado", nRomeuFechados);
+		mv.addObject("n_romeu_total", nRomeuTotal);
+		
+		mv.addObject("n_contas_excluidas", nContasExcluidas);
+		mv.addObject("n_contas_senhas_trocadas", nContasSenhasTrocadas);
+		mv.addObject("n_contas_mudanca_planos", nContasMudancaPlanos);
 		
 		//mv.addObject("servicos_ariana_rede", servicosArianaRede);
 		
@@ -227,6 +336,78 @@ public class RelatorioMensalController {
 		return srvlist;
 	}
 	
+	public List<Servico> servicosAbertos(List<Servico> servicos, String Atendente)
+	{
+		Iterator<Servico> it = servicos.iterator();
+		List<Servico> srvlist = new ArrayList<Servico>(); 
+		while(it.hasNext())
+		{
+			Servico srv = (Servico) it.next();
+			
+			if(srv.getStatus().getDescricao().equals("Aberto") && srv.getAtendente().getNome().equals(Atendente))
+			{
+				System.out.println(srv.getStatus().getDescricao());
+				srvlist.add(srv);
+			}
+			
+		}
+		return srvlist;
+	}
+	
+	public List<Servico> servicosAndamento(List<Servico> servicos)
+	{
+		Iterator<Servico> it = servicos.iterator();
+		List<Servico> srvlist = new ArrayList<Servico>(); 
+		while(it.hasNext())
+		{
+			Servico srv = (Servico) it.next();
+			
+			if(srv.getStatus().getDescricao().equals("Em andamento"))
+			{
+				System.out.println(srv.getStatus().getDescricao());
+				srvlist.add(srv);
+			}
+			
+		}
+		return srvlist;
+	}
+	
+	public List<Servico> servicosFechados(List<Servico> servicos, String Atendente)
+	{
+		Iterator<Servico> it = servicos.iterator();
+		List<Servico> srvlist = new ArrayList<Servico>(); 
+		while(it.hasNext())
+		{
+			Servico srv = (Servico) it.next();
+			
+			if(srv.getStatus().getDescricao().equals("Fechado") && srv.getAtendente().getNome().equals(Atendente))
+			{
+				System.out.println(srv.getStatus().getDescricao());
+				srvlist.add(srv);
+			}
+			
+		}
+		return srvlist;
+	}
+	
+	public List<Servico> servicosAndamento(List<Servico> servicos, String Atendente)
+	{
+		Iterator<Servico> it = servicos.iterator();
+		List<Servico> srvlist = new ArrayList<Servico>(); 
+		while(it.hasNext())
+		{
+			Servico srv = (Servico) it.next();
+			
+			if(srv.getStatus().getDescricao().equals("Em andamento") && srv.getAtendente().getNome().equals(Atendente))
+			{
+				System.out.println(srv.getStatus().getDescricao());
+				srvlist.add(srv);
+			}
+			
+		}
+		return srvlist;
+	}
+	
 	public List<ServicoInternet> servicosInternetVistaOi(List<ServicoInternet> servicos)
 	{
 		Iterator<ServicoInternet> it = servicos.iterator();
@@ -263,23 +444,67 @@ public class RelatorioMensalController {
 		return srvlist;
 	}
 	
-	public List<Servico> servicosAndamento(List<Servico> servicos)
+	public List<ServicoEmail> servicosEmailContas(List<ServicoEmail> servicos, int flag)
 	{
-		Iterator<Servico> it = servicos.iterator();
-		List<Servico> srvlist = new ArrayList<Servico>(); 
+		Iterator<ServicoEmail> it = servicos.iterator();
+		List<ServicoEmail> emailsCriados = new ArrayList<ServicoEmail>(); 
+		List<ServicoEmail> emailsAlterados = new ArrayList<ServicoEmail>(); 
+		List<ServicoEmail> emailsExcluidos = new ArrayList<ServicoEmail>(); 
+		List<ServicoEmail> emailsSenhasTrocadas = new ArrayList<ServicoEmail>(); 
+		List<ServicoEmail> emailsPlanosMudados = new ArrayList<ServicoEmail>();
 		while(it.hasNext())
 		{
-			Servico srv = (Servico) it.next();
+			ServicoEmail se = (ServicoEmail) it.next();
+			switch(flag) {
+			case 0:
+				if(se.getCriacao_usuario() == true)
+				{
+					emailsCriados.add(se);
+				}
+			break;
+			case 1:
+				if(se.getAlteracao_usuario() == true)
+				{
+					emailsAlterados.add(se);
+				}
+			break;
+			case 2:
+				if(se.getExclusao_usuario() == true)
+				{
+					emailsExcluidos.add(se);
+				}
+			break;
 			
-			if(srv.getStatus().getDescricao().equals("Em andamento"))
-			{
-				System.out.println(srv.getStatus().getDescricao());
-				srvlist.add(srv);
+			case 3:
+				if(se.getTroca_senha() == true)
+				{
+					emailsSenhasTrocadas.add(se);
+				}
+			break;
+			case 4:
+				if(se.getMudanca_plano() == true)
+				{
+					emailsPlanosMudados.add(se);
+				}
+			break;
 			}
 			
 		}
-		return srvlist;
+		if(flag == 0)
+			return emailsCriados;
+		else if(flag == 1)
+			return emailsAlterados;
+		else if(flag == 2)
+			return emailsExcluidos;
+		else if(flag == 3)
+			return emailsSenhasTrocadas;
+		else if(flag == 4)
+			return emailsPlanosMudados;
+		
+		return null;
 	}
+	
+
 	
 	public List<ServicoManutencao> servicosManutencaoAtendente(List<ServicoManutencao> servicos, String Atendente)
 	{
@@ -324,6 +549,23 @@ public class RelatorioMensalController {
 		while(it.hasNext())
 		{
 			ServicoRede sr = (ServicoRede) it.next();
+			
+			if (sr.getAtendente().getNome().equals(Atendente))
+			{
+				srlist.add(sr);
+			}
+			
+		}
+		return srlist;
+	}
+	
+	public List<ServicoTelefone> servicosTelefoneAtendente(List<ServicoTelefone> servicos, String Atendente)
+	{
+		Iterator it = servicos.iterator();
+		List<ServicoTelefone> srlist = new ArrayList<ServicoTelefone>(); 
+		while(it.hasNext())
+		{
+			ServicoTelefone sr = (ServicoTelefone) it.next();
 			
 			if (sr.getAtendente().getNome().equals(Atendente))
 			{
