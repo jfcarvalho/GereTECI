@@ -21,7 +21,6 @@ import com.teci.gereteci.model.Servico.ServicoManutencao;
 import com.teci.gereteci.model.Servico.ServicoRede;
 import com.teci.gereteci.model.Servico.ServicoTelefone;
 import com.teci.gereteci.model.Usuario.Usuario;
-import com.teci.gereteci.repository.Servicos;
 import com.teci.gereteci.repository.ServicosEmail;
 import com.teci.gereteci.repository.ServicosInternet;
 import com.teci.gereteci.repository.ServicosManutencao;
@@ -44,9 +43,9 @@ public class RelatorioMensalController {
 	private ServicosEmail semail;
 	@Autowired
 	private ServicosTelefone stelefone;
-	@Autowired
+	/*@Autowired
 	private Servicos servicosGerais;
-
+*/
 	private static final String RELATORIO_PATH = "/relatorios/RelatorioMensal";
 	
 	@RequestMapping("/gereteci/relatoriomensal")
@@ -58,7 +57,7 @@ public class RelatorioMensalController {
 		List<ServicoRede> redes = sredes.findAll();
 		List<ServicoEmail> emails = semail.findAll();
 		List<ServicoTelefone> telefones = stelefone.findAll();
-		List<Servico> sgLista = servicosGerais.findAll();
+		//List<Servico> sgLista = servicosGerais.findAll();
 		
 		
 		int numeroManutencoes = manutencao.size();
@@ -66,7 +65,7 @@ public class RelatorioMensalController {
 		int numeroRedes = redes.size();
 		int numeroEmail = emails.size();
 		int numeroTelefone = telefones.size();
-		int numeroGerais = sgLista.size();
+		//int numeroGerais = sgLista.size();
 		
 		
 		int servicostotais = numeroManutencoes + numeroInternet + numeroRedes + numeroEmail + numeroTelefone;
@@ -120,8 +119,7 @@ public class RelatorioMensalController {
 		List<ServicoEmail> fechadoEmail = servicosEmail(emails, 2);
 		
 		
-		List<Servico> sAbertos = servicosAbertos(sgLista);
-		List<Servico> sAndamento = servicosAndamento(sgLista);
+		
 		List<ServicoInternet> servicosVisitaOi = servicosInternetVistaOi(internet);
 		List<ServicoInternet> servicosAberturaRds = servicosInternetAberturaRDS(internet);
 		
@@ -219,67 +217,41 @@ public class RelatorioMensalController {
 		mv.addObject("contas_excluidas", contasExcluidas);
 		mv.addObject("contas_senha_trocada", contasSenhaTrocada);
 		mv.addObject("contas_mudanca_plano", contasMudancaPlanos);
-		
-		List<Servico> abertosAriana = servicosAbertos(sgLista, "Ariana Souza Silva");
-		List<Servico> abertosUiran = servicosAbertos(sgLista, "Uiran Passos");
-		List<Servico> abertosJean = servicosAbertos(sgLista, "Jean Carvalho");
-		List<Servico> abertosRomeu = servicosAbertos(sgLista, "Romeu Oliveira");
-		
-		List<Servico> andamentoAriana = servicosAndamento(sgLista, "Ariana Souza Silva");
-		List<Servico> andamentoUiran = servicosAndamento(sgLista, "Uiran Passos");
-		List<Servico> andamentoJean = servicosAndamento(sgLista, "Jean Carvalho");
-		List<Servico> andamentoRomeu = servicosAndamento(sgLista, "Romeu Oliveira");
-		
-		List<Servico> fechadoAriana = servicosFechados(sgLista, "Ariana Souza Silva");
-		List<Servico> fechadoUiran = servicosFechados(sgLista, "Uiran Passos");
-		List<Servico> fechadoJean = servicosFechados(sgLista, "Jean Carvalho");
-		List<Servico> fechadoRomeu = servicosFechados(sgLista, "Romeu Oliveira");
-		
-		
-		int nArianaAbertos = abertosAriana.size();
-		int nArianaAndamento = andamentoAriana.size();
-		int nArianaFechados = fechadoAriana.size();
-		int nArianaTotal = nArianaAbertos+nArianaAndamento+nArianaFechados;
-		
-		int nUiranAbertos = abertosUiran.size();
-		int nUiranAndamento = andamentoUiran.size();
-		int nUiranFechados = fechadoUiran.size();
-		int nUiranTotal = nUiranAbertos+nUiranAndamento+nUiranFechados;
-		
-		int nJeanAbertos = abertosJean.size();
-		int nJeanAndamento = andamentoJean.size();
-		int nJeanFechados = fechadoJean.size();
-		int nJeanTotal = nJeanAbertos+nJeanAndamento+nJeanFechados;
-		
-		int nRomeuAbertos = abertosRomeu.size();
-		int nRomeuAndamento = andamentoRomeu.size();
-		int nRomeuFechados = fechadoRomeu.size();
-		int nRomeuTotal = nRomeuAbertos+nRomeuAndamento+nRomeuFechados;
-		
-		mv.addObject("n_ariana_abertos", nArianaAbertos);
-		mv.addObject("n_ariana_andamento", nArianaAndamento);
-		mv.addObject("n_ariana_fechado", nArianaFechados);
-		mv.addObject("n_ariana_total", nArianaTotal);
-		
-		mv.addObject("n_uiran_abertos", nUiranAbertos);
-		mv.addObject("n_uiran_andamento", nUiranAndamento);
-		mv.addObject("n_uiran_fechado", nUiranFechados);
-		mv.addObject("n_uiran_total", nUiranTotal);
-		
-		
-		mv.addObject("n_jean_abertos", nJeanAbertos);
-		mv.addObject("n_jean_andamento", nJeanAndamento);
-		mv.addObject("n_jean_fechado", nJeanFechados);
-		mv.addObject("n_jean_total", nJeanTotal);
-		
-		mv.addObject("n_romeu_abertos", nRomeuAbertos);
-		mv.addObject("n_romeu_andamento", nRomeuAndamento);
-		mv.addObject("n_romeu_fechado", nRomeuFechados);
-		mv.addObject("n_romeu_total", nRomeuTotal);
-		
 		mv.addObject("n_contas_excluidas", nContasExcluidas);
 		mv.addObject("n_contas_senhas_trocadas", nContasSenhasTrocadas);
 		mv.addObject("n_contas_mudanca_planos", nContasMudancaPlanos);
+		
+		//Serviços Ariana Manutencao
+		
+		//serviços abertos
+		mv.addObject("n_ariana_abertos", servicosManutencao(manutencao, 0, "Ariana Souza Silva").size() + servicosInternet(internet, 0, "Ariana Souza Silva").size() +servicosRede(redes, 0, "Ariana Souza Silva").size() );
+		//servicos em andamento
+		mv.addObject("n_ariana_andamento", servicosManutencao(manutencao, 1, "Ariana Souza Silva").size() + servicosInternet(internet, 1, "Ariana Souza Silva").size() + servicosRede(redes, 1, "Ariana Souza Silva").size());
+		//servicos fehcados
+		mv.addObject("n_ariana_fechados", servicosManutencao(manutencao, 2, "Ariana Souza Silva").size() + servicosInternet(internet, 2, "Ariana Souza Silva").size() + servicosRede(redes, 2, "Ariana Souza Silva").size());
+		//mv.addObject("n_ariana_total", )
+	
+		
+		//Serviços Uiran Manutencao
+		mv.addObject("n_uiran_abertos",servicosManutencao(manutencao, 0, "Uiran Passos").size()+ servicosInternet(internet, 0, "Uiran Passos").size() + servicosRede(redes, 0, "Uiran Passos").size());
+		mv.addObject("n_uiran_andamento", servicosManutencao(manutencao, 1, "Uiran Passos").size() + servicosInternet(internet, 1, "Uiran Passos").size() + servicosRede(redes, 1, "Uiran Passos").size());
+		mv.addObject("n_uiran_fechados", servicosManutencao(manutencao, 2, "Uiran Passos").size() + servicosInternet(internet, 2, "Uiran Passos").size() +  servicosRede(redes, 2, "Uiran Passos").size());
+		
+		
+				//Serviços Jean Manutencao
+		mv.addObject("n_jean_abertos", servicosManutencao(manutencao, 0, "Jean Carvalho").size() + servicosInternet(internet, 0, "Jean Carvalho").size() + servicosRede(redes, 0, "Jean Carvalho").size() + servicosEmail(emails, 0, "Jean Carvalho").size());		
+		mv.addObject("n_jean_andamento", servicosManutencao(manutencao, 1, "Jean Carvalho").size() + servicosInternet(internet, 1, "Jean Carvalho").size() + servicosRede(redes, 1, "Jean Carvalho").size() + servicosEmail(emails, 1, "Jean Carvalho").size());
+		mv.addObject("n_jean_fechados", servicosManutencao(manutencao, 2, "Jean Carvalho").size() + servicosInternet(internet, 2, "Jean Carvalho").size() + servicosRede(redes, 2, "Jean Carvalho").size()+ servicosEmail(emails, 2, "Jean Carvalho").size());	
+		//Serviços Romeu
+		mv.addObject("n_jean_abertos", servicosManutencao(manutencao, 0, "Jean Carvalho").size() + servicosInternet(internet, 0, "Jean Carvalho").size() + servicosRede(redes, 0, "Jean Carvalho").size() + servicosEmail(emails, 0, "Jean Carvalho").size());		
+		mv.addObject("n_jean_andamento", servicosManutencao(manutencao, 1, "Jean Carvalho").size() + servicosInternet(internet, 1, "Jean Carvalho").size() + servicosRede(redes, 1, "Jean Carvalho").size() + servicosEmail(emails, 1, "Jean Carvalho").size());
+		mv.addObject("n_jean_fechados", servicosManutencao(manutencao, 2, "Jean Carvalho").size() + servicosInternet(internet, 2, "Jean Carvalho").size() + servicosRede(redes, 2, "Jean Carvalho").size()+ servicosEmail(emails, 2, "Jean Carvalho").size());		
+		
+		mv.addObject("n_romeu_abertos", servicosManutencao(manutencao, 0, "Romeu Oliveira").size() + servicosInternet(internet, 0, "Romeu Oliveira").size()+  servicosRede(redes, 0, "Romeu Oliveira").size() + servicosEmail(emails, 0, "Romeu Oliveira").size() + servicosTelefone(telefones, 0, "Romeu Oliveira").size());
+		mv.addObject("n_romeu_andamento", servicosManutencao(manutencao, 1, "Romeu Oliveira").size() + servicosInternet(internet, 1, "Romeu Oliveira").size()+  servicosRede(redes, 1, "Romeu Oliveira").size() + servicosEmail(emails, 1, "Romeu Oliveira").size() + servicosTelefone(telefones, 1, "Romeu Oliveira").size());
+		mv.addObject("n_romeu_fechados", servicosManutencao(manutencao, 2, "Romeu Oliveira").size() + servicosInternet(internet, 2, "Romeu Oliveira").size()+  servicosRede(redes, 2, "Romeu Oliveira").size() + servicosEmail(emails, 2, "Romeu Oliveira").size() + servicosTelefone(telefones, 2, "Romeu Oliveira").size());
+
+	
 		
 		//mv.addObject("servicos_ariana_rede", servicosArianaRede);
 		
@@ -318,95 +290,40 @@ public class RelatorioMensalController {
 		return smlist;
 	}
 	
-	public List<Servico> servicosAbertos(List<Servico> servicos)
+	public List<ServicoManutencao> servicosManutencao(List<ServicoManutencao> servicos, int flag, String Atendente)
 	{
-		Iterator<Servico> it = servicos.iterator();
-		List<Servico> srvlist = new ArrayList<Servico>(); 
+		Iterator it = servicos.iterator();
+		List<ServicoManutencao> smlist = new ArrayList<ServicoManutencao>(); 
 		while(it.hasNext())
 		{
-			Servico srv = (Servico) it.next();
-			
-			if(srv.getStatus().getDescricao().equals("Aberto"))
-			{
-				System.out.println(srv.getStatus().getDescricao());
-				srvlist.add(srv);
+			ServicoManutencao sm = (ServicoManutencao) it.next();
+			switch(flag) {
+			case 0:
+				if(sm.getStatus().getDescricao().equals("Aberto") && sm.getAtendente().getNome().equals(Atendente))
+				{
+					smlist.add(sm);
+				}
+			break;
+			case 1:
+				if(sm.getStatus().getDescricao().equals("Em andamento")  && sm.getAtendente().getNome().equals(Atendente))
+				{
+					smlist.add(sm);
+				}
+			break;
+			case 2:
+				if(sm.getStatus().getDescricao().equals("Fechado")  && sm.getAtendente().getNome().equals(Atendente))
+				{
+					smlist.add(sm);
+				}
+			break;
 			}
 			
 		}
-		return srvlist;
+		return smlist;
 	}
 	
-	public List<Servico> servicosAbertos(List<Servico> servicos, String Atendente)
-	{
-		Iterator<Servico> it = servicos.iterator();
-		List<Servico> srvlist = new ArrayList<Servico>(); 
-		while(it.hasNext())
-		{
-			Servico srv = (Servico) it.next();
-			
-			if(srv.getStatus().getDescricao().equals("Aberto") && srv.getAtendente().getNome().equals(Atendente))
-			{
-				System.out.println(srv.getStatus().getDescricao());
-				srvlist.add(srv);
-			}
-			
-		}
-		return srvlist;
-	}
 	
-	public List<Servico> servicosAndamento(List<Servico> servicos)
-	{
-		Iterator<Servico> it = servicos.iterator();
-		List<Servico> srvlist = new ArrayList<Servico>(); 
-		while(it.hasNext())
-		{
-			Servico srv = (Servico) it.next();
-			
-			if(srv.getStatus().getDescricao().equals("Em andamento"))
-			{
-				System.out.println(srv.getStatus().getDescricao());
-				srvlist.add(srv);
-			}
-			
-		}
-		return srvlist;
-	}
 	
-	public List<Servico> servicosFechados(List<Servico> servicos, String Atendente)
-	{
-		Iterator<Servico> it = servicos.iterator();
-		List<Servico> srvlist = new ArrayList<Servico>(); 
-		while(it.hasNext())
-		{
-			Servico srv = (Servico) it.next();
-			
-			if(srv.getStatus().getDescricao().equals("Fechado") && srv.getAtendente().getNome().equals(Atendente))
-			{
-				System.out.println(srv.getStatus().getDescricao());
-				srvlist.add(srv);
-			}
-			
-		}
-		return srvlist;
-	}
-	
-	public List<Servico> servicosAndamento(List<Servico> servicos, String Atendente)
-	{
-		Iterator<Servico> it = servicos.iterator();
-		List<Servico> srvlist = new ArrayList<Servico>(); 
-		while(it.hasNext())
-		{
-			Servico srv = (Servico) it.next();
-			
-			if(srv.getStatus().getDescricao().equals("Em andamento") && srv.getAtendente().getNome().equals(Atendente))
-			{
-				System.out.println(srv.getStatus().getDescricao());
-				srvlist.add(srv);
-			}
-			
-		}
-		return srvlist;
-	}
 	
 	public List<ServicoInternet> servicosInternetVistaOi(List<ServicoInternet> servicos)
 	{
@@ -626,6 +543,38 @@ public class RelatorioMensalController {
 		return smlist;
 	}
 	
+	public List<ServicoRede> servicosRede(List<ServicoRede> servicos, int flag, String Atendente)
+	{
+		Iterator it = servicos.iterator();
+		List<ServicoRede> smlist = new ArrayList<ServicoRede>(); 
+		while(it.hasNext())
+		{
+			ServicoRede sm = (ServicoRede) it.next();
+			switch(flag) {
+			case 0:
+				if(sm.getStatus().getDescricao().equals("Aberto")  && sm.getAtendente().getNome().equals(Atendente))
+				{
+					smlist.add(sm);
+				}
+			break;
+			case 1:
+				if(sm.getStatus().getDescricao().equals("Em andamento")  && sm.getAtendente().getNome().equals(Atendente))
+				{
+					smlist.add(sm);
+				}
+			break;
+			case 2:
+				if(sm.getStatus().getDescricao().equals("Fechado")  && sm.getAtendente().getNome().equals(Atendente))
+				{
+					smlist.add(sm);
+				}
+			break;
+			}
+			
+		}
+		return smlist;
+	}
+	
 	public List<ServicoInternet> servicosInternet(List<ServicoInternet> servicos, int flag)
 	{
 		Iterator it = servicos.iterator();
@@ -648,6 +597,38 @@ public class RelatorioMensalController {
 			break;
 			case 2:
 				if(sm.getStatus().getDescricao().equals("Fechado"))
+				{
+					smlist.add(sm);
+				}
+			break;
+			}
+			
+		}
+		return smlist;
+	}
+	
+	public List<ServicoInternet> servicosInternet(List<ServicoInternet> servicos, int flag, String Atendente)
+	{
+		Iterator it = servicos.iterator();
+		List<ServicoInternet> smlist = new ArrayList<ServicoInternet>(); 
+		while(it.hasNext())
+		{
+			ServicoInternet sm = (ServicoInternet) it.next();
+			switch(flag) {
+			case 0:
+				if(sm.getStatus().getDescricao().equals("Aberto") && sm.getAtendente().getNome().equals(Atendente))
+				{
+					smlist.add(sm);
+				}
+			break;
+			case 1:
+				if(sm.getStatus().getDescricao().equals("Em andamento") && sm.getAtendente().getNome().equals(Atendente))
+				{
+					smlist.add(sm);
+				}
+			break;
+			case 2:
+				if(sm.getStatus().getDescricao().equals("Fechado") && sm.getAtendente().getNome().equals(Atendente))
 				{
 					smlist.add(sm);
 				}
@@ -690,6 +671,38 @@ public class RelatorioMensalController {
 		return smlist;
 	}
 	
+	public List<ServicoEmail> servicosEmail(List<ServicoEmail> servicos, int flag, String Atendente)
+	{
+		Iterator it = servicos.iterator();
+		List<ServicoEmail> smlist = new ArrayList<ServicoEmail>(); 
+		while(it.hasNext())
+		{
+			ServicoEmail sm = (ServicoEmail) it.next();
+			switch(flag) {
+			case 0:
+				if(sm.getStatus().getDescricao().equals("Aberto") && sm.getAtendente().getNome().equals(Atendente))
+				{
+					smlist.add(sm);
+				}
+			break;
+			case 1:
+				if(sm.getStatus().getDescricao().equals("Em andamento") && sm.getAtendente().getNome().equals(Atendente))
+				{
+					smlist.add(sm);
+				}
+			break;
+			case 2:
+				if(sm.getStatus().getDescricao().equals("Fechado") && sm.getAtendente().getNome().equals(Atendente))
+				{
+					smlist.add(sm);
+				}
+			break;
+			}
+			
+		}
+		return smlist;
+	}
+	
 	public List<ServicoTelefone> servicosTelefone(List<ServicoTelefone> servicos, int flag)
 	{
 		Iterator it = servicos.iterator();
@@ -722,16 +735,35 @@ public class RelatorioMensalController {
 		return smlist;
 	}
 	
-	/*public  edicao(@PathVariable("id_servico") ServicoManutencao servicoManutencao)
+	public List<ServicoTelefone> servicosTelefone(List<ServicoTelefone> servicos, int flag, String Atendente)
 	{
-		//System.out.println(">>>>>>> codigo recebido: " + id_usuario);
-		//Usuario usuario = usuarios.findOne(id_usuario);
-		Usuario solicitante = servicoManutencao.getSolicitado();
-		Usuario usuario_atendente = servicoManutencao.getAtendente();
-		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		mv.addObject("servico", servicoManutencao);
-		mv.addObject(servicoManutencao);
-		return mv;
+		Iterator it = servicos.iterator();
+		List<ServicoTelefone> smlist = new ArrayList<ServicoTelefone>(); 
+		while(it.hasNext())
+		{
+			ServicoTelefone sm = (ServicoTelefone) it.next();
+			switch(flag) {
+			case 0:
+				if(sm.getStatus().getDescricao().equals("Aberto")  && sm.getAtendente().getNome().equals(Atendente))
+				{
+					smlist.add(sm);
+				}
+			break;
+			case 1:
+				if(sm.getStatus().getDescricao().equals("Em andamento")  && sm.getAtendente().getNome().equals(Atendente))
+				{
+					smlist.add(sm);
+				}
+			break;
+			case 2:
+				if(sm.getStatus().getDescricao().equals("Fechado")  && sm.getAtendente().getNome().equals(Atendente))
+				{
+					smlist.add(sm);
+				}
+			break;
+			}
+			
+		}
+		return smlist;
 	}
-	*/
 }

@@ -15,5 +15,5 @@ import com.teci.gereteci.model.Usuario.Usuario;
 public interface ServicosInternet extends JpaRepository<ServicoInternet, Integer>{
 	List<ServicoInternet> findByAtendente(Usuario Atendente);
 	List<ServicoInternet> findBySolicitado(Usuario solicitado);
-	List<ServicoInternet> findByStatus(StatusServico status);
+	List<ServicoInternet> findByStatus(StatusServico status); 
 }

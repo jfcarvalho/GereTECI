@@ -17,4 +17,5 @@ public interface ServicosEmail extends JpaRepository<ServicoEmail, Integer>{
 	List<ServicoEmail> findByAtendente(Usuario Atendente);
 	List<ServicoEmail> findBySolicitado(Usuario solicitado);
 	List<ServicoEmail> findByStatus(StatusServico status);
+	
 }
