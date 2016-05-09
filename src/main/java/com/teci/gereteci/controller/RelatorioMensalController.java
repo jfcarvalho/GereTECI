@@ -21,6 +21,7 @@ import com.teci.gereteci.model.Servico.ServicoManutencao;
 import com.teci.gereteci.model.Servico.ServicoRede;
 import com.teci.gereteci.model.Servico.ServicoTelefone;
 import com.teci.gereteci.model.Usuario.Usuario;
+import com.teci.gereteci.repository.Servicos;
 import com.teci.gereteci.repository.ServicosEmail;
 import com.teci.gereteci.repository.ServicosInternet;
 import com.teci.gereteci.repository.ServicosManutencao;
@@ -43,22 +44,31 @@ public class RelatorioMensalController {
 	private ServicosEmail semail;
 	@Autowired
 	private ServicosTelefone stelefone;
-	/*@Autowired
+	@Autowired
 	private Servicos servicosGerais;
-*/
+
 	private static final String RELATORIO_PATH = "/relatorios/RelatorioMensal";
 	
 	@RequestMapping("/gereteci/relatoriomensal")
 	public ModelAndView relatorio()
 	{
 		ModelAndView mv = new ModelAndView(RELATORIO_PATH);
+		/*List<ServicoManutencao> manutencao = manutencaoPorPeriodo(manutencoes.findAll(), "2016-04");
+		List<ServicoInternet> internet = internetPorPeriodo(sinternet.findAll(), "2016-04");
+		List<ServicoRede> redes = redePorPeriodo(sredes.findAll(), "2016-04");
+		List<ServicoEmail> emails = emailPorPeriodo(semail.findAll(), "2016-04");
+		List<ServicoTelefone> telefones = telefonePorPeriodo(stelefone.findAll(), "2016-04");
+		*/
+		
 		List<ServicoManutencao> manutencao = manutencoes.findAll();
 		List<ServicoInternet> internet = sinternet.findAll();
 		List<ServicoRede> redes = sredes.findAll();
 		List<ServicoEmail> emails = semail.findAll();
 		List<ServicoTelefone> telefones = stelefone.findAll();
-		//List<Servico> sgLista = servicosGerais.findAll();
 		
+		List<Servico> sgLista = servicosGerais.findAll();
+		
+		System.out.println(sgLista.size());
 		
 		int numeroManutencoes = manutencao.size();
 		int numeroInternet = internet.size();
@@ -75,6 +85,10 @@ public class RelatorioMensalController {
 		mv.addObject("n_email", numeroEmail);
 		mv.addObject("n_telefone", numeroTelefone);
 		mv.addObject("n_redes", numeroRedes);
+		
+		mv.addObject("servicos_gerais_abertos", servicosGerais(sgLista, 0));
+		mv.addObject("servicos_gerais_andamento", servicosGerais(sgLista, 1));
+		mv.addObject("servicos_gerais_fechados", servicosGerais(sgLista, 2));
 		
 		List<ServicoManutencao> servicosArianaManutencao = servicosManutencaoAtendente(manutencao, "Ariana Souza Silva");
 		List<ServicoRede> servicosArianaRede = servicosRedeAtendente(redes, "Ariana Souza Silva");
@@ -122,6 +136,7 @@ public class RelatorioMensalController {
 		
 		List<ServicoInternet> servicosVisitaOi = servicosInternetVistaOi(internet);
 		List<ServicoInternet> servicosAberturaRds = servicosInternetAberturaRDS(internet);
+		List<ServicoEmail> emailsAberturaRds = servicosEmailAberturaRDS(emails);
 		
 		int nManutencoesAbertos = abertosManutencao.size();
 		int nManutencoesEmAndamento = emAndamentoManutencao.size();
@@ -144,9 +159,10 @@ public class RelatorioMensalController {
 		int nEmailsFechados = fechadoEmail.size();
 		int numeroServicosVisitaOi = servicosVisitaOi.size();
 		int numeroServicosAberturaRds = servicosAberturaRds.size();
+		int numeroEmailsAberturaRds = emailsAberturaRds.size();
 		
 		mv.addObject("n_servicos_visita_oi", numeroServicosVisitaOi);
-		mv.addObject("n_servicos_rds",numeroServicosAberturaRds);
+		mv.addObject("n_servicos_rds",numeroServicosAberturaRds + numeroEmailsAberturaRds);
 		
 		mv.addObject("n_servicos_abertos_manutencao", nManutencoesAbertos);
 		mv.addObject("n_servicos_andamento_manutencao",nManutencoesEmAndamento);
@@ -192,6 +208,7 @@ public class RelatorioMensalController {
 		//mv.addObject("sandamento", sAndamento);
 		mv.addObject("svisita_oi", servicosVisitaOi);
 		mv.addObject("saberturards", servicosAberturaRds);
+		mv.addObject("semailaberturards", emailsAberturaRds);
 		
 		
 		List<ServicoEmail> contasCriadas = servicosEmailContas(emails, 0);
@@ -361,6 +378,24 @@ public class RelatorioMensalController {
 		return srvlist;
 	}
 	
+	public List<ServicoEmail> servicosEmailAberturaRDS(List<ServicoEmail> servicos)
+	{
+		Iterator<ServicoEmail> it = servicos.iterator();
+		List<ServicoEmail> srvlist = new ArrayList<ServicoEmail>(); 
+		while(it.hasNext())
+		{
+			ServicoEmail srv = (ServicoEmail) it.next();
+			
+			if(srv.getRds_aberto() == true)
+			{
+				//System.out.println(srv.getStatus().getDescricao());
+				srvlist.add(srv);
+			}
+			
+		}
+		return srvlist;
+	}
+	
 	public List<ServicoEmail> servicosEmailContas(List<ServicoEmail> servicos, int flag)
 	{
 		Iterator<ServicoEmail> it = servicos.iterator();
@@ -422,6 +457,37 @@ public class RelatorioMensalController {
 	}
 	
 
+	public List<Servico> servicosGerais(List<Servico> servicos, int flag)
+	{
+		Iterator it = servicos.iterator();
+		List<Servico> smlist = new ArrayList<Servico>(); 
+		while(it.hasNext())
+		{
+			Servico sm = (Servico) it.next();
+			switch(flag) {
+			case 0:
+				if(sm.getStatus().getDescricao().equals("Aberto"))
+				{
+					smlist.add(sm);
+				}
+			break;
+			case 1:
+				if(sm.getStatus().getDescricao().equals("Em andamento"))
+				{
+					smlist.add(sm);
+				}
+			break;
+			case 2:
+				if(sm.getStatus().getDescricao().equals("Fechado"))
+				{
+					smlist.add(sm);
+				}
+			break;
+			}
+			
+		}
+		return smlist;
+	}
 	
 	public List<ServicoManutencao> servicosManutencaoAtendente(List<ServicoManutencao> servicos, String Atendente)
 	{
@@ -500,7 +566,7 @@ public class RelatorioMensalController {
 		while(it.hasNext())
 		{
 			ServicoEmail se = (ServicoEmail) it.next();
-			System.out.println(se.getAtendente().getNome());
+			
 			if (se.getAtendente().getNome().equals(Atendente))
 			{
 				selist.add(se);
@@ -765,5 +831,92 @@ public class RelatorioMensalController {
 			
 		}
 		return smlist;
+	}
+	
+	public List<ServicoManutencao> manutencaoPorPeriodo(List<ServicoManutencao> manutencao, String data)
+	{
+		
+		List<ServicoManutencao> servicosManutencaoPeriodo = new ArrayList<ServicoManutencao>();
+	Iterator it = manutencao.iterator();
+	while(it.hasNext())
+	{
+		ServicoManutencao serv = (ServicoManutencao) it.next();
+		if(serv.getData_ocorrencia().toString().contains(data))
+		{
+			servicosManutencaoPeriodo.add(serv);
+		}
+	}	
+	//List<Computador> todosComputadores = computadores.findAll();
+		return servicosManutencaoPeriodo;
+	}
+	
+	public List<ServicoInternet> internetPorPeriodo(List<ServicoInternet> internet, String data)
+	{
+		
+		List<ServicoInternet> servicosInternetPeriodo = new ArrayList<ServicoInternet>();
+	Iterator it = internet.iterator();
+	while(it.hasNext())
+	{
+		ServicoInternet serv = (ServicoInternet) it.next();
+		if(serv.getData_ocorrencia().toString().contains(data))
+		{
+			servicosInternetPeriodo.add(serv);
+		}
+	}	
+	//List<Computador> todosComputadores = computadores.findAll();
+		return servicosInternetPeriodo;
+	}
+	
+	public List<ServicoRede> redePorPeriodo(List<ServicoRede> rede, String data)
+	{
+		
+		List<ServicoRede> servicosRedePeriodo = new ArrayList<ServicoRede>();
+	Iterator it = rede.iterator();
+	while(it.hasNext())
+	{
+		ServicoRede serv = (ServicoRede) it.next();
+		if(serv.getData_ocorrencia().toString().contains(data))
+		{
+
+			servicosRedePeriodo.add(serv);
+		}
+	}	
+	//List<Computador> todosComputadores = computadores.findAll();
+		return servicosRedePeriodo;
+	}
+	
+	public List<ServicoTelefone> telefonePorPeriodo(List<ServicoTelefone> telefone, String data)
+	{
+		
+		List<ServicoTelefone> servicosTelefonePeriodo = new ArrayList<ServicoTelefone>();
+	Iterator it = telefone.iterator();
+	while(it.hasNext())
+	{
+		ServicoTelefone serv = (ServicoTelefone) it.next();
+		if(serv.getData_ocorrencia().toString().contains(data))
+		{
+			
+			servicosTelefonePeriodo.add(serv);
+		}
+	}	
+	//List<Computador> todosComputadores = computadores.findAll();
+		return servicosTelefonePeriodo;
+	}
+	
+	public List<ServicoEmail> emailPorPeriodo(List<ServicoEmail> email, String data)
+	{
+		
+		List<ServicoEmail> servicosEmailPeriodo = new ArrayList<ServicoEmail>();
+	Iterator it = email.iterator();
+	while(it.hasNext())
+	{
+		ServicoEmail serv = (ServicoEmail) it.next();
+		if(serv.getData_ocorrencia().toString().contains(data))
+		{
+			servicosEmailPeriodo.add(serv);
+		}
+	}	
+	//List<Computador> todosComputadores = computadores.findAll();
+		return servicosEmailPeriodo;
 	}
 }

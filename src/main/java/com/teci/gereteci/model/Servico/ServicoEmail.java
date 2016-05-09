@@ -1,11 +1,16 @@
 package com.teci.gereteci.model.Servico;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Usuario.Usuario;
@@ -20,8 +25,12 @@ public class ServicoEmail extends Servico {
 	private boolean exclusao_usuario;
 	private boolean troca_senha;
 	private boolean mudanca_plano;
+	private boolean rds_aberto;
 	private String conta;
-	
+	private String numero_rds;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date data_rds;
 	@Enumerated(EnumType.STRING)
 	private DescricaoProntaEmail descricao_pronta;
 	
@@ -85,6 +94,33 @@ public class ServicoEmail extends Servico {
 		this.conta = usuario;
 	}
 	
+	public String getNumero_rds()
+	{
+		return this.numero_rds;
+	}
 	
+	public void setRds_aberto(boolean rds_aberto)
+	{
+		this.rds_aberto = rds_aberto;
+	}
+
+	public void setNumero_rds(String numero_rds)
+	{
+		this.numero_rds = numero_rds;
+	}
+	public boolean getRds_aberto()
+	{
+		return this.rds_aberto;
+	}
+	
+	public Date getData_rds()
+	{
+		return this.data_rds;
+	}
+	
+	public void setData_rds(Date data_rds)
+	{
+		this.data_rds = data_rds;
+	}
 	
 }

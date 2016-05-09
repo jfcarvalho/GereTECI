@@ -40,10 +40,16 @@
 		<div class="form-group">
 			<label for="sistema" class="col-sm-2 control-label">Usuário solicitante:</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="usuario_id_usuario" >
+				<select class="form-control disable-solicitante-manutencao-input" name="usuario_id_usuario" >
 					<option th:each="usuario : ${todosUsuarios}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}" th:selected="${servico.solicitado} ? ${servico.solicitado.nome} == ${usuario.nome}"></option>
 				</select>
 			</div>
+			
+			<div class="col-sm-6" style="width:180px">
+				    <div class="input-group">
+				        <input type="checkbox" class ="disable-solicitante-manutencao-botao"/> Manutenção preventiva  	
+				    </div><!-- /input-group -->
+				  </div>
 		</div>
 		
 		<div class="form-group">
@@ -66,6 +72,14 @@
 				   <br/>Usuário/Conta: <input class ="form-control" type="text" id="conta" name="conta" th:field="*{conta}" /> 
 			</div>
 		</div>
+		
+		<div class="col-sm-6">
+				<input type="checkbox" name="rds_aberto" th:checked="${servico.rds_aberto}"/>Foi aberto uma RDS?<br/>
+				<br/><label for="status" class="col-sm-8 control-label">Numero da RDS:</label> <input class ="form-control" type="text" id="numero_rds" name="numero_rds" th:field="*{numero_rds}" />
+				<br/><label for="status" class="col-sm-8 control-label">Data de abertura:</label><input type="text" class="form-control" id="data_rds" name="data_rds" th:field="*{data_rds}" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR" data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom" value="teste"/>
+
+		</div>
+		
 		<div>
 		
 		</div>

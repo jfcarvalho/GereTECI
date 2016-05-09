@@ -17,4 +17,5 @@ public interface ServicosManutencao extends JpaRepository<ServicoManutencao, Int
 	List<ServicoManutencao> findBySolicitado(Usuario solicitado);
 	List<ServicoManutencao> findByStatus(StatusServico status); 
 	
+	
 }

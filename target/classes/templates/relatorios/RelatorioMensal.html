@@ -115,7 +115,7 @@
 <br/>
 
 
-
+<p>Serviços em aberto</p>
 <table class="table table-bordered table-striped">
 		
 			<thead>
@@ -133,7 +133,7 @@
 				
 			</thead>
 			<tbody>
-				<tr th:each="servico : ${sabertos}">
+				<tr th:each="servico : ${servicos_gerais_abertos}">
 					<td class="text-center" th:text="${servico} ? ${servico.categoria}"></td>
 					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
 					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia}"></td>
@@ -146,14 +146,14 @@
 				</tr>
 				
 			<tr>
-				<td colspan="6" th:if="${#lists.isEmpty(sabertos)}">Nenhum serviço em aberto encontrado</td>
+				<td colspan="6" th:if="${#lists.isEmpty(servicos_gerais_abertos)}">Nenhum serviço em aberto encontrado</td>
 			</tr>
 			</tbody>
 		
 		</table>
 		<br/>
 		<br/>
-		
+		<p>Serviços em andamento</p>
 		<table class="table table-bordered table-striped">
 		
 			<thead>
@@ -171,7 +171,7 @@
 				
 			</thead>
 			<tbody>
-				<tr th:each="servico : ${sandamento}">
+				<tr th:each="servico : ${servicos_gerais_andamento}">
 					<td class="text-center" th:text="${servico} ? ${servico.categoria}"></td>
 					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
 					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia}"></td>
@@ -184,7 +184,7 @@
 				</tr>
 				
 			<tr>
-				<td colspan="6" th:if="${#lists.isEmpty(sandamento)}">Nenhum serviço em andamento encontrado</td>
+				<td colspan="6" th:if="${#lists.isEmpty(servicos_gerais_andamento)}">Nenhum serviço em andamento encontrado</td>
 			</tr>
 			</tbody>
 		
@@ -212,13 +212,13 @@
 				<tr th:each="servico : ${svisita_oi}">
 					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia}"></td>
 					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
-					<td class="text-center" th:text="${servico} ? ${servico.data_encerramento}"></td>
+					<td class="text-center" th:text="${servico} and ${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
 
 					<td class="text-center" th:text="${servico} and ${servico.nome_tecnico} ? ${servico.solicitado.nome}:'Ninguém'"></td>
 					<td class="text-center" th:text="${servico.protocolo_servico}"></td>
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 					<!-- <td class="text-center" th:text="${computador.id_impressao}"></td> -->
-					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+					<td class="text-center" th:text="${servico.descircao_solucao} ? ${servico.descricao_solucao}: 'Não informado'"></td>
 				</tr>
 				
 			<tr>
@@ -235,6 +235,7 @@
 
 <p>Serviços em que houve abertura de RDS: <span th:text="${n_servicos_rds}"></span></p>
 
+<p>Serviços de Internet</p>
 <table class="table table-bordered table-striped">
 		
 			<thead>
@@ -255,12 +256,12 @@
 				<tr th:each="servico : ${saberturards}">
 					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia}"></td>
 					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
-					<td class="text-center" th:text="${servico} ? ${servico.data_encerramento}"></td>
+					<td class="text-center" th:text="${servico} and ${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'" ></td>
 					<td class="text-center" th:text="${servico.numero_rds}"></td>
 					<td class="text-center" th:text="${servico.data_rds}"></td>
 					<!-- <td class="text-center" th:text="${computador.id_impressao}"></td> -->
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
-					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao} ? ${servico.descricao_solucao}: 'Não informado'"></td>
 				</tr>
 				
 			<tr>
@@ -271,10 +272,47 @@
 		</table>
 	<br/>
 	<br/>
+	<p>Serviços de Email</p>
+	<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				<th class="text-center col-md-2">Data de Abertura</th>
+				<!-- <th class="text-center col-md-2">Arquitetura</th> -->
+				<th class="text-center col-md-2">Data de Encerramento</th>
+				<th class="text-center col-md-2">Número da RDS</th>
+				<!--  <th class="text-center col-md-2">ID de Impressão</th> -->
+				<th class="text-center col-md-2">Data de abertura(RDS)</th>
+				<th class="text-center col-md-2">Descrição do problema</th>
+				<th class="text-center col-md-2">Solução adotada</th>				
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${semailaberturards}">
+					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia}"></td>
+					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
+					<td class="text-center" th:text="${servico} and ${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
+					<td class="text-center" th:text="${servico.numero_rds}"></td>
+					<td class="text-center" th:text="${servico.data_rds}"></td>
+					<!-- <td class="text-center" th:text="${computador.id_impressao}"></td> -->
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(semailaberturards)}">Nenhum serviço em andamento encontrado</td>
+			</tr>
+			</tbody>
+		
+		</table>
+	<br/>
+	<br/>
 	
 	<p>Relatório por funcionário</p>
 
-<h2><p>Ariana Souza:</p></h2>
+<h3><p>Ariana Souza:</p></h3>
 
 <table class="table table-bordered table-striped">
 		
@@ -323,9 +361,9 @@
 			<tbody>
 				<tr th:each="servico : ${servicos_ariana_manutencao}">
 					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
-					<td class="text-center" th:text="${servico.data_encerramento}"></td>
-					<td class="text-center" th:text="${servico.solicitado.setor.sigla}"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla} : 'Não informado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome} : 'Não informado'"></td>
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
 					<td class="text-center" th:text="${servico.status}"></td>
@@ -359,9 +397,9 @@
 			<tbody>
 				<tr th:each="servico : ${servicos_ariana_internet}">
 					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
-					<td class="text-center" th:text="${servico.data_encerramento}"></td>
-					<td class="text-center" th:text="${servico.solicitado.setor.sigla}"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla} : 'Não informado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome} : 'Não informado'"></td>
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
 					<td class="text-center" th:text="${servico.status}"></td>
@@ -395,9 +433,9 @@
 			<tbody>
 				<tr th:each="servico : ${servicos_ariana_rede}">
 					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
-					<td class="text-center" th:text="${servico.data_encerramento}"></td>
-					<td class="text-center" th:text="${servico.solicitado.setor.sigla}"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla} : 'Não informado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome} : 'Não informado'"></td>
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
 					<td class="text-center" th:text="${servico.status}"></td>
@@ -412,7 +450,7 @@
 		</table>
 		
 		
-<h2><p>Uiran Passos:</p></h2>
+<h3><p>Uiran Passos:</p></h3>
 <table class="table table-bordered table-striped">
 <thead>
 				<tr>
@@ -458,9 +496,9 @@
 			<tbody>
 				<tr th:each="servico : ${servicos_uiran_manutencao}">
 					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
-					<td class="text-center" th:text="${servico.data_encerramento}"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla}: 'Manutenção preventiva'"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}: 'Manutenção preventiva'"></td>
+					<td class="text-center" th:text="${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla}: 'Não informado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}: 'Não informado'"></td>
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
 					<td class="text-center" th:text="${servico.status}"></td>
@@ -494,9 +532,9 @@
 			<tbody>
 				<tr th:each="servico : ${servicos_uiran_internet}">
 					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
-					<td class="text-center" th:text="${servico.data_encerramento}"></td>
-					<td class="text-center" th:text="${servico.solicitado.setor.sigla}"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla}: 'Não informado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}: 'Não informado'"></td>
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
 					<td class="text-center" th:text="${servico.status}"></td>
@@ -530,9 +568,9 @@
 			<tbody>
 				<tr th:each="servico : ${servicos_uiran_rede}">
 					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
-					<td class="text-center" th:text="${servico.data_encerramento}"></td>
-					<td class="text-center" th:text="${servico.solicitado.setor.sigla}"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla}: 'Não informado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}: 'Não informado'"></td>
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
 					<td class="text-center" th:text="${servico.status}"></td>
@@ -549,7 +587,7 @@
 	<br/>
 	<br/>
 	
-		<h2><p>Jean Carvalho:</p></h2>
+		<h3><p>Jean Carvalho:</p></h3>
 		
 		<table class="table table-bordered table-striped">
 <thead>
@@ -597,9 +635,9 @@
 			<tbody>
 				<tr th:each="servico : ${servicos_jean_manutencao}">
 					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
-					<td class="text-center" th:text="${servico.data_encerramento}"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla}"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla}: 'Não informado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}: 'Não informado'"></td>
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
 					<td class="text-center" th:text="${servico.status}"></td>
@@ -633,9 +671,9 @@
 			<tbody>
 				<tr th:each="servico : ${servicos_jean_internet}">
 					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
-					<td class="text-center" th:text="${servico.data_encerramento}"></td>
-					<td class="text-center" th:text="${servico.solicitado.setor.sigla}"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla}: 'Não informado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}: 'Não informado'"></td>
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
 					<td class="text-center" th:text="${servico.status}"></td>
@@ -669,9 +707,9 @@
 			<tbody>
 				<tr th:each="servico : ${servicos_jean_rede}">
 					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
-					<td class="text-center" th:text="${servico.data_encerramento}"></td>
-					<td class="text-center" th:text="${servico.solicitado.setor.sigla}"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla}: 'Não informado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}: 'Não informado'"></td>
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
 					<td class="text-center" th:text="${servico.status}"></td>
@@ -704,10 +742,10 @@
 			</thead>
 			<tbody>
 				<tr th:each="servico : ${servicos_jean_email}">
-					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
-					<td class="text-center" th:text="${servico.data_encerramento}"></td>
-					<td class="text-center" th:text="${servico.solicitado.setor.sigla}"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.data_ocorrencia} "></td>
+					<td class="text-center" th:text="${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla}: 'Não informado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}: 'Não informado'"></td>
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
 					<td class="text-center" th:text="${servico.status}"></td>
@@ -725,7 +763,7 @@
 	<br/>
 	
 	
-		<h2><p>Romeu Oliveira:</p></h2>
+		<h3><p>Romeu Oliveira:</p></h3>
 		
 		<table class="table table-bordered table-striped">
 <thead>
@@ -772,9 +810,9 @@
 			<tbody>
 				<tr th:each="servico : ${servicos_romeu_manutencao}">
 					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
-					<td class="text-center" th:text="${servico.data_encerramento}"></td>
-					<td class="text-center" th:text="${servico.solicitado.setor.sigla}"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla}: 'Não informado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}: 'Não informado'"></td>
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
 					<td class="text-center" th:text="${servico.status}"></td>
@@ -808,9 +846,9 @@
 			<tbody>
 				<tr th:each="servico : ${servicos_romeu_internet}">
 					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
-					<td class="text-center" th:text="${servico.data_encerramento}"></td>
-					<td class="text-center" th:text="${servico.solicitado.setor.sigla}"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla}: 'Não informado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}: 'Não informado'"></td>
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
 					<td class="text-center" th:text="${servico.status}"></td>
@@ -844,9 +882,9 @@
 			<tbody>
 				<tr th:each="servico : ${servicos_romeu_rede}">
 					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
-					<td class="text-center" th:text="${servico.data_encerramento}"></td>
-					<td class="text-center" th:text="${servico.solicitado.setor.sigla}"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla}: 'Não informado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}: 'Não informado'"></td>
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
 					<td class="text-center" th:text="${servico.status}"></td>
@@ -880,9 +918,9 @@
 			<tbody>
 				<tr th:each="servico : ${servicos_romeu_email}">
 					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
-					<td class="text-center" th:text="${servico.data_encerramento}"></td>
-					<td class="text-center" th:text="${servico.solicitado.setor.sigla}"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla}: 'Não informado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}: 'Não informado'"></td>
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
 					<td class="text-center" th:text="${servico.status}"></td>
@@ -916,9 +954,9 @@
 			<tbody>
 				<tr th:each="servico : ${servicos_romeu_telefone}">
 					<td class="text-center" th:text="${servico.data_ocorrencia}"></td>
-					<td class="text-center" th:text="${servico.data_encerramento}"></td>
-					<td class="text-center" th:text="${servico.solicitado.setor.sigla}"></td>
-					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}"></td>
+					<td class="text-center" th:text="${servico.data_encerramento} ? ${servico.data_encerramento}: 'Não finalizado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.setor.sigla}: 'Não informado'"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome}: 'Não informado'"></td>
 					<td class="text-center" th:text="${servico.descricao_problema}"></td>
 					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
 					<td class="text-center" th:text="${servico.status}"></td>
