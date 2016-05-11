@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.teci.gereteci.model.Computador.Computador;
@@ -48,24 +49,37 @@ public class RelatorioMensalController {
 	private Servicos servicosGerais;
 
 	private static final String RELATORIO_PATH = "/relatorios/RelatorioMensal";
-	
-	@RequestMapping("/gereteci/relatoriomensal")
-	public ModelAndView relatorio()
+	private static final String RELATORIO_PATH2 = "/relatorios/GerarRelatorio";
+	@RequestMapping(value="/gereteci/relatoriomensal", method= RequestMethod.GET)
+	public ModelAndView relatorio(String mes, String ano)
 	{
 		ModelAndView mv = new ModelAndView(RELATORIO_PATH);
-		/*List<ServicoManutencao> manutencao = manutencaoPorPeriodo(manutencoes.findAll(), "2016-04");
-		List<ServicoInternet> internet = internetPorPeriodo(sinternet.findAll(), "2016-04");
-		List<ServicoRede> redes = redePorPeriodo(sredes.findAll(), "2016-04");
-		List<ServicoEmail> emails = emailPorPeriodo(semail.findAll(), "2016-04");
-		List<ServicoTelefone> telefones = telefonePorPeriodo(stelefone.findAll(), "2016-04");
-		*/
 		
+		String periodo = ano + "-" + mes; 
+		
+		mv.addObject("mes_relatorio", mes);
+		mv.addObject("ano_relatorio", ano);
+		
+		List<ServicoManutencao> manutencao = manutencaoPorPeriodo(manutencoes.findAll(), periodo);
+		List<ServicoInternet> internet = internetPorPeriodo(sinternet.findAll(), periodo);
+		List<ServicoRede> redes = redePorPeriodo(sredes.findAll(), periodo);
+		List<ServicoEmail> emails = emailPorPeriodo(semail.findAll(), periodo);
+		List<ServicoTelefone> telefones = telefonePorPeriodo(stelefone.findAll(), periodo);
+		
+		/*
+		List<ServicoManutencao> manutencao = manutencaoPorPeriodo(manutencoes.findAll(), "2016-05");
+		List<ServicoInternet> internet = internetPorPeriodo(sinternet.findAll(), "2016-05");
+		List<ServicoRede> redes = redePorPeriodo(sredes.findAll(), "2016-05");
+		List<ServicoEmail> emails = emailPorPeriodo(semail.findAll(), "2016-05");
+		List<ServicoTelefone> telefones = telefonePorPeriodo(stelefone.findAll(), "2016-05");
+		*/
+		/*
 		List<ServicoManutencao> manutencao = manutencoes.findAll();
 		List<ServicoInternet> internet = sinternet.findAll();
 		List<ServicoRede> redes = sredes.findAll();
 		List<ServicoEmail> emails = semail.findAll();
 		List<ServicoTelefone> telefones = stelefone.findAll();
-		
+		*/
 		List<Servico> sgLista = servicosGerais.findAll();
 		
 		System.out.println(sgLista.size());
@@ -85,6 +99,7 @@ public class RelatorioMensalController {
 		mv.addObject("n_email", numeroEmail);
 		mv.addObject("n_telefone", numeroTelefone);
 		mv.addObject("n_redes", numeroRedes);
+		
 		
 		mv.addObject("servicos_gerais_abertos", servicosGerais(sgLista, 0));
 		mv.addObject("servicos_gerais_andamento", servicosGerais(sgLista, 1));
@@ -274,6 +289,12 @@ public class RelatorioMensalController {
 		
 		return mv;
 	}
+	@RequestMapping(value="/gereteci/gerarrelatorio")
+	public ModelAndView gerarRelatorio()
+	{
+		ModelAndView mv = new ModelAndView(RELATORIO_PATH2);
+		return mv;
+	}
 	
 	public List<ServicoManutencao> servicosManutencao(List<ServicoManutencao> servicos, int flag)
 	{
@@ -306,6 +327,8 @@ public class RelatorioMensalController {
 		}
 		return smlist;
 	}
+	
+	
 	
 	public List<ServicoManutencao> servicosManutencao(List<ServicoManutencao> servicos, int flag, String Atendente)
 	{

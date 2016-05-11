@@ -6,13 +6,15 @@
 </head>
 
 <section layout:fragment="conteudo">
-<center><h1>Relatório de serviços mensal</h1></center>
+<center><h2>Companhia de Transportes do Estado da Bahia</h2></center>
+<center><h2>Tecnologia da Informação - TECI</h2></center>
+<center><h3>Relatório de serviços prestados - GERETECI</h3></center>
 
-<h4>Mês de referência: Março - Abril</h4>
-<h4>Ano de referência: 2016</h4>
+<h4>Mês de referência: <span th:text="${mes_relatorio}"></span></h4>
+<h4>Ano de referência: <span th:text="${ano_relatorio}"></span></h4>
 
 <div class="left" style="float:left; padding:10px;">
-<p><b>Total de serviços prestados no mês: </b><div th:text="${n_total}"></div> </p>
+<p><b>Total de serviços prestados no mês: </b><span th:text="${n_total}"></span> </p>
 <table class="table table-bordered table-striped" th:object="${relatorio}">
  <tr>
   <td>
@@ -377,7 +379,7 @@
 		
 		</table>
 
-<p>Serviços de Intenet:</p>
+<p>Serviços de Internet:</p>
 
 <table class="table table-bordered table-striped">
 		
@@ -512,7 +514,7 @@
 		
 		</table>
 
-<p>Serviços de Intenet:</p>
+<p>Serviços de Internet:</p>
 
 <table class="table table-bordered table-striped">
 		
@@ -651,7 +653,7 @@
 		
 		</table>
 
-<p>Serviços de Intenet:</p>
+<p>Serviços de Internet:</p>
 
 <table class="table table-bordered table-striped">
 		
@@ -826,7 +828,7 @@
 		
 		</table>
 
-<p>Serviços de Intenet:</p>
+<p>Serviços de Internet:</p>
 
 <table class="table table-bordered table-striped">
 		

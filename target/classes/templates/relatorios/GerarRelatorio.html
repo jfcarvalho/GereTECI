@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario">
+<head>
+
+<title>Gerar relatório de serviços</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+<h3 style="text-align: center;">Escolha o mês e o ano para a geração do relatório de serviços</h3>
+	<div class="clearfix">	
+		<form method="GET" action="/gereteci/relatoriomensal">
+			<div class="col-lg-3">
+   				 <div class="input-group">
+   				 <span>Escolha o mês</span>
+     				 	<select class="form-control" name="mes">
+ 						 	<option value="03">Março</option>
+  						 	<option value="04">Abril</option>
+ 						 	<option value="05">Maio</option>
+						</select>
+					 </div>
+					  <br/>
+					 <div class="input-group">
+					 <span>Escolha o ano</span>
+					<select class="form-control" name="ano">
+ 						 <option value="2016">2016</option>
+					</select>
+     				 </div>
+     				 <br/>
+     				 <div class="input-group">
+    				  <span class="input-group-btn">
+       					 <button class="btn btn-default" type="submit">Gerar</button>
+      				</span>
+   				</div>
+ 			 </div>
+ 			  
+ 			</form>
+		</div>
+
+</section>
+</html>
