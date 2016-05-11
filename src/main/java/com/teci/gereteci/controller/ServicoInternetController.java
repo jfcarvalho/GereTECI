@@ -271,18 +271,18 @@ public class ServicoInternetController {
 		List<Usuario> todosUsuarios = usuarios.findAll();
 		Collections.reverse(todosServicosInternet);
 		ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosInternet");
-		if( todosServicosInternet.size() < 10) {
-		List<ServicoInternet> novaListaLimitada = new ArrayList<ServicoInternet>();
-		int contador = 0; 
-		for (ServicoInternet servico : todosServicosInternet)
-		{
-			if(contador < 10 ) {
-				novaListaLimitada.add(servico);
-				contador++;
+		if( todosServicosInternet.size() > 10) {
+			List<ServicoInternet> novaListaLimitada = new ArrayList<ServicoInternet>();
+			int contador = 0; 
+			for (ServicoInternet servico : todosServicosInternet)
+			{
+				if(contador < 10 ) {
+					novaListaLimitada.add(servico);
+					contador++;
+				}
+				else {break;}
 			}
-			else {break;}
-			}
-		 mv.addObject("servicos", novaListaLimitada);
+			 mv.addObject("servicos", novaListaLimitada);
 		}
 		else {mv.addObject("servicos", todosServicosInternet);}
 			    

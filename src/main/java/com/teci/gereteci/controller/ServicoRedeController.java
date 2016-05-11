@@ -26,6 +26,7 @@ import com.teci.gereteci.model.Computador.Memoria;
 import com.teci.gereteci.model.Computador.StatusComputador;
 
 import com.teci.gereteci.model.Servico.DescricaoProntaRede;
+import com.teci.gereteci.model.Servico.ServicoManutencao;
 import com.teci.gereteci.model.Servico.ServicoRede;
 import com.teci.gereteci.model.Servico.ServicoRede;
 import com.teci.gereteci.model.Servico.StatusServico;
@@ -259,9 +260,32 @@ public class ServicoRedeController {
 		   List<ServicoRede> todosServicosRede = servicos.findAll();
 		   List<Usuario> todosUsuarios = usuarios.findAll();
 			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosRede");
-		    mv.addObject("servicos", todosServicosRede);
+		   /* mv.addObject("servicos", todosServicosRede);
 			mv.addObject("usuarios", todosUsuarios);
-	    
+		    */
+			Collections.reverse(todosServicosRede);
+			if(todosServicosRede.size() > 10) {
+				
+				List<ServicoRede> novaListaLimitada = new ArrayList<ServicoRede>();
+				int contador = 0; 
+				for (ServicoRede servico : todosServicosRede)
+				{
+					if(contador < 10 ) {
+						novaListaLimitada.add(servico);
+						contador++;
+					}
+					else {break;}
+				}
+				//if(todosServicosManutencao.size() > 10) {
+					//mv.addObject("servicos", todosServicosManutencao.subList(todosServicosManutencao.size()-10 ,todosServicosManutencao.size()));
+				//}
+				//else { mv.addObject("servicos", todosServicosManutencao); }
+					mv.addObject("servicos", novaListaLimitada);
+				}
+				else {mv.addObject("servicos", todosServicosRede); }
+				mv.addObject("usuarios", todosUsuarios);
+				
+		
 		return mv;
 	}
 

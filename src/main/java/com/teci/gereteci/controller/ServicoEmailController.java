@@ -28,6 +28,7 @@ import com.teci.gereteci.model.Servico.DescricaoProntaEmail;
 import com.teci.gereteci.model.Servico.DescricaoProntaInternet;
 import com.teci.gereteci.model.Servico.ServicoEmail;
 import com.teci.gereteci.model.Servico.ServicoInternet;
+import com.teci.gereteci.model.Servico.ServicoManutencao;
 import com.teci.gereteci.model.Servico.ServicoEmail;
 import com.teci.gereteci.model.Servico.StatusServico;
 import com.teci.gereteci.model.Usuario.Usuario;
@@ -263,9 +264,28 @@ public class ServicoEmailController {
 		   List<ServicoEmail> todosServicosEmail = servicos.findAll();
 		   List<Usuario> todosUsuarios = usuarios.findAll();
 			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosEmail");
-		    mv.addObject("servicos", todosServicosEmail);
+			Collections.reverse(todosServicosEmail);
+			if(todosServicosEmail.size() > 10) {
+			
+			List<ServicoEmail> novaListaLimitada = new ArrayList<ServicoEmail>();
+			int contador = 0; 
+			for (ServicoEmail servico : todosServicosEmail)
+			{
+				if(contador < 10 ) {
+					novaListaLimitada.add(servico);
+					contador++;
+				}
+				else {break;}
+			}
+			//if(todosServicosManutencao.size() > 10) {
+				//mv.addObject("servicos", todosServicosManutencao.subList(todosServicosManutencao.size()-10 ,todosServicosManutencao.size()));
+			//}
+			//else { mv.addObject("servicos", todosServicosManutencao); }
+				mv.addObject("servicos", novaListaLimitada);
+			}
+			else {mv.addObject("servicos", todosServicosEmail); }
 			mv.addObject("usuarios", todosUsuarios);
-	    
+			
 		return mv;
 	}
 

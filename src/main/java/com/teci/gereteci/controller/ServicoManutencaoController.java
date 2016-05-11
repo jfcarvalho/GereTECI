@@ -261,20 +261,9 @@ public class ServicoManutencaoController {
 		   List<ServicoManutencao> todosServicosManutencao = servicos.findAll();
 		   List<Usuario> todosUsuarios = usuarios.findAll();
 			ModelAndView mv = new ModelAndView("/pesquisa/PesquisaServicosManutencao");
-		/*	Comparator<ServicoManutencao> sm = new Comparator<ServicoManutencao>() {
-			    public int compare(ServicoManutencao m1, ServicoManutencao m2) {
-			    	if(m2.getId_servico() > m1.getId_servico()) {
-						return 0;
-					}
-			    	if(m2.getId_servico() < m1.getId_servico()) {
-						return -1;
-					}
-					
-					return 1;
-			    }
-			};
-			*/
 			Collections.reverse(todosServicosManutencao);
+			if(todosServicosManutencao.size() > 10) {
+			
 			List<ServicoManutencao> novaListaLimitada = new ArrayList<ServicoManutencao>();
 			int contador = 0; 
 			for (ServicoManutencao servico : todosServicosManutencao)
@@ -285,12 +274,13 @@ public class ServicoManutencaoController {
 				}
 				else {break;}
 			}
-			System.out.println( todosServicosManutencao.size());
 			//if(todosServicosManutencao.size() > 10) {
 				//mv.addObject("servicos", todosServicosManutencao.subList(todosServicosManutencao.size()-10 ,todosServicosManutencao.size()));
 			//}
 			//else { mv.addObject("servicos", todosServicosManutencao); }
-			mv.addObject("servicos", novaListaLimitada);
+				mv.addObject("servicos", novaListaLimitada);
+			}
+			else {mv.addObject("servicos", todosServicosManutencao); }
 			mv.addObject("usuarios", todosUsuarios);
 			
 		return mv;
