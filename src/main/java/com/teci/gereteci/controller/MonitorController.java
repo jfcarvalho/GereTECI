@@ -91,7 +91,7 @@ public class MonitorController {
 		m.setMarca(monitor.getMarca());
 		m.setStatus(monitor.getStatus());
 		m.setPolegadas(monitor.getPolegadas());
-		m.setCategoria_monitor(monitor.getCategoria_monitor());
+		//m.setCategoria_monitor(monitor.getCategoria_monitor());
 		
 		monitores.save(m);
 		attributes.addFlashAttribute("mensagem", "Monitor salvo com sucesso!");	
@@ -131,15 +131,13 @@ public String salvar2(Monitor monitor, @RequestParam Integer computador_id_compu
 	}
 //	System.out.println(">>>>>> " + usuario_id_usuario);
 	Monitor m = monitores.findOne(monitor.getId_recurso());
-	System.out.println(">>>>>> ID do monitor: " + monitor.getId_recurso());
-	System.out.println(">>>>>> Tipo de Recurso " + monitor.getTipo_recurso());
-	System.out.println(">>>>>> ID do computador" + computador_id_computador);
+	
 	
 	if(computador_id_computador != null)
 	{
-		Computador pc = computadores.findOne(m.getComputador().getId_computador()); //computador antigo
-		System.out.println(">>>>> computador antigo" + pc.getId_computador());
-		if(m.getCategoria_monitor().getCategoria().equals("Primário"))
+		/*Computador pc = computadores.findOne(m.getComputador().getId_computador()); //computador antigo
+		
+		if(m.getCategoria_monitor().getCategoria().equals("Primário") && monitor.getCategoria().equals("Secundário"))
 		{
 			pc.setRecurso_monitor1(null); //OK	
 			Computador pcnovo = computadores.findOne(computador_id_computador);
@@ -158,7 +156,18 @@ public String salvar2(Monitor monitor, @RequestParam Integer computador_id_compu
 			monitores.save(m);
 			computadores.save(pc);
 		}
+	*/	
+      Computador pc = computadores.findOne(m.getComputador().getId_computador()); //computador antigo
 		
+		if(m.getCategoria_monitor().getCategoria().equals("Primário") && monitor.getCategoria().equals("Secundário"))
+		{
+			pc.setRecurso_monitor1(null); //OK	
+			Computador pcnovo = computadores.findOne(computador_id_computador);
+			pcnovo.setRecurso_monitor2(m);
+			m.setComputador(pcnovo);
+			monitores.save(m);
+			computadores.save(pc);
+		}
 	}
 	monitores.save(m);
 	attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
@@ -208,7 +217,7 @@ public String salvar2(Monitor monitor, @RequestParam Integer computador_id_compu
 		
 	}
 	
-	@RequestMapping("/{id_computador}/edicaomenu")
+	@RequestMapping("/{id_recurso}/edicaomenu")
 
 	public ModelAndView edicaomenu(@PathVariable("id_recurso") Recurso recurso)
 	{
