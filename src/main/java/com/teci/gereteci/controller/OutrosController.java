@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.Computador.Computador;
-import com.teci.gereteci.model.Computador.StatusComputador;
+import com.teci.gereteci.model.Computador.Status;
 import com.teci.gereteci.model.Recurso.Midia;
 import com.teci.gereteci.model.Recurso.Monitor;
 import com.teci.gereteci.model.Recurso.Outros;
@@ -92,8 +92,8 @@ public class OutrosController {
 
 
 	@ModelAttribute("todosStatusOutros")
-	public List<StatusComputador> todosStatusMidia() {
-		return Arrays.asList(StatusComputador.values());
+	public List<Status> todosStatusMidia() {
+		return Arrays.asList(Status.values());
 	}
 	@ModelAttribute("todosTiposOutros")
 	public List<TipoES> todosTiposMidia() {

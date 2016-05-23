@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.Computador.Memoria;
-import com.teci.gereteci.model.Computador.StatusComputador;
+import com.teci.gereteci.model.Computador.Status;
 import com.teci.gereteci.model.Servico.DescricaoProntaEmail;
 import com.teci.gereteci.model.Servico.DescricaoProntaInternet;
 import com.teci.gereteci.model.Servico.ServicoEmail;

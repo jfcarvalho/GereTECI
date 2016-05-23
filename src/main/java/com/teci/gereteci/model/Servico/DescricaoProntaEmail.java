@@ -4,7 +4,8 @@ public enum DescricaoProntaEmail {
 	desc1("Usuário esqueceu a senha do email"),
 	desc2("Usuário trocou informações da conta"),
 	desc3("Mudança do plano de email"),
-	desc4("Outros");
+	desc4("Suporte OneDrive"),
+	desc5("Outros");
 	
 	private String descricao;
 	

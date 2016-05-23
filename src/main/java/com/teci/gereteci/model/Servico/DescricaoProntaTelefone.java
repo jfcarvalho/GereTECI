@@ -9,8 +9,6 @@ public enum DescricaoProntaTelefone {
 	desc6("Problema na central telefônica"),
 	desc7("Problema na(s) conta da VIVO"),
 	desc8("Problema na(s) conta da OI"),
-	desc9("Problema no(s) modens 4G"),
-	desc10("Problema no(s) modens 3G"),
 	desc11("Outros");
 	
 	private String descricao;

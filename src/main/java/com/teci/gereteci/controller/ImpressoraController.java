@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.*;
 import com.teci.gereteci.model.Computador.Computador;
-import com.teci.gereteci.model.Computador.StatusComputador;
+import com.teci.gereteci.model.Computador.Status;
 import com.teci.gereteci.model.Impressora.Impressora;
 import com.teci.gereteci.model.Internet.Dns_alternativo;
 import com.teci.gereteci.model.Internet.Dns_preferencial;
@@ -85,8 +85,8 @@ public class ImpressoraController {
 	}
 	
 	@ModelAttribute("todosStatusImpressora")
-	public List<StatusComputador> todosStatusImpressora() {
-		return Arrays.asList(StatusComputador.values());
+	public List<Status> todosStatusImpressora() {
+		return Arrays.asList(Status.values());
 	}
 	
 	@ModelAttribute("todosSetoresImpressora")
@@ -119,9 +119,9 @@ public class ImpressoraController {
 	{
 		//Isso aqui vai para camada de serviço
 		Impressora impressora= impressoras.findOne(id_impressora);
-		impressora.setStatus(StatusComputador.manutencao);
+		impressora.setStatus(Status.manutencao);
 		impressoras.save(impressora);
-		return StatusComputador.manutencao.getStatus();
+		return Status.manutencao.getStatus();
 	}
 	
 	@RequestMapping(value="/{id_impressora}/baixa", method=RequestMethod.PUT)
@@ -129,9 +129,9 @@ public class ImpressoraController {
 	{
 		//Isso aqui vai para camada de serviço
 		Impressora impressora= impressoras.findOne(id_impressora);
-		impressora.setStatus(StatusComputador.com_defeito_para);
+		impressora.setStatus(Status.com_defeito_para);
 		impressoras.save(impressora);
-		return StatusComputador.com_defeito_para.getStatus();
+		return Status.com_defeito_para.getStatus();
 	}
 	
 	@RequestMapping(value="/{id_impressora}/consertado", method=RequestMethod.PUT)
@@ -139,9 +139,9 @@ public class ImpressoraController {
 	{
 		//Isso aqui vai para camada de serviço
 		Impressora impressora = impressoras.findOne(id_impressora);
-		impressora.setStatus(StatusComputador.funcionando);
+		impressora.setStatus(Status.funcionando);
 		impressoras.save(impressora);
-		return StatusComputador.funcionando.getStatus();
+		return Status.funcionando.getStatus();
 	}
 }
 	

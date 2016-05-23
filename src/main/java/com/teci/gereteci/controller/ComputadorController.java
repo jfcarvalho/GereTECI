@@ -23,14 +23,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.teci.gereteci.model.*;
 import com.teci.gereteci.model.Computador.Arquitetura;
 import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Computador.Memoria;
 import com.teci.gereteci.model.Computador.Sistema;
-import com.teci.gereteci.model.Computador.StatusComputador;
+import com.teci.gereteci.model.Computador.Status;
 import com.teci.gereteci.model.Impressora.Impressora;
 import com.teci.gereteci.model.Internet.Dns_alternativo;
 import com.teci.gereteci.model.Internet.Dns_preferencial;
@@ -54,11 +52,12 @@ import com.teci.gereteci.repository.*;
 @RequestMapping("/gereteci/computadores")
 public class ComputadorController {
 	private static final String CADASTRO_VIEW = "/cadastro/CadastroComputador"; 
-	private static final String EDICAO1_VIEW = "/edicoes/EditarComputador";
-	private static final String EDICAO2_VIEW = "/edicoes/EditarComputadorRecurso";
-	private static final String EDICAO3_VIEW = "/edicoes/EditarComputadorUsuario";
-	private static final String EDICAO4_VIEW = "/edicoes/EditarComputadorBackup";
-	private static final String EDICAO5_VIEW = "/edicoes/EditarComputadorFormatacao";
+	private static final String EDICAO_COMPUTADOR_VIEW = "/edicoes/EditarComputador";
+	private static final String EDICAO_RECURSO = "/edicoes/EditarComputadorRecurso";
+	private static final String EDICAO_USUARIO = "/edicoes/EditarComputadorUsuario";
+	private static final String EDICAO_BACKUP = "/edicoes/EditarComputadorBackup";
+	private static final String EDICAO_FORMATACAO = "/edicoes/EditarComputadorFormatacao";
+	private static final String EDICAO_MENU = "/edicoes/PopUPComputador";
 	@Autowired
 	private Computadores computadores;
 	@Autowired
@@ -301,7 +300,7 @@ public class ComputadorController {
 	
 	public ModelAndView editar1(@PathVariable("id_computador") Computador computador)
 	{
-		ModelAndView mv = new ModelAndView(EDICAO1_VIEW);
+		ModelAndView mv = new ModelAndView(EDICAO_COMPUTADOR_VIEW);
 	//	System.out.println(">>>>>> " + usuario_id_usuario);
 	
 	
@@ -317,7 +316,7 @@ public class ComputadorController {
 	@RequestMapping("/{id_computador}/editar2")
 	public ModelAndView editar2(@PathVariable("id_computador") Computador computador)
 	{
-		ModelAndView mv = new ModelAndView(EDICAO2_VIEW);
+		ModelAndView mv = new ModelAndView(EDICAO_RECURSO);
 	//	System.out.println(">>>>>> " + usuario_id_usuario);
 	
 	
@@ -334,7 +333,7 @@ public class ComputadorController {
 	@RequestMapping("/{id_computador}/editar3")
 	public ModelAndView editar3(@PathVariable("id_computador") Computador computador)
 	{
-		ModelAndView mv = new ModelAndView(EDICAO3_VIEW);
+		ModelAndView mv = new ModelAndView(EDICAO_USUARIO);
 	//	System.out.println(">>>>>> " + usuario_id_usuario);
 	
 	
@@ -351,7 +350,7 @@ public class ComputadorController {
 	@RequestMapping("/{id_computador}/editar4")
 	public ModelAndView editar4(@PathVariable("id_computador") Computador computador)
 	{
-		ModelAndView mv = new ModelAndView(EDICAO4_VIEW);
+		ModelAndView mv = new ModelAndView(EDICAO_BACKUP);
 	//	System.out.println(">>>>>> " + usuario_id_usuario);
 	
 	
@@ -365,10 +364,10 @@ public class ComputadorController {
 		return mv;
 	}
 	
-	@RequestMapping("/computadores/{id_computador}/editar5")
+	@RequestMapping("/{id_computador}/editar5")
 	public ModelAndView editar5(@PathVariable("id_computador") Computador computador)
 	{
-		ModelAndView mv = new ModelAndView(EDICAO5_VIEW);
+		ModelAndView mv = new ModelAndView(EDICAO_FORMATACAO);
 	//	System.out.println(">>>>>> " + usuario_id_usuario);
 	
 	
@@ -416,6 +415,23 @@ public class ComputadorController {
 	}
 	
 	
+	@RequestMapping("/{id_computador}/edicaomenu")
+
+	public ModelAndView edicaomenu(@PathVariable("id_computador") Computador computador)
+	{
+		//ObjectMapper mapper = new ObjectMapper();
+		
+		//System.out.println(">>>>>>> codigo recebido: " + computador.getId_computador());
+		//System.out.println(">>>>>>> Codigo de usuario recebido: " + recursos.getDescricao());
+		//Usuario usuario = usuarios.findOne(id_usuario);
+		
+		ModelAndView mv = new ModelAndView(EDICAO_MENU);	
+		mv.addObject("pc", computador);
+		mv.addObject(computador);
+		
+		return mv;
+	}
+	
 	@RequestMapping("{id_computador}")
 
 	public ModelAndView edicao(@PathVariable("id_computador") Computador computador)
@@ -426,12 +442,13 @@ public class ComputadorController {
 		//System.out.println(">>>>>>> Codigo de usuario recebido: " + recursos.getDescricao());
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
-		ModelAndView mv = new ModelAndView(EDICAO1_VIEW);	
+		ModelAndView mv = new ModelAndView(EDICAO_COMPUTADOR_VIEW);	
 		mv.addObject("pc", computador);
 		mv.addObject(computador);
 		
 		return mv;
 	}
+	
 	
 
 	@RequestMapping(value="{id_computador}", method=RequestMethod.DELETE)
@@ -573,8 +590,8 @@ public class ComputadorController {
 	}
 	
 	@ModelAttribute("todosStatusComputador")
-	public List<StatusComputador> todosStatusComputador() {
-		return Arrays.asList(StatusComputador.values());
+	public List<Status> todosStatusComputador() {
+		return Arrays.asList(Status.values());
 	}
 	
 	@ModelAttribute("todasMemoriasComputador")
@@ -757,9 +774,9 @@ public class ComputadorController {
 	{
 		//Isso aqui vai para camada de serviço
 		Computador computador = computadores.findOne(id_computador);
-		computador.setStatus(StatusComputador.manutencao);
+		computador.setStatus(Status.manutencao);
 		computadores.save(computador);
-		return StatusComputador.manutencao.getStatus();
+		return Status.manutencao.getStatus();
 	}
 	
 	@RequestMapping(value="/{id_computador}/baixa", method=RequestMethod.PUT)
@@ -767,9 +784,9 @@ public class ComputadorController {
 	{
 		//Isso aqui vai para camada de serviço
 		Computador computador = computadores.findOne(id_computador);
-		computador.setStatus(StatusComputador.com_defeito_para);
+		computador.setStatus(Status.com_defeito_para);
 		computadores.save(computador);
-		return StatusComputador.com_defeito_para.getStatus();
+		return Status.com_defeito_para.getStatus();
 	}
 	
 	@RequestMapping(value="/{id_computador}/consertado", method=RequestMethod.PUT)
@@ -777,8 +794,8 @@ public class ComputadorController {
 	{
 		//Isso aqui vai para camada de serviço
 		Computador computador = computadores.findOne(id_computador);
-		computador.setStatus(StatusComputador.funcionando);
+		computador.setStatus(Status.funcionando);
 		computadores.save(computador);
-		return StatusComputador.funcionando.getStatus();
+		return Status.funcionando.getStatus();
 	}
 }

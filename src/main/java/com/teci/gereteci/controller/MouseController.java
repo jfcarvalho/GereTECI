@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.Computador.Computador;
-import com.teci.gereteci.model.Computador.StatusComputador;
+import com.teci.gereteci.model.Computador.Status;
 import com.teci.gereteci.model.Recurso.Monitor;
 import com.teci.gereteci.model.Recurso.Mouse;
 import com.teci.gereteci.model.Recurso.TipoES;
@@ -207,8 +207,8 @@ public String salvar2(@Validated Mouse mouse, @RequestParam Integer computador_i
 	}
 	
 	@ModelAttribute("todosStatusMouse")
-	public List<StatusComputador> todosStatusMouses() {
-		return Arrays.asList(StatusComputador.values());
+	public List<Status> todosStatusMouses() {
+		return Arrays.asList(Status.values());
 	}
 	
 	@ModelAttribute("todosTiposMouse")
@@ -221,9 +221,9 @@ public String salvar2(@Validated Mouse mouse, @RequestParam Integer computador_i
 	{
 		//Isso aqui vai para camada de serviço
 		Mouse mouse = mouses.findOne(id_recurso);
-		mouse.setStatus(StatusComputador.manutencao);
+		mouse.setStatus(Status.manutencao);
 		mouses.save(mouse);
-		return StatusComputador.manutencao.getStatus();
+		return Status.manutencao.getStatus();
 	}
 	
 	@RequestMapping(value="/{id_recurso}/baixa", method=RequestMethod.PUT)
@@ -231,9 +231,9 @@ public String salvar2(@Validated Mouse mouse, @RequestParam Integer computador_i
 	{
 		//Isso aqui vai para camada de serviço
 		Mouse mouse = mouses.findOne(id_recurso);
-		mouse.setStatus(StatusComputador.com_defeito_para);
+		mouse.setStatus(Status.com_defeito_para);
 		mouses.save(mouse);
-		return StatusComputador.com_defeito_para.getStatus();
+		return Status.com_defeito_para.getStatus();
 		
 	}
 	
@@ -242,9 +242,9 @@ public String salvar2(@Validated Mouse mouse, @RequestParam Integer computador_i
 	{
 		//Isso aqui vai para camada de serviço
 		Mouse mouse = mouses.findOne(id_recurso);
-		mouse.setStatus(StatusComputador.funcionando);
+		mouse.setStatus(Status.funcionando);
 		mouses.save(mouse);
-		return StatusComputador.funcionando.getStatus();
+		return Status.funcionando.getStatus();
 	}
 	
 }

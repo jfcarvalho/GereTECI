@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.Computador.Computador;
-import com.teci.gereteci.model.Computador.StatusComputador;
+import com.teci.gereteci.model.Computador.Status;
 import com.teci.gereteci.model.Recurso.CaixaDeSom;
 import com.teci.gereteci.model.Recurso.Midia;
 import com.teci.gereteci.model.Recurso.Mouse;
@@ -208,8 +208,8 @@ public ModelAndView editar2(@PathVariable("id_recurso") CaixaDeSom caixa)
 	}
 	
 	@ModelAttribute("todosStatusCS")
-	public List<StatusComputador> todosStatusCS() {
-		return Arrays.asList(StatusComputador.values());
+	public List<Status> todosStatusCS() {
+		return Arrays.asList(Status.values());
 	}
 	
 	@ModelAttribute("todosTiposCS")
@@ -223,9 +223,9 @@ public ModelAndView editar2(@PathVariable("id_recurso") CaixaDeSom caixa)
 	{
 		//Isso aqui vai para camada de serviço
 		CaixaDeSom caixa = caixas.findOne(id_recurso);
-		caixa.setStatus(StatusComputador.manutencao);
+		caixa.setStatus(Status.manutencao);
 		caixas.save(caixa);
-		return StatusComputador.manutencao.getStatus();
+		return Status.manutencao.getStatus();
 	}
 	
 	@RequestMapping(value="/{id_recurso}/baixa", method=RequestMethod.PUT)
@@ -233,9 +233,9 @@ public ModelAndView editar2(@PathVariable("id_recurso") CaixaDeSom caixa)
 	{
 		//Isso aqui vai para camada de serviço
 		CaixaDeSom caixa = caixas.findOne(id_recurso);
-		caixa.setStatus(StatusComputador.com_defeito_para);
+		caixa.setStatus(Status.com_defeito_para);
 		caixas.save(caixa);
-		return StatusComputador.com_defeito_para.getStatus();
+		return Status.com_defeito_para.getStatus();
 		
 	}
 	
@@ -244,8 +244,8 @@ public ModelAndView editar2(@PathVariable("id_recurso") CaixaDeSom caixa)
 	{
 		//Isso aqui vai para camada de serviço
 		CaixaDeSom caixa= caixas.findOne(id_recurso);
-		caixa.setStatus(StatusComputador.funcionando);
+		caixa.setStatus(Status.funcionando);
 		caixas.save(caixa);
-		return StatusComputador.funcionando.getStatus();
+		return Status.funcionando.getStatus();
 	}
 }

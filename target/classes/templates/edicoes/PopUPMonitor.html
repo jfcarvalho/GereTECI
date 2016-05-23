@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
+<head>
+
+<title>Edição de recurso</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+
+	<h2>O que você gostaria de fazer?</h2>
+	<ul>
+		<a target="_blank" th:href="@{/gereteci/monitores/{id_recurso}/editar1(id_recurso=${monitor.id_recurso})}"><li>Apenas editar informações</li></a>
+		<a target="_blank" th:href="@{/gereteci/monitores/{id_recurso}/editar2(id_recurso=${monitor.id_recurso})}"><li>Mudar recursos do computador</li></a>
+		<a target="_blank" th:href="@{/gereteci/monitores/{id_recurso}/editar3(id_recurso=${monitor.id_recurso})}"><li>Mudar usuários do computador</li></a>
+		<a target="_blank" th:href="@{/gereteci/monitores/{id_recurso}/editar4(id_recurso=${monitor.id_recurso})}"><li>Mudar data de Backup</li></a>
+		<a target="_blank" th:href="@{/gereteci/monitores/{id_recurso}/editar5(id_recurso=${monitor.id_recurso})}"><li>Mudar data de Formatação</li></a>
+	
+	</ul>
+
+</section>
+</html>

@@ -78,7 +78,7 @@ public class Computador {
 	@Size(min=3, max=100, message="O tamanho do campo nome tem que ser entre 3 e 20")
 	private String id_impressao;
 	@Enumerated(EnumType.STRING)
-	private StatusComputador status;
+	private Status status;
 	//private Integer usuario_id_usuario;
 	@Size(min=1, max=100, message="O tamanho do campo nome tem que ser entre 3 e 20")
 	private String processador;
@@ -216,11 +216,11 @@ public class Computador {
 		this.id_impressao = id_impressao;
 	}
 	
-	public StatusComputador getStatus() {
+	public Status getStatus() {
 		return this.status;
 	}
 	
-	public void setStatus(StatusComputador status)
+	public void setStatus(Status status)
 	{
 		this.status = status;
 	}

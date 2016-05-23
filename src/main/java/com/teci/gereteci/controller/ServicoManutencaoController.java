@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.Computador.Memoria;
-import com.teci.gereteci.model.Computador.StatusComputador;
+import com.teci.gereteci.model.Computador.Status;
 import com.teci.gereteci.model.Recurso.Recurso;
 import com.teci.gereteci.model.Servico.DescricaoManutencao;
 import com.teci.gereteci.model.Servico.ServicoManutencao;

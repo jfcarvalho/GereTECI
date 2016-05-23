@@ -6,14 +6,17 @@
 </head>
 
 <section layout:fragment="conteudo">
-<div class="modal fade" id= "PopUPComputador" tabindex="-1">
-	<h1>O que você gostaria de fazer?</h1>
 
+
+	<h2>O que você gostaria de fazer?</h2>
 	<ul>
-		<li>Apenas editar informações</li>
-		<li>Mudar recursos do computador</li>
-		<li>Mudar usuários do computador</li>
+		<a target="_blank" th:href="@{/gereteci/computadores/{id_computador}/editar1(id_computador=${computador.id_computador})}"><li>Apenas editar informações</li></a>
+		<a target="_blank" th:href="@{/gereteci/computadores/{id_computador}/editar2(id_computador=${computador.id_computador})}"><li>Mudar recursos do computador</li></a>
+		<a target="_blank" th:href="@{/gereteci/computadores/{id_computador}/editar3(id_computador=${computador.id_computador})}"><li>Mudar usuários do computador</li></a>
+		<a target="_blank" th:href="@{/gereteci/computadores/{id_computador}/editar4(id_computador=${computador.id_computador})}"><li>Mudar data de Backup</li></a>
+		<a target="_blank" th:href="@{/gereteci/computadores/{id_computador}/editar5(id_computador=${computador.id_computador})}"><li>Mudar data de Formatação</li></a>
+	
 	</ul>
-</div>
+
 </section>
 </html>

@@ -25,7 +25,7 @@ import javax.validation.constraints.Size;
 
 import com.teci.gereteci.model.Computador.CategoriaRecurso;
 import com.teci.gereteci.model.Computador.Computador;
-import com.teci.gereteci.model.Computador.StatusComputador;
+import com.teci.gereteci.model.Computador.Status;
 
 @Entity
 @Inheritance
@@ -45,7 +45,7 @@ public abstract class Recurso {
 	@Size(min=1, max=100, message="O tamanho do campo cargo tem que ser entre 3 e 20")
 	private String marca;
 	@Enumerated(EnumType.STRING)
-	private StatusComputador status;
+	private Status status;
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST})
 	@JoinColumn(name="computador_id_computador")
@@ -87,10 +87,10 @@ public abstract class Recurso {
 		this.marca= marca;
 	}
 	
-	public StatusComputador getStatus() {
+	public Status getStatus() {
 		return this.status;
 	}
-	public void setStatus(StatusComputador status) {
+	public void setStatus(Status status) {
 		this.status= status;
 	}
 	public Computador getComputador()

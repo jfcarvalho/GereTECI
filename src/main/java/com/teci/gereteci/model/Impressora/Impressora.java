@@ -14,7 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.validation.constraints.Size;
 
 import com.teci.gereteci.model.Computador.Computador;
-import com.teci.gereteci.model.Computador.StatusComputador;
+import com.teci.gereteci.model.Computador.Status;
 import com.teci.gereteci.model.Internet.Dns_alternativo;
 import com.teci.gereteci.model.Internet.Dns_preferencial;
 import com.teci.gereteci.model.Internet.Gateway;
@@ -43,7 +43,7 @@ public class Impressora {
 	@Enumerated(EnumType.STRING)
 	private Mascara mascara;
 	
-	private StatusComputador status;
+	private Status status;
 	@ManyToMany(mappedBy="impressoras")
 	private List<Computador> computadores;
 	
@@ -74,10 +74,10 @@ public class Impressora {
 		this.marca= marca;
 	}
 	
-	public StatusComputador getStatus() {
+	public Status getStatus() {
 		return this.status;
 	}
-	public void setStatus(StatusComputador status) {
+	public void setStatus(Status status) {
 		this.status= status;
 	}
 	public String getIp() {

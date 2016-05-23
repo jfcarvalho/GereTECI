@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.Computador.Computador;
-import com.teci.gereteci.model.Computador.StatusComputador;
+import com.teci.gereteci.model.Computador.Status;
 import com.teci.gereteci.model.Recurso.CaixaDeSom;
 import com.teci.gereteci.model.Recurso.CategoriaMonitor;
 import com.teci.gereteci.model.Recurso.Monitor;
@@ -37,6 +37,7 @@ public class MonitorController {
 	private static final String CADASTRO_VIEW_MONITOR = "/cadastro/CadastroMonitor"; 
 	private static final String EDICAO1_VIEW = "/edicoes/EditarMonitor";
 	private static final String EDICAO2_VIEW = "/edicoes/EditarMonitorComputador";
+	private static final String EDICAO_MENU = "/edicoes/PopUPMonitor";
 	@Autowired
 	private Monitores monitores;
 	@Autowired
@@ -207,6 +208,24 @@ public String salvar2(Monitor monitor, @RequestParam Integer computador_id_compu
 		
 	}
 	
+	@RequestMapping("/{id_computador}/edicaomenu")
+
+	public ModelAndView edicaomenu(@PathVariable("id_recurso") Recurso recurso)
+	{
+		//ObjectMapper mapper = new ObjectMapper();
+		
+		//System.out.println(">>>>>>> codigo recebido: " + computador.getId_computador());
+		//System.out.println(">>>>>>> Codigo de usuario recebido: " + recursos.getDescricao());
+		//Usuario usuario = usuarios.findOne(id_usuario);
+		
+		ModelAndView mv = new ModelAndView(EDICAO_MENU);	
+		mv.addObject("recurso", recurso);
+		mv.addObject(recurso);
+		
+		return mv;
+	}
+	
+	
 	@ModelAttribute("todosComputadoresDisponiveis")
 	public List<Computador> todosComputadoresDisponiveis()
 	{
@@ -225,8 +244,8 @@ public String salvar2(Monitor monitor, @RequestParam Integer computador_id_compu
 		return todosComputadoresDisponiveis;
 	}
 	@ModelAttribute("todosStatusMonitor")
-	public List<StatusComputador> todosStatusMonitor() {
-		return Arrays.asList(StatusComputador.values());
+	public List<Status> todosStatusMonitor() {
+		return Arrays.asList(Status.values());
 	}
 	
 	@ModelAttribute("todasCategoriasMonitor")
@@ -239,9 +258,9 @@ public String salvar2(Monitor monitor, @RequestParam Integer computador_id_compu
 	{
 		//Isso aqui vai para camada de serviço
 		Monitor monitor = monitores.findOne(id_recurso);
-		monitor.setStatus(StatusComputador.manutencao);
+		monitor.setStatus(Status.manutencao);
 		monitores.save(monitor);
-		return StatusComputador.manutencao.getStatus();
+		return Status.manutencao.getStatus();
 	}
 	
 	@RequestMapping(value="/{id_recurso}/baixa", method=RequestMethod.PUT)
@@ -249,9 +268,9 @@ public String salvar2(Monitor monitor, @RequestParam Integer computador_id_compu
 	{
 		//Isso aqui vai para camada de serviço
 		Monitor monitor = monitores.findOne(id_recurso);
-		monitor.setStatus(StatusComputador.com_defeito_para);
+		monitor.setStatus(Status.com_defeito_para);
 		monitores.save(monitor);
-		return StatusComputador.com_defeito_para.getStatus();
+		return Status.com_defeito_para.getStatus();
 		
 	}
 	
@@ -260,9 +279,9 @@ public String salvar2(Monitor monitor, @RequestParam Integer computador_id_compu
 	{
 		//Isso aqui vai para camada de serviço
 		Monitor monitor = monitores.findOne(id_recurso);
-		monitor.setStatus(StatusComputador.funcionando);
+		monitor.setStatus(Status.funcionando);
 		monitores.save(monitor);
-		return StatusComputador.funcionando.getStatus();
+		return Status.funcionando.getStatus();
 	}
 	
 }

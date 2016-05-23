@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teci.gereteci.model.Computador.Computador;
-import com.teci.gereteci.model.Computador.StatusComputador;
+import com.teci.gereteci.model.Computador.Status;
 import com.teci.gereteci.model.Recurso.Monitor;
 import com.teci.gereteci.model.Recurso.Mouse;
 import com.teci.gereteci.model.Recurso.Teclado;
@@ -209,8 +209,8 @@ public class TecladoController {
 	}
 	
 	@ModelAttribute("todosStatusTeclado")
-	public List<StatusComputador> todosStatusMonitor() {
-		return Arrays.asList(StatusComputador.values());
+	public List<Status> todosStatusMonitor() {
+		return Arrays.asList(Status.values());
 	}
 	
 	@ModelAttribute("todosTiposTeclado")
@@ -223,9 +223,9 @@ public class TecladoController {
 	{
 		//Isso aqui vai para camada de serviço
 		Teclado teclado= teclados.findOne(id_recurso);
-		teclado.setStatus(StatusComputador.manutencao);
+		teclado.setStatus(Status.manutencao);
 		teclados.save(teclado);
-		return StatusComputador.manutencao.getStatus();
+		return Status.manutencao.getStatus();
 	}
 	
 	@RequestMapping(value="/{id_recurso}/baixa", method=RequestMethod.PUT)
@@ -233,9 +233,9 @@ public class TecladoController {
 	{
 		//Isso aqui vai para camada de serviço
 		Teclado teclado = teclados.findOne(id_recurso);
-		teclado.setStatus(StatusComputador.com_defeito_para);
+		teclado.setStatus(Status.com_defeito_para);
 		teclados.save(teclado);
-		return StatusComputador.com_defeito_para.getStatus();
+		return Status.com_defeito_para.getStatus();
 		
 	}
 	
@@ -244,8 +244,8 @@ public class TecladoController {
 	{
 		//Isso aqui vai para camada de serviço
 		Teclado teclado = teclados.findOne(id_recurso);
-		teclado.setStatus(StatusComputador.funcionando);
+		teclado.setStatus(Status.funcionando);
 		teclados.save(teclado);
-		return StatusComputador.funcionando.getStatus();
+		return Status.funcionando.getStatus();
 	}
 }
