@@ -206,7 +206,7 @@ public class ComputadorController {
 		if(computador.getImpressoras() != null) {
 			pc.setImpressoras(computador.getImpressoras());
 		}
-		System.out.println(computador.getRecurso_teclado()); 
+		
 		if(computador.getRecurso_teclado() != null) {
 			//System.out.println(">>>>>>>>>>>> "+ pc.getRecurso_teclado().getId_recurso());
 			if(pc.getRecurso_teclado() != null) {
@@ -271,26 +271,56 @@ public class ComputadorController {
 		
 	}
 	
-	@RequestMapping(value="/computadores/{id_computador}/salvar3",method = RequestMethod.POST)
+	@RequestMapping(value="/{id_computador}/salvar3",method = RequestMethod.POST)
 	public String salvar3(@Validated Computador computador, @RequestParam Integer usuario_id_usuario, @RequestParam Integer usuario_sec, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		Computador pc = computadores.findOne(computador.getId_computador());
+		Usuario user = null;
+		Usuario user2 = null;
+		Usuario user3 = null;
+		Usuario user4 = null;
+		
+		
 		if(errors.hasErrors())
 		{
 			return "cadastroComputador";
 		}
+		if(usuario_id_usuario != null) {
+			user = usuarios.findOne(usuario_id_usuario); //peguei no banco de dados!
+			user.setComputador(pc);
+			usuarios.save(user);
+	     	
+		}
+	
+		if (usuario_sec != null) {
+			user2 = usuarios.findOne(usuario_sec);
+			user2.setComputador(pc);
+			
+			usuarios.save(user2);
+		}
 		
-		Usuario user = usuarios.findOne(usuario_id_usuario);
-		Usuario user2 = usuarios.findOne(usuario_sec);
-		Computador pc = computadores.findOne(computador.getId_computador());
-		user.setComputador(pc);
-		user2.setComputador(pc);
+		if(pc.getUsuario() != null) {
+			user3 = usuarios.findOne(pc.getUsuario().getId_usuario());
+			user3.setComputador(null);
+			usuarios.save(user3);
+	}
+			
+		if(pc.getUsuario_sec() != null) {
+			user4 = usuarios.findOne(pc.getUsuario_sec().getId_usuario());
+			user4.setComputador(null);
+			usuarios.save(user4);
+		}
+		
+		
 		pc.setUsuario(user);
 		pc.setUsuario_sec(user2);
 		
+		
+		
 		computadores.save(pc);
-		usuarios.save(user);
-		usuarios.save(user2);
+		
+		
 		attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
 		return "redirect:/gereteci/computadores/novo";
 		
@@ -611,7 +641,7 @@ public class ComputadorController {
 			if(user.getComputador() == null)
 			{
 					todosUsuariosSemComputador.add(user);
-					System.out.println(todosUsuariosSemComputador.size());
+					
 			}
 		}
 		Comparator<Usuario> comparator = new Comparator<Usuario>() {
@@ -672,8 +702,8 @@ public class ComputadorController {
 		while(it.hasNext())
 		{
 			Monitor obj = (Monitor) it.next();
-			System.out.println(obj.getTipo_recurso());
-			System.out.println(obj.getCategoria_monitor());
+			
+			
 			if(obj.getComputador() == null && obj.getCategoria_monitor().getCategoria().equals("Primário")) {
 				//System.out.println(obj.getId_recurso() + obj.getPolegadas());
 				todosMonitoresDisponiveis.add(obj);
@@ -693,8 +723,8 @@ public class ComputadorController {
 		while(it.hasNext())
 		{
 			Monitor obj = (Monitor) it.next();
-			System.out.println(obj.getTipo_recurso());
-			System.out.println(obj.getCategoria_monitor());
+			
+			
 			if(obj.getComputador() == null && obj.getCategoria_monitor().getCategoria().equals("Secundário")) {
 				//System.out.println(obj.getId_recurso() + obj.getPolegadas());
 				todosMonitoresDisponiveis.add(obj);
