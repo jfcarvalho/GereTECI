@@ -133,11 +133,13 @@ public String salvar2(Monitor monitor, @RequestParam Integer computador_id_compu
 	Monitor m = monitores.findOne(monitor.getId_recurso());
 	
 	
+	
+	
 	if(computador_id_computador != null)
 	{
-		/*Computador pc = computadores.findOne(m.getComputador().getId_computador()); //computador antigo
+		Computador pc = computadores.findOne(m.getComputador().getId_computador()); //computador antigo
 		
-		if(m.getCategoria_monitor().getCategoria().equals("Primário") && monitor.getCategoria().equals("Secundário"))
+		if(m.getCategoria_monitor().getCategoria().equals("Primário"))
 		{
 			pc.setRecurso_monitor1(null); //OK	
 			Computador pcnovo = computadores.findOne(computador_id_computador);
@@ -156,18 +158,7 @@ public String salvar2(Monitor monitor, @RequestParam Integer computador_id_compu
 			monitores.save(m);
 			computadores.save(pc);
 		}
-	*/	
-      Computador pc = computadores.findOne(m.getComputador().getId_computador()); //computador antigo
 		
-		if(m.getCategoria_monitor().getCategoria().equals("Primário") && monitor.getCategoria().equals("Secundário"))
-		{
-			pc.setRecurso_monitor1(null); //OK	
-			Computador pcnovo = computadores.findOne(computador_id_computador);
-			pcnovo.setRecurso_monitor2(m);
-			m.setComputador(pcnovo);
-			monitores.save(m);
-			computadores.save(pc);
-		}
 	}
 	monitores.save(m);
 	attributes.addFlashAttribute("mensagem", "Computador salvo com sucesso!");	
@@ -245,7 +236,7 @@ public String salvar2(Monitor monitor, @RequestParam Integer computador_id_compu
 		{
 			Computador obj = (Computador) it.next();
 			if(obj.getRecurso_monitor1() == null) {
-				System.out.println(obj.getId_impressao());
+				
 				todosComputadoresDisponiveis.add(obj);
 			}
 		}

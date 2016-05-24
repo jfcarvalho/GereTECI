@@ -105,9 +105,9 @@ public class CaixaDeSomController {
 		}
 //		System.out.println(">>>>>> " + usuario_id_usuario);
 		CaixaDeSom c = caixas.findOne(caixa.getId_recurso());
-		System.out.println(">>>>>> ID do monitor: " + caixa.getId_recurso());
-		System.out.println(">>>>>> Tipo de Recurso " + caixa.getTipo_recurso());
-		System.out.println(">>>>>> ID do computador" + computador_id_computador);
+		
+		
+		
 		
 		if(computador_id_computador != null)
 		{

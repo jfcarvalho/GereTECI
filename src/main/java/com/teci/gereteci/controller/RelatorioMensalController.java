@@ -66,20 +66,6 @@ public class RelatorioMensalController {
 		List<ServicoEmail> emails = emailPorPeriodo(semail.findAll(), periodo);
 		List<ServicoTelefone> telefones = telefonePorPeriodo(stelefone.findAll(), periodo);
 		
-		/*
-		List<ServicoManutencao> manutencao = manutencaoPorPeriodo(manutencoes.findAll(), "2016-05");
-		List<ServicoInternet> internet = internetPorPeriodo(sinternet.findAll(), "2016-05");
-		List<ServicoRede> redes = redePorPeriodo(sredes.findAll(), "2016-05");
-		List<ServicoEmail> emails = emailPorPeriodo(semail.findAll(), "2016-05");
-		List<ServicoTelefone> telefones = telefonePorPeriodo(stelefone.findAll(), "2016-05");
-		*/
-		/*
-		List<ServicoManutencao> manutencao = manutencoes.findAll();
-		List<ServicoInternet> internet = sinternet.findAll();
-		List<ServicoRede> redes = sredes.findAll();
-		List<ServicoEmail> emails = semail.findAll();
-		List<ServicoTelefone> telefones = stelefone.findAll();
-		*/
 		List<Servico> sgLista = servicosGerais.findAll();
 		
 		System.out.println(sgLista.size());

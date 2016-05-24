@@ -26,7 +26,7 @@
 	<input type="hidden" th:field="*{status}" />
 	<input type="hidden" th:field="*{tipo_recurso}" />
 	<input type="hidden" th:field="*{polegadas}" />
-	<!--  <input type="hidden" th:field="*{categoria_monitor}" /> -->
+	<input type="hidden" th:field="*{categoria_monitor}" />
 			<div class="form-group">
 		<label for="" class="col-sm-2 control-label">Computador Escolhido:</label>
 			<div class="col-sm-6">
@@ -53,19 +53,8 @@
   </div>
   
 			</div>
-			
-			
-		
 		</div>
-	<div class="form-group">
-			<label for="status" class="col-sm-2 control-label">Categoria:</label>
-			<div class="col-sm-2">
-				<select class="form-control" name="categoria_monitor">
-					<option th:each="categoria : ${todasCategoriasMonitor}" th:value="${categoria}" th:text="${categoria.categoria}" th:selected="${rec} and ${rec.categoria} ? ${rec.categoria.categoria} == ${categoria.categoria}"></option>
-				</select>
-			</div>
-		</div>
-		
+	
 	<div class="form-group">
      		<div class="col-sm-offset-2 col-sm-10">
 				<button type="submit" class="btn btn-primary">Cadastrar</button>

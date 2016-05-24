@@ -127,9 +127,9 @@ public String salvar2(@Validated Mouse mouse, @RequestParam Integer computador_i
 	}
 //	System.out.println(">>>>>> " + usuario_id_usuario);
 	Mouse m = mouses.findOne(mouse.getId_recurso());
-	System.out.println(">>>>>> ID do monitor: " + mouse.getId_recurso());
-	System.out.println(">>>>>> Tipo de Recurso " + mouse.getTipo_recurso());
-	System.out.println(">>>>>> ID do computador" + computador_id_computador);
+
+
+
 	
 	if(computador_id_computador != null)
 	{
