@@ -66,7 +66,6 @@ public class ServicoEmailController {
 		{
 			return "cadastroServicoInternet";
 		}
-		Usuario user = usuarios.findOne(usuario_id_usuario);
 		String array[] = new String[3];
 		String protocolo = "CTB";
 		long numero = servicos.count()+1;
@@ -77,10 +76,16 @@ public class ServicoEmailController {
 		array = formatarDate.format(data).toString().split("-");
 		
 		protocolo = protocolo + "E" + array[0] + array[1] + "-" + numero;
-		servicoEmail.setSolicitado(user);
-		servicoEmail.setProtocolo(protocolo);
 		
-		servicoEmail.setSolicitado(user);
+		if(usuario_id_usuario != null) { 
+			Usuario user = usuarios.findOne(usuario_id_usuario); 
+			servicoEmail.setSolicitado(user);
+		}
+		servicoEmail.setProtocolo(protocolo);
+		//servicoEmail.setSolicitado(user);
+		//servicoEmail.setProtocolo(protocolo);
+		
+		//servicoEmail.setSolicitado(user);
 		servicos.save(servicoEmail);
 		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
 		return "redirect:/gereteci/servicosemail/novo";

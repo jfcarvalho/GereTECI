@@ -108,7 +108,7 @@ public class RelatorioMensalController {
 		List<ServicoRede> servicosRomeuRede = servicosRedeAtendente(redes, "Romeu Oliveira");
 		List<ServicoInternet> servicosRomeuInternet = servicosInternetAtendente(internet, "Romeu Oliveira");
 		List<ServicoEmail> servicosRomeuEmail = servicosEmailAtendente(emails, "Romeu Oliveira");
-		List<ServicoTelefone> servicosRomeuTelefone = servicosTelefoneAtendente(telefones, "Jean Carvalho");
+		List<ServicoTelefone> servicosRomeuTelefone = servicosTelefoneAtendente(telefones, "Romeu Oliveira");
 		
 		//List<ServicoManutencao> servicosArianaManutencao = servicosManutencaoAtendente(manutencao, "Romeu Oliveira");
 		
@@ -193,7 +193,7 @@ public class RelatorioMensalController {
 		mv.addObject("servicos_romeu_rede", servicosRomeuRede);
 		mv.addObject("servicos_romeu_internet", servicosRomeuInternet);
 		mv.addObject("servicos_romeu_email", servicosRomeuEmail);
-		mv.addObject("servicos_romeu_email", servicosRomeuTelefone);
+		mv.addObject("servicos_romeu_telefone", servicosRomeuTelefone);
 		
 		mv.addObject("servicos_uiran_manutencao", servicosUiranManutencao);
 		mv.addObject("servicos_uiran_rede", servicosUiranRede);

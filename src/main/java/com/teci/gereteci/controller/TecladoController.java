@@ -22,6 +22,7 @@ import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Computador.Status;
 import com.teci.gereteci.model.Recurso.Monitor;
 import com.teci.gereteci.model.Recurso.Mouse;
+import com.teci.gereteci.model.Recurso.Recurso;
 import com.teci.gereteci.model.Recurso.Teclado;
 import com.teci.gereteci.model.Recurso.TipoES;
 import com.teci.gereteci.repository.Computadores;
@@ -35,6 +36,7 @@ public class TecladoController {
 	private static final String CADASTRO_VIEW_TECLADO = "/cadastro/CadastroTeclado"; 
 	private static final String EDICAO1_VIEW = "/edicoes/EditarTeclado";
 	private static final String EDICAO2_VIEW = "/edicoes/EditarTecladoComputador";
+	private static final String EDICAO_MENU = "/edicoes/PopUPTeclado";
 	@Autowired
 	private Teclados teclados;
 	@Autowired
@@ -139,6 +141,24 @@ public class TecladoController {
 		return "redirect:/gereteci/computadores/novo";
 		
 	}
+	
+	@RequestMapping("/{id_recurso}/edicaomenu")
+	public ModelAndView edicaomenu(@PathVariable("id_recurso") Recurso recurso)
+	{
+		//ObjectMapper mapper = new ObjectMapper();
+		
+		//System.out.println(">>>>>>> codigo recebido: " + computador.getId_computador());
+		//System.out.println(">>>>>>> Codigo de usuario recebido: " + recursos.getDescricao());
+		//Usuario usuario = usuarios.findOne(id_usuario);
+		
+		ModelAndView mv = new ModelAndView(EDICAO_MENU);	
+		mv.addObject("recurso", recurso);
+		mv.addObject(recurso);
+		
+		return mv;
+	}
+
+
 
 	@RequestMapping("/{id_recurso}/editar2")
 

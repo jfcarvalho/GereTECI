@@ -49,7 +49,7 @@
 			<label for="polegadas" class="col-sm-2 control-label">Tipo de teclado:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="tipo_teclado">
-					<option th:each="tipos : ${todosTiposTeclado}" th:value="${tipos}" th:text="${tipos.tipo}" th:selected="${rec} ? ${rec.tipo_teclado.tipo} == ${tipos.tipo}"></option>
+					<option th:each="tipos : ${todosTiposTeclado}" th:value="${tipos}" th:text="${tipos.tipo}" th:selected="${rec} ? ${rec.tipoes.tipo} == ${tipos.tipo}"></option>
 				</select>
 			</div>
 		</div>

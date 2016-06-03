@@ -31,6 +31,7 @@ import com.teci.gereteci.repository.Midias;
 
 public class MidiaController {
 	private static final String CADASTRO_VIEW_MIDIA = "/cadastro/CadastroMidia"; 
+	
 	@Autowired
 	private Midias midias;
 	@Autowired

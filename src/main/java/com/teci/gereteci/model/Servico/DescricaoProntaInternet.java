@@ -6,7 +6,9 @@ public enum DescricaoProntaInternet {
 	desc3("Problema no Proxy"),
 	desc4("Problema na página da CTB"),
 	desc5("Atualização de conteúdo da página da CTB"),
-	desc6("Suporte FIPLAN");
+	desc6("Banco do Brasil(Módulo de Segurança)"),
+	desc7("Suporte FIPLAN"),
+	desc8("Outros");
 	
 	private String descricao;
 	

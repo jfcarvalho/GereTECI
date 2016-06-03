@@ -1024,7 +1024,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="conta : ${contas_criadas}">
-					<td class="text-center" th:text="${conta.solicitado.nome} "></td>
+					<td class="text-center" th:text="${conta.solicitado} ? ${conta.solicitado.nome} : 'Não houve solicitação externa'"></td>
 					<td class="text-center" th:text="${conta.conta}"></td>
 				</tr>
 				
@@ -1048,7 +1048,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="conta : ${contas_excluidas}">
-					<td class="text-center" th:text="${conta.solicitado.nome} "></td>
+					<td class="text-center" th:text="${conta.solicitado} ? ${conta.solicitado.nome} : 'Não houve solicitação externa' "></td>
 					<td class="text-center" th:text="${conta.conta}"></td>
 				</tr>
 				
@@ -1096,7 +1096,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="conta : ${contas_mudanca_plano}">
-					<td class="text-center" th:text="${conta.solicitado.nome} "></td>
+					<td class="text-center" th:text="${conta.solicitado} ? ${conta.solicitado.nome} : 'Não houve solicitação externa' "></td>
 					<td class="text-center" th:text="${conta.conta}"></td>
 				</tr>
 				

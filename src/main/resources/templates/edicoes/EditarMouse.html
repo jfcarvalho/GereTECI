@@ -56,7 +56,7 @@
 			<label for="tipos" class="col-sm-2 control-label">Tipo de mouse:</label>
 			<div class="col-sm-6">
 				<select class="form-control" name="tipo_mouse">
-					<option th:each="tipos : ${todosTiposMouse}" th:value="${tipos}" th:text="${tipos.tipo}" th:selected="${rec} and ${rec.tipo_mouse} ? ${rec.tipo_mouse.tipo} == ${tipos.tipo}"></option>
+					<option th:each="tipos : ${todosTiposMouse}" th:value="${tipos}" th:text="${tipos.tipo}" th:selected="${rec} and ${rec.tipoes} ? ${rec.tipoes.tipo} == ${tipos.tipo}"></option>
 				</select>
 			</div>	
 		</div>

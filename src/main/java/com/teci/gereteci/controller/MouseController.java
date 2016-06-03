@@ -22,6 +22,7 @@ import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Computador.Status;
 import com.teci.gereteci.model.Recurso.Monitor;
 import com.teci.gereteci.model.Recurso.Mouse;
+import com.teci.gereteci.model.Recurso.Recurso;
 import com.teci.gereteci.model.Recurso.TipoES;
 import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Monitores;
@@ -34,6 +35,7 @@ public class MouseController {
 	private static final String CADASTRO_VIEW_MOUSE = "/cadastro/CadastroMouse"; 
 	private static final String EDICAO1_VIEW = "/edicoes/EditarMouse";
 	private static final String EDICAO2_VIEW = "/edicoes/EditarMouseComputador";
+	private static final String EDICAO_MENU = "/edicoes/PopUPMouse";
 	
 	@Autowired
 	private Mouses mouses;
@@ -149,6 +151,23 @@ public String salvar2(@Validated Mouse mouse, @RequestParam Integer computador_i
 	return "redirect:/gereteci/computadores/novo";
 	
 }
+
+@RequestMapping("/{id_recurso}/edicaomenu")
+public ModelAndView edicaomenu(@PathVariable("id_recurso") Recurso recurso)
+{
+	//ObjectMapper mapper = new ObjectMapper();
+	
+	//System.out.println(">>>>>>> codigo recebido: " + computador.getId_computador());
+	//System.out.println(">>>>>>> Codigo de usuario recebido: " + recursos.getDescricao());
+	//Usuario usuario = usuarios.findOne(id_usuario);
+	
+	ModelAndView mv = new ModelAndView(EDICAO_MENU);	
+	mv.addObject("recurso", recurso);
+	mv.addObject(recurso);
+	
+	return mv;
+}
+
 
 
 	@RequestMapping

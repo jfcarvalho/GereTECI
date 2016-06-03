@@ -35,6 +35,7 @@ public class CaixaDeSomController {
 	private static final String CADASTRO_VIEW_CS = "/cadastro/CadastroCaixaDeSom"; 
 	private static final String EDICAO1_VIEW = "/edicoes/EditarCaixa";
 	private static final String EDICAO2_VIEW = "/edicoes/EditarCaixaComputador";
+	private static final String EDICAO_MENU = "/edicoes/PopUPCaixaSom";
 	@Autowired
 	private CaixasDeSom caixas;
 	@Autowired
