@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -49,6 +51,7 @@ public class Usuario implements Comparable<Usuario>{
 	private String telefone;
 	@Size(min=3, max=100, message="O tamanho do campo email tem que ser entre 3 e 20")
 	private String email;
+	private String password;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="setor_id_setor")
 	private Setor setor;
@@ -59,6 +62,11 @@ public class Usuario implements Comparable<Usuario>{
 	@OneToOne
 	@JoinColumn(name="computador_id_computador")
 	private Computador computador;
+	
+	@ManyToMany
+	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "codigo_usuario")
+				, inverseJoinColumns = @JoinColumn(name = "codigo_grupo"))	
+	private List<Grupo> grupos;
 	
 	public Integer getId_usuario()
 	{
@@ -166,5 +174,19 @@ public class Usuario implements Comparable<Usuario>{
 		
 			return 0;
 	}
-	
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public List<Grupo> getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(List<Grupo> grupos) {
+		this.grupos = grupos;
+	}
 }
