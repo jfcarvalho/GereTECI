@@ -157,11 +157,11 @@ public class Usuario implements Comparable<Usuario>{
 	{
 		this.computador = computador;
 	}
-	public List<Servico> getServicos()
+	public List<Servico> getServicos_manutencao()
 	{
 		return this.servicos_manutencao;
 	}
-	public void setServicos(List<Servico> servicos)
+	public void setServicos_manutencao(List<Servico> servicos)
 	{
 		this.servicos_manutencao = servicos;
 	}

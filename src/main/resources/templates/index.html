@@ -7,8 +7,132 @@
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 
+</head>
 <header layout:include="layout/Cabecalho"></header>
 
-</head>
+<body>
+<div class="container-fluid">
 
+
+<h3>Seja bem vindo usuarío teci!!</h3>
+
+Informações gerais
+<table class="table  table-hover">
+		
+			<thead>
+				<tr>
+				<th class="text-center col-md-2">Total de serviços prestados</th>
+				<th class="text-center col-md-2">Serviços em aberto</th>
+				<th class="text-center col-md-2">Serviços em andamento</th>
+				<th class="text-center col-md-2">Serviços concluídos</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="text-center" th:text="${servicos_total}"></td>
+					<td class="text-center">a</td>
+					<td class="text-center">a</td>
+					<td class="text-center">a</td>
+				
+				</tr>
+			</tbody>
+		
+		</table>
+		10 Últimos serviços em aberto
+		<table class="table  table-hover">
+		
+			<thead>
+				<tr>
+				<th class="text-center col-md-2">Protocolo</th>
+				<th class="text-center col-md-2">Usuário / Setor</th>
+				<th class="text-center col-md-2">Tipo de serviço</th>
+				<th class="text-center col-md-2">Data de abertura</th>
+				<th class="text-center col-md-2">Requisicao</th>
+				</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<!-- <tr th:each="contrato : ${contratosgeridos}"> -->
+					<td class="text-center">a</td>
+					<td class="text-center">a</td>
+						<td class="text-center">a</td>
+						<td class="text-center">a</td>
+						<td class="text-center">a</td>
+				</tr>		
+				<!--  </tr> -->
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(contratosgeridos)}"><div style="text-align:center">Nenhum contrato encontrado</div></td>
+			</tr>
+			</tbody>
+		
+		
+		</table>
+		
+		10 Últimos serviços em andamento
+		<table class="table  table-hover">
+		
+			<thead>
+				<tr>
+				<th class="text-center col-md-2">Protocolo</th>
+				<th class="text-center col-md-2">Usuário / Setor</th>
+				<th class="text-center col-md-2">Tipo de serviço</th>
+				<th class="text-center col-md-2">Data de abertura</th>
+				<th class="text-center col-md-2">Requisicao</th>
+				</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<!-- <tr th:each="contrato : ${contratosgeridos}"> -->
+					<td class="text-center">a</td>
+					<td class="text-center">a</td>
+						<td class="text-center">a</td>
+						<td class="text-center">a</td>
+						<td class="text-center">a</td>
+				</tr>		
+				<!--  </tr> -->
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(contratosgeridos)}"><div style="text-align:center">Nenhum contrato encontrado</div></td>
+			</tr>
+			</tbody>
+		
+		
+		</table>
+		
+		10 Últimos serviços em concluídos
+		<table class="table  table-hover">
+		
+			<thead>
+				<tr>
+				<th class="text-center col-md-2">Protocolo</th>
+				<th class="text-center col-md-2">Usuário / Setor</th>
+				<th class="text-center col-md-2">Tipo de serviço</th>
+				<th class="text-center col-md-2">Data de abertura</th>
+				<th class="text-center col-md-2">Requisicao</th>
+				</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<!-- <tr th:each="contrato : ${contratosgeridos}"> -->
+					<td class="text-center">a</td>
+					<td class="text-center">a</td>
+						<td class="text-center">a</td>
+						<td class="text-center">a</td>
+						<td class="text-center">a</td>
+				</tr>		
+				<!--  </tr> -->
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(contratosgeridos)}"><div style="text-align:center">Nenhum contrato encontrado</div></td>
+			</tr>
+			</tbody>
+		
+		
+		</table>
+		
+
+
+</div>
+</body>
 </html>

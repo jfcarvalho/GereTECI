@@ -29,7 +29,7 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" th:if="${home_teci}">
         <li class="active"><a href="/gereteci/computadores">Home <span class="sr-only">(current)</span></a></li>
         <li><a href="/gereteci/usuarios">Usuarios</a></li>
         <li><a href="/gereteci/computadores">Computadores</a></li>
@@ -57,6 +57,7 @@
     Servicos
     <span class="caret"></span>
   </button>
+  
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
    
     <li><a href="/gereteci/servicosmanutencao">Manutenção</a></li>
@@ -66,6 +67,27 @@
    		 <li><a href="/gereteci/servicosemail">E-mail</a></li>
    		 
     
+  </ul>
+</div>
+       
+       </li>
+       <li><a href="/gereteci/gerarrelatorio">Relatório de Serviços</a></li>
+      </ul>
+      
+      
+        <ul class="nav navbar-nav" th:if="!${home_teci}">
+        <li class="active"><a href="/gereteci/computadores">Home <span class="sr-only">(current)</span></a></li>
+        <li><a href="/gereteci/setores">Setores</a></li> 
+       
+       <li><div class="dropdown servicos-button">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+   Solicitar Serviço
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+   
+    <li><a href="/gereteci/servicosmanutencao">Suporte Técnico</a></li>
+   		 <li><a href="/gereteci/servicosinternet">Solicitação de Material</a></li> 
   </ul>
 </div>
        

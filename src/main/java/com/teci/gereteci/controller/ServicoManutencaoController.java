@@ -32,6 +32,7 @@ import com.teci.gereteci.model.Servico.StatusServico;
 import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.ServicosManutencao;
 import com.teci.gereteci.repository.Usuarios;
+import com.teci.gereteci.security.AppUserDetailsService;
 
 
 @Controller
@@ -372,6 +373,11 @@ public class ServicoManutencaoController {
 		Collections.sort(todosUsuariosTECI, comparator);
 		
 		return todosUsuariosTECI;
+	}
+	
+	@ModelAttribute("home_teci")
+	public boolean homeGestor() {
+		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI");
 	}
 	
 }
