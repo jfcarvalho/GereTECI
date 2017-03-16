@@ -14,7 +14,7 @@
 <div class="container-fluid">
 
 
-<h3>Seja bem vindo usuarío teci!!</h3>
+<h3>Seja bem vindo usuarío <span th:text="${nome_user}"></span></h3>
 
 Informações gerais
 <table class="table  table-hover">
@@ -30,9 +30,9 @@ Informações gerais
 			<tbody>
 				<tr>
 					<td class="text-center" th:text="${servicos_total}"></td>
-					<td class="text-center">a</td>
-					<td class="text-center">a</td>
-					<td class="text-center">a</td>
+					<td class="text-center" th:text="${servicos_abertos}"></td>
+					<td class="text-center" th:text="${servicos_andamento}"></td>
+					<td class="text-center" th:text="${servicos_concluidos}"></td>
 				
 				</tr>
 			</tbody>
@@ -51,18 +51,18 @@ Informações gerais
 				</tr>
 			</thead>
 			<tbody>
-			<tr>
-				<!-- <tr th:each="contrato : ${contratosgeridos}"> -->
-					<td class="text-center">a</td>
-					<td class="text-center">a</td>
-						<td class="text-center">a</td>
-						<td class="text-center">a</td>
-						<td class="text-center">a</td>
+			
+			 <tr th:each="servico : ${ultimos_servicos_abertos}">
+					<td class="text-center" th:text="${servico.protocolo}"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome} + '-' + ${servico.solicitado.setor.nome} : 'Não informado'"></td>
+						<td class="text-center"  th:text="${servico.categoria}"></td>
+						<td class="text-center" th:text="${#dates.format(servico.data_ocorrencia, 'dd/MM/yyyy')}"></td>
+						<td class="text-center">Sem ainda</td>
 				</tr>		
 				<!--  </tr> -->
 				
 			<tr>
-				<td colspan="6" th:if="${#lists.isEmpty(contratosgeridos)}"><div style="text-align:center">Nenhum contrato encontrado</div></td>
+				<td colspan="6" th:if="${#lists.isEmpty(ultimos_servicos_abertos)}"><div style="text-align:center">Nenhum serviço encontrado</div></td>
 			</tr>
 			</tbody>
 		
@@ -82,18 +82,20 @@ Informações gerais
 				</tr>
 			</thead>
 			<tbody>
-			<tr>
+			
 				<!-- <tr th:each="contrato : ${contratosgeridos}"> -->
-					<td class="text-center">a</td>
-					<td class="text-center">a</td>
-						<td class="text-center">a</td>
-						<td class="text-center">a</td>
-						<td class="text-center">a</td>
+					 <tr th:each="servico : ${ultimos_servicos_andamento}">
+					<td class="text-center" th:text="${servico.protocolo}"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome} + '-' + ${servico.solicitado.setor.sigla} : 'Não informado'"></td>
+						<td class="text-center"  th:text="${servico.categoria}"></td>
+						<td class="text-center" th:text="${#dates.format(servico.data_ocorrencia, 'dd/MM/yyyy')}"></td>
+						<td class="text-center">Sem ainda</td>
+					
 				</tr>		
 				<!--  </tr> -->
 				
 			<tr>
-				<td colspan="6" th:if="${#lists.isEmpty(contratosgeridos)}"><div style="text-align:center">Nenhum contrato encontrado</div></td>
+				<td colspan="6" th:if="${#lists.isEmpty(ultimos_servicos_andamento)}"><div style="text-align:center">Nenhum contrato encontrado</div></td>
 			</tr>
 			</tbody>
 		
@@ -113,19 +115,19 @@ Informações gerais
 				</tr>
 			</thead>
 			<tbody>
-			<tr>
-				<!-- <tr th:each="contrato : ${contratosgeridos}"> -->
-					<td class="text-center">a</td>
-					<td class="text-center">a</td>
-						<td class="text-center">a</td>
-						<td class="text-center">a</td>
-						<td class="text-center">a</td>
+				<tr th:each="servico : ${ultimos_servicos_concluidos}">
+					<td class="text-center" th:text="${servico.protocolo}"></td>
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome} + '-' + ${servico.solicitado.setor.sigla} : 'Não Informado'"  ></td>
+						<td class="text-center"  th:text="${servico.categoria}"></td>
+						<td class="text-center" th:text="${#dates.format(servico.data_ocorrencia, 'dd/MM/yyyy')}"></td>
+						<td class="text-center">Sem ainda</td>						
 				</tr>		
 				<!--  </tr> -->
 				
 			<tr>
-				<td colspan="6" th:if="${#lists.isEmpty(contratosgeridos)}"><div style="text-align:center">Nenhum contrato encontrado</div></td>
+				<td colspan="6" th:if="${#lists.isEmpty(ultimos_servicos_concluidos)}"><div style="text-align:center">Nenhum contrato encontrado</div></td>
 			</tr>
+			
 			</tbody>
 		
 		

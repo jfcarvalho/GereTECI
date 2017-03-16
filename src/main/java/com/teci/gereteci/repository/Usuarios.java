@@ -14,5 +14,6 @@ public interface Usuarios extends JpaRepository<Usuario, Integer>, UsuariosQueri
 	List<Usuario> findByNomeContaining(String nome);
 	List<Usuario> findBySetor(Setor setor);
 	Usuario findByEmail(String email);
+	Usuario findByMatricula(String matricula);
 	
 }

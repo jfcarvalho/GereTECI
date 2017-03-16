@@ -14,8 +14,8 @@ public class UsuariosImpl implements UsuariosQueries {
 	private EntityManager manager;
 	
 	@Override
-	public Optional<Usuario> porEmail(String email) {
-		return manager.createQuery("from Usuario where lower(email) = lower(:email)", Usuario.class).setParameter("email", email).getResultList().stream().findFirst();
+	public Optional<Usuario> porMatricula(String matricula) {
+		return manager.createQuery("from Usuario where lower(matricula) = lower(:matricula)", Usuario.class).setParameter("matricula", matricula).getResultList().stream().findFirst();
 	}
 	
 	@Override

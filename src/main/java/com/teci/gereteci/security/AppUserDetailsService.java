@@ -24,8 +24,8 @@ public class AppUserDetailsService implements UserDetailsService  {
 	private Usuarios usuarios;
 	public static UserDetails cusuario = null;
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Optional<Usuario> usuarioOptional = usuarios.porEmail(email);
+	public UserDetails loadUserByUsername(String matricula) throws UsernameNotFoundException {
+		Optional<Usuario> usuarioOptional = usuarios.porMatricula(matricula);
 		Usuario usuario = usuarioOptional.orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
 		
 		UserDetails aux = new UsuarioSistema(usuario, getPermissoes(usuario));
