@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.teci.gereteci.Mailer;
 import com.teci.gereteci.model.Computador.Memoria;
 import com.teci.gereteci.model.Computador.Status;
 import com.teci.gereteci.model.Servico.DescricaoManutencao;
 import com.teci.gereteci.model.Servico.DescricaoProntaInternet;
+import com.teci.gereteci.model.Servico.Servico;
 import com.teci.gereteci.model.Servico.ServicoInternet;
 import com.teci.gereteci.model.Servico.ServicoManutencao;
 import com.teci.gereteci.model.Servico.StatusServico;
@@ -50,6 +52,8 @@ public class ServicoInternetController {
 	private ServicosInternet servicos;
 	@Autowired
 	private ServicosInternet servicosAtendente;
+	@Autowired
+	private Mailer mailer;
 	
 	
 	@RequestMapping("/novo")
@@ -90,7 +94,8 @@ public class ServicoInternetController {
 		}
 
 		servicos.save(servicoInternet);
-		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");	
+		attributes.addFlashAttribute("mensagem", "Serviço salvo com sucesso!");
+		mailer.enviar_servico(servicoInternet.getSolicitado(), servicoInternet.getAtendente(), servicoInternet.getSolicitado().getSetor().getSigla(),(Servico) servicoInternet,"jfcarvalho@ctb.ba.gov.br");
 		return "redirect:/gereteci/servicosinternet/novo";
 	
 	}

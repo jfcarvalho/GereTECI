@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -25,6 +26,7 @@ import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Servico.ServicoManutencao;
 import com.teci.gereteci.model.Servico.StatusServico;
 import com.teci.gereteci.model.Setor.Setor;
+import com.teci.gereteci.model.Usuario.Grupo;
 import com.teci.gereteci.model.Usuario.Nivel;
 import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
@@ -45,6 +47,8 @@ public class UsuarioController {
 	private ServicosManutencao smanutencao;
 	@Autowired
 	private ServicosRede srede;
+	@Autowired
+	private Grupos grupos;
 	
 	
 	@RequestMapping("/novo")
@@ -57,7 +61,7 @@ public class UsuarioController {
 		return mv;
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Usuario usuario, @RequestParam Integer setor_id_setor, Errors errors, RedirectAttributes attributes)
+	public String salvar (Usuario usuario, @RequestParam Integer setor_id_setor, Errors errors, RedirectAttributes attributes)
 	{
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		System.out.println(">>>>> ID DO SETOR: "+ setor_id_setor +"");
@@ -75,8 +79,10 @@ public class UsuarioController {
 		}
 		
 		
-		
-		usuarios.save(usuario);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		usuario.setPassword(encoder.encode(usuario.getPassword()));
+		System.out.println(usuario.getPassword());
+		//usuarios.save(usuario);
 		
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");	
 		return "redirect:/gereteci/usuarios/novo";
@@ -122,6 +128,9 @@ public class UsuarioController {
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
+		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		//usuario.setPassword(encoder.encode(usuario.getPassword()));
+		
 		mv.addObject("su", usuario);
 		mv.addObject(usuario);
 		return mv;
@@ -167,6 +176,12 @@ public class UsuarioController {
 		return Arrays.asList(Nivel.values());
 	}
 
+	@ModelAttribute("grupos")
+	public List<Grupo> todosGrupos() {
+		return grupos.findAll();
+	}
+
+	
 	@ModelAttribute("todosSetoresUsuario")
 	public List<Setor> todosSetoresUsuario()
 	{

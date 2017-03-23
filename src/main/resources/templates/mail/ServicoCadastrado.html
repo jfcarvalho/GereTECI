@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+
+
+<body>
+
+<h4><i>Um serviço foi cadastrado no GereTECI</i></h4>
+
+<table style="width: 100%; border-collapse: collapse;  margin: 20px 0">
+	<thead>
+				<tr>
+				<th class="text-center col-md-2">Usuário solicitante</th>
+				<th class="text-center col-md-2">Usuário atendente</th>
+				<th class="text-center col-md-2">Data de abertura</th>
+				<th class="text-center col-md-2">Data de finalização</th>
+				<th class="text-center col-md-2">Status</th>
+				<th class="text-center col-md-2">Descrição do problema</th>
+				<th class="text-center col-md-2">Solução adotada</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="text-center" th:text="${solicitante.nome} + '-' + ${setor}"></td>
+				  	<td class="text-center" th:text="${atendente.nome}"></td> 
+					<td class="text-center" th:text="${#dates.format(servico.data_ocorrencia, 'dd/MM/yyyy')}"></td>
+					<td class="text-center" th:text="${#dates.format(servico.data_encerramento,'dd/MM/yyyy')}"></td>
+					<td class="text-center" th:text="${servico.status.descricao}"></td>
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+				
+				</tr>
+				
+			
+			</tbody>
+			
+</table>
+
+
+
+</body>
+
+</html>
