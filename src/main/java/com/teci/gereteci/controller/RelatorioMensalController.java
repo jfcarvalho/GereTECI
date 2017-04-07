@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +30,7 @@ import com.teci.gereteci.repository.ServicosManutencao;
 import com.teci.gereteci.repository.ServicosRede;
 import com.teci.gereteci.repository.ServicosTelefone;
 import com.teci.gereteci.repository.Usuarios;
+import com.teci.gereteci.security.AppUserDetailsService;
 
 @Controller
 
@@ -927,5 +929,10 @@ public class RelatorioMensalController {
 	}	
 	//List<Computador> todosComputadores = computadores.findAll();
 		return servicosEmailPeriodo;
+	}
+	
+	@ModelAttribute("home_teci")
+	public boolean homeTECI() {
+		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI") || AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_CADASTRAR_SERVICO");
 	}
 }

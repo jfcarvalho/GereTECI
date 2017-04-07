@@ -29,30 +29,30 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav" th:if="${home_teci}">
-        <li class="active"><a href="/gereteci/computadores">Home <span class="sr-only">(current)</span></a></li>
-        <li><a href="/gereteci/usuarios">Usuarios</a></li>
-        <li><a href="/gereteci/computadores">Computadores</a></li>
-        <li><a href="/gereteci/setores">Setores</a></li>
-       <li><div class="dropdown servicos-button"><button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      <ul class="nav navbar-nav" >
+        <li class="active" th:if="${home_teci}"><a href="/gereteci/computadores" >Home <span class="sr-only">(current)</span></a></li>
+        <li th:if="${home_teci}"><a href="/gereteci/usuarios" >Usuarios</a></li>
+        <li th:if="${home_teci}"><a href="/gereteci/computadores" >Computadores</a></li>
+        <li th:if="${home_teci}"><a href="/gereteci/setores" >Setores</a></li>
+       <li  th:if="${home_teci}"><div class="dropdown servicos-button" ><button th:if="${home_teci}" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     Recurso
     <span class="caret"></span>
   	</button>
-       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-       <li><a href="/gereteci/monitores/">Monitor</a></li>
-    <li><a href="/gereteci/mouses/">Mouse</a></li>
-    <li><a href="/gereteci/teclados/">Teclado</a></li>
-    <li><a href="/gereteci/caixas/">Caixa de Som</a></li>
-    <li><a href="/gereteci/midias/">Dispositivo de armazenamento</a></li>
-    <li><a href="/gereteci/outros/">Outros</a></li>
+       <ul class="dropdown-menu" th:if="${home_teci}" aria-labelledby="dropdownMenu1">
+       <li th:if="${home_teci}"><a href="/gereteci/monitores/" >Monitor</a></li>
+    <li  th:if="${home_teci}"><a href="/gereteci/mouses/">Mouse</a></li>
+    <li th:if="${home_teci}"><a href="/gereteci/teclados/"  >Teclado</a></li>
+    <li th:if="${home_teci}"><a href="/gereteci/caixas/" >Caixa de Som</a></li>
+    <li th:if="${home_teci}"><a href="/gereteci/midias/"  >Dispositivo de armazenamento</a></li>
+    <li th:if="${home_teci}"><a href="/gereteci/outros/" >Outros</a></li>
        </ul>
        </div>
        </li>
-        <li><a href="/gereteci/impressoras">Impressoras</a></li>
-        <li><a href="/gereteci/licencas">Licenças</a></li>
-        <li><a href="/gereteci/licencasoffice">Licenças Office 365</a></li>
+        <li th:if="${home_teci}"><a href="/gereteci/impressoras" >Impressoras</a></li>
+        <li th:if="${home_teci}"><a href="/gereteci/licencas" >Licenças</a></li>
+        <li th:if="${home_teci}"><a href="/gereteci/licencasoffice" >Licenças Office 365</a></li>
        
-       <li><div class="dropdown servicos-button">
+       <li th:if="${home_teci}"><div class="dropdown servicos-button" >
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     Servicos
     <span class="caret"></span>

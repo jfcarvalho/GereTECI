@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+
+<body>
+
+<h4><i>Lista de serviços abertos</i></h4>
+
+<table style="width: 100%; border-collapse: collapse;  margin: 20px 0">
+	<thead>
+				<tr>
+				<th class="text-center col-md-2">Usuário solicitante</th>
+				<th class="text-center col-md-2">Usuário atendente</th>
+				<th class="text-center col-md-2">Data de abertura</th>
+				<th class="text-center col-md-2">Descrição do problema</th>
+				<th class="text-center col-md-2">Solução adotada</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr  th:each="servico : ${ultimos_abertos}">
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome} : 'Não informado'"></td>
+				  	<td class="text-center" th:text="${servico.atendente.nome}"></td> 
+					<td class="text-center" th:text="${#dates.format(servico.data_ocorrencia, 'dd/MM/yyyy')}"></td>
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+				
+				</tr>
+				
+			
+			</tbody>
+			
+</table>
+
+<h4><i>Lista de serviços em andamento</i></h4>
+
+<table style="width: 100%; border-collapse: collapse;  margin: 20px 0">
+	<thead>
+				<tr>
+				<th class="text-center col-md-2">Usuário solicitante</th>
+				<th class="text-center col-md-2">Usuário atendente</th>
+				<th class="text-center col-md-2">Data de abertura</th>
+				<th class="text-center col-md-2">Descrição do problema</th>
+				<th class="text-center col-md-2">Solução adotada</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr  th:each="servico : ${ultimos_andamento}">
+					<td class="text-center" th:text="${servico.solicitado} ? ${servico.solicitado.nome} : 'Não informado'"></td>
+				  	<td class="text-center" th:text="${servico.atendente.nome}"></td> 
+					<td class="text-center" th:text="${#dates.format(servico.data_ocorrencia, 'dd/MM/yyyy')}"></td>
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+				
+				</tr>
+			
+			</tbody>
+			
+</table>
+
+</body>
+
+</html>

@@ -29,6 +29,7 @@ import com.teci.gereteci.model.Recurso.Teclado;
 import com.teci.gereteci.model.Usuario.Nivel;
 import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Monitores;
+import com.teci.gereteci.security.AppUserDetailsService;
 
 @Controller
 @RequestMapping("/gereteci/monitores")
@@ -282,6 +283,11 @@ public String salvar2(Monitor monitor, @RequestParam Integer computador_id_compu
 		monitor.setStatus(Status.funcionando);
 		monitores.save(monitor);
 		return Status.funcionando.getStatus();
+	}
+	
+	@ModelAttribute("home_teci")
+	public boolean homeTECI() {
+		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI") || AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_CADASTRAR_SERVICO");
 	}
 	
 }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario">
+<head>
+
+<title>Gerar relatório de serviços</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+<h3 style="text-align: center;">Escolha o usuário, o mês e o ano para a geração do relatório individual de serviços</h3>
+	<div class="clearfix">	
+		<form method="GET" action="/gereteci/relatorio_individual">
+			
+			<div class="col-lg-3">
+			
+   				 <div class="input-group">
+   				 
+     		<!--    <div class="col-sm-8"> -->
+     		<br/>
+     		<label for="sistema" class="col-sm-12 control-label"><span>Escolha o usuário</span></label>
+				<select class="form-control" name="user" >
+					<option th:each="usuario : ${todosUsuarios}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}"></option>
+				</select>
+				</div>
+				<br/>
+				<div class="input-group">
+				
+				<label for="sistema" class="col-sm-12 control-label"><span>Escolha o tipo do serviço</span></label>
+     				 	<select class="form-control" name="tServico">
+ 						 	<option value="m">Manutenção</option>
+ 						 	<option value="i">Internet</option>
+ 						 	<option value="r">Rede</option>
+ 						 	<option value="t">Telefone</option>
+ 						 	<option value="e">Email</option>
+ 						 	<option value="todos">TODOS</option>
+						</select>
+				</div>
+		<!--  	</div> -->
+					 
+					 <br/>
+   				 <div class="input-group">
+   				<label class="col-sm-12 control-label"> <span>Escolha o mes</span> </label>
+     				 	<select class="form-control" name="mes">
+ 						 	<option value="01">Janeiro</option>
+ 						 	<option value="02">Fevereiro</option>
+ 						 	<option value="03">Março</option>
+ 						 	<option value="04">Abril</option>
+ 						 	<option value="05">Maio</option>
+ 						 	<option value="06">Junho</option>
+ 						 	<option value="07">Julho</option>
+  						 	<option value="08">Agosto</option>
+ 						 	<option value="09">Setembro</option>
+ 						 	<option value="10">Outubro</option>
+ 						 	<option value="11">Novembro</option>
+ 						 	<option value="12">Dezembro</option>
+ 						 	<option value="todos">TODOS</option>
+						</select>
+					 </div>
+					  <br/>
+					 <div class="input-group">
+					<label class="col-sm-12 control-label"> <span>Escolha o ano</span> </label>
+					<select class="form-control" name="ano">
+ 						 <option value="2016">2016</option>
+ 						 <option value="2017">2017</option>
+ 						 <option value="2018">2018</option>
+ 						 <option value="2019">2019</option>
+ 						 <option value="2020">2020</option>
+ 						 <option value="2021">2021</option>
+ 						 <option value="todos">TODOS</option>
+					</select>
+     				 </div>
+     				 <br/>
+     				 <div class="input-group">
+    				  <span class="input-group-btn">
+       					 <button class="btn btn-default" type="submit">Gerar</button>
+      				</span>
+   				</div>
+ 			 </div>
+ 			  
+ 			</form>
+		</div>
+
+</section>
+</html>

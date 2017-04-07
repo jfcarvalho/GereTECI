@@ -33,6 +33,7 @@ import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.ServicosInternet;
 import com.teci.gereteci.repository.ServicosManutencao;
 import com.teci.gereteci.repository.Usuarios;
+import com.teci.gereteci.security.AppUserDetailsService;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -381,6 +382,11 @@ public class ServicoInternetController {
 		};
 		Collections.sort(todosUsuariosTECI, comparator);
 		return todosUsuariosTECI;
+	}
+	
+	@ModelAttribute("home_teci")
+	public boolean homeTECI() {
+		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI") || AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_CADASTRAR_SERVICO");
 	}
 	
 }

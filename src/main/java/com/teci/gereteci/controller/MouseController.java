@@ -27,6 +27,7 @@ import com.teci.gereteci.model.Recurso.TipoES;
 import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Monitores;
 import com.teci.gereteci.repository.Mouses;
+import com.teci.gereteci.security.AppUserDetailsService;
 
 @Controller
 @RequestMapping("/gereteci/mouses")
@@ -264,6 +265,11 @@ public ModelAndView edicaomenu(@PathVariable("id_recurso") Recurso recurso)
 		mouse.setStatus(Status.funcionando);
 		mouses.save(mouse);
 		return Status.funcionando.getStatus();
+	}
+	
+	@ModelAttribute("home_teci")
+	public boolean homeTECI() {
+		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI") || AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_CADASTRAR_SERVICO");
 	}
 	
 }

@@ -30,6 +30,7 @@ import com.teci.gereteci.model.Usuario.Grupo;
 import com.teci.gereteci.model.Usuario.Nivel;
 import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
+import com.teci.gereteci.security.AppUserDetailsService;
 
 @Controller
 @RequestMapping("/gereteci/usuarios")
@@ -81,8 +82,7 @@ public class UsuarioController {
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		usuario.setPassword(encoder.encode(usuario.getPassword()));
-		System.out.println(usuario.getPassword());
-		//usuarios.save(usuario);
+		usuarios.save(usuario);
 		
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");	
 		return "redirect:/gereteci/usuarios/novo";
@@ -128,8 +128,7 @@ public class UsuarioController {
 		//Usuario usuario = usuarios.findOne(id_usuario);
 		
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		//usuario.setPassword(encoder.encode(usuario.getPassword()));
+		
 		
 		mv.addObject("su", usuario);
 		mv.addObject(usuario);
@@ -200,6 +199,10 @@ public class UsuarioController {
 		};
 		Collections.sort(todosSetores, comparator);
 		return todosSetores;
+	}
+	@ModelAttribute("home_teci")
+	public boolean homeTECI() {
+		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI") || AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_CADASTRAR_SERVICO");
 	}
 	
 	

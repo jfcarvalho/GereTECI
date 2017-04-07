@@ -19,6 +19,7 @@ import com.teci.gereteci.model.*;
 import com.teci.gereteci.model.Computador.Computador;
 import com.teci.gereteci.model.Licenca.Licenca;
 import com.teci.gereteci.repository.*;
+import com.teci.gereteci.security.AppUserDetailsService;
 
 @Controller
 @RequestMapping("/gereteci/licencas")
@@ -88,6 +89,11 @@ public class LicencaController {
 	{
 		List<Computador> todosComputadores= computadores.findAll();
 		return todosComputadores;
+	}
+	
+	@ModelAttribute("home_teci")
+	public boolean homeTECI() {
+		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI") || AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_CADASTRAR_SERVICO");
 	}
 	
 	

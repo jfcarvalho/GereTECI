@@ -44,6 +44,7 @@ import com.teci.gereteci.model.Recurso.Teclado;
 import com.teci.gereteci.model.Setor.Setor;
 import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
+import com.teci.gereteci.security.AppUserDetailsService;
 
 
 
@@ -827,5 +828,10 @@ public class ComputadorController {
 		computador.setStatus(Status.funcionando);
 		computadores.save(computador);
 		return Status.funcionando.getStatus();
+	}
+	
+	@ModelAttribute("home_teci")
+	public boolean homeTECI() {
+		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI") || AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_CADASTRAR_SERVICO");
 	}
 }

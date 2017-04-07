@@ -11,7 +11,7 @@ import com.teci.gereteci.model.Usuario.Grupo;
 import com.teci.gereteci.model.Usuario.Nivel;
 import com.teci.gereteci.model.Usuario.Usuario;
 
-public interface Grupos extends JpaRepository<Grupo, Integer> {
+public interface Grupos extends JpaRepository<Grupo, Long> {
 
 	
 }

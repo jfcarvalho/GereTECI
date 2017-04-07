@@ -25,6 +25,7 @@ import com.teci.gereteci.model.Internet.Gateway;
 import com.teci.gereteci.model.Internet.Mascara;
 import com.teci.gereteci.model.Setor.Setor;
 import com.teci.gereteci.repository.*;
+import com.teci.gereteci.security.AppUserDetailsService;
 
 @Controller
 @RequestMapping("/gereteci/impressoras")
@@ -142,6 +143,11 @@ public class ImpressoraController {
 		impressora.setStatus(Status.funcionando);
 		impressoras.save(impressora);
 		return Status.funcionando.getStatus();
+	}
+	
+	@ModelAttribute("home_teci")
+	public boolean homeTECI() {
+		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI") || AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_CADASTRAR_SERVICO");
 	}
 }
 	

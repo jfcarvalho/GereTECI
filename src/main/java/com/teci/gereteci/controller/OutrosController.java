@@ -26,6 +26,7 @@ import com.teci.gereteci.model.Recurso.TipoES;
 import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Midias;
 import com.teci.gereteci.repository.Outross;
+import com.teci.gereteci.security.AppUserDetailsService;
 
 @Controller
 @RequestMapping("/gereteci/outros")
@@ -100,5 +101,9 @@ public class OutrosController {
 		return Arrays.asList(TipoES.values());
 	}
 	
+	@ModelAttribute("home_teci")
+	public boolean homeTECI() {
+		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI") || AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_CADASTRAR_SERVICO");
+	}
 	
 }

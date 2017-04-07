@@ -38,7 +38,7 @@ public class Usuario implements Comparable<Usuario>{
 	private String matricula;
 	@Size(min=3, max=100, message="O tamanho do campo nome tem que ser entre 3 e 20")
 	private String nome;
-	@Size(min=3, max=100, message="O tamanho do campo cargo tem que ser entre 3 e 20")
+	
 	private String cargo; 
 
 
@@ -47,9 +47,9 @@ public class Usuario implements Comparable<Usuario>{
 	
 	@Enumerated(EnumType.STRING)
 	private Nivel nivel_acesso; 
-	@Size(min=3, max=100, message="O tamanho do campo telefone tem que ser entre 3 e 20")
+	
 	private String telefone;
-	@Size(min=3, max=100, message="O tamanho do campo email tem que ser entre 3 e 20")
+	
 	private String email;
 	private String password;
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -57,7 +57,7 @@ public class Usuario implements Comparable<Usuario>{
 	private Setor setor;
 	@OneToMany(mappedBy="solicitado", fetch = FetchType.LAZY,  cascade = {CascadeType.ALL})
 	private List<Servico> servicos_manutencao;	
-	@Size(min=3, max=100, message="O tamanho do campo telefone tem que ser entre 3 e 20")
+	
 	private String usuario_rede;
 	@OneToOne
 	@JoinColumn(name="computador_id_computador")

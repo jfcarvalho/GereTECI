@@ -38,6 +38,7 @@ import com.teci.gereteci.repository.ServicosEmail;
 import com.teci.gereteci.repository.ServicosInternet;
 import com.teci.gereteci.repository.ServicosEmail;
 import com.teci.gereteci.repository.Usuarios;
+import com.teci.gereteci.security.AppUserDetailsService;
 
 
 @Controller
@@ -387,5 +388,10 @@ public class ServicoEmailController {
 		};
 		Collections.sort(todosUsuariosTECI, comparator);
 		return todosUsuariosTECI;
+	}
+	
+	@ModelAttribute("home_teci")
+	public boolean homeTECI() {
+		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI") || AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_CADASTRAR_SERVICO");
 	}
 }

@@ -20,13 +20,13 @@
 	
 	<div class="panel-body">
 	<input type="hidden" th:field="*{id_usuario}" />
-		<div class="form-group">
+		<div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
 			<label for="nome" class="col-sm-2 control-label" >Nome:</label>
 			<div class="col-sm-4">
 				<input type="text" class="form-control" id="nome" name="nome" th:field="*{nome}"/>
 			</div>
 		</div>
-			<div class="form-group">
+			<div class="form-group" th:classappend="${#fields.hasErrors('matricula')} ? has-error">
 			<label for="matricula" class="col-sm-2 control-label">Matrícula:</label>
 			<div class="col-sm-2">
 				<input type="text" class="form-control" id="matricula" name="matricula" th:field="*{matricula}" />
@@ -80,9 +80,9 @@
 			</div>
 		</div>
 		
-		<label for="" class="col-sm-2 control-label">Grupos disponiveis:</label>
+		 <label for="bla" class="col-sm-2 control-label">Grupos disponiveis:</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="grupos" multiple="multiple">
+				<select class="form-control" name="grupos">
 					<option th:each="grupo : ${grupos}" th:value="${grupo.codigo}" th:text="${grupo.nome}"></option>
 				</select>
 </div>

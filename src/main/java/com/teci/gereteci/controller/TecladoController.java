@@ -28,6 +28,7 @@ import com.teci.gereteci.model.Recurso.TipoES;
 import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Monitores;
 import com.teci.gereteci.repository.Teclados;
+import com.teci.gereteci.security.AppUserDetailsService;
 
 @Controller
 @RequestMapping("/gereteci/teclados")
@@ -267,5 +268,10 @@ public class TecladoController {
 		teclado.setStatus(Status.funcionando);
 		teclados.save(teclado);
 		return Status.funcionando.getStatus();
+	}
+	
+	@ModelAttribute("home_teci")
+	public boolean homeTECI() {
+		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI") || AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_CADASTRAR_SERVICO");
 	}
 }

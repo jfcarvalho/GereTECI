@@ -38,6 +38,7 @@ import com.teci.gereteci.repository.ServicosManutencao;
 import com.teci.gereteci.repository.ServicosRede;
 import com.teci.gereteci.repository.ServicosTelefone;
 import com.teci.gereteci.repository.Usuarios;
+import com.teci.gereteci.security.AppUserDetailsService;
 
 
 @Controller
@@ -387,6 +388,11 @@ public class ServicoTelefoneController {
 		};
 		Collections.sort(users, comparator);
 		return users;
+	}
+	
+	@ModelAttribute("home_teci")
+	public boolean homeTECI() {
+		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI") || AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_CADASTRAR_SERVICO");
 	}
 	
 }

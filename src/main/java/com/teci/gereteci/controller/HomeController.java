@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.teci.gereteci.repository.*;
 import com.teci.gereteci.model.*;
@@ -43,19 +44,28 @@ public class HomeController {
 	
 	@Autowired
 	private Servicos servicos;
-	
+
+	private static final String TESTE_PATH = "/mail/ServicosAA";
 	
 	
 	@RequestMapping("/gereteci")
 	public String index(HttpServletRequest request)
 	{
-		System.out.println(request.getServletContext());
+
+		
 		return "index";
+	}
+	
+	@RequestMapping("/gereteci/teste")
+	public ModelAndView teste()
+	{
+		ModelAndView mv = new ModelAndView(TESTE_PATH);
+		return mv;
 	}
 	
 	@ModelAttribute("home_teci")
 	public boolean homeTECI() {
-		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI");
+		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI") || AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_CADASTRAR_SERVICO");
 	}
 	
 	@ModelAttribute("home_comum")
@@ -235,4 +245,53 @@ public class HomeController {
 		Usuario user = usuarios.findByMatricula(AppUserDetailsService.cusuario.getUsername());
 		return user.getNome();
 	}
+	
+	@ModelAttribute("ultimos_andamento")
+	public List<Servico> ultimos_andamento()
+	{
+		List<Servico> srv = servicos.findAll(); 
+		List<Servico> listaLimitada = new ArrayList<Servico>();
+		
+		 Comparator<Servico> cmp = new Comparator<Servico>() {
+		        public int compare(Servico s1, Servico s2) {
+		          return s2.getData_ocorrencia().compareTo(s1.getData_ocorrencia());
+		        }
+	};
+	
+	
+		for(Servico s :srv)
+		{
+			if(s.getStatus().getDescricao().toString().equals("Em andamento"))
+			listaLimitada.add(s);
+			
+		}
+		listaLimitada.sort(cmp);
+		return listaLimitada; 
+	}
+	
+	@ModelAttribute("ultimos_abertos")
+	public List<Servico> ultimos_abertos()
+	{
+		List<Servico> srv = servicos.findAll(); 
+		List<Servico> listaLimitada = new ArrayList<Servico>();
+		
+		 Comparator<Servico> cmp = new Comparator<Servico>() {
+		        public int compare(Servico s1, Servico s2) {
+		          return s2.getData_ocorrencia().compareTo(s1.getData_ocorrencia());
+		        }
+	};
+	
+	
+		for(Servico s :srv)
+		{
+			if(s.getStatus().getDescricao().toString().equals("Aberto"))
+			listaLimitada.add(s);
+			
+		}
+		listaLimitada.sort(cmp);
+		return listaLimitada; 
+	}
+	
+	
+	
 }

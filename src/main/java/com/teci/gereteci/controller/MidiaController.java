@@ -24,6 +24,7 @@ import com.teci.gereteci.model.Recurso.Monitor;
 import com.teci.gereteci.model.Recurso.TipoES;
 import com.teci.gereteci.repository.Computadores;
 import com.teci.gereteci.repository.Midias;
+import com.teci.gereteci.security.AppUserDetailsService;
 
 @Controller
 @RequestMapping("/gereteci/midias")
@@ -97,6 +98,11 @@ public class MidiaController {
 	@ModelAttribute("todosTiposMidia")
 	public List<TipoES> todosTiposMidia() {
 		return Arrays.asList(TipoES.values());
+	}
+	
+	@ModelAttribute("home_teci")
+	public boolean homeTECI() {
+		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI") || AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_CADASTRAR_SERVICO");
 	}
 	
 }

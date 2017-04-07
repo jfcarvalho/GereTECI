@@ -21,6 +21,7 @@ import com.teci.gereteci.model.*;
 import com.teci.gereteci.model.Setor.Setor;
 import com.teci.gereteci.model.Usuario.Usuario;
 import com.teci.gereteci.repository.*;
+import com.teci.gereteci.security.AppUserDetailsService;
 
 @Controller
 @RequestMapping("/gereteci/setores")
@@ -102,6 +103,11 @@ public class SetorController {
 		};
 		Collections.sort(todosUsuarios, comparator);
 		return todosUsuarios;
+	}
+	
+	@ModelAttribute("home_teci")
+	public boolean homeTECI() {
+		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI") || AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_CADASTRAR_SERVICO");
 	}
 	
 }

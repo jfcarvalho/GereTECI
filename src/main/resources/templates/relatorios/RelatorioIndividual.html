@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario">
+<head>
+
+<title>Relatório de serviços mensal</title>
+</head>
+
+<section layout:fragment="conteudo">
+<center><h2>Companhia de Transportes do Estado da Bahia</h2></center>
+<center><h2>Tecnologia da Informação - TECI</h2></center>
+<center><h3>Relatório Individual de serviços prestados - GERETECI</h3></center>
+
+<br/>
+
+<h4>Informações do usuário</h4>
+<br/>
+<p>Nome do usuário: <span th:text="${usuario.nome}"></span></p>
+<p>Matricula: <span th:text="${usuario.matricula}"></span></p>
+<p>Setor: <span th:text="${usuario.setor} ? ${usuario.setor.sigla} : 'Inexistente'"></span></p>
+<p>Cargo: <span th:text="${usuario.cargo}"></span></p>
+
+<br/>
+<h4>Informações do gabinete</h4>
+<br/>
+<p>Patrimônio: <span th:text="${computador} ? ${computador.patrimonio} : 'Não cadastrado'"></span></p>
+<p>IP: <span th:text="${computador} ? ${computador.ip} : 'Não cadastrado'"></span></p>
+<p>Sistema Opercional: <span th:text="${computador} ? ${computador.sistema.sistema} : 'Não cadastrado'"></span></p>
+<p>Arquitetura: <span th:text="${computador} ? ${computador.arquitetura.arquitetura} : 'Não cadastrado'"></span></p>
+<p>Versão do Java: <span th:text="${computador} ? ${computador.versao_java} : 'Não cadastrado'"></span></p>
+<p>Processador: <span th:text="${computador} ? ${computador.processador} : 'Não cadastrado'"></span></p>
+<p>Memória: <span th:text="${computador} ? ${computador.memoria.memoria} : 'Não cadastrado'"></span></p>
+
+<br/>
+
+<h4>Monitor</h4>
+<br/>
+<p>Patrimônio: <span th:text="${monitor} ? ${monitor.patrimonio} : 'Não cadastrado'"></span></p>
+<p>Marca: <span th:text="${monitor} ? ${monitor.marca} : 'Não cadastrado'"></span></p>
+<p>Polegadas: <span th:text="${monitor} ? ${monitor.polegadas} : 'Não cadastrado'"></span></p>
+
+<br/>
+
+<h4>Mouse</h4>
+<br/>
+<p>Patrimônio: <span th:text="${mouse} ? ${mouse.patrimonio} : 'Não cadastrado'"></span></p>
+<p>Marca: <span th:text="${mouse} ? ${mouse.marca} : 'Não cadastrado'"></span></p>
+<p>Tipos: <span th:text="${mouse} ? ${mouse.tipo} : 'Não cadastrado'"></span></p>
+
+
+
+<br/>
+
+<h4>Teclado</h4>
+<br/>
+<p>Patrimônio: <span th:text="${teclado} ? ${teclado.patrimonio} : 'Não cadastrado'"></span></p>
+<p>Marca: <span th:text="${teclado} ? ${teclado.marca} : 'Não cadastrado'"></span></p>
+<p>Tipos: <span th:text="${teclado} ? ${teclado.tipo} : 'Não cadastrado'"></span></p>
+<br/>
+
+<h4>Caixas de som</h4>
+<br/>
+<p>Patrimônio: <span th:text="${caixas} ? ${caixas.patrimonio} : 'Não cadastrado'"></span></p>
+<p>Marca: <span th:text="${caixas} ? ${caixas.marca} : 'Não cadastrado'"></span></p>
+<p>Tipos: <span th:text="${caixas} ? ${caixas.tipo} : 'Não cadastrado'"></span></p>
+
+<br/>
+
+<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				<!-- <th class="text-center col-md-2">Arquitetura</th> -->
+				<th class="text-center col-md-2">Data de Ocorrência</th>
+				<!--  <th class="text-center col-md-2">ID de Impressão</th> -->
+				<th class="text-center col-md-2">Usuário Atendente</th>
+				<th class="text-center col-md-2">Status</th>
+				<th class="text-center col-md-2">Descricão do problema</th>
+				<th class="text-center col-md-2">Descricão solução adotada</th>				
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${servicos_manutencao}">
+					
+					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
+					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia}"></td>
+
+					<td class="text-center" th:text="${servico} and ${servico.atendente} ? ${servico.atendente.nome}: 'Ninguém'"></td>
+					<td class="text-center" th:text="${servico.status.descricao}"></td>
+					
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(servicos_manutencao)}">Nenhum serviço em aberto encontrado</td>
+			</tr>
+			</tbody>
+		
+		</table>
+		
+		<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				<!-- <th class="text-center col-md-2">Arquitetura</th> -->
+				<th class="text-center col-md-2">Data de Ocorrência</th>
+				<!--  <th class="text-center col-md-2">ID de Impressão</th> -->
+				<th class="text-center col-md-2">Usuário Atendente</th>
+				<th class="text-center col-md-2">Setor</th>
+				<th class="text-center col-md-2">Descricão do problema</th>
+				<th class="text-center col-md-2">Descricão solução adotada</th>				
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${servicos_internet}">
+					
+					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
+					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia}"></td>
+
+					<td class="text-center" th:text="${servico} and ${servico.atendente} ? ${servico.atendente.nome}: 'Ninguém'"></td>
+					<td class="text-center" th:text="${servico} and ${servico.solicitado} and ${servico.solicitado.setor} ? ${servico.solicitado.setor.nome}:'Sem setor'"></td>
+					
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(servicos_internet)}">Nenhum serviço em aberto encontrado</td>
+			</tr>
+			</tbody>
+		
+		</table>
+		
+		<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				<!-- <th class="text-center col-md-2">Arquitetura</th> -->
+				<th class="text-center col-md-2">Data de Ocorrência</th>
+				<!--  <th class="text-center col-md-2">ID de Impressão</th> -->
+				<th class="text-center col-md-2">Usuário Atendente</th>
+				<th class="text-center col-md-2">Setor</th>
+				<th class="text-center col-md-2">Descricão do problema</th>
+				<th class="text-center col-md-2">Descricão solução adotada</th>				
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${servicos_rede}">
+					
+					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
+					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia}"></td>
+
+					<td class="text-center" th:text="${servico} and ${servico.atendente} ? ${servico.atendente.nome}: 'Ninguém'"></td>
+					<td class="text-center" th:text="${servico} and ${servico.solicitado} and ${servico.solicitado.setor} ? ${servico.solicitado.setor.nome}:'Sem setor'"></td>
+					
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(servicos_rede)}">Nenhum serviço em aberto encontrado</td>
+			</tr>
+			</tbody>
+		
+		</table>
+		
+		<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				<!-- <th class="text-center col-md-2">Arquitetura</th> -->
+				<th class="text-center col-md-2">Data de Ocorrência</th>
+				<!--  <th class="text-center col-md-2">ID de Impressão</th> -->
+				<th class="text-center col-md-2">Usuário Atendente</th>
+				<th class="text-center col-md-2">Setor</th>
+				<th class="text-center col-md-2">Descricão do problema</th>
+				<th class="text-center col-md-2">Descricão solução adotada</th>				
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${servicos_email}">
+					
+					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
+					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia}"></td>
+
+					<td class="text-center" th:text="${servico} and ${servico.atendente} ? ${servico.atendente.nome}: 'Ninguém'"></td>
+					<td class="text-center" th:text="${servico} and ${servico.solicitado} and ${servico.solicitado.setor} ? ${servico.solicitado.setor.nome}:'Sem setor'"></td>
+					
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(servicos_email)}">Nenhum serviço em aberto encontrado</td>
+			</tr>
+			</tbody>
+		
+		</table>
+		
+		<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				<!-- <th class="text-center col-md-2">Arquitetura</th> -->
+				<th class="text-center col-md-2">Data de Ocorrência</th>
+				<!--  <th class="text-center col-md-2">ID de Impressão</th> -->
+				<th class="text-center col-md-2">Usuário Atendente</th>
+				<th class="text-center col-md-2">Setor</th>
+				<th class="text-center col-md-2">Descricão do problema</th>
+				<th class="text-center col-md-2">Descricão solução adotada</th>				
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${servicos_telefone}">
+					
+					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
+					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia}"></td>
+
+					<td class="text-center" th:text="${servico} and ${servico.atendente} ? ${servico.atendente.nome}: 'Ninguém'"></td>
+					<td class="text-center" th:text="${servico} and ${servico.solicitado} and ${servico.solicitado.setor} ? ${servico.solicitado.setor.nome}:'Sem setor'"></td>
+					
+					<td class="text-center" th:text="${servico.descricao_problema}"></td>
+					<td class="text-center" th:text="${servico.descricao_solucao}"></td>
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(servicos_telefone)}">Nenhum serviço em aberto encontrado</td>
+			</tr>
+			</tbody>
+		
+		</table>
+</section>
+</html>
