@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.teci.gereteci.repository.*;
 import com.teci.gereteci.model.*;
+import com.teci.gereteci.model.Requisicao.Requisicao;
 import com.teci.gereteci.model.Servico.Servico;
 import com.teci.gereteci.model.Servico.ServicoEmail;
 import com.teci.gereteci.model.Servico.ServicoManutencao;
@@ -45,6 +46,9 @@ public class HomeController {
 	@Autowired
 	private Servicos servicos;
 
+	@Autowired
+	private Requisicoes requisicoes;
+	
 	private static final String TESTE_PATH = "/mail/ServicosAA";
 	
 	
@@ -68,10 +72,6 @@ public class HomeController {
 		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_TECI") || AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_CADASTRAR_SERVICO");
 	}
 	
-	@ModelAttribute("home_comum")
-	public boolean homeComum() {
-		return AppUserDetailsService.cusuario.getAuthorities().toString().contains("ROLE_HOME_COMUM");
-	}
 	
 	@ModelAttribute("servicos_total")
 	public Integer total_s()
@@ -81,13 +81,32 @@ public class HomeController {
 		for(Servico s :srv)
 		{
 			String user = AppUserDetailsService.cusuario.getUsername();
-			System.out.println(s.getAtendente().getNome());
-			if(s.getAtendente().getMatricula().equals(user)) {
-					listaLimitada.add(s);
-			}
+	
+		  if(s.getAtendente() != null) {
+				if(s.getAtendente().getMatricula().equals(user)) {
+						listaLimitada.add(s);
+				}
+		  }
 			//System.out.println(s.getCategoria());
 			//ServicoEmail se = (ServicoEmail) s;
 			//System.out.println(se.getConta());
+		}
+		return	listaLimitada.size();			// AppUserDetailsService.cusuario.getUsername()
+	}
+	
+	@ModelAttribute("requisicoes_total")
+	public Integer total_r()
+	{
+		List<Requisicao> reqs = requisicoes.findAll(); 
+		List<Requisicao> listaLimitada = new ArrayList<Requisicao>();
+		for(Requisicao r :reqs)
+		{
+			String user = AppUserDetailsService.cusuario.getUsername();
+
+				if(r.getRequisitante().getMatricula().equals(user)) {
+						listaLimitada.add(r);
+				
+		  }
 		}
 		return	listaLimitada.size();			// AppUserDetailsService.cusuario.getUsername()
 	}
@@ -100,10 +119,33 @@ public class HomeController {
 		for(Servico s :srv)
 		{
 			String user = AppUserDetailsService.cusuario.getUsername();
-			if(s.getAtendente().getMatricula().equals(user)) {
-					if(s.getStatus().getDescricao().toString().equals("Aberto"))
-						listaLimitada.add(s);
+			if(s.getAtendente() != null) {
+				if(s.getAtendente().getMatricula().equals(user)) {
+						if(s.getStatus().getDescricao().toString().equals("Aberto"))
+							listaLimitada.add(s);
+				}
 			}
+			//System.out.println(s.getCategoria());
+			//ServicoEmail se = (ServicoEmail) s;
+			//System.out.println(se.getConta());
+		}
+		return	listaLimitada.size();			// AppUserDetailsService.cusuario.getUsername()
+	}
+	
+	@ModelAttribute("requisicoes_abertas")
+	public Integer total_r_abertos()
+	{
+		List<Requisicao> reqs = requisicoes.findAll(); 
+		List<Requisicao> listaLimitada = new ArrayList<Requisicao>();
+		for(Requisicao r :reqs)
+		{
+			String user = AppUserDetailsService.cusuario.getUsername();
+			
+				if(r.getRequisitante().getMatricula().equals(user)) {
+						if(r.getServico().getStatus().getDescricao().toString().equals("Aberto"))
+							listaLimitada.add(r);
+				}
+			
 			//System.out.println(s.getCategoria());
 			//ServicoEmail se = (ServicoEmail) s;
 			//System.out.println(se.getConta());
@@ -126,10 +168,12 @@ public class HomeController {
 		for(Servico s :srv)
 		{
 			String user = AppUserDetailsService.cusuario.getUsername();
+		if(s.getAtendente() != null) {
 			if(s.getAtendente().getMatricula().equals(user)) {
 					if(s.getStatus().getDescricao().toString().equals("Aberto"))
 						listaLimitada.add(s);
 			}
+		}
 			//System.out.println(s.getCategoria());
 			//ServicoEmail se = (ServicoEmail) s;
 			//System.out.println(se.getConta());
@@ -148,10 +192,33 @@ public class HomeController {
 		for(Servico s :srv)
 		{
 			String user = AppUserDetailsService.cusuario.getUsername();
+		if(s.getAtendente() != null) {
 			if(s.getAtendente().getMatricula().equals(user)) {
 					if(s.getStatus().getDescricao().toString().equals("Em andamento"))
 						listaLimitada.add(s);
 			}
+		}
+			//System.out.println(s.getCategoria());
+			//ServicoEmail se = (ServicoEmail) s;
+			//System.out.println(se.getConta());
+		}
+		return	listaLimitada.size();			// AppUserDetailsService.cusuario.getUsername()
+	}
+	
+	@ModelAttribute("requisicoes_andamento")
+	public Integer total_r_andamentos()
+	{
+		List<Requisicao> reqs = requisicoes.findAll(); 
+		List<Requisicao> listaLimitada = new ArrayList<Requisicao>();
+		for(Requisicao r :reqs)
+		{
+			String user = AppUserDetailsService.cusuario.getUsername();
+		
+			if(r.getRequisitante().getMatricula().equals(user)) {
+					if(r.getServico().getStatus().getDescricao().toString().equals("Em andamento"))
+						listaLimitada.add(r);
+			}
+		
 			//System.out.println(s.getCategoria());
 			//ServicoEmail se = (ServicoEmail) s;
 			//System.out.println(se.getConta());
@@ -176,10 +243,12 @@ public class HomeController {
 		for(Servico s :srv)
 		{
 			String user = AppUserDetailsService.cusuario.getUsername();
+		if(s.getAtendente() != null) {	
 			if(s.getAtendente().getMatricula().equals(user)) {
 					if(s.getStatus().getDescricao().toString().equals("Em andamento"))
 						listaLimitada.add(s);
 			}
+		}
 			//System.out.println(s.getCategoria());
 			//ServicoEmail se = (ServicoEmail) s;
 			//System.out.println(se.getConta());
@@ -199,17 +268,36 @@ public class HomeController {
 		for(Servico s :srv)
 		{
 			String user = AppUserDetailsService.cusuario.getUsername();
+		if(s.getAtendente() != null) {
 			if(s.getAtendente().getMatricula().equals(user)) {
 					if(s.getStatus().getDescricao().toString().equals("Fechado"))
 						listaLimitada.add(s);
 			}
+		}
 			//System.out.println(s.getCategoria());
 			//ServicoEmail se = (ServicoEmail) s;
 			//System.out.println(se.getConta());
 		}
 		return	listaLimitada.size();			// AppUserDetailsService.cusuario.getUsername()
 	}
-	
+
+	@ModelAttribute("requisicoes_fechadas")
+	public Integer total_r_concluidos()
+	{
+		List<Requisicao> reqs = requisicoes.findAll(); 
+		List<Requisicao> listaLimitada = new ArrayList<Requisicao>();
+		for(Requisicao r :reqs)
+		{
+			String user = AppUserDetailsService.cusuario.getUsername();
+		
+			if(r.getRequisitante().getMatricula().equals(user)) {
+					if(r.getServico().getStatus().getDescricao().toString().equals("Fechado"))
+						listaLimitada.add(r);
+			}
+		}
+		return	listaLimitada.size();			// AppUserDetailsService.cusuario.getUsername()
+	}
+
 	@ModelAttribute("ultimos_servicos_concluidos")
 	public List<Servico> ultimos10_concluidos()
 	{
@@ -218,10 +306,12 @@ public class HomeController {
 		for(Servico s :srv)
 		{
 			String user = AppUserDetailsService.cusuario.getUsername();
+		if(s.getAtendente() != null) {
 			if(s.getAtendente().getMatricula().equals(user)) {
 					if(s.getStatus().getDescricao().toString().equals("Fechado"))
 						listaLimitada.add(s);
 			}
+		}
 			//System.out.println(s.getCategoria());
 			//ServicoEmail se = (ServicoEmail) s;
 			//System.out.println(se.getConta());
@@ -261,9 +351,10 @@ public class HomeController {
 	
 		for(Servico s :srv)
 		{
-			if(s.getStatus().getDescricao().toString().equals("Em andamento"))
-			listaLimitada.add(s);
-			
+			if(s.getStatus() != null) {
+				if(s.getStatus().getDescricao().toString().equals("Em andamento"))
+				listaLimitada.add(s);
+			}
 		}
 		listaLimitada.sort(cmp);
 		return listaLimitada; 
@@ -284,12 +375,28 @@ public class HomeController {
 	
 		for(Servico s :srv)
 		{
-			if(s.getStatus().getDescricao().toString().equals("Aberto"))
-			listaLimitada.add(s);
-			
+			if(s.getStatus() != null) {
+				if(s.getStatus().getDescricao().toString().equals("Aberto"))
+				listaLimitada.add(s);
+			}
 		}
 		listaLimitada.sort(cmp);
 		return listaLimitada; 
+	}
+	
+	@ModelAttribute("requisicoes_nao_atendidas")
+	public List<Requisicao> requisicoes_n()
+	{
+		List<Requisicao> reqs = new ArrayList<Requisicao>();
+		List<Requisicao> r = requisicoes.findAll();
+		for(Requisicao req: r)
+		{
+			if(req.getAtendente() == null)
+			{
+				reqs.add(req);
+			}
+		}
+		return reqs;
 	}
 	
 	

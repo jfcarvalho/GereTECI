@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
+<head>
+
+<title>Cadastro de Requisicões</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+<form class="form-horizontal" method="POST" th:action="@{/gereteci/requisicoes/avaliacao/salvar/}" th:object="${avaliacao}">
+		<div layout:include="/mensagem/MensagemUsuario"></div>
+	
+		<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+			<h1 class="panel-title">Avaliação de Serviço</h1>
+		<a class="btn btn-link aw-link-panel" href="/gereteci/requisicoes">Voltar para pesquisa</a>
+		</div>
+		</div>
+	
+	A sua opinião é muito importante para nós, por favor de-nos o seu feedback para que possamos estar a cada dia melhorando o nosso serviço
+	<div class="panel-body">
+	<input type="hidden" th:field="*{id_avaliacao}" />
+	<div class="form-group">
+			<label for="cnpj" class="col-sm-2 control-label">Requisição:</label>
+			<div class="col-sm-2">
+				<select class="form-control" name="avaliacao_id_requisicao">
+					<option th:value="${requisicao.id_requisicao}" th:text="${requisicao.protocolo}" ></option>
+				</select>
+			</div>
+		</div>	
+		
+		<div class="form-group">
+			<label for="cnpj" class="col-sm-2 control-label">Nota de atendimento:</label>
+			<div class="col-sm-2">
+				<select class="form-control" name="nota_atendimento">
+					<option th:value="04" th:text="Ótimo" ></option>
+					<option th:value="03" th:text="Bom" ></option>
+					<option th:value="02" th:text="Regular" ></option>
+					<option th:value="01" th:text="Ruim" ></option>
+				</select>
+			</div>
+		</div>	
+		
+			<div class="form-group">
+			<label for="corpo" class="col-sm-2 control-label">Críticas, Sugestões ou Elogios</label>
+			<div class="col-sm-6">
+				<textarea rows="8" cols="60" class ="form-control" id="observacao" name="observacao"></textarea>
+			</div>
+		</div>
+		
+		
+			<div class="form-group">
+     		<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Registrar</button>
+			</div>
+		</div>
+		
+		
+	</div>
+	</div>
+</form>
+</section>
+</html>

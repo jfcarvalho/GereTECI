@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+
+
+<body>
+
+<h4><i>Uma requisição de serviço foi cadastrada no GereTECI</i></h4>
+
+
+<table style="width: 100%; border-collapse: collapse;  margin: 20px 0">
+	<thead>
+				<tr>
+				<th class="text-center col-md-2">Protocolo gerado</th>
+				<th class="text-center col-md-2">Usuário solicitante</th>
+				<th class="text-center col-md-2">Data de abertura</th>
+				<th class="text-center col-md-2">Data de ocorrência</th>
+				<th class="text-center col-md-2">Categoria</th>
+				<th class="text-center col-md-2">Descrição do problema</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+				<td class="text-center" th:text="${protocolo}"></td>
+					<td class="text-center" th:text="${solicitante} + '-' + ${setor}"></td> 
+					<td class="text-center" th:text="${#dates.format(data_abertura, 'dd/MM/yyyy')}"></td>
+					<td class="text-center" th:text="${#dates.format(data_ocorrencia, 'dd/MM/yyyy')}"></td>
+					<td class="text-center" th:text="${categoria}"></td>
+					<td class="text-center" th:text="${descricao}"></td>
+					
+					
+				</tr>
+				
+			
+			</tbody>
+			
+</table>
+
+
+
+</body>
+
+</html>

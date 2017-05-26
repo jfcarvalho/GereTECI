@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
+<head>
+
+<title>Cadastro de RCS - Requisição de Chamado de Serviço</title>
+</head>
+
+<section layout:fragment="conteudo">
+<form class="form-horizontal" method="POST" action="/gereteci/requisicoes" th:object="${requisicao}">
+		<div layout:include="/mensagem/MensagemUsuario"></div>
+		<div layout:include="/mensagem/MensagemErro"></div>
+		<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+			<h1 class="panel-title">Nova Requisição de Chamado de Serviço (RCS) </h1>
+		<a class="btn btn-link aw-link-panel" href="/gereteci/requisicoes">Voltar para pesquisa</a>
+		</div>
+		</div>
+	
+	
+	<div class="panel-body">
+	<input type="hidden" th:field="*{id_requisicao}" />
+		<div class="form-group" >
+			<label for="nome" class="col-sm-2 control-label" >Qual a natureza do problema?:</label>
+			<!-- <div class="col-sm-4">
+				<input type="text" class="form-control" id="nome" name="nome" th:field="*{nome}"/>
+			</div> -->
+			<div class="col-sm-4">
+				<select class="form-control" name="tipo">
+				<option th:value="1">Manutenção (Hardware/Software)</option>
+				<option th:value="2">Internet</option>
+				<option th:value="3">Rede</option>
+				<option th:value="4">Email</option>
+				<option th:value="5">Telefone</option>
+				<option th:value="5">Outro(Instalação de Projetor/ Emprestimo de recurso)</option>
+					
+				</select>
+			</div>
+		</div>
+			<div class="form-group">
+			<label for="chave" class="col-sm-2 control-label">Quando (em que data) ocorreu?:</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="data_abertura" name="data_abertura" th:field="*{data_abertura}" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR" data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom" />
+			</div>
+		</div>
+			<div class="form-group">
+			<label for="data_compra" class="col-sm-2 control-label">Faça uma breve descrição do seu problema</label>
+			<div class="col-sm-6">
+				<textarea rows="8" cols="60" class ="form-control" id="problema" name="problema"></textarea>
+			</div>
+		</div>
+		
+		
+			<div class="form-group">
+     		<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Cadastrar</button>
+			</div>
+		</div>
+		
+		
+	</div>
+	</div>
+</form>
+</section>
+</html>

@@ -16,4 +16,5 @@ public interface ServicosInternet extends JpaRepository<ServicoInternet, Integer
 	List<ServicoInternet> findByAtendente(Usuario Atendente);
 	List<ServicoInternet> findBySolicitado(Usuario solicitado);
 	List<ServicoInternet> findByStatus(StatusServico status); 
+	ServicoInternet findByProtocolo(String protocolo);
 }

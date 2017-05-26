@@ -4,7 +4,7 @@ public enum Status {
 	
 	funcionando("Funcionando normalmente"),
 	manutencao("Em manutenção"),
-	com_defeito_para("Defeito e parado");
+	com_defeito_para("Baixa");
 	
 	private String status;
 	

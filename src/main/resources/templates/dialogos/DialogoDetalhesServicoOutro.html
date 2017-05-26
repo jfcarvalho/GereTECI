@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="LayoutPadraoUsuario" >
+<head>
+<meta charset="UTF-8"/>
+<title>Diálogo de detalhes</title>
+</head>
+
+<div class="modal fade" id= "detalhesOutro" tabindex="-1">
+	<div class="modal-dialog">
+	<form th:attr="data-url-base='/servicosoutro'" method="POST">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"></button>
+				<h4 class="modal-title">Informações detalhadas sobre o serviço</h4>
+			</div>
+			
+			  <div class="modal-body">
+				<span>Tem certeza que deseja excluir?</span>
+			</div> 
+		</div>
+		</form>
+	</div>
+</div>
+
+
+
+</html>

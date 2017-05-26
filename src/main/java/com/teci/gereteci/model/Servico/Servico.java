@@ -22,6 +22,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.teci.gereteci.model.Requisicao.Requisicao;
 import com.teci.gereteci.model.Usuario.Usuario;
 
 @Inheritance
@@ -52,6 +53,9 @@ public abstract class Servico {
 	@JoinColumn(name="atendente")
 	private Usuario atendente;
 	private String descricao_solucao;
+	@OneToOne
+	@JoinColumn(name="servico_id_requisicao")
+	private Requisicao requisicao;
 	
 	public Integer getId_servico()
 	{
@@ -139,5 +143,14 @@ public abstract class Servico {
 	public void setDescricao_solucao(String solucao)
 	{
 		this.descricao_solucao = solucao;
+	}
+	
+	public Requisicao getRequisicao()
+	{
+		return this.requisicao;
+	}
+	public void setRequisicao(Requisicao requisicao)
+	{
+		this.requisicao = requisicao;
 	}
 }

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+
+
+<body>
+
+<h4>Voce tem uma nova mensagem em sua requisição de protocolo: <i><span th:text="${protocolo}"></span></i> aberta no dia: <i><span  th:text="${#dates.format(data, 'dd/MM/yyyy')}"></span></i>  atendida pelo usuário <i><span th:text="${nome}"></span></i> de matricula: <i><span th:text="${matricula}"></span></i></h4>
+
+Acesse o link para ver as suas mensagens: <span th:text="${link}"></span>
+
+
+</body>
+
+</html>

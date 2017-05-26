@@ -11,8 +11,8 @@
 		
 		<div class="panel-heading">
 		<div class="clearfix">	
-			<h1 class="panel-title">Pesquisa de Setores</h1>
-			<a class="btn btn-link aw-link-panel" href="/gereteci/setores/novo">Novo setor</a>
+			
+			<a th:if="${home_teci}" class="btn btn-link aw-link-panel" href="/gereteci/setores/novo">Novo setor</a>
 		</div>
 		</div>
 		<div class="panel-body">
@@ -20,22 +20,25 @@
 		<table class="table table-bordered table-striped">
 		
 			<thead>
-				<tr><th class="text-center col-md-1">#</th>
+				<tr>
 				<th class="text-center col-md-2">Nome</th>
 				<th class="text-center col-md-2">Sigla</th>
 				<th class="text-center col-md-2">Responsável</th>
-				<th class="text-center col-md-2">Ação</th>
+				<th class="text-center col-md-2">Telefone</th>
+				<th class="text-center col-md-2">Email</th>
+				<th th:if="${home_teci}" class="text-center col-md-2">Ação</th>
 				
 				</tr>
 				
 			</thead>
 			<tbody>
 				<tr th:each="setor : ${setores}">
-					<td class="text-center" th:text="${setor.id_setor}"></td>
 					<td class="text-center" th:text="${setor.nome}"></td>
 					<td class="text-center" th:text="${setor.sigla}"></td>
 					<td class="text-center" th:text="${setor.responsavel} ? ${setor.responsavel.nome}"></td>
-					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/gereteci/setores/{id_setor}(id_setor=${setor.id_setor})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalSetor" th:attr="data-id_setor=${setor.id_setor}, data-nome=${setor.nome}"><span class="glyphicon glyphicon-remove"></span></a></td>
+					<td class="text-center" th:text="${setor.responsavel} ? ${setor.responsavel.telefone}"></td>
+					<td class="text-center" th:text="${setor.responsavel} ? ${setor.responsavel.email}"></td>
+					<td th:if="${home_teci}" class="text-center"><a class="btn btn-link btn-xs" th:href="@{/gereteci/setores/{id_setor}(id_setor=${setor.id_setor})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalSetor" th:attr="data-id_setor=${setor.id_setor}, data-nome=${setor.nome}"><span class="glyphicon glyphicon-remove"></span></a></td>
 					
 				</tr>
 				

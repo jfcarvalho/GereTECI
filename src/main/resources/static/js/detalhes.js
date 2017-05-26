@@ -87,6 +87,36 @@ $('#detalhesManutencao').on('show.bs.modal', function(event)
 			
 		});
 
+$('#detalhesRequisicao').on('show.bs.modal', function(event)
+		{
+			var button = $(event.relatedTarget);
+			var idServico = button.data('id_requisicao');
+			var protocolo = button.data('protocolo');
+			var data_abertura = button.data('data_abertura');
+			var data_encerramento = button.data('data_encerramento');
+			var solicitante = button.data('solicitante');
+			var atendente = button.data('atendente');
+			var descricao_problema = button.data('descricao_problema');
+			var solucao_adotada = button.data('solucao_adotada');
+			var status = button.data('status');
+			
+			var modal = $(this);
+			
+			var form = modal.find('form');
+			var action = form.data('url-base');
+			if(!action.endsWith('/'))
+				{
+					action += '/';
+				}
+			
+				form.attr('action', action + idServico);
+				
+				
+			modal.find('.modal-body span').html('<p><b>Protocolo:</b><i> '+ protocolo +'</p></i> <b><p>Data de abertura:</b><i> '+ data_abertura + '</i></p><p><b>Data de encerramento:</b><i> '+ data_encerramento + '</i></p><b><p>Usuário solicitante:</b><i> '+ solicitante +'</i></p><p><b>Usuário Atendente: </b><i>'+ atendente + '</i></p><p><b>Descrição do problema: </b><i>'+ descricao_problema +'</i></p><p><b>Solução adotada: </b><i>'+ solucao_adotada + '</i></p><p><b>Status: </b><i>'+status+'</p></i>');
+			
+		});
+
+
 $('#detalhesInternet').on('show.bs.modal', function(event)
 		{
 			var button = $(event.relatedTarget);
@@ -290,5 +320,44 @@ else { senha_expirada = 'não';}
 		
 	modal.find('.modal-body span').html('<p><b>Protocolo:</b><i> '+ protocolo +'</p></i> <b><p>Data de abertura:</b><i> '+ data_abertura + '</i></p><p><b>Data de encerraemnto:</b><i> '+ data_encerramento + '</i></p><b><p>Usuário solicitante:</b><i> '+ solicitante +'</i></p><p><b>Usuário Atendente: </b><i>'+ atendente + '</i></p><p><b>Houve criação de conta de usuário?: </b><i>'+ criacao_usuario + '</i></p><p><b>Houve alteração de conta de usuário?: </b><i>'+alteracao_usuario+ '</i></p><p><b>Houve alteração plano de conta?: </b><i>'+mudanca_plano+ '</i></p><p><b>Houve exclusao de conta de usuário?: </b><i>'+ exclusao_usuario + '</i></p><p><b>Houve senha expirada?: </b><i>'+ senha_expirada + '</i></p><p><b>Descrição do problema: </b><i>'+ descricao_problema +'</i></p><p><b>Descricao pronta: </b><i>'+ descricao_pronta + '</i></p><b>Solução adotada: </b><i>'+ solucao_adotada + '</i></p><p><b>Status: </b><i>'+status+'</p></i>');
 		
+		});
+
+$('#detalhesOutro').on('show.bs.modal', function(event)
+		{
+			var button = $(event.relatedTarget);
+			var idServico = button.data('id_servico');
+			var protocolo = button.data('protocolo');
+			var data_abertura = button.data('data_abertura');
+			var data_encerramento = button.data('data_encerramento');
+			var solicitante = button.data('solicitante');
+			var atendente = button.data('atendente');
+			var emprestimo_recurso = button.data('emprestimo_recurso');
+			var data_visita= button.data('data_emprestimo');
+			var recurso_emprestado = button.data('material_emprestado');
+			var descricao_problema = button.data('descricao_problema');
+			var descricao_pronta = button.data('descricao_pronta');
+			var solucao_adotada = button.data('solucao_adotada');
+			var status = button.data('status');
+			
+			if(emprestimo_recurso)
+				{
+					emprestimo_recurso = 'sim';
+				}
+			else {emprestimo_recurso = 'não'}
+			
+			var modal = $(this);
+			
+			var form = modal.find('form');
+			var action = form.data('url-base');
+			if(!action.endsWith('/'))
+				{
+					action += '/';
+				}
+			
+				form.attr('action', action + idServico);
+				
+				
+			modal.find('.modal-body span').html('<p><b>Protocolo:</b><i> '+ protocolo +'</p></i> <b><p>Data de abertura:</b><i> '+ data_abertura + '</i></p><p><b>Data de encerramento:</b><i> '+ data_encerramento + '</i></p><b><p>Usuário solicitante:</b><i> '+ solicitante +'</i></p><p><b>Usuário Atendente: </b><i>'+ atendente + '</i></p><p><b>Houve emprestimo de recurso: </b><i>'+ emprestimo_recurso + '</i></p><p><b>Recurso Emprestado: </b><i>'+material_emprestado+ '</i></p><p><b>Data de empréstimo?: </b><i>'+ data_emprestimo + '</i></p><p><b>Protocolo de servico(OI): </b><i>'+ protocolo_servico + '</i></p><p><b>Houve troca de ramais?: </b><i>'+ troca_ramal +'</i></p><p><b>Descricao pronta: </b><i>'+ descricao_pronta + '</i></p><b>Solução adotada: </b><i>'+ solucao_adotada + '</i></p><p><b>Status: </b><i>'+status+'</p></i>');
+			
 		});
 

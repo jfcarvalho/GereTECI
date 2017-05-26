@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
+<head>
+<title>Pesquisa de Serviços</title>
+</head>
+
+<section layout:fragment="conteudo">
+<div layout:include="/mensagem/MensagemUsuario"></div>
+
+<div class="panel panel-default">
+		
+		<div class="panel-heading">
+		<div class="clearfix">	
+			<h1 class="panel-title">Servicos de Telefone</h1>
+			<div class="col-lg-3">
+   				 <div class="input-group">
+     				 <input type="text" class="form-control" placeholder="Pesquise aqui..."/>
+    				  <span class="input-group-btn">
+       					 <button class="btn btn-default" type="button">Pesquisar</button>
+      				</span>
+   				 </div>
+ 			 </div>
+ 			 <div class="col-lg-6">
+ 			 	<input type="radio" name ="solicitante" value="solicitante" /> Solicitante
+ 			 	<input type="radio" name ="solicitante" value="solicitante" /> Atendente
+ 			 	<input type="radio" name ="solicitante" value="solicitante" /> Setor
+ 			 	<input type="radio" name ="solicitante" value="solicitante" /> Status
+ 			 	<input type="radio" name ="solicitante" value="solicitante" /> Data de ocorrência
+ 			 </div>
+			<a class="btn btn-link aw-link-panel" href="/gereteci/servicosoutro/novo">Novo serviço</a>
+		</div>
+		</div>
+		<div class="panel-body">
+		
+		<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				<th class="text-center col-md-2">Protocolo</th>
+				<!-- <th class="text-center col-md-2">Arquitetura</th> -->
+				<th class="text-center col-md-2">Data de Ocorrência</th>
+				<th class="text-center col-md-2">Usuário Solicitante</th>
+				<!--  <th class="text-center col-md-2">ID de Impressão</th> -->
+				<th class="text-center col-md-2">Usuário Atendente</th>
+				<th class="text-center col-md-2">Setor</th>
+				<th class="text-center col-md-2">Status</th>
+				<th class="text-center col-md-2">Ação</th>				
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="servico : ${servicos}">
+					<td class="text-center" th:text="${servico} ? ${servico.protocolo} : 'Não informado'" ></td>
+					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
+					<td class="text-center" th:text="${servico} ? ${servico.data_ocorrencia} : 'Não informado' "></td>
+					<td class="text-center" th:text="${servico} and ${servico.solicitado} ? ${servico.solicitado.nome} : 'Não informado' "></td>
+					<td class="text-center" th:text="${servico.atendente} ? ${servico.atendente.nome} : 'Ninguém'"></td>
+					<td class="text-center" th:text="${servico} and ${servico.solicitado} and ${servico.solicitado.setor} ? ${servico.solicitado.setor.nome} : 'Não informado'" ></td>
+					<td class="text-center"><div th:switch="${servico.status} ? ${servico.status.descricao}" th:attr="data-role=${servico.id_servico}"><span class="label label-success" th:text="${servico.status.descricao}" th:case="'Fechado'"></span>
+																				<span class="label label-warning" th:text="${servico.status.descricao}" th:case="'Em andamento'"></span>
+																													  <span class="label label-danger" th:text="${servico.status.descricao}" th:case="'Aberto'"></span></div></td>
+					<!-- <td class="text-center" th:text="${computador.id_impressao}"></td> -->
+					<td class="text-center"><a class="btn btn-link btn-xs" th:href="@{/gereteci/servicosoutro/{id_servico}(id_servico=${servico.id_servico})}" ><span class="glyphicon glyphicon-pencil" ></span></a><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#detalhesOutro" th:attr="data-id_computador=${servico.id_servico}, data-id_servico=${servico.id_servico}, data-protocolo=${servico.protocolo}, data-data_abertura=${servico.data_ocorrencia}, data-data_encerramento=${servico.data_encerramento}, data-solicitante=${servico.solicitado} ? ${servico.solicitado.nome} : 'null', data-atendente=${servico.atendente} ? ${servico.atendente.nome}: 'null', data-descricao_pronta=${servico.descricao_pronta} ? ${servico.descricao_pronta.descricao} : 'Ninguém', data-status=${servico.status} ? ${servico.status.descricao} : 'Não registrado', data-solucao_adotada=${servico.descricao_solucao}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(servicos)}">Nenhum serviço cadastrado encontrado</td>
+			</tr>
+			</tbody>
+		
+		</table>
+		</div>
+		
+		
+		<div layout:include="/dialogos/DialogoDetalhesServicoOutro"></div>
+	</div>	
+</section>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
+<head>
+<title>Pesquisa de Serviços de Manutenção</title>
+</head>
+
+<section layout:fragment="conteudo">
+<div layout:include="/mensagem/MensagemUsuario"></div>
+
+<div class="panel panel-default">
+		
+		<div class="panel-heading" >
+		<div class="clearfix">	
+			<h1 class="panel-title">Requisições solicitadas</h1>
+			<form method="GET" action="/gereteci/requisicoes">
+			<div class="col-lg-3">
+   				 <div class="input-group">
+     				 <input type="text" class="form-control" placeholder="Pesquise aqui..." name="busca"/>
+    				  <span class="input-group-btn">
+       					 <button class="btn btn-default" type="submit">Pesquisar</button>
+      				</span>
+   				 </div>
+ 			 </div>
+ 			 <div class="col-lg-12">
+ 			 	<input type="radio" name ="proto" /> Protocolo
+ 			 	<input type="radio" name ="docorre"/> Data de Ocorrência
+ 			 	<input type="radio" name ="cat"/> Categoria
+ 			 	<input type="radio" name ="prob"/> Descrição do problema
+ 			 </div>
+ 			  
+ 			</form>
+			<a class="btn btn-link aw-link-panel" href="/gereteci/requisicoes/novo">Nova RCS</a>
+		</div>
+		</div>
+		<div class="panel-body">
+		
+		<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				   <th class="text-center col-md-2">Protocolo</th> 
+				<th class="text-center col-md-2">Categoria</th>
+				<!-- <th class="text-center col-md-2">Arquitetura</th> -->
+				<th class="text-center col-md-2">Data de Ocorrência</th>
+				<th class="text-center col-md-2">Usuário Atendente</th>
+				<!--  <th class="text-center col-md-2">ID de Impressão</th> -->
+				
+				<th class="text-center col-md-2">Descrição do Problema</th>	
+				<th class="text-center col-md-2">Solução adotada</th>
+				<th class="text-center col-md-2">Status</th>
+				<th class="text-center col-md-2">Ações</th>
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="requisicao : ${requisicoes}">
+					   <td class="text-center" th:text="${requisicao} ? ${requisicao.protocolo}"></td> 
+					<td class="text-center" th:text="${requisicao} ? ${requisicao.servico.categoria}"></td>
+					<!--   <td class="text-center" th:text="${computador.arquitetura.arquitetura}"></td> -->
+					<td class="text-center" th:text="${requisicao} ? ${#dates.format(requisicao.data_abertura, 'dd/MM/yyyy')}" ></td>
+
+					<td class="text-center" th:text="${requisicao} and ${requisicao.atendente} ? ${requisicao.atendente.nome}:'TECI'"></td>
+					
+					<td class="text-center" th:text="${requisicao} and ${requisicao.problema}  ? ${requisicao.problema}:'Sem descrição'"></td>
+					<td class="text-center" th:text="${requisicao.servico} and ${requisicao.servico.descricao_solucao}  ? ${requisicao.servico.descricao_solucao}:'Em avaliação'"></td>
+					<td class="text-center"><div th:switch="${requisicao.servico.status.descricao}" th:attr="data-role=${requisicao.servico.id_servico}"><span class="label label-success" th:text="${requisicao.servico.status.descricao}" th:case="'Fechado'"></span>
+					<span class="label label-warning" th:text="${requisicao.servico.status.descricao}" th:case="'Em andamento'"> </span>
+					 <span class="label label-danger" th:text="${requisicao.servico.status.descricao}" th:case="'Aberto'"></span></div></td>
+					 <td class="text-center"><a class="btn btn-link btn-xs" data-toggle="modal" data-target="#detalhesRequisicao" th:attr="data-protocolo=${requisicao.protocolo}, data-data_abertura=${requisicao.data}, data-data_encerramento=${requisicao.servico.data_encerramento}, data-solicitante=${requisicao} and ${requisicao.servico} ? ${requisicao.servico.solicitado.nome}:'Não informado', data-atendente=${requisicao.servico.atendente} ? ${requisicao.servico.atendente.nome} :'Ninguém', data-status=${requisicao.servico.status.descricao}, data-solucao_adotada=${requisicao.servico.descricao_solucao}, data-descricao_problema=${requisicao.servico.descricao_problema}"><span class="glyphicon glyphicon-eye-open"></span></a><a th:if="${requisicao.atendente}" class="btn btn-link btn-xs" target="_blank" th:href="@{/gereteci/requisicoes/{id_requisicao}/mensagem/novo(id_requisicao=${requisicao.id_requisicao})}" ><span class="glyphicon glyphicon-envelope" ></span></a><a th:if="${requisicao.servico.status.descricao} == 'Fechado' and ${requisicao.avaliacao} == null" class="btn btn-link btn-xs" target="_blank" th:href="@{/gereteci/requisicoes/{id_requisicao}/avaliacao/novo(id_requisicao=${requisicao.id_requisicao})}" ><span class="glyphicon glyphicon-ok" ></span></a></td>
+					 
+
+					<!-- <td class="text-center" th:text="${computador.id_impressao}"></td> -->
+
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(requisicoes)}">Nenhuma RCS cadastrada encontrada</td>
+			</tr>
+			</tbody>
+		
+		</table>
+		</div>
+		
+		<div layout:include="/dialogos/DialogoConfirmacaoExclusaoServicoManutencao"></div>
+		<div layout:include="/dialogos/DialogoDetalhesRequisicao"></div>
+	</div>	
+</section>
+
+</html>

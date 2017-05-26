@@ -11,12 +11,42 @@
 <header layout:include="layout/Cabecalho"></header>
 
 <body>
+
+
+
 <div class="container-fluid">
 
 
-<h3>Seja bem vindo usuarío <span th:text="${nome_user}"></span></h3>
+<h3>Seja bem vindo usuario <span th:text="${nome_user}"></span></h3>
 
-Informações gerais
+<br/>
+
+<div th:if="!${home_teci}">
+<table class="table  table-hover">
+		
+			<thead>
+				<tr>
+				<th class="text-center col-md-2">Total de requisições solicitadas</th>
+				<th class="text-center col-md-2">Requisições em aberto</th>
+				<th class="text-center col-md-2">Requisições em andamento</th>
+				<th class="text-center col-md-2">Requisições concluídos</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="text-center" th:text="${requisicoes_total}"></td>
+					<td class="text-center" th:text="${requisicoes_abertas}"></td>
+					<td class="text-center" th:text="${requisicoes_andamento}"></td>
+					<td class="text-center" th:text="${requisicoes_fechadas}"></td>
+				
+				</tr>
+			</tbody>
+		
+		</table>
+</div>
+<div th:if="${home_teci}">
+<br/>Informações gerais
+
 <table class="table  table-hover">
 		
 			<thead>
@@ -38,6 +68,35 @@ Informações gerais
 			</tbody>
 		
 		</table>
+Requisições Não atendidas
+
+<table class="table  table-hover" style="color:red">
+		
+			<thead>
+				<tr>
+				<th class="text-center col-md-2">Protocolo</th>
+				<th class="text-center col-md-2">Solicitante</th>
+				<th class="text-center col-md-2">Data de abertura</th>
+				<th class="text-center col-md-2">Descrição</th>
+				<th class="text-center col-md-2">Ação</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="requisicao : ${requisicoes_nao_atendidas}">
+					<td class="text-center" th:text="${requisicao.protocolo}"></td>
+					<td class="text-center" th:text="${requisicao.requisitante.nome}"></td>
+					<td class="text-center" th:text="${#dates.format(requisicao.data_abertura, 'dd/MM/yyyy')}"></td>
+					<td class="text-center" th:text="${requisicao.problema}"></td>
+					<td class="text-center"> <a th:href="@{/gereteci/requisicoes/gerar_atendimento/{id_requisicao}(id_requisicao=${requisicao.id_requisicao})}">Atender</a></td>
+				
+				</tr>
+			</tbody>
+		
+		</table>
+		
+		
+		
+		
 		10 Últimos serviços em aberto
 		<table class="table  table-hover">
 		
@@ -132,9 +191,18 @@ Informações gerais
 		
 		
 		</table>
-		
+		</div>
 
 
 </div>
+
+<script src="/js/jquery-2.2.0.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/gereteci.js"></script>
+<script src="/js/bootstrap-datepicker.min.js"></script>
+<script src="/js/bootstrap-datepicker.pt-BR.min.js"></script>
+<script src="/js/detalhes.js"></script>
+
+
 </body>
 </html>

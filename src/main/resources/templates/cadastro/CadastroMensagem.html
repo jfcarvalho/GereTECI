@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
+<head>
+
+<title>Cadastro de Requisicões</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+<form class="form-horizontal" method="POST" th:action="@{/gereteci/requisicoes/mensagem/salvar/}" th:object="${msg}">
+		<div layout:include="/mensagem/MensagemUsuario"></div>
+	
+		<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+			<h1 class="panel-title">Nova Mensagem </h1>
+		<a class="btn btn-link aw-link-panel" href="/gereteci/requisicoes/">Voltar para pesquisa</a>
+		</div>
+		</div>
+	
+	
+	<div class="panel-body">
+	<input type="hidden" th:field="*{id_mensagem}" />
+	<div class="form-group">
+			<label for="cnpj" class="col-sm-2 control-label">Requisição:</label>
+			<div class="col-sm-2">
+				<select class="form-control" name="mensagem_id_requisicao">
+					<option th:value="${requisicao.id_requisicao}" th:text="${requisicao.protocolo}" ></option>
+				</select>
+			</div>
+		</div>
+	
+	
+				<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+				<th class="text-center col-md-2">De:</th>
+				<th class="text-center col-md-2">Data</th>
+				<!-- <th class="text-center col-md-2">Arquitetura</th> -->
+				<th class="text-center col-md-2">Corpo</th>
+				
+				
+				
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="msg : ${msgs}">
+					<td class="text-center" th:text="${msg.de.nome}"></td>
+					<td class="text-center" th:text="${msg.data}"></td>
+					<td class="text-center" th:text="${msg.corpo}"></td>					
+				</tr>
+				
+			<tr>
+				<td colspan="6" th:if="${#lists.isEmpty(msgs)}">Nenhuma mensagem encontrada</td>
+			</tr>
+			</tbody>
+		
+		</table>
+		
+			<div class="form-group">
+			<label for="corpo" class="col-sm-2 control-label">Digite a sua mensagem</label>
+			<div class="col-sm-6">
+				<textarea rows="8" cols="60" class ="form-control" id="corpo" name="corpo"></textarea>
+			</div>
+		</div>
+		
+		
+			<div class="form-group">
+     		<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Registrar</button>
+			</div>
+		</div>
+		
+		
+	</div>
+	</div>
+</form>
+</section>
+</html>

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-
+import com.teci.gereteci.model.Servico.ServicoInternet;
 import com.teci.gereteci.model.Servico.ServicoManutencao;
 import com.teci.gereteci.model.Servico.ServicoRede;
 import com.teci.gereteci.model.Servico.StatusServico;
@@ -17,5 +17,5 @@ public interface ServicosRede extends JpaRepository<ServicoRede, Integer>{
 	List<ServicoRede> findByAtendente(Usuario Atendente);
 	List<ServicoRede> findBySolicitado(Usuario solicitado);
 	List<ServicoRede> findByStatus(StatusServico status);
-	
+	ServicoRede findByProtocolo(String protocolo);
 }

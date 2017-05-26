@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/LayoutPadraoUsuario" >
+<head>
+
+<title>Atender Requisição</title>
+</head>
+
+<section layout:fragment="conteudo">
+<form class="form-horizontal" method="POST" th:action="@{/gereteci/requisicoes/atender/{id_requisicao}(id_requisicao= ${requisicao.id_requisicao})}" th:object="${requisicao}">
+		<div layout:include="/mensagem/MensagemUsuario"></div>
+		<div layout:include="/mensagem/MensagemErro"></div>
+		<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+			<h1 class="panel-title">Atender Requisição</h1>
+		<a class="btn btn-link aw-link-panel" href="/gereteci/usuarios">Voltar para pesquisa</a>
+		</div>
+		</div>
+	
+	
+	<div class="panel-body">
+	<input type="hidden" th:field="*{id_requisicao}" />
+		
+		
+		
+			<p><label for="email">Número de requisição (protocolo):</label><span th:text="${requisicao.protocolo}"></span></p>
+			<p><label for="email">Data de abertura::</label><span th:text="${requisicao.data_abertura}"></span></p>
+			<p><label for="email">Usuário solicitante:</label><span th:text="${requisicao.requisitante.nome}"></span></p>
+			<p><label for="email">Setor:</label><span th:text="${requisicao.requisitante.setor.sigla}"></span></p>
+			<p><label for="email">Cargo/Função:</label><span th:text="${requisicao.requisitante.cargo}"></span></p>
+			<p><label for="email">Descrição do problema (relato do usuário):</label><span th:text="${requisicao.problema}"></span></p>
+			
+			
+	
+		
+
+		
+		
+		
+		
+			<div class="form-group">
+     		<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Atender Solicitação</button>
+			</div>
+		</div>
+		
+		
+	</div>
+	</div>
+</form>
+</section>
+</html>

@@ -14,7 +14,7 @@ public class SegurancaController {
 	public String login(@AuthenticationPrincipal User user) {
 		System.out.println(user);
 		if (user != null) {
-			return "redirect:/gereteci/servicosmanutencao";
+			return "redirect:/gereteci/";
 		}
 		
 		return "login";

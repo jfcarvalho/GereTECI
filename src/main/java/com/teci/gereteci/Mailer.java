@@ -1,5 +1,7 @@
 package com.teci.gereteci;
 
+import java.util.Date;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import com.teci.gereteci.model.Requisicao.Requisicao;
 import com.teci.gereteci.model.Servico.Servico;
 import com.teci.gereteci.model.Usuario.Usuario;
 
@@ -42,7 +45,7 @@ public class Mailer {
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 			helper.setFrom("suporte.ctb1210@ctb.ba.gov.br");
-			helper.setTo("jfcarvalho@ctb.ba.gov.br");
+			helper.setTo("romeuoj@ctb.ba.gov.br");
 			helper.setSubject("GERETECI - Abertura de Serviço");
 			helper.setText(email, true);
 			mailSender.send(mimeMessage);
@@ -51,4 +54,86 @@ public class Mailer {
 		}
 		thymeleaf.process("mail/ServicoCadastrado", context);
 	}
+
+	@Async
+	public void enviar_requisicao(String solicitante, String protocolo, String setor, Date data, Date data_abertura,String Categoria, String descricao, String emailu)
+	{
+		
+		
+		Context context = new Context();
+		context.setVariable("solicitante", solicitante);
+		context.setVariable("protocolo", protocolo);
+		context.setVariable("setor", setor);
+		context.setVariable("data_abertura", data);
+		context.setVariable("data_ocorrencia", data_abertura);
+		context.setVariable("categoria", Categoria);
+		context.setVariable("descricao", descricao);
+		String email = thymeleaf.process("mail/RequisicaoCadastrada", context);
+		try {
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+			helper.setFrom("suporte.ctb1210@ctb.ba.gov.br");
+			helper.setTo(emailu);
+			helper.setCc("jfcarvalho@ctb.ba.gov.br");
+			helper.setSubject("GERETECI - Cadastro de Requisição");
+			helper.setText(email, true);
+			mailSender.send(mimeMessage);
+		} catch(MessagingException e) {
+			logger.error("Erro enviando e-mail", e);
+		}
+		thymeleaf.process("mail/ServicoCadastrado", context);
+	}
+	
+	@Async
+	public void requisicao_atendida(String nomea, String matriculaa, String protocolo, Date data, String Categoria, String emailu, String emaila)
+	{
+		Context context = new Context();
+		context.setVariable("nome", nomea);
+		context.setVariable("matricula", matriculaa);
+		context.setVariable("protocolo", protocolo);
+		context.setVariable("data", data);
+		context.setVariable("categoria", Categoria);
+		String email = thymeleaf.process("mail/RequisicaoAtendida", context);
+		try {
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+			helper.setFrom("suporte.ctb1210@ctb.ba.gov.br");
+			helper.setTo(emailu);
+			helper.setCc(emaila);
+			helper.setSubject("GERETECI - Atendimento de Requisição");
+			helper.setText(email, true);
+			mailSender.send(mimeMessage);
+		} catch(MessagingException e) {
+			logger.error("Erro enviando e-mail", e);
+		}
+		thymeleaf.process("mail/RequisicaoAtendida", context);
+		
+	}
+	
+	public void mensagem_nova_requisicao(String requisicao, String nomea, String matriculaa, String protocolo, Date data, String Categoria, String emailu, String emaila)
+	{
+		Context context = new Context();
+		context.setVariable("nome", nomea);
+		context.setVariable("matricula", matriculaa);
+		context.setVariable("protocolo", protocolo);
+		context.setVariable("data", data);
+		context.setVariable("link", "localhost:8080/gereteci/requisicoes/" + requisicao + "/mensagem/novo");
+		
+		String email = thymeleaf.process("mail/RequisicaoMensagem", context);
+		try {
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+			helper.setFrom("suporte.ctb1210@ctb.ba.gov.br");
+			helper.setTo(emailu);
+			helper.setCc(emaila);
+			helper.setSubject("GERETECI - Aviso de mensagem nova em requisição");
+			helper.setText(email, true);
+			mailSender.send(mimeMessage);
+		} catch(MessagingException e) {
+			logger.error("Erro enviando e-mail", e);
+		}
+		thymeleaf.process("mail/RequisicaoMensagem", context);
+		
+	}
+	
 }

@@ -24,16 +24,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">GereTECI</a>
+      <a class="navbar-brand" href="/gereteci/">GereTECI</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav" >
-        <li class="active" th:if="${home_teci}"><a href="/gereteci/computadores" >Home <span class="sr-only">(current)</span></a></li>
-        <li th:if="${home_teci}"><a href="/gereteci/usuarios" >Usuarios</a></li>
+        <li class="active"><a href="/gereteci/" >Home <span class="sr-only">(current)</span></a></li>
+        <li><a href="/gereteci/usuarios" >Usuarios</a></li>
         <li th:if="${home_teci}"><a href="/gereteci/computadores" >Computadores</a></li>
-        <li th:if="${home_teci}"><a href="/gereteci/setores" >Setores</a></li>
+        <li><a href="/gereteci/setores" >Setores</a></li>
        <li  th:if="${home_teci}"><div class="dropdown servicos-button" ><button th:if="${home_teci}" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     Recurso
     <span class="caret"></span>
@@ -58,41 +58,53 @@
     <span class="caret"></span>
   </button>
   
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+  <ul th:if="${home_teci}" class="dropdown-menu" aria-labelledby="dropdownMenu1">
    
-    <li><a href="/gereteci/servicosmanutencao">Manutenção</a></li>
-   		 <li><a href="/gereteci/servicosinternet">Internet</a></li>
-   		 <li><a href="/gereteci/servicosrede">Rede</a></li>
-   		 <li><a href="/gereteci/servicostelefone">Telefone</a></li>
-   		 <li><a href="/gereteci/servicosemail">E-mail</a></li>
+    <li th:if="${home_teci}"><a href="/gereteci/servicosmanutencao">Manutenção</a></li>
+   		 <li th:if="${home_teci}"><a href="/gereteci/servicosinternet">Internet</a></li>
+   		 <li th:if="${home_teci}"><a href="/gereteci/servicosrede">Rede</a></li>
+   		 <li th:if="${home_teci}" ><a href="/gereteci/servicostelefone">Telefone</a></li>
+   		 <li th:if="${home_teci}"><a href="/gereteci/servicosemail">E-mail</a></li>
+   		 <li th:if="${home_teci}"><a href="/gereteci/servicosoutro">Outro</a></li>
    		 
     
   </ul>
 </div>
        
        </li>
-       <li><a href="/gereteci/gerarrelatorio">Relatório de Serviços</a></li>
+       
+       <!--  <li th:if="${home_teci}"><a href="/gereteci/gerarrelatorio">Relatório de Serviços</a></li> -->
+       	<li>	
+       	<button th:if="${home_teci}" style="margin-top: 8px" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Relatórios
+    <span class="caret"></span>
+  </button>
+  
+       	<ul th:if="${home_teci}" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+   
+    <li th:if="${home_teci}"><a href="/gereteci/gerarrelatorio">Relatório Geral de Serviços</a></li>
+   		 <li th:if="${home_teci}"><a href="/gereteci/gerar_relatorio_individual">Relatório Individual de Serviços</a></li>
+   		 <li th:if="${home_teci}"><a href="/gereteci/servicosrede">Relatório de Computadores e Recursos</a></li>
+   		<!--   <li th:if="${home_teci}" ><a href="/gereteci/servicostelefone">Telefone</a></li> -->
+   		 <!--  <li th:if="${home_teci}"><a href="/gereteci/servicosemail">E-mail</a></li> -->
+   		 
+    
+  </ul>
+  </li>
+          <li><a href="/gereteci/requisicoes">Requisições</a></li>
+          
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+	      
+	      <li>
+	        <a href="/logout">Logout</a>
+	      </li> 
+	    </ul>
       
       
         <ul class="nav navbar-nav" th:if="!${home_teci}">
-        <li class="active"><a href="/gereteci/computadores">Home <span class="sr-only">(current)</span></a></li>
-        <li><a href="/gereteci/setores">Setores</a></li> 
-       
-       <li><div class="dropdown servicos-button">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-   Solicitar Serviço
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-   
-    <li><a href="/gereteci/servicosmanutencao">Suporte Técnico</a></li>
-   		 <li><a href="/gereteci/servicosinternet">Solicitação de Material</a></li> 
-  </ul>
-</div>
-       
-       </li>
-       <li><a href="/gereteci/gerarrelatorio">Relatório de Serviços</a></li>
+        
+    
       </ul>
       
     </div><!-- /.navbar-collapse -->
